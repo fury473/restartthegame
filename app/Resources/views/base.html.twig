@@ -11,9 +11,10 @@
 
         {% block stylesheet %}
             {% stylesheets
+                '%kernel.root_dir%/../vendor/twitter/bootstrap/less/bootstrap.less'
                 'bundles/rtgsite/css/main.less'
                 filter='cssrewrite'
-                output='css/compiled/main.css'
+                output='css/main.css'
             %}
             <link rel="stylesheet" href="{{ asset_url }}" />{% endstylesheets %}
         {% endblock %}
@@ -55,8 +56,8 @@
 
         {% block javascript %}
             {% javascripts
-                'bundles/rtgsite/js/jquery-1.11.0.min.js'
-                'bundles/rtgsite/js/bootstrap.min.js'
+                '../vendor/jquery/jquery/jquery-1.9.1.min.js'
+                '../vendor/twitter/bootstrap/dist/js/bootstrap.min.js'
                 'bundles/rtgsite/js/analyticstracking.min.js'
                 'bundles/rtgsite/js/main.js' %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
