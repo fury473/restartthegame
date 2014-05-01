@@ -1,0 +1,17 @@
+\.orig$
+\.orig\..*$
+\.chg\..*$
+\.rej$
+\.conflict\~$
+^nbproject
+^vendor
+^app\/bootstrap
+^app\/config\/parameters\.yml$
+^app\/cache\/
+^app\/logs\/
+^web\/bundles\/
+^web\/css\/
+^web\/js\/
+^web\/media\/
+^web\/uploads\/
+^web\/documents\/

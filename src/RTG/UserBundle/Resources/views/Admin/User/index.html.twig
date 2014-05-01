@@ -1,0 +1,49 @@
+{% extends 'RTGUserBundle::layout.html.twig' %}
+
+{% block title %}{{ 'user.title.list'|trans({}, 'entity') }}{% endblock %}
+
+{% block content -%}
+    <h1>{{ 'user.title.list'|trans({}, 'entity') }}</h1>
+
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>{{ 'user.field.username'|trans({}, 'entity') }}</th>
+                <th>{{ 'user.field.email'|trans({}, 'entity') }}</th>
+                <th>{{ 'user.field.roles'|trans({}, 'entity') }}</th>
+                <th>{{ 'user.field.locked'|trans({}, 'entity') }}</th>
+                <th>{{ 'user.field.actions'|trans({}, 'entity') }}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td><a href="{{ path('rtg_user_admin_user_show', { 'id': entity.id }) }}">{{ entity.username }}</a></td>
+                <td>{{ entity.email }}</td>
+                <td>{% for role in entity.roles %}{{ role }}<br/>{% endfor %}</td>
+                <td>{{ entity.locked }}</td>
+                <td>
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="{{ path('rtg_user_admin_user_show', { 'id': entity.id }) }}"><button class="btn btn-default btn-xs">{{ 'user.button.show'|trans({}, 'entity') }}</button></a>
+                    </li>
+                    <li>
+                        <a href="{{ path('rtg_user_admin_user_edit', { 'id': entity.id }) }}"><button class="btn btn-default btn-xs">{{ 'user.button.edit'|trans({}, 'entity') }}</button></a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('rtg_user_admin_user_new') }}">
+                {{ 'user.button.create_a_new_entry'|trans({}, 'entity') }}
+            </a>
+        </li>
+    </ul>
+{% endblock %}

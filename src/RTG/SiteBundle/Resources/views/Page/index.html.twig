@@ -1,0 +1,64 @@
+{% extends 'RTGSiteBundle::layout.html.twig' %}
+
+{% block title %}Restart the Game{% endblock %}
+
+{% block content %}
+<div class="bloc container">
+    <div class="row-fluid clearfix">
+        <div class="col-md-9">
+            {{ include('RTGSiteBundle:Page:carousel.html.twig', {'news': news}) }}
+        </div>
+        <div class="col-md-3">
+            <h3>Dernières compétitions</h3>
+            <ul class="latest-posts">
+                {% for competition in competitions %}
+                    <li class="clearfix">
+                        <span class="date">
+                            <em class="day">{{ competition.created|localizeddate('none', 'none', app.request.locale, null, 'd') }}</em>
+                            <em class="month">{{ competition.created|localizeddate('none', 'none', app.request.locale, null, 'MMM') }}</em>
+                        </span>
+                        <a href="{{ path('rtg_blog_competitionarticle_show', { 'slug': competition.slug }) }}">{{ competition.title }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    
+    <div class="row-fluid">
+        <div class="col-md-12">
+            <div class="intro">
+                La Restart The Game, RTG, est une association où se regroupent de nombreux joueurs...
+            </div>
+        </div>
+    </div>
+
+    <div class="row-fluid">
+        <div class="col-md-12">
+            <h1>Restart the Game</h1>
+            <p>Bienvenue a toi, je te souhaite le bienvenue sur le site de la Restart The Game. Si tu nous connais pas encore nous allons t'expliquer qui nous sommes. Nous sommes un groupe d'amis qui geront un Teamspeak pour les teams qui n'ont pas de Teampseak. Ceci permet au gens de pouvoir communiquer gratuitment dans un endroit défini pour eux! Ici en dessous sont les critères que l'ont respecte:</p>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="col-md-3">
+            <img class="center-block" src="{{ asset('bundles/rtgsite/img/index/icon1.png') }}" alt="Teamspeak"/>
+            <h3 class="text-center">Teamspeak 24/7</h3>
+            <p class="text-center">Le Teamspeak est toujours disponible. Aucune limite de connexion.</p>
+        </div>
+        <div class="col-md-3">
+            <img class="center-block" src="{{ asset('bundles/rtgsite/img/index/icon2.png') }}" alt="Respect & Politesse"/>
+            <h3 class="text-center">Respect & Politesse</h3>
+            <p class="text-center">Les joueurs respecte les autres et reste polis entre eux. Voir admin/Staff pour plus.</p>
+        </div>
+        <div class="col-md-3">
+            <img class="center-block" src="{{ asset('bundles/rtgsite/img/index/icon3.png') }}" alt="Admins/Staff"/>
+            <h3 class="text-center">Admins/Staff</h3>
+            <p class="text-center">Les Admins, Modo ou le Staff est la pour vous aider en cas de problèmes.</p>
+        </div>
+        <div class="col-md-3">
+            <img class="center-block" src="{{ asset('bundles/rtgsite/img/index/icon4.png') }}" alt="Votre channel"/>
+            <h3 class="text-center">Votre channel</h3>
+            <p class="text-center">Votre channel sera constitué des elements ci-dessus et d'autres détails.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

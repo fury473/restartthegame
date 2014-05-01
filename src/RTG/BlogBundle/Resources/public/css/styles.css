@@ -1,0 +1,49 @@
+.highlight { font-weight: bold; }
+
+.date { margin-bottom: 20px; border-bottom: 1px solid #ccc; font-size: 24px; color: #666; line-height: 30px }
+.article { margin-bottom: 20px; }
+.article img { width: 190px; float: left; padding: 5px; border: 1px solid #ccc; margin: 0 10px 10px 0; }
+.article .meta { clear: left; margin-bottom: 20px; }
+.article .snippet p.continue { margin-bottom: 0; text-align: right; }
+.article .meta { font-style: italic; font-size: 12px; color: #666; }
+.article .meta p { margin-bottom: 5px; line-height: 1.2em; }
+.article img.large { width: 300px; min-height: 165px; float: none; display: block; margin: auto; }
+
+.comments { clear: both; }
+.comments .odd { background: #222; }
+.comments .even { background: #333; }
+.comments .comment { padding: 20px; }
+.comments .comment p { margin-bottom: 0; }
+.comments h3 { padding: 10px; font-size: 20px; margin-bottom: 20px; clear: both; }
+.comments .previous-comments { margin-bottom: 20px; }
+
+.sidebar .bloc {
+    margin-top: 20px;
+}
+.sidebar .section .bloc {
+    padding: 10px 30px 15px 30px;
+}
+@media (min-width: 1280px){
+    .sidebar .section .bloc {
+        padding: 10px 50px 15px 50px;
+    }
+}
+.sidebar h3 { line-height: 1.2em; font-size: 20px; margin-bottom: 10px; font-weight: normal; padding: 5px;  }
+.sidebar p { line-height: 1.5em; margin-bottom: 20px; }
+.sidebar ul { list-style: none }
+.sidebar ul li { line-height: 1.5em }
+.sidebar .small { font-size: 12px; }
+.sidebar .comment p { margin-bottom: 5px; }
+.sidebar .comment { margin-bottom: 10px; padding-bottom: 10px; }
+.sidebar .tags { font-weight: bold; }
+.sidebar .tags span { font-size: 12px; }
+.sidebar .tags .weight-1 { font-size: 12px; }
+.sidebar .tags .weight-2 { font-size: 15px; }
+.sidebar .tags .weight-3 { font-size: 18px; }
+.sidebar .tags .weight-4 { font-size: 21px; }
+.sidebar .tags .weight-5 { font-size: 24px; }
+
+.records_list td ul {
+    list-style-type: none;
+    padding: 0;
+}

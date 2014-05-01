@@ -1,0 +1,15 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+<div class="bloc container">
+    {% block content %}{% endblock %}
+</div>
+{% endblock %}
+
+{% block sidebar %}
+    {% if 'news' in app.request.get('_route') %}
+    {{ render(controller("RTGBlogBundle:Page:sidebar", {'type': 'news'})) }}
+    {% elseif 'competition' in app.request.get('_route') %}
+    {{ render(controller("RTGBlogBundle:Page:sidebar", {'type': 'competition'})) }}
+    {% endif %}
+{% endblock %}

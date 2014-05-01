@@ -1,0 +1,17 @@
+{% extends 'RTGUserBundle::layout.html.twig' %}
+{% trans_default_domain 'entity' %}
+
+{% block title %}{{ entity.username }} {{ 'user.button.profile'|trans }} - RTG{% endblock %}
+
+{% block content -%}
+
+    {% if entity.avatar is not null %}
+    <img class="thumbnail pull-right" src="{{ entity.avatar.webPath|apply_filter('tb-128x128') }}" alt="{{ entity.username }}"/>
+    {% endif %}
+    <p>{{ 'user.field.username'|trans }}: {{ entity.username }}</p>
+    <p>{{ 'user.field.email'|trans }}: {{ entity.email }}</p>
+    <p>{{ 'user.field.age'|trans }}: {{ entity.age }}</p>
+    <p>{{ 'user.field.city'|trans }}: {{ entity.city }}</p>
+    {% if entity.hasRole('ROLE_STAFF')%}<p>Staff RTG</p>{% endif %}
+    <a href="{{ path('rtg_user_admin_user_edit', { 'id': entity.id }) }}" title="{{ 'user.title.edit'|trans }}" class="btn btn-primary">{{ 'user.button.edit'|trans }}</a>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'RTGUserBundle::layout.html.twig' %}
+
+{% block title %}{{ 'user.title.new'|trans({}, 'entity') }}{% endblock %}
+
+{% block content -%}
+    <h1>{{ 'user.title.new'|trans({}, 'entity') }}</h1>
+
+    {{ form(form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('rtg_user_admin_user_index') }}">
+            {{ 'user.button.back_to_list'|trans({}, 'entity') }}
+        </a>
+    </li>
+</ul>
+{% endblock %}

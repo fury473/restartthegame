@@ -1,0 +1,27 @@
+{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+{{ render(controller("RTGBlogBundle:NewsComment:new", { 'article_id': article.id })) }}
+{% endif %}
+{% for comment in comments %}
+    <div class="media {{ cycle(['odd', 'even'], loop.index0) }}" id="comment-{{ comment.id }}">
+        <div class="pull-left">
+        {% if comment.user is not null and comment.user.avatar is not null %}
+                <img src="{{ comment.user.avatar.webPath|apply_filter('tb-48x48') }}" alt="{{ comment.user }}"/>
+        {% else %}
+                <img src="{{ 'bundles/rtgsite/img/content/staff/anonyme.jpg'|apply_filter('tb-48x48') }}" alt="{{ comment.user|default('Compte supprimé') }}" />
+        {% endif %}
+        </div>
+        <div class="media-body">
+            <div class="media-heading">
+                {% if comment.user is not null %}
+                <a href="#" title="Voir le profil">{{ comment.user }}</a></span>
+                {% else %}
+                <span class="highlight">Compte supprimé</span>
+                {% endif %}
+                <time datetime="{{ comment.created|date('c') }}" class="comment-date">{{ comment.created|time_ago_in_words(true, true)|trans() }}</time>
+            </div>
+            {{ comment.comment }}
+        </div>
+    </div>
+{% else %}
+    <p>{% trans %}There are no comments for this post. Be the first to comment...{% endtrans %}</p>
+{% endfor %}

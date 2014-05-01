@@ -1,0 +1,2 @@
+parameters:
+    rtg_blog.comments.latest_comment_limit: 5

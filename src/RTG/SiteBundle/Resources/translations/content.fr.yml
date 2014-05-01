@@ -1,0 +1,39 @@
+#Contact    
+contact:
+    text:
+        p1: "<p>Vous souhaitez déposer votre candidature à un poste au sein de l'association RTG ? Pour cela, rien de plus simple.</p><p>Afin d'obtenir un entretien avec notre équipe de recrutement, envoyez-nous votre dossier de candidature dûment rempli à : contact@restartthegame.com</p><p>Votre demande sera alors étudiée puis soumise à l'accord du responsable concerné.</p>"
+        p2: "<p>Disponibilités présence sur le TS : (cocher vos disponibilités)</p>"
+        p3: "<p>Quel poste visez-vous au sein de la RTG? (merci de cocher)</p>"
+        p4: "<p>Pour quel(s) jeu(x) ?</p>"
+        p5: "<p>Exercice d'écriture ! c'est le moment d'exposer vos motivations pour le ou les poste(s) sein de la RTG !</p>"
+    rtg_apply: "Candidature RTG"
+    info_generales: "Informations générales"
+    info_personnelles: "Informations personnelles"
+    disponibility: "Disponibilités présence sur le TS : (cocher vos disponibilités)"
+    form:
+        lastname: "Nom"
+        firstname: "Prénom"
+        birthday: "Date de naissance"
+        birthplace: "Lieu de naissance"
+        adress: "Adresse"
+        zip_code: "Code postal"
+        town: "Ville"
+        email: "E-mail"
+        phone: "Téléphone"
+    info_virtuelles: "Informations virtuelles"
+    parcours_professionnel: "Parcours professionnel"
+    parcours_pro:
+        p1: "Situation actuelle : employé, étudiant, en recherche d'emploi, autre ? (rayer la/les mentions inutiles)"
+        p2: "Expérience professionnelle :"
+        p3: "Centre d'intérêts :"
+    info_post: "Informations pour le poste RTG"
+    post:
+        responsable_section: "Responsable de section"
+        moderateur_section: "Modérateur de section"
+        responsable_cup: "Responsable Cup"
+        streamer_commenter: "Streamer/Commentateur"
+        ts_officer: "Officier Teamspeak"
+image: Image
+images: Images
+user: Utilisateur
+users: Utilisateurs

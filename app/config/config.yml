@@ -1,0 +1,114 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+
+parameters:
+    web_path: %kernel.root_dir%/../web
+    rtg.twig_extension.class: RTG\SiteBundle\Services\Extension\TwigExtension
+
+framework:
+    #esi:             ~
+    translator:      { fallback: %locale% }
+    secret:          %secret%
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: ~
+    form:            ~
+    csrf_protection: ~
+    validation:      { enable_annotations: true }
+    templating:
+        engines: ['twig']
+        #assets_version: SomeVersionScheme
+    default_locale:  "%locale%"
+    trusted_proxies: ~
+    session:         ~
+    fragments:       ~
+    http_method_override: true
+
+# Twig Configuration
+twig:
+    debug:            %kernel.debug%
+    strict_variables: %kernel.debug%
+    form:
+        resources:
+            - 'RTGSiteBundle:Form:customFormTheme.html.twig'
+    globals:
+        web_path: %web_path%
+services:
+    rtg.twig_extension:
+        class: %rtg.twig_extension.class%
+        tags:
+            - { name: twig.extension }
+    twig.extension.intl:
+        class: Twig_Extensions_Extension_Intl
+        tags:
+            - { name: twig.extension }
+    salavert.twig.time_ago:
+        class: Salavert\Twig\Extension\TimeAgoExtension
+        arguments: ["@translator"]
+        tags:
+        - { name: twig.extension }
+
+# Assetic Configuration
+assetic:
+    debug:          %kernel.debug%
+    use_controller: false
+    bundles:        [ RTGSiteBundle, RTGBlogBundle ]
+    filters:
+        cssrewrite: ~
+        lessphp:
+            file: %kernel.root_dir%/../vendor/leafo/lessphp/lessc.inc.php
+            apply_to: "\.less$"
+            #formatter: "compressed"
+            preserve_comments: true
+
+# Doctrine Configuration
+doctrine:
+    dbal:
+        driver:   %database_driver%
+        host:     %database_host%
+        port:     %database_port%
+        dbname:   %database_name%
+        user:     %database_user%
+        password: %database_password%
+        charset:  UTF8
+        # if using pdo_sqlite as your database driver, add the path in parameters.yml
+        # e.g. database_path: %kernel.root_dir%/data/data.db3
+        # path:     %database_path%
+
+    orm:
+        auto_generate_proxy_classes: %kernel.debug%
+        auto_mapping: true
+
+# Swiftmailer Configuration
+swiftmailer:
+    transport: %mailer_transport%
+    username:  %mailer_user%
+    password:  %mailer_password%
+
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: RTG\UserBundle\Entity\User
+    service:
+        mailer: fos_user.mailer.twig_swift
+    registration:
+        form:
+            type: fos_user_registration
+        confirmation:
+            enabled: true
+            from_email:
+                address: %noreply_address%
+                sender_name: Admin de restartthegame.com
+            template: RTGUserBundle:User:registration.email.twig
+
+avalanche_imagine:
+    filters:
+        tb-128x128:
+            type:    thumbnail
+            options: { size: [128, 128], mode: inset, quality: 100, format: png }
+        tb-48x48:
+            type:    thumbnail
+            options: { size: [48, 48], mode: inset, quality: 100, format: png }
+
+gregwar_captcha: ~

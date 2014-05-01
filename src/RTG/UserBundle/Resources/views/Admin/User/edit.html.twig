@@ -1,0 +1,18 @@
+{% extends 'RTGUserBundle::layout.html.twig' %}
+
+{% block title %}{{ 'user.title.edit'|trans({}, 'entity') }}{% endblock %}
+
+{% block content -%}
+    <h1>{{ 'user.title.edit'|trans({}, 'entity') }}</h1>
+
+    {{ form(edit_form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('rtg_user_admin_user_index') }}">
+            {{ 'user.button.back_to_list'|trans({}, 'entity') }}
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

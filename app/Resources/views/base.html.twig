@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}Restart the Game{% endblock %}</title>
+        <meta name="author" content="Olivier Haag">
+        <link rel="icon" href="{{ asset('favicon.ico') }}" />
+
+
+        {% block stylesheet %}
+            {% stylesheets
+                'bundles/rtgsite/css/main.less'
+                filter='cssrewrite'
+                output='css/compiled/main.css'
+            %}
+            <link rel="stylesheet" href="{{ asset_url }}" />{% endstylesheets %}
+        {% endblock %}
+    </head>
+    {% trans_default_domain 'RTGSiteBundle' %}
+    <body>
+        <div class="scanlines"></div>
+        {{ include('RTGSiteBundle:Page:menuUser.html.twig') }}
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="header-logo">
+                        <a href="{{ path('rtg_site_page_index') }}" title="Restart the Game">
+                            <img class="center-block img-responsive" src="{{ asset('bundles/rtgsite/img/logo.png') }}" alt="Restart the Game"/>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="title row">
+                        <div class="center-block">
+                            <a href="{{ path('rtg_site_page_index') }}" title="Restart the Game">Restart the Game</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            
+        {% block body %}{% endblock %}
+        
+        <div id="footer">
+            <div class="container bloc">
+                <div id="copyright">
+                    {% block footer %}
+                    © 2013 Restart the Game - <a href="{{ path('rtg_site_page_legalnotices') }}">{{ 'legal_notices'|trans({}, 'menu') }}</a>
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+
+        {% block javascript %}
+            {% javascripts
+                'bundles/rtgsite/js/jquery-1.11.0.min.js'
+                'bundles/rtgsite/js/bootstrap.min.js'
+                'bundles/rtgsite/js/analyticstracking.min.js'
+                'bundles/rtgsite/js/main.js' %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+        {% endblock %}
+    </body>
+</html>

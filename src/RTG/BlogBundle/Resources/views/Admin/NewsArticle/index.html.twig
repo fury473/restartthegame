@@ -1,0 +1,53 @@
+{% extends 'RTGBlogBundle::layout.html.twig' %}
+
+{% block title %}{% trans %}News{% endtrans %}{% endblock %}
+
+{% block content -%}
+    <h1>List of NewsArticle</h1>
+
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Image</th>
+                <th>Created</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td><a href="{{ path('rtg_blog_admin_newsarticle_edit', { 'id': entity.id }) }}">{{ entity.title }}</a></td>
+                <td>{{ entity.author }}</td>
+                {% if entity.image is not null %}
+                <td><img src="{{ entity.image.webPath|apply_filter('tb-128x128') }}" /></td>
+                {% else %}
+                <td>Aucune</td>
+                {% endif %}
+                <td><time datetime="{{ entity.created|date('c') }}">{{ entity.created|localizeddate('short', 'none')|capitalize }}</time></td>
+                <td>
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="{{ path('rtg_blog_admin_newsarticle_edit', { 'id': entity.id }) }}"><button class="btn btn-default btn-xs">{{ 'article.edit'|trans({}, 'form') }}</button></a>
+                    </li>
+                    <li>
+                        <a href="{{ path('rtg_blog_newsarticle_show', { 'slug': entity.slug }) }}"><button class="btn btn-default btn-xs">{{ 'article.show'|trans({}, 'form') }}</button></a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul class="list-unstyled">
+        <li>
+            <a href="{{ path('rtg_blog_admin_newsarticle_new') }}">
+                <button class="btn btn-default">{{ 'article.create_a_new_entry'|trans({}, 'form') }}</button>
+            </a>
+        </li>
+    </ul>
+{% endblock %}

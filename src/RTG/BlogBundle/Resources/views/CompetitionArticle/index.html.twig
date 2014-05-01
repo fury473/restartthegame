@@ -1,0 +1,27 @@
+{% extends 'RTGBlogBundle::layout_without_bloc.html.twig' %}
+
+{% block title %}{% trans %}Competitions{% endtrans %} - RTG{% endblock %}
+
+{% block content %}
+    {% for article in articles %}
+        <article class="article bloc">
+            <header>
+                <div class="date right"><time datetime="{{ article.created|date('c') }}">{{ article.created|localizeddate('full', 'short')|capitalize }}</time></div>
+                <h2><a href="{{ path('rtg_blog_competitionarticle_show', { 'slug': article.slug }) }}">{{ article.title }}</a></h2>
+            </header>
+
+            {# <img src="{{ asset(article.image.webPath) }}" /> #}
+            <div class="snippet">
+                {{ article.message|raw }}
+                {#<p class="continue"><a href="{{ path('rtg_blog_competitionarticle_show', { 'slug': article.slug }) }}">{% trans %}Continue reading...{% endtrans %}</a></p>#}
+            </div>
+
+            {#<footer class="meta">
+                <p>{% trans %}Comments{% endtrans %}: <a href="{{ path('rtg_blog_competitionarticle_show', { 'slug': article.slug }) }}#comments">{{ article.comments|length }}</a></p>
+                <p>{% trans %}Posted by{% endtrans %} <span class="highlight">{{article.author}}</span> {% trans %}at{% endtrans %} {{ article.created|localizeddate('none', 'short') }}</p>
+            </footer>#}
+        </article>
+    {% else %}
+        <p>{% trans %}There are no articles{% endtrans %}</p>
+    {% endfor %}
+{% endblock %}

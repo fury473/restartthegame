@@ -1,0 +1,14 @@
+<ul class="nav navbar-nav">
+    <li{% if app.request.get('_route') == 'rtg_site_page_index' %} class="active"{% endif %}>
+      <a href="{{ path('rtg_site_page_index') }}" title="Restart the Game">{{ 'home'|trans({}, 'menu') }}</a>
+    </li>
+    <li{% if app.request.get('_route') == 'rtg_site_page_contact' %} class="active"{% endif %}>
+        <a href="{{ path('rtg_site_page_contact') }}" title="{{ 'contact'|trans({}, 'menu') }}">{{ 'contact'|trans({}, 'menu') }}</a>
+    </li>
+    <li{% if app.request.get('_route') == 'rtg_site_page_speak' %} class="active"{% endif %}>
+        <a href="{{ path('rtg_site_page_teamspeak') }}" title="{{ 'teamspeak'|trans({}, 'menu') }}">{{ 'teamspeak'|trans({}, 'menu') }}</a>
+    </li>
+    <li{% if app.request.get('_route') == 'rtg_site_page_aboutus' %} class="active"{% endif %}>
+        <a href="{{ path('rtg_site_page_aboutus') }}" title="{{ 'about_us'|trans({}, 'menu') }}">{{ 'about_us'|trans({}, 'menu') }}</a>
+    </li>
+</ul>

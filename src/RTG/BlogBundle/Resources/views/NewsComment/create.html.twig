@@ -1,0 +1,8 @@
+{% extends 'RTGBlogBundle::layout.html.twig' %}
+
+{% block title %}{% trans %}Add Comment{% endtrans %}{% endblock%}
+
+{% block content %}
+    <h1>{% trans %}Add comment for blog post{% endtrans %} "{{ comment.article.title }}"</h1>
+    {% include 'RTGBlogBundle:NewsComment:form.html.twig' with { 'form': form } %}
+{% endblock %}

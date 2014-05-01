@@ -1,0 +1,27 @@
+comment.header: Commentaires
+comment.pseudonym: Pseudonyme
+comment.message: Laissez un commentaire
+article.featured: A l'affiche
+article.title: Titre
+article.catchPhrase: Phrase d'accroche
+article.message: Message
+article.image: Image
+article.create: Créer
+article.update: Modifier
+article.delete: Supprimer
+article.edit: Éditer
+article.show: Voir
+article.create_a_new_entry: Créer un nouvel article
+article.back_to_the_list: Retourner à la liste
+
+image.file: Fichier
+image.name: Nom
+image.create: Créer
+image.update: Modifier
+image.delete: 'Supprimer l''image'
+image.edit: Éditer
+image.show: Voir
+image.upload: Uploader une image
+image.list: Liste des images
+image.create_a_new_entry: Créer une nouvelle image
+image.back_to_the_list: Retourner à la liste

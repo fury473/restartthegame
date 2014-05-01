@@ -1,0 +1,15 @@
+{% extends "RTGUserBundle::layout.html.twig" %}
+{% trans_default_domain 'entity' %}
+
+{% block title %}{{ user.username }} {{ 'user.title.profile'|trans }} - RTG{% endblock %}
+
+{% block content %}
+
+    {% if user.avatar is not null %}
+    <img class="thumbnail pull-right" src="{{ user.avatar.webPath|apply_filter('tb-128x128') }}" alt="{{ user.username }}"/>
+    {% endif %}
+    <p>{{ 'user.field.username'|trans }}: {{ user.username }}</p>
+    <p>{{ 'user.field.age'|trans }}: {{ user.age }}</p>
+    <p>{{ 'user.field.city'|trans }}: {{ user.city }}</p>
+    {% if user.hasRole('ROLE_STAFF')%}<p>Staff RTG</p>{% endif %}
+{% endblock content %}

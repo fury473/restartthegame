@@ -1,0 +1,19 @@
+{% extends 'RTGBlogBundle::layout_without_bloc.html.twig' %}
+
+{% block title %}{{ article.title }} - RTG{% endblock %}
+
+{% block content %}
+    <article class="bloc">
+        <header>
+            {# |date('l, F j, Y') #}
+            <div class="date"><time datetime="{{ article.created|date('c') }}">{{ article.created|localizeddate('full', 'none')|capitalize }}</time></div>
+            <h1>{{ article.title }}</h1>
+        </header>
+        {% if article.image is not null %}
+            <img src="{{ asset(article.image.webPath) }}" alt="{{ article.title }} image not found" class="large" />
+        {% endif %}
+        <div>
+            {{ article.message|raw }}
+        </div>
+    </article>
+{% endblock %}

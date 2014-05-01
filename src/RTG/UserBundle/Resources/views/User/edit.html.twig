@@ -1,0 +1,53 @@
+{% extends "RTGUserBundle::layout.html.twig" %}
+{% trans_default_domain 'entity' %}
+
+{% block content %}
+
+    {{ form_start(form, { 'attr': { 'class': 'form' } }) }}
+    
+    {{ form_errors(form) }}
+
+    <div class="form-group">
+    {{ form_row(form.email, { 'attr': { 'placeholder': 'user.field.email'|trans } }) }}
+    </div>
+
+    <div class="form-group">
+    {{ form_row(form.birthday) }}
+    </div>
+
+    <div class="form-group">
+    {{ form_row(form.city, { 'attr': { 'placeholder': 'user.field.city'|trans } }) }}
+    </div>
+
+    {% if delete_img_form is not defined %}
+    <div class="form-group">
+    {{ form_row(form.avatar) }}
+    </div>
+    {% endif %}
+
+    <div class="form-group">
+    {{ form_row(form.submit) }}
+    </div>
+
+    {{ form_end(form) }}
+
+    {% if delete_img_form is defined %}
+    <div class="form-group">
+        <img src="{{ user.avatar.webPath|apply_filter('tb-128x128') }}" alt="{{ user.username }}"/>
+        {{ form(delete_img_form) }}
+    </div>
+    {% endif %}
+
+    <ul class="list-unstyled">
+        <li>
+            {% if app.user.username == user.username %}
+            <a href="{{ path('rtg_user_user_myprofile') }}">
+            {% else %}
+            <a href="{{ path('rtg_user_user_profile', {'id': user.id}) }}">
+            {% endif%}
+                <button class="btn btn-default">{{ 'user.button.back_to_profile'|trans }}</button>
+            </a>
+        </li>
+        <li>{{ form(delete_form) }}</li>
+    </ul>
+{% endblock %}

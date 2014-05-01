@@ -1,0 +1,19 @@
+parameters:
+    database_driver:   pdo_mysql
+    database_host:     127.0.0.1
+    database_port:     3306
+    database_name:     rtg
+    database_user:     rtg-dev
+    database_password: 'rtg,7hf'
+
+    mailer_transport:  smtp
+    mailer_host:       restartthegame.com
+    mailer_user:       ~
+    mailer_password:   ~
+    contact_delivery_address: contact@restartthegame.com
+    dev_delivery_address: fury473@gmail.com
+    noreply_address: noreply@restartthegame.com
+    site_address: site@restartthegame.com
+
+    locale:            fr
+    secret:            'rtg,7hf'

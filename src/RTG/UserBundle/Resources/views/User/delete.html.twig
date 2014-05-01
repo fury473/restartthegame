@@ -1,0 +1,29 @@
+{% extends "RTGUserBundle::layout.html.twig" %}
+{% trans_default_domain 'entity' %}
+
+{% block title %}{{ 'user.title.delete'|trans }} - RTG{% endblock %}
+
+{% block content %}
+    <h1>Suppression du compte</h1>
+    {% if state == 'deleted' %}
+        <p>{{ 'user.content.account_deleted'|trans }}</p>
+    {% else %}
+        {% if state == 'invalid_password' %}
+            <p>{{ 'user.content.incorrect_password'|trans }}</p>
+        {% endif %}
+        <p>{{ 'user.content.rewritre_your_password'|trans }}</p>
+        <form action="{{ path('rtg_user_user_delete') }}" method="POST">
+            <div class="form-group">
+                <input type="password" name="password" class="form-control" placeholder="{{ 'user.field.password'|trans }}" required />
+            </div>
+            <div class="form-group">
+                <div>
+                    <input type="submit" class="btn btn-danger" value="{{ 'user.button.validate_delete'|trans }}" />
+                </div>
+            </div>
+        </form>
+        <a href="{{ path('rtg_user_user_myprofile') }}">
+            <button class="btn btn-default">{{ 'user.button.back_to_profile'|trans }}</button>
+        </a>
+    {% endif %}
+{% endblock %}

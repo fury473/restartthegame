@@ -1,0 +1,51 @@
+#s3slider {
+    min-height: 305px;
+    margin: auto;
+    margin-bottom: 30px;
+    position: relative;
+    max-width: 800px;
+}
+
+#s3slider ul {
+    display: inline-block;
+    position: relative;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#s3slider ul, #s3slider li {
+    height: 100%;
+}
+ 
+#s3sliderContent {
+}
+ 
+.s3sliderImage {
+    display: none; /* important */
+}
+
+.s3sliderImage img {
+    vertical-align: middle;
+}
+ 
+.s3sliderImage span {
+    position: absolute; /* important */
+    box-sizing: border-box;
+    left: 0;
+    font: 15px Arial, Helvetica, sans-serif;
+    padding: 10px 13px;
+    background-color: #000;
+    filter: alpha(opacity=70); /* here you can set the opacity of box with text */
+    -moz-opacity: 0.7; /* here you can set the opacity of box with text */
+    -khtml-opacity: 0.7; /* here you can set the opacity of box with text */
+    opacity: 0.7; /* here you can set the opacity of box with text */
+    color: #fff;
+    display: none; /* important */
+    top: 0; /*
+        if you put top: 0;  -> the box with text will be shown 
+                                at the top of the image
+        if you put bottom: 0;  -> the box with text will be shown 
+                                at the bottom of the image
+    */
+}
