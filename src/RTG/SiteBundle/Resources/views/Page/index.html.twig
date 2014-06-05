@@ -13,11 +13,10 @@
             <ul class="latest-posts">
                 {% for competition in competitions %}
                     <li class="clearfix">
-                        <span class="date">
-                            <em class="day">{{ competition.created|localizeddate('none', 'none', app.request.locale, null, 'd') }}</em>
-                            <em class="month">{{ competition.created|localizeddate('none', 'none', app.request.locale, null, 'MMM') }}</em>
-                        </span>
-                        <a href="{{ path('rtg_blog_competitionarticle_show', { 'slug': competition.slug }) }}">{{ competition.title }}</a>
+                        <a href="{{ path('rtg_blog_competitionarticle_show', { 'slug': competition.slug }) }}" title="{{ competition.title }}"><span class="date">
+                                <em class="day">{{ competition.created|localizeddate('none', 'none', app.request.locale, null, 'd') }}</em>
+                                <em class="month">{{ competition.created|localizeddate('none', 'none', app.request.locale, null, 'MMM') }}</em>
+                            </span><span class="post-title">{{ competition.title }}</span></a>
                     </li>
                 {% endfor %}
             </ul>

@@ -17,7 +17,7 @@ class NewsArticleType extends AbstractType
     {
         $entity = $options['data'];
         $builder
-            ->add('featured', 'checkbox', array('label' => 'article.featured'))
+            ->add('featured', 'checkbox', array('label' => 'article.featured', 'required' => false))
             ->add('title', 'text', array('label' => 'article.title', 'attr' => array('class' => 'form-control')))
             ->add('catchPhrase', 'text', array('label' => 'article.catchPhrase', 'attr' => array('class' => 'form-control')))
             ->add('message', 'ckeditor', array('label' => 'article.message', 'attr' => array('class' => 'form-control')));

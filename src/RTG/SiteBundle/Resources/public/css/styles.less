@@ -136,40 +136,44 @@ ul.latest-posts {
         font-family: 'PTSansRegular';
         font-style: normal;
         font-size: 14px;
-        padding-top: 10px;
-        margin-bottom: 10px;
         border-top: 1px dashed #454545;
 
         a {
             color: #b5b5b5;
+            display: block;
+            height: 46px;
+
+            span.post-title {
+                line-height: 46px;
+            }
+
+            span.date {
+                float: left;
+                font-family: 'CharisSILItalic';
+                padding-right: 15px;
+                padding-top: 5px;
+                text-align: center;
+                color: #dcdcdc;
+                font-style: normal;
+
+                em.day {
+                    font-size: 25px;
+                    font-style: normal;
+                }
+
+                em.month {
+                    font-size: 13px;
+                    text-transform: uppercase;
+                    display: block;
+                    line-height: 8px;
+                    margin-top: 1px;
+                    font-style: normal;
+                }
+            }
         }
 
         a:hover {
             color: #e5ba5b;
-        }
-
-        span.date {
-            float: left;
-            font-family: 'CharisSILItalic';
-            padding-right: 15px;
-            padding-top: 2px;
-            text-align: center;
-            color: #dcdcdc;
-            font-style: normal;
-        }
-
-        em.day {
-            font-size: 25px;
-            font-style: normal;
-        }
-
-        em.month {
-            font-size: 13px;
-            text-transform: uppercase;
-            display: block;
-            line-height: 8px;
-            margin-top: 1px;
-            font-style: normal;
         }
     }
 
