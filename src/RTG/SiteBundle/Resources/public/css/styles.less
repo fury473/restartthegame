@@ -14,26 +14,23 @@ body {
 
 .bloc {
     margin: 20px auto;
+}
+
+.vcard {
+    margin-top: 20px;
+}
+
+.top .vcard {
+    margin-top: 0;
+}
+
+.bloc, .vcard {
     padding: 30px 15px;
     color: #b5b5b5;
     background: rgba(0, 0, 0, 0.9);
     -webkit-box-shadow: 0px 1px 2px -1px rgba(0, 0, 0, 0.6);
     -moz-box-shadow: 0px 1px 2px -1px rgba(0, 0, 0, 0.6);
     box-shadow: 0px 1px 2px -1px rgba(0, 0, 0, 0.6);
-}
-
-hr {
-    border-color: #333;
-}
-
-.scanlines {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    background: url('../img/tile.png');
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -84,6 +81,13 @@ ul {
     }
 }
 
+ul.list-unstyled {
+    li {
+        padding: 0;
+        list-style-image: none;
+    }
+}
+
 ol {
     font-family: 'CharisSILItalic';
     font-size: 14px;
@@ -94,6 +98,36 @@ ol {
     li {
         padding: 0;
         margin: 0;
+    }
+}
+
+#main-menu.bloc {
+    padding: 0 15px;
+}
+
+#main-menu {
+    a {
+        color: #999999;
+        font-family: 'Museo500';
+        line-height: 32px;
+        font-size: 14px;
+    }
+    a:hover {
+        background: inherit;
+        color: #ffffff;
+    }
+    li.active a {
+        color: #ffffff;
+    }
+    ul {
+        width: 100%;
+    }
+    li.pull-right {
+        padding: 0;
+        a {
+            padding-left: 5px;
+            padding-right: 0;
+        }
     }
 }
 

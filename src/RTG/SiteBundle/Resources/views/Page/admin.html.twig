@@ -3,20 +3,18 @@
 {% block title %}Administration - RTG{% endblock %}
 
 {% block content %}
-<div class="bloc">
+<div class="bloc container">
     <h1>Administration</h1>
-    <h2>Articles</h2>
     <ul class="list-inline">
     <li>
-        <a href="{{ path('rtg_blog_admin_newsarticle_index') }}"><button class="btn btn-default">{{ 'news'|trans({}, 'menu') }}</button></a>
+        <a href="{{ path('rtg_blog_admin_newsarticle_index') }}"><button class="btn btn-primary">{{ 'news'|trans({}, 'menu') }}</button></a>
     </li>
     <li>
-        <a href="{{ path('rtg_blog_admin_competitionarticle_index') }}"><button class="btn btn-default">{{ 'competition'|trans({}, 'menu') }}</button></a>
+        <a href="{{ path('rtg_blog_admin_competitionarticle_index') }}"><button class="btn btn-primary">{{ 'competitions'|trans({}, 'menu') }}</button></a>
     </li>
     </ul>
     {% if is_granted('ROLE_SUPER_ADMIN') %}
-    <h2>{% trans from 'content' %}users{% endtrans %}</h2>
-    <a href="{{ path('rtg_user_admin_user_index') }}"><button class="btn btn-default">{% trans from 'content' %}users{% endtrans %}</button></a>
+    <a href="{{ path('rtg_user_admin_user_index') }}"><button class="btn btn-primary">{% trans from 'content' %}users{% endtrans %}</button></a>
     {% endif %}
     {# <a href="{{ path('admin_game') }}" title="Jeux" class="btn btn-inverse">Jeux</a> #}
 </div>

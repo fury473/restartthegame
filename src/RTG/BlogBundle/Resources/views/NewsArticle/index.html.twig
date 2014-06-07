@@ -1,18 +1,18 @@
-{% extends 'RTGBlogBundle::layout_without_bloc.html.twig' %}
+{% extends 'RTGBlogBundle::layout.html.twig' %}
 
 {% block title %}{% trans %}News{% endtrans %} - RTG{% endblock %}
 
 {% block content %}
     {% for article in articles %}
-        <article class="article bloc">
+        <article class="article">
             <header>
-                <div class="date right"><time datetime="{{ article.created|date('c') }}">{{ article.created|localizeddate('full', 'short')|capitalize }}</time></div>
+                <div class="date pull-right"><time datetime="{{ article.created|date('c') }}">{{ article.created|localizeddate('full', 'short')|capitalize }}</time></div>
                 <h2><a href="{{ path('rtg_blog_newsarticle_show', { 'slug': article.slug }) }}">{{ article.title }}</a></h2>
             </header>
 
             {# <img src="{{ asset(article.image.webPath) }}" /> #}
             <div class="snippet">
-                {{ article.message|raw }}
+                {{ article.catchPhrase }}
                 {#<p class="continue"><a href="{{ path('rtg_blog_newsarticle_show', { 'slug': article.slug }) }}">{% trans %}Continue reading...{% endtrans %}</a></p>#}
             </div>
 

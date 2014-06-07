@@ -3,16 +3,16 @@
 {% block title %}{% trans %}News{% endtrans %}{% endblock %}
 
 {% block content -%}
-    <h1>List of NewsArticle</h1>
+    <h1>{{ 'title.article_list'|trans({}, 'messages') }}</h1>
 
     <table class="table table-responsive">
         <thead>
             <tr>
                 <th>#</th>
-                <th>Title</th>
-                <th>Author</th>
-                <th>Image</th>
-                <th>Created</th>
+                <th>{{ 'article.title'|trans({}, 'form') }}</th>
+                <th>{{ 'article.author'|trans({}, 'form') }}</th>
+                <th>{{ 'article.image'|trans({}, 'form') }}</th>
+                <th>{{ 'article.created'|trans({}, 'form') }}</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -31,10 +31,10 @@
                 <td>
                 <ul class="list-unstyled">
                     <li>
-                        <a href="{{ path('rtg_blog_admin_newsarticle_edit', { 'id': entity.id }) }}"><button class="btn btn-default btn-xs">{{ 'article.edit'|trans({}, 'form') }}</button></a>
+                        <a href="{{ path('rtg_blog_admin_newsarticle_edit', { 'id': entity.id }) }}"><button class="btn btn-primary btn-xs">{{ 'article.edit'|trans({}, 'form') }}</button></a>
                     </li>
                     <li>
-                        <a href="{{ path('rtg_blog_newsarticle_show', { 'slug': entity.slug }) }}"><button class="btn btn-default btn-xs">{{ 'article.show'|trans({}, 'form') }}</button></a>
+                        <a href="{{ path('rtg_blog_newsarticle_show', { 'slug': entity.slug }) }}"><button class="btn btn-info btn-xs">{{ 'article.show'|trans({}, 'form') }}</button></a>
                     </li>
                 </ul>
                 </td>
@@ -46,7 +46,7 @@
     <ul class="list-unstyled">
         <li>
             <a href="{{ path('rtg_blog_admin_newsarticle_new') }}">
-                <button class="btn btn-default">{{ 'article.create_a_new_entry'|trans({}, 'form') }}</button>
+                <button class="btn btn-success">{{ 'article.create_a_new_entry'|trans({}, 'form') }}</button>
             </a>
         </li>
     </ul>

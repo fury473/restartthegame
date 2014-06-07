@@ -290,7 +290,7 @@ class UserController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('rtg_user_admin_user_deleteimg', array('user_id' => $user_id, 'id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => $this->get('translator')->trans('image.delete', array(), 'form'), 'attr' => array('class' => 'btn btn-default')))
+            ->add('submit', 'submit', array('label' => $this->get('translator')->trans('image.delete', array(), 'form'), 'attr' => array('class' => 'btn btn-danger')))
             ->getForm()
         ;
     }

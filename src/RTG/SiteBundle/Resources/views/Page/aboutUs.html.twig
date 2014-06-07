@@ -3,7 +3,7 @@
 {% block title %}Qui sommes nous ? - RTG{% endblock %}
 
 {% block content %}
-<div class="bloc">
+<div class="bloc container">
     <h1>Qui sommes nous ?</h1>
     <h2>Naissance du projet RTG</h2>
     <p>Partis du constat que la communauté Pc française manquait d’évènements virtuels et physiques, les deux membres fondateurs, Shark et 7v3n, décident alors de créer la RTG. Issus de la communauté Modern Warfare 2, alors dépourvue d’activité, leur objectif a alors été de la relancer, et d’étendre le projet vers d’autres jeux. Dans ce but, l’équipe RTG s’agrandit : Lilith, Fury, Harck, Taokyl et Belette rejoignent alors le projet.</p>
@@ -16,110 +16,30 @@
     <p>La Restart The Game est une association à but non lucratif implantée dans la région lyonnaise. Nous souhaitons relancer la communauté PC, en proposant à nos membres le meilleur de la compétition et des Lans. Nous sommes en effet conscients que la plus grande difficulté rencontrée par les joueurs issus du domaine E-sport, est de trouver des structures solides proposant des évènements réguliers.</p>
     
     <h2>Le [Staff RTG]</h2>
-    <div class="staff row">
-        <div class="col-md-6">
-            <div class="col-md-10 col-md-offset-1 thumbnail">
-                <div class="col-md-6">
-                    {% if file_exists(web_path~'/bundles/rtgsite/img/content/staff/7v3n.jpg') %}
-                    <img class="picture img-circle img-responsive" src="{{ asset('bundles/rtgsite/img/content/staff/7v3n.jpg') }}" />
-                    {% else %}
-                    <img class="picture img-circle img-responsive" src="{{ asset('bundles/rtgsite/img/content/staff/anonyme.jpg') }}" />
-                    {% endif %}
-                </div>
-                <div class="col-md-6">
-                    <p>Milàn Godart (<strong>7v3n</strong>)</p>
-                    <p>Arrageois</p>
-                    <br/>
-                    <p><strong>Président</strong></p>
-                </div>
-            </div>
+    <div class="row">
+        <div class="col-md-6 top">
+            {{ include('RTGSiteBundle:Page:vcard.html.twig', {'name': 'Milàn Godart', 'pseudo': '7v3n', 'city': 'Arras', 'role': 'Président', 'image': '7v3n.jpg'}) }}
         </div>
-        <div class="col-md-6">
-            <div class="col-md-10 col-md-offset-1 thumbnail">
-                <div class="col-md-6">
-                    {% if file_exists(web_path~'/bundles/rtgsite/img/content/staff/belette.jpg') %}
-                    <img class="picture img-circle img-responsive" src="{{ asset('bundles/rtgsite/img/content/staff/belette.jpg') }}" />
-                    {% else %}
-                    <img class="picture img-circle img-responsive" src="{{ asset('bundles/rtgsite/img/content/staff/anonyme.jpg') }}" />
-                    {% endif %}
-                </div>
-                <div class="col-md-6">
-                    <p>Amandine Bouttier (<strong>Belette</strong>)</p>
-                    <p>Rillarde</p>
-                    <p><strong>Secrétaire</strong></p>
-                </div>
-            </div>
+        <div class="col-md-6 top">
+            {{ include('RTGSiteBundle:Page:vcard.html.twig', {'name': 'Amandine Bouttier', 'pseudo': 'Belette', 'city': 'Rillieux-la-Pape', 'role': 'Secrétaire', 'image': 'belette.jpg'}) }}
         </div>
     </div>
     
-    <div class="staff row">
+    <div class="row">
         <div class="col-md-6">
-            <div class="col-md-10 col-md-offset-1 thumbnail">
-                <div class="col-md-6">
-                    {% if file_exists(web_path~'/bundles/rtgsite/img/content/staff/lilith.jpg') %}
-                    <img class="picture img-circle img-responsive" src="{{ asset('bundles/rtgsite/img/content/staff/lilith.jpg') }}" />
-                    {% else %}
-                    <img class="picture img-circle img-responsive" src="{{ asset('bundles/rtgsite/img/content/staff/anonyme.jpg') }}" />
-                    {% endif %}
-                </div>
-                <div class="col-md-6">
-                    <p>Julie Genet (<strong>Lilith</strong>)</p>
-                    <p>Saint-Chamonaise</p>
-                    <p><strong>Secrétaire Adjointe</strong></p>
-                </div>
-            </div>
+            {{ include('RTGSiteBundle:Page:vcard.html.twig', {'name': 'Julie Genet', 'pseudo': 'Lilith', 'city': 'Saint-Chamond', 'role': 'Secrétaire Adjointe', 'image': 'lilith.jpg'}) }}
         </div>
         <div class="col-md-6">
-            <div class="col-md-10 col-md-offset-1 thumbnail">
-                <div class="col-md-6">
-                    {% if file_exists(web_path~'/bundles/rtgsite/img/content/staff/fury.jpg') %}
-                    <img class="picture img-circle img-responsive" src="{{ asset('bundles/rtgsite/img/content/staff/fury.jpg') }}" />
-                    {% else %}
-                    <img class="picture img-circle img-responsive" src="{{ asset('bundles/rtgsite/img/content/staff/anonyme.jpg') }}" />
-                    {% endif %}
-                </div>
-                <div class="col-md-6">
-                    <p>Olivier Haag (<strong>Fury</strong>)</p>
-                    <p>21 ans</p>
-                    <p>Pavezinois</p>
-                    <p><strong>Développeur</strong></p>
-                </div>
-            </div>
+            {{ include('RTGSiteBundle:Page:vcard.html.twig', {'name': 'Olivier Haag', 'pseudo': 'Fury', 'city': 'Pavezin', 'role': 'Développeur', 'image': 'fury.jpg'}) }}
         </div>
     </div>
     
-    <div class="staff row">
+    <div class="row">
         <div class="col-md-6">
-            <div class="col-md-10 col-md-offset-1 thumbnail">
-                <div class="col-md-6">
-                    {% if file_exists(web_path~'/bundles/rtgsite/img/content/staff/taokyl.jpg') %}
-                    <img class="picture img-circle img-responsive" src="{{ asset('bundles/rtgsite/img/content/staff/taokyl.jpg') }}" />
-                    {% else %}
-                    <img class="picture img-circle img-responsive" src="{{ asset('bundles/rtgsite/img/content/staff/anonyme.jpg') }}" />
-                    {% endif %}
-                </div>
-                <div class="col-md-6">
-                    <p>Emmanuel Besset (<strong>Taokyl</strong>)</p>
-                    <p>Oullinois</p>
-                    <p><strong>Trésorier</strong></p>
-                </div>
-            </div>
+            {{ include('RTGSiteBundle:Page:vcard.html.twig', {'name': 'Emmanuel Besset', 'pseudo': 'Taokyl', 'city': 'Oullins', 'role': 'Trésorier', 'image': 'taokyl.jpg'}) }}
         </div>
         <div class="col-md-6">
-            <div class="col-md-10 col-md-offset-1 thumbnail">
-                <div class="col-md-6">
-                    {% if file_exists(web_path~'/bundles/rtgsite/img/content/staff/harck.jpg') %}
-                    <img class="picture img-circle img-responsive" src="{{ asset('bundles/rtgsite/img/content/staff/harck.jpg') }}" />
-                    {% else %}
-                    <img class="picture img-circle img-responsive" src="{{ asset('bundles/rtgsite/img/content/staff/anonyme.jpg') }}" />
-                    {% endif %}
-                </div>
-                <div class="col-md-6">
-                    <p>Mikael Ravinet (<strong>Harck</strong>)</p>
-                    <p>Lyonnais</p>
-                    <p><strong>Hébergeur</strong></p>
-                </div>
-            </div>
+            {{ include('RTGSiteBundle:Page:vcard.html.twig', {'name': 'Mikael Ravinet', 'pseudo': 'Harck', 'city': 'Lyon', 'role': 'Hébergeur', 'image': 'harck.jpg'}) }}
         </div>
     </div>
 </div>

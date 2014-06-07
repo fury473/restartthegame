@@ -70,6 +70,16 @@ class PageController extends Controller
     }
     
     /**
+     * @Route("/partners")
+     * @Method({"GET"})
+     * @Template()
+     */
+    public function partnersAction()
+    {
+        return array();
+    }
+    
+    /**
      * @Route("/teamspeak")
      * @Method({"GET"})
      * @Template()
@@ -152,13 +162,13 @@ class PageController extends Controller
     
     
     
-    /**
-     * @Route("/coming-soon")
-     * @Method({"GET"})
-     * @Template()
-     */
-    public function comingSoonAction()
-    {
-        return array();
-    }
+//    /**
+//     * @Route("/coming-soon")
+//     * @Method({"GET"})
+//     * @Template()
+//     */
+//    public function comingSoonAction()
+//    {
+//        return array();
+//    }
 }

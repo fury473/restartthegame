@@ -1,9 +1,9 @@
-{% extends 'RTGBlogBundle::layout_without_bloc.html.twig' %}
+{% extends 'RTGBlogBundle::layout.html.twig' %}
 
 {% block title %}{{ article.title }} - RTG{% endblock %}
 
 {% block content %}
-    <article class="bloc">
+    <article>
         <header>
             {# |date('l, F j, Y') #}
             <time datetime="{{ article.created|date('c') }}" class="pull-right">{{ article.created|localizeddate('full', 'none')|capitalize }}</time>

@@ -1,14 +1,29 @@
 <ul class="nav navbar-nav">
+    <li class="pull-right">
+        <a target="_blank" href="https://www.facebook.com/RestartTheGameCommunity" title="Facebook - Restart the Game"><i class="icon-facebook icon32"></i></a>
+    </li>
+    <li class="pull-right">
+        <a target="_blank" href="http://steamcommunity.com/groups/RestartTheGame" title="Steam - Restart the Game"><i class="icon-steam icon32"></i></a>
+    </li>
     <li{% if app.request.get('_route') == 'rtg_site_page_index' %} class="active"{% endif %}>
       <a href="{{ path('rtg_site_page_index') }}" title="Restart the Game">{{ 'home'|trans({}, 'menu') }}</a>
     </li>
-    <li{% if app.request.get('_route') == 'rtg_site_page_contact' %} class="active"{% endif %}>
-        <a href="{{ path('rtg_site_page_contact') }}" title="{{ 'contact'|trans({}, 'menu') }}">{{ 'contact'|trans({}, 'menu') }}</a>
+    <li{% if app.request.get('_route') == 'rtg_site_page_aboutus' %} class="active"{% endif %}>
+        <a href="{{ path('rtg_site_page_aboutus') }}" title="{{ 'about_us'|trans({}, 'menu') }}">{{ 'about_us'|trans({}, 'menu') }}</a>
     </li>
     <li{% if app.request.get('_route') == 'rtg_site_page_speak' %} class="active"{% endif %}>
         <a href="{{ path('rtg_site_page_teamspeak') }}" title="{{ 'teamspeak'|trans({}, 'menu') }}">{{ 'teamspeak'|trans({}, 'menu') }}</a>
     </li>
-    <li{% if app.request.get('_route') == 'rtg_site_page_aboutus' %} class="active"{% endif %}>
-        <a href="{{ path('rtg_site_page_aboutus') }}" title="{{ 'about_us'|trans({}, 'menu') }}">{{ 'about_us'|trans({}, 'menu') }}</a>
+    <li{% if app.request.get('_route') == 'rtg_blog_competitionarticle_index' %} class="active"{% endif %}>
+        <a href="{{ path('rtg_blog_competitionarticle_index') }}" title="{{ 'competitions'|trans({}, 'menu') }}">{{ 'competitions'|trans({}, 'menu') }}</a>
+    </li>
+    <li{% if app.request.get('_route') == 'rtg_blog_newsarticle_index' %} class="active"{% endif %}>
+        <a href="{{ path('rtg_blog_newsarticle_index') }}" title="{{ 'news'|trans({}, 'menu') }}">{{ 'news'|trans({}, 'menu') }}</a>
+    </li>
+    <li{% if app.request.get('_route') == 'rtg_site_page_partners' %} class="active"{% endif %}>
+        <a href="{{ path('rtg_site_page_partners') }}" title="{{ 'partners'|trans({}, 'menu') }}">{{ 'partners'|trans({}, 'menu') }}</a>
+    </li>
+    <li{% if app.request.get('_route') == 'rtg_site_page_contact' %} class="active"{% endif %}>
+        <a href="{{ path('rtg_site_page_contact') }}" title="{{ 'contact'|trans({}, 'menu') }}">{{ 'contact'|trans({}, 'menu') }}</a>
     </li>
 </ul>

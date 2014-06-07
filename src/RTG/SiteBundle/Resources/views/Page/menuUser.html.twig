@@ -1,5 +1,5 @@
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container">
+    <div id="top-menu" class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span>
@@ -10,15 +10,14 @@
             <a class="navbar-brand" href="{{ path('rtg_site_page_index') }}" title="Restart the Game">Restart the Game</a>
         </div>
         <div class="collapse navbar-collapse">
-            {{ include('RTGSiteBundle:Page:menu.html.twig') }}
             <ul class="nav navbar-nav navbar-right navbar-collapse">
             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                 {# {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} #}
-                <li>
+                <li{% if app.request.get('_route') == 'rtg_user_user_myprofile' %} class="active"{% endif %}>
                     <a href="{{ path('rtg_user_user_myprofile') }}" title="{{ 'profile'|trans({}, 'menu') }}"><span class="glyphicon glyphicon-user"></span> {{ 'profile'|trans({}, 'menu') }}</a>
                 </li>
                 {% if is_granted("ROLE_ADMIN") %}
-                    <li>
+                    <li{% if app.request.get('_route') == 'rtg_site_page_admin' %} class="active"{% endif %}>
                         <a href="{{ path('rtg_site_page_admin') }}" title="{{ 'admin'|trans({}, 'menu') }}"><span class="glyphicon glyphicon-wrench"></span> {{ 'admin'|trans({}, 'menu') }}</a>
                     </li>
                 {% endif %}

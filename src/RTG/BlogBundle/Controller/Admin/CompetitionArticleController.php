@@ -80,7 +80,7 @@ class CompetitionArticleController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => $this->get('translator')->trans('article.create', array(), 'form'), 'attr' => array('class' => 'btn btn-default')));
+        $form->add('submit', 'submit', array('label' => $this->get('translator')->trans('article.create', array(), 'form'), 'attr' => array('class' => 'btn btn-success')));
 
         return $form;
     }
@@ -154,7 +154,7 @@ class CompetitionArticleController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => $this->get('translator')->trans('article.update', array(), 'form'), 'attr' => array('class' => 'btn btn-default')));
+        $form->add('submit', 'submit', array('label' => $this->get('translator')->trans('article.update', array(), 'form'), 'attr' => array('class' => 'btn btn-primary')));
 
         return $form;
     }
@@ -234,7 +234,7 @@ class CompetitionArticleController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('rtg_blog_admin_competitionarticle_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => $this->get('translator')->trans('article.delete', array(), 'form'), 'attr' => array('class' => 'btn btn-default')))
+            ->add('submit', 'submit', array('label' => $this->get('translator')->trans('article.delete', array(), 'form'), 'attr' => array('class' => 'btn btn-danger')))
             ->getForm()
         ;
     }
@@ -277,7 +277,7 @@ class CompetitionArticleController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('rtg_blog_admin_competitionarticle_deleteimg', array('article_id' => $article_id, 'id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => $this->get('translator')->trans('image.delete', array(), 'form'), 'attr' => array('class' => 'btn btn-default')))
+            ->add('submit', 'submit', array('label' => $this->get('translator')->trans('image.delete', array(), 'form'), 'attr' => array('class' => 'btn btn-danger')))
             ->getForm()
         ;
     }

@@ -45,7 +45,7 @@
             {% else %}
             <a href="{{ path('rtg_user_user_profile', {'id': user.id}) }}">
             {% endif%}
-                <button class="btn btn-default">{{ 'user.button.back_to_profile'|trans }}</button>
+                <button class="btn btn-primary">{{ 'user.button.back_to_profile'|trans }}</button>
             </a>
         </li>
         <li>{{ form(delete_form) }}</li>

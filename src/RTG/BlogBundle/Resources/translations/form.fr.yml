@@ -3,6 +3,8 @@ comment.pseudonym: Pseudonyme
 comment.message: Laissez un commentaire
 article.featured: A l'affiche
 article.title: Titre
+article.author: Auteur
+article.created: Crée le
 article.catchPhrase: Phrase d'accroche
 article.message: Message
 article.image: Image
