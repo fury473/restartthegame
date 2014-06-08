@@ -1,7 +1,8 @@
 <?php
 
-namespace RTG\UserBundle\Form;
+namespace RTG\UserBundle\Form\Admin;
 
+use RTG\UserBundle\Form\AvatarType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -14,13 +15,25 @@ class UserType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $entity = $options['data'];
         $builder
-            ->add('username', 'text', array('label' => 'user.field.username'))
-            ->add('email', 'text', array('label' => 'user.field.email'))
+            ->add('username', 'text', array('label' => 'user.field.username', 'attr' => array('class' => 'form-control')))
+            ->add('email', 'email', array('label' => 'user.field.email', 'attr' => array('class' => 'form-control')))
+            ->add('birthday', 'date', array(
+                'label' => 'user.field.birthday',
+                'widget' => 'single_text',
+                'attr' => array('class' => 'datepicker'),
+                'required' => false,
+                'attr' => array('class' => 'form-control')
+            ))
+            ->add('city', 'text', array('label' => 'user.field.city', 'required' => false, 'attr' => array('class' => 'form-control')))
             ->add('enabled', 'checkbox', array('label' => 'user.field.enabled', 'required' => false))
             ->add('locked', 'checkbox', array('label' => 'user.field.locked', 'required' => false))
             ->add('roles', null, array('label' => 'user.field.roles'))
         ;
+        if($entity->getAvatar() == null) {
+            $builder->add('avatar', new AvatarType(), array('label' => 'user.field.avatar'));
+        }
     }
     
     /**

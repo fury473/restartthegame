@@ -277,7 +277,7 @@ class CompetitionArticleController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('rtg_blog_admin_competitionarticle_deleteimg', array('article_id' => $article_id, 'id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => $this->get('translator')->trans('image.delete', array(), 'form'), 'attr' => array('class' => 'btn btn-danger')))
+            ->add('submit', 'submit', array('label' => $this->get('translator')->trans('image.delete', array(), 'form'), 'attr' => array('class' => 'btn btn-warning')))
             ->getForm()
         ;
     }

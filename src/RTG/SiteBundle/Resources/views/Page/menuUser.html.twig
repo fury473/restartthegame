@@ -13,11 +13,11 @@
             <ul class="nav navbar-nav navbar-right navbar-collapse">
             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                 {# {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} #}
-                <li{% if app.request.get('_route') == 'rtg_user_user_myprofile' %} class="active"{% endif %}>
+                <li{% if 'profile' in app.request.get('_route') or 'rtg_user_user_edit' in app.request.get('_route') %} class="active"{% endif %}>
                     <a href="{{ path('rtg_user_user_myprofile') }}" title="{{ 'profile'|trans({}, 'menu') }}"><span class="glyphicon glyphicon-user"></span> {{ 'profile'|trans({}, 'menu') }}</a>
                 </li>
                 {% if is_granted("ROLE_ADMIN") %}
-                    <li{% if app.request.get('_route') == 'rtg_site_page_admin' %} class="active"{% endif %}>
+                    <li{% if app.request.get('_route') == 'rtg_site_page_admin' or 'rtg_blog_admin' in app.request.get('_route') %} class="active"{% endif %}>
                         <a href="{{ path('rtg_site_page_admin') }}" title="{{ 'admin'|trans({}, 'menu') }}"><span class="glyphicon glyphicon-wrench"></span> {{ 'admin'|trans({}, 'menu') }}</a>
                     </li>
                 {% endif %}

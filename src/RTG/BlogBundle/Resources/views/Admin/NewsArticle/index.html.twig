@@ -3,7 +3,10 @@
 {% block title %}{% trans %}News{% endtrans %}{% endblock %}
 
 {% block content -%}
-    <h1>{{ 'title.article_list'|trans({}, 'messages') }}</h1>
+    <a class="pull-right" href="{{ path('rtg_blog_admin_newsarticle_new') }}">
+        <button class="btn btn-success">{{ 'article.create_a_new_entry'|trans({}, 'form') }}</button>
+    </a>
+    <h1>{{ 'title.article.index'|trans }}</h1>
 
     <table class="table table-responsive">
         <thead>
@@ -42,12 +45,7 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <ul class="list-unstyled">
-        <li>
-            <a href="{{ path('rtg_blog_admin_newsarticle_new') }}">
-                <button class="btn btn-success">{{ 'article.create_a_new_entry'|trans({}, 'form') }}</button>
-            </a>
-        </li>
-    </ul>
+    <a class="pull-right" href="{{ path('rtg_blog_admin_newsarticle_new') }}">
+        <button class="btn btn-success">{{ 'article.create_a_new_entry'|trans({}, 'form') }}</button>
+    </a>
 {% endblock %}

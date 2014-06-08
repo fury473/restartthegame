@@ -4,6 +4,7 @@
 {% block title %}{{ user.username }} {{ 'user.title.profile'|trans }} - RTG{% endblock %}
 
 {% block content %}
+    <h1>{{ 'user.title.profile_of'|trans({'username': user.username}) }}</h1>
 
     {% if user.avatar is not null %}
     <img class="thumbnail pull-right" src="{{ user.avatar.webPath|apply_filter('tb-128x128') }}" alt="{{ user.username }}"/>

@@ -1,9 +1,9 @@
 {% extends 'RTGUserBundle::layout.html.twig' %}
 
-{% block title %}{{ 'user.title.list'|trans({}, 'entity') }}{% endblock %}
+{% block title %}{{ 'user.title.index'|trans({}, 'entity') }}{% endblock %}
 
 {% block content -%}
-    <h1>{{ 'user.title.list'|trans({}, 'entity') }}</h1>
+    <h1>{{ 'user.title.index'|trans({}, 'entity') }}</h1>
 
     <table class="table table-responsive">
         <thead>
@@ -38,12 +38,4 @@
         {% endfor %}
         </tbody>
     </table>
-
-        <ul>
-        <li>
-            <a href="{{ path('rtg_user_admin_user_new') }}">
-                {{ 'user.button.create_a_new_entry'|trans({}, 'entity') }}
-            </a>
-        </li>
-    </ul>
 {% endblock %}

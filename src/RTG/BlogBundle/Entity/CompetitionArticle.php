@@ -33,7 +33,7 @@ class CompetitionArticle
     protected $slug;
     
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     protected $message;
 

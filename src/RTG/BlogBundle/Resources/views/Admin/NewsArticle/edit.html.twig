@@ -1,7 +1,7 @@
 {% extends 'RTGBlogBundle::layout.html.twig' %}
 
 {% block content -%}
-    <h1>NewsArticle edit</h1>
+    <h1>{{ 'title.article.edit'|trans }}</h1>
 
     {{ form_start(form, { 'attr': { 'class': 'form' } }) }}
     
@@ -27,27 +27,30 @@
     <div class="form-group">
     {{ form_row(form.image) }}
     </div>
+    {% else %}
+    <div class="form-group">
+        <label>{{ 'article.image'|trans({}, 'form') }}</label>
+        <div>
+            <img src="{{ asset(entity.image.webPath) }}" alt="{{ entity.title }}"/>
+        </div>
+    </div>
     {% endif %}
     
-    <div class="form-group">
+    <div class="form-group pull-right">
     {{ form_row(form.submit) }}
     </div>
-    
     {{ form_end(form) }}
     
-    {% if delete_img_form is defined %}
-    <div class="form-group">
-        <img src="{{ asset(entity.image.webPath) }}" alt="{{ entity.title }}"/>
-        {{ form(delete_img_form) }}
+    <div class="form-group pull-right">
+    {{ form(delete_form) }}
     </div>
+    
+    {% if delete_img_form is defined %}
+    {{ form(delete_img_form) }}
+    <div class="clearfix"></div>
     {% endif %}
     
-    <ul class="list-unstyled">
-        <li>
-            <a href="{{ path('rtg_blog_admin_newsarticle_index') }}">
-                <button class="btn btn-primary">{{ 'article.back_to_the_list'|trans({}, 'form') }}</button>
-            </a>
-        </li>
-        <li>{{ form(delete_form) }}</li>
-    </ul>
+    <a href="{{ path('rtg_blog_admin_newsarticle_index') }}">
+        <button class="btn btn-primary">{{ 'article.back_to_the_list'|trans({}, 'form') }}</button>
+    </a>
 {% endblock %}

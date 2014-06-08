@@ -70,21 +70,18 @@ class UserController extends Controller {
         $editForm = $this->createEditForm($user);
         $deleteForm = $this->createDeleteForm();
         
-        if($user->getAvatar() != null) {
-            $deleteImgForm = $this->createDeleteImgForm($user->getAvatar()->getId());
-            return array(
-                'user'      => $user,
-                'form'   => $editForm->createView(),
-                'delete_img_form' => $deleteImgForm->createView(),
-                'delete_form' => $deleteForm->createView(),
-            );
-        }
-
-        return array(
+        $parameters = array(
             'user'      => $user,
             'form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
+        
+        if($user->getAvatar() != null) {
+            $deleteImgForm = $this->createDeleteImgForm($user->getAvatar()->getId());
+            $parameters['delete_img_form'] = $deleteImgForm->createView();
+        }
+
+        return $parameters;
     }
     
     /**
@@ -101,7 +98,7 @@ class UserController extends Controller {
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => $this->get('translator')->trans('user.button.update', array(), 'form'), 'attr' => array('class' => 'btn btn-success')));
+        $form->add('submit', 'submit', array('label' => $this->get('translator')->trans('user.button.update', array(), 'form'), 'attr' => array('class' => 'btn btn-primary')));
 
         return $form;
     }

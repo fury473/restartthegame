@@ -1,10 +1,18 @@
+title:
+    article:
+        index: Liste des articles
+        new: Création d'un article
+        edit: Edition de l'article
+    competition:
+        index: Liste des compétitions
+        new: Création d'une compétition
+        edit: Edition de la compétition
+
 News: Actualités
-'list_of': 'Liste des %entity%'
+list_of: Liste des %entity%
 Competition: Compétition
 Competitions: Compétitions
-'title.article_list': 'Liste des articles'
-'title.competition_list': 'Liste des compétitions'
-'Continue reading...': 'Lire la suite...'
+'Continue reading...': Lire la suite...
 Comments: Commentaires
 'Posted by': 'Posté par'
 at: 'à'

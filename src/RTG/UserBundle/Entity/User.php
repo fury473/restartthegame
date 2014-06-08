@@ -69,7 +69,7 @@ class User extends BaseUser
      *
      * @return \DateTime 
      */
-    public function getBirthDay()
+    public function getBirthday()
     {
         return $this->birthday;
     }
@@ -80,7 +80,7 @@ class User extends BaseUser
      * @var \Date
      * @return User
      */
-    public function setBirthDay($birthday)
+    public function setBirthday($birthday)
     {
         $this->birthday = $birthday;
         return $this;

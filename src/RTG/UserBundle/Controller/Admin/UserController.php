@@ -9,6 +9,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use RTG\UserBundle\Entity\User;
 use RTG\UserBundle\Form\UserType;
+use RTG\UserBundle\Form\Admin;
+use FOS\UserBundle\Doctrine\UserManager;
 
 /**
  * User controller.
@@ -34,74 +36,7 @@ class UserController extends Controller
             'entities' => $entities,
         );
     }
-    /**
-     * Creates a new User entity.
-     *
-     * @Route("/")
-     * @Method("POST")
-     * @Template("RTGUserBundle:Admin\User:new.html.twig")
-     */
-    public function createAction(Request $request)
-    {
-        $entity = new User();
-        $form = $this->createCreateForm($entity);
-        $form->handleRequest($request);
-        
-        $avatar = $entity->getAvatar();
-        if($avatar->getFile() == null) {
-            $entity->setAvatar(null);
-        }
-
-        if ($form->isValid()) {
-            $userManager = $this->get('fos_user.user_manager');
-            $userManager->updateUser($entity);
-
-            return $this->redirect($this->generateUrl('rtg_user_admin_user_show', array('id' => $entity->getId())));
-        }
-
-        return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        );
-    }
-
-    /**
-    * Creates a form to create a User entity.
-    *
-    * @param User $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
-    private function createCreateForm(User $entity)
-    {
-        $form = $this->createForm(new UserType(), $entity, array(
-            'action' => $this->generateUrl('rtg_user_admin_user_create'),
-            'method' => 'POST',
-        ));
-
-        $form->add('submit', 'submit', array('label' => 'Create'));
-
-        return $form;
-    }
-
-    /**
-     * Displays a form to create a new User entity.
-     *
-     * @Route("/new")
-     * @Method("GET")
-     * @Template()
-     */
-    public function newAction()
-    {
-        $entity = new User();
-        $form   = $this->createCreateForm($entity);
-
-        return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        );
-    }
-
+    
     /**
      * Finds and displays a User entity.
      *
@@ -136,22 +71,29 @@ class UserController extends Controller
      */
     public function editAction($id)
     {
-        $userManager = $this->get('fos_user.user_manager');
+        $em = $this->getDoctrine()->getEntityManager();
 
-        $entity = $userManager->findUserBy(array('id' => $id));
+        $user = $em->getRepository('RTGUserBundle:User')->findOneBy(array('id' => $id));
 
-        if (!$entity) {
+        if (!$user) {
             throw $this->createNotFoundException('Unable to find User entity.');
         }
 
-        $editForm = $this->createEditForm($entity);
+        $editForm = $this->createEditForm($user);
         $deleteForm = $this->createDeleteForm($id);
-
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+        
+        $parameters = array(
+            'entity'      => $user,
+            'form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
+        
+        if($user->getAvatar() != null) {
+            $deleteImgForm = $this->createDeleteImgForm($user->getId(), $user->getAvatar()->getId());
+            $parameters['delete_img_form'] = $deleteImgForm->createView();
+        }
+
+        return $parameters;
     }
 
     /**
@@ -163,12 +105,12 @@ class UserController extends Controller
     */
     private function createEditForm(User $entity)
     {
-        $form = $this->createForm(new UserType(), $entity, array(
+        $form = $this->createForm(new Admin\UserType(), $entity, array(
             'action' => $this->generateUrl('rtg_user_admin_user_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => $this->get('translator')->trans('user.button.update', array(), 'entity')));
+        $form->add('submit', 'submit', array('label' => $this->get('translator')->trans('user.button.update', array(), 'entity'), 'attr' => array('class' => 'btn btn-primary')));
 
         return $form;
     }
@@ -247,7 +189,7 @@ class UserController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('rtg_user_admin_user_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => $this->get('translator')->trans('user.button.delete_this_account', array(), 'entity')))
+            ->add('submit', 'submit', array('label' => $this->get('translator')->trans('user.button.delete_this_account', array(), 'entity'), 'attr' => array('class' => 'btn btn-danger')))
             ->getForm()
         ;
     }
@@ -290,7 +232,7 @@ class UserController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('rtg_user_admin_user_deleteimg', array('user_id' => $user_id, 'id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => $this->get('translator')->trans('image.delete', array(), 'form'), 'attr' => array('class' => 'btn btn-danger')))
+            ->add('submit', 'submit', array('label' => $this->get('translator')->trans('image.delete', array(), 'form'), 'attr' => array('class' => 'btn btn-warning')))
             ->getForm()
         ;
     }

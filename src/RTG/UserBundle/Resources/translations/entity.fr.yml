@@ -1,9 +1,11 @@
 user:
     title:
-        list: 'Liste des utilisateurs'
-        edit: 'Éditer l''utilisateur'
+        index: 'Liste des utilisateurs'
+        edit: Édition de l'utilisateur username
         new: 'Nouvel utilisateur'
         profile: 'Profil'
+        profile_of: 'Profil de username'
+        my_profile: 'Mon profil'
         delete: 'Suppression de compte'
     content:
         incorrect_password: 'Mot de pass incorrect.'
@@ -32,6 +34,6 @@ user:
         complete_profile: 'Compléter mon profil'
         delete_account: 'Supprimer mon compte'
         delete_this_account: 'Supprimer ce compte'
-        create_a_new_entry: 'Créer un nouvel Utilisateur'
         back_to_list: 'Retour à la liste'
         back_to_profile: 'Retourner au profil'
+        back_to_my_profile: 'Retourner à mon profil'

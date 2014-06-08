@@ -4,7 +4,7 @@
 {% block title %}{{ 'user.title.delete'|trans }} - RTG{% endblock %}
 
 {% block content %}
-    <h1>Suppression du compte</h1>
+    <h1>{{ 'user.title.delete'|trans }}</h1>
     {% if state == 'deleted' %}
         <p>{{ 'user.content.account_deleted'|trans }}</p>
     {% else %}
@@ -18,7 +18,7 @@
             </div>
             <div class="form-group">
                 <div>
-                    <input type="submit" class="btn btn-danger" value="{{ 'user.button.validate_delete'|trans }}" />
+                    <input type="submit" class="btn btn-danger pull-right" value="{{ 'user.button.validate_delete'|trans }}" />
                 </div>
             </div>
         </form>

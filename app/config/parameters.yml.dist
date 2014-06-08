@@ -17,3 +17,5 @@ parameters:
 
     locale:            fr
     secret:            'rtg,7hf'
+
+#    assetic.cache.class: Assetic\Cache\ArrayCache

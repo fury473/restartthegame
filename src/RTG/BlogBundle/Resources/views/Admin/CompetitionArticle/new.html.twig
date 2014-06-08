@@ -1,7 +1,7 @@
 {% extends 'RTGBlogBundle::layout.html.twig' %}
 
 {% block content -%}
-    <h1>CompetitionArticle creation</h1>
+    <h1>{{ 'title.competition.new'|trans }}</h1>
 
     {{ form_start(form, { 'attr': { 'class': 'form' } }) }}
     
@@ -19,17 +19,13 @@
     {{ form_row(form.image) }}
     </div>
     
-    <div class="form-group">
+    <div class="form-group pull-right">
     {{ form_row(form.submit) }}
     </div>
     
     {{ form_end(form) }}
-
-    <ul class="list-unstyled">
-        <li>
-            <a href="{{ path('rtg_blog_admin_competitionarticle_index') }}">
-                <button class="btn btn-primary">{{ 'article.back_to_the_list'|trans({}, 'form') }}</button>
-            </a>
-        </li>
-    </ul>
+    
+    <a href="{{ path('rtg_blog_admin_competitionarticle_index') }}">
+        <button class="btn btn-primary">{{ 'article.back_to_the_list'|trans({}, 'form') }}</button>
+    </a>
 {% endblock %}

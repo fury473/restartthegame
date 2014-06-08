@@ -1,9 +1,10 @@
 {% extends "RTGUserBundle::layout.html.twig" %}
 {% trans_default_domain 'entity' %}
 
-{% block title %}{{ 'user.title.profile'|trans }} - RTG{% endblock %}
+{% block title %}{{ 'user.title.my_profile'|trans }} - RTG{% endblock %}
 
 {% block content %}
+    <h1>{{ 'user.title.my_profile'|trans }}</h1>
 
     {% if user.avatar is not null %}
     <img class="thumbnail pull-right" src="{{ user.avatar.webPath|apply_filter('tb-128x128') }}" alt="{{ user.username }}"/>
@@ -13,6 +14,7 @@
     <p>{{ 'user.field.age'|trans }}: {{ user.age }}</p>
     <p>{{ 'user.field.city'|trans }}: {{ user.city }}</p>
     {% if user.hasRole('ROLE_STAFF')%}<p>Staff RTG</p>{% endif %}
-    <a href="{{ path('rtg_user_user_edit') }}" title="Profil" class="btn btn-primary">{{ 'user.button.complete_profile'|trans }}</a>
-    <a href="{{ path('rtg_user_user_delete') }}" class="btn btn-danger">{{ 'user.button.delete_account'|trans }}</a>
+    <div class="clearfix"></div>
+    <a href="{{ path('rtg_user_user_edit') }}" title="Profil" class="btn btn-primary pull-right">{{ 'user.button.complete_profile'|trans }}</a>
+    <a href="{{ path('rtg_user_user_delete') }}" class="btn btn-danger pull-right">{{ 'user.button.delete_account'|trans }}</a>
 {% endblock content %}

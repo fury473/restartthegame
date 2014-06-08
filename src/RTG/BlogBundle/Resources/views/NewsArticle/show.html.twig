@@ -8,10 +8,10 @@
             {# |date('l, F j, Y') #}
             <time datetime="{{ article.created|date('c') }}" class="pull-right">{{ article.created|localizeddate('full', 'none')|capitalize }}</time>
             <h1>{{ article.title }}</h1>
+            {% if article.image is not null %}
+                <img src="{{ asset(article.image.webPath) }}" alt="{{ article.title }} image not found" class="img-responsive" />
+            {% endif %}
         </header>
-        {% if article.image is not null %}
-            <img src="{{ asset(article.image.webPath) }}" alt="{{ article.title }} image not found" class="img-responsive center-block" />
-        {% endif %}
         <div>
             {{ article.message|raw }}
         </div>
