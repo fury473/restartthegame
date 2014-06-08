@@ -15,16 +15,21 @@ hr {
     border-bottom: 1px solid #ffffff;
 }
 
-input, textarea, select {
+input, textarea, select,
+input.form-control, textarea.form-control, select.form-control {
     background-color: #333;
     border-color: #111;
     color: #ccc;
 }
-input:disabled, textarea:disabled, select:disabled {
+input:disabled, textarea:disabled, select:disabled,
+input.form-control:disabled, textarea.form-control:disabled, select.form-control:disabled {
     background-color: #888;
 }
 
-input:disabled, textarea:disabled, select:disabled, input:readonly, textarea:readonly, select:readonly {
+input:disabled, textarea:disabled, select:disabled,
+input:readonly, textarea:readonly, select:readonly,
+input.form-control:disabled, textarea.form-control:disabled, select.form-control:disabled,
+input.form-control:readonly, textarea.form-control:readonly, select.form-control:readonly {
     border-color: #eee;
     color: #555;
 }

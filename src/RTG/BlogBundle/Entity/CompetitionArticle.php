@@ -21,6 +21,11 @@ class CompetitionArticle
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+    
+    /**
+     * @ORM\Column(type="date")
+     */
+    protected $date;
 
     /**
      * @ORM\Column(type="string")
@@ -55,8 +60,9 @@ class CompetitionArticle
     
     public function __construct()
     {
-        $this->setCreated(new \DateTime());
-        $this->setUpdated(new \DateTime());
+        $this->created = new \DateTime();
+        $this->date = new \DateTime();
+        $this->updated = new \DateTime();
     }
     
     public function __toString()
@@ -228,6 +234,29 @@ class CompetitionArticle
     public function getCreated()
     {
         return $this->created;
+    }
+    
+    /**
+     * Set date
+     *
+     * @param \DateTime $date
+     * @return Article
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+    
+        return $this;
+    }
+    
+    /**
+     * Get date
+     *
+     * @return \DateTime 
+     */
+    public function getDate()
+    {
+        return $this->date;
     }
 
     /**

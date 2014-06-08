@@ -110,3 +110,53 @@ avalanche_imagine:
             options: { size: [48, 48], mode: inset, quality: 100, format: png }
 
 gregwar_captcha: ~
+
+ivory_ck_editor:
+    default_config: config_1
+    configs:
+        config_1:
+            toolbar: custom
+    toolbars:
+        configs:
+            custom: 
+                - ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat']
+                - [NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl']
+                - ['Link', 'Unlink', 'Anchor']
+                - ['Image', 'FLash', 'Table', 'HorizontalRule', 'SpecialChar', 'Smiley']
+                - '/'
+                - ['Styles', 'Format', 'Font', 'FontSize', 'TextColor', 'BGColor']
+                - ['Maximize', 'ShowBlocks']
+                - '/'
+                - ['Source', '-', 'NewPage', '-', 'Templates']
+                - ['PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']
+                - ['Find', 'Replace', '-', 'SelectAll', '-', 'Scayt']
+            full: 
+                - ['Source', '-', 'NewPage', 'Preview', 'Print', '-', 'Templates']
+                - ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']
+                - ['Find', 'Replace', '-', 'SelectAll', '-', 'Scayt']
+                - ['Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'SelectField', 'Button', 'ImageButton', 'HiddenField']
+                - '/'
+                - ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat']
+                - [NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl']
+                - ['Link', 'Unlink', 'Anchor']
+                - ['Image', 'FLash', 'Table', 'HorizontalRule', 'SpecialChar', 'Smiley', 'PageBreak', 'Iframe']
+                - '/'
+                - ['Styles', 'Format', 'Font', 'FontSize', 'TextColor', 'BGColor']
+                - ['Maximize', 'ShowBlocks']
+                - ['About']
+            standard:
+                - ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']
+                - ['Scayt']
+                - ['Link', 'Unlink', 'Anchor']
+                - ['Image', 'Table', 'HorizontalRule', 'SpecialChar']
+                - ['Maximize']
+                - ['Source']
+                - '/'
+                - ['Bold', 'Italic', 'Strike', '-', 'RemoveFormat']
+                - ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote']
+                - ['Styles', 'Format', 'About']
+            basic:
+                - ['Bold', 'Italic']
+                - ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent']
+                - ['Link', 'Unlink']
+                - ['About']

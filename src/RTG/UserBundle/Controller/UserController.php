@@ -49,7 +49,7 @@ class UserController extends Controller {
     }
     
     /**
-     * @Route("/{id}/profile")
+     * @Route("/profile/{id}/show")
      * @Method("GET")
      * @Template()
      */

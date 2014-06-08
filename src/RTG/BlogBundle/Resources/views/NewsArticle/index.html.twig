@@ -6,21 +6,18 @@
     {% for article in articles %}
         <article class="article">
             <header>
-                <div class="date pull-right"><time datetime="{{ article.created|date('c') }}">{{ article.created|localizeddate('full', 'short')|capitalize }}</time></div>
+                <div class="pull-right">Posté par <span class="highlight">{{article.author}}</span> le <time datetime="{{ article.created|date('c') }}">{{ article.created|localizeddate('full', 'short') }}</time></div>
                 <h2><a href="{{ path('rtg_blog_newsarticle_show', { 'slug': article.slug }) }}">{{ article.title }}</a></h2>
             </header>
 
             {# <img src="{{ asset(article.image.webPath) }}" /> #}
             <div class="snippet">
-                {{ article.catchPhrase }}
-                {#<p class="continue"><a href="{{ path('rtg_blog_newsarticle_show', { 'slug': article.slug }) }}">{% trans %}Continue reading...{% endtrans %}</a></p>#}
+                <p>{{ article.catchPhrase }}</p>
+                <div class="pull-right"><a href="{{ path('rtg_blog_newsarticle_show', { 'slug': article.slug }) }}#comments">{{ 'Voir les commentaires ('~article.comments|length~')' }}</a></div>
+                <p class="continue"><a href="{{ path('rtg_blog_newsarticle_show', { 'slug': article.slug }) }}">{% trans %}Continue reading...{% endtrans %}</a></p>
             </div>
-
-            {#<footer class="meta">
-                <p>{% trans %}Comments{% endtrans %}: <a href="{{ path('rtg_blog_newsarticle_show', { 'slug': article.slug }) }}#comments">{{ article.comments|length }}</a></p>
-                <p>{% trans %}Posted by{% endtrans %} <span class="highlight">{{article.author}}</span> {% trans %}at{% endtrans %} {{ article.created|localizeddate('none', 'short') }}</p>
-            </footer>#}
         </article>
+        {% if not loop.last %}<hr/>{% endif %}
     {% else %}
         <p>{% trans %}There are no articles{% endtrans %}</p>
     {% endfor %}

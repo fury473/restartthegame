@@ -13,6 +13,7 @@
             <tr>
                 <th>#</th>
                 <th>{{ 'article.title'|trans({}, 'form') }}</th>
+                <th>{{ 'article.date'|trans({}, 'form') }}</th>
                 <th>{{ 'article.image'|trans({}, 'form') }}</th>
                 <th>{{ 'article.created'|trans({}, 'form') }}</th>
                 <th>Actions</th>
@@ -23,6 +24,7 @@
             <tr>
                 <td>{{ loop.index }}</td>
                 <td><a href="{{ path('rtg_blog_admin_competitionarticle_edit', { 'id': entity.id }) }}">{{ entity.title }}</a></td>
+                <td><time datetime="{{ entity.date|date('c') }}">{{ entity.date|localizeddate('short', 'none')|capitalize }}</time></td>
                 {% if entity.image is not null %}
                 <td><img src="{{ entity.image.webPath|apply_filter('tb-128x128') }}" /></td>
                 {% else %}

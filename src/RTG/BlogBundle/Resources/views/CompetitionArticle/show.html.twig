@@ -5,11 +5,15 @@
 {% block content %}
     <article>
         <header>
-            {# |date('l, F j, Y') #}
             <time datetime="{{ article.created|date('c') }}" class="pull-right">{{ article.created|localizeddate('full', 'none')|capitalize }}</time>
             <h1>{{ article.title }}</h1>
             {% if article.image is not null %}
                 <img src="{{ asset(article.image.webPath) }}" alt="{{ article.title }} image not found" class="img-responsive" />
+            {% endif %}
+            {% if article.date is null %}
+                Non plannifiée
+            {% else %}
+                Planifiée le <time datetime="{{ article.date|date('c') }}">{{ article.date|localizeddate('full', 'none')|capitalize }}</time>
             {% endif %}
         </header>
         <div>

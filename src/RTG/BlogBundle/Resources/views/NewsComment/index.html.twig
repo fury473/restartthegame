@@ -13,7 +13,7 @@
         <div class="media-body">
             <div class="media-heading">
                 {% if comment.user is not null %}
-                <a href="#" title="Voir le profil">{{ comment.user }}</a></span>
+                <a href="{{ path('rtg_user_user_profile', {'id': comment.user.id}) }}" title="Voir le profil">{{ comment.user }}</a></span>
                 {% else %}
                 <span class="highlight">Compte supprimé</span>
                 {% endif %}

@@ -6,17 +6,16 @@
     {% for article in articles %}
         <article class="article">
             <header>
-                <div class="date pull-right"><time datetime="{{ article.created|date('c') }}">{{ article.created|localizeddate('full', 'short')|capitalize }}</time></div>
+                <div class="date pull-right">Posté le <time datetime="{{ article.created|date('c') }}">{{ article.created|localizeddate('full', 'short')|capitalize }}</time></div>
                 <h2><a href="{{ path('rtg_blog_competitionarticle_show', { 'slug': article.slug }) }}">{{ article.title }}</a></h2>
             </header>
-
-            {# <img src="{{ asset(article.image.webPath) }}" /> #}
-
-            {#<footer class="meta">
-                <p>{% trans %}Comments{% endtrans %}: <a href="{{ path('rtg_blog_competitionarticle_show', { 'slug': article.slug }) }}#comments">{{ article.comments|length }}</a></p>
-                <p>{% trans %}Posted by{% endtrans %} <span class="highlight">{{article.author}}</span> {% trans %}at{% endtrans %} {{ article.created|localizeddate('none', 'short') }}</p>
-            </footer>#}
+            {% if article.date is null %}
+                Non plannifiée
+            {% else %}
+                Planifiée le <time datetime="{{ article.date|date('c') }}">{{ article.date|localizeddate('full', 'none')|capitalize }}</time>
+            {% endif %}
         </article>
+        {% if not loop.last %}<hr/>{% endif %}
     {% else %}
         <p>{% trans %}There are no articles{% endtrans %}</p>
     {% endfor %}

@@ -13,7 +13,7 @@ class CompetitionArticleRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('a')
                    ->select('a')
-                   ->addOrderBy('a.created', 'DESC');
+                   ->addOrderBy('a.date', 'DESC');
         
         if (false === is_null($limit)) {
             $qb->setMaxResults($limit);

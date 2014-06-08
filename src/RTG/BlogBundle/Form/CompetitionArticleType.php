@@ -18,6 +18,7 @@ class CompetitionArticleType extends AbstractType
         $entity = $options['data'];
         $builder
             ->add('title', 'text', array('label' => 'article.title', 'attr' => array('class' => 'form-control')))
+            ->add('date', 'date', array('label' => 'article.date'))
             ->add('message', 'ckeditor', array('label' => 'article.message', 'attr' => array('class' => 'form-control')));
         if($entity->getImage() == null) {
             $builder->add('image', new ImageArticleType(), array('label' => 'article.image'));

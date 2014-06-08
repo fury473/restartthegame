@@ -14,8 +14,8 @@
                 {% for competition in competitions %}
                     <li class="clearfix">
                         <a href="{{ path('rtg_blog_competitionarticle_show', { 'slug': competition.slug }) }}" title="{{ competition.title }}"><span class="date">
-                                <em class="day">{{ competition.created|localizeddate('none', 'none', app.request.locale, null, 'd') }}</em>
-                                <em class="month">{{ competition.created|localizeddate('none', 'none', app.request.locale, null, 'MMM') }}</em>
+                                <em class="day">{{ competition.date|localizeddate('none', 'none', app.request.locale, null, 'd') }}</em>
+                                <em class="month">{{ competition.date|localizeddate('none', 'none', app.request.locale, null, 'MMM') }}</em>
                             </span><span class="post-title">{{ competition.title }}</span></a>
                     </li>
                 {% endfor %}
