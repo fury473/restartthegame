@@ -11,8 +11,8 @@
 
         {% block stylesheet %}
             {% stylesheets
-                '../vendor/twitter/bootstrap/less/bootstrap.less'
-                'bundles/rtgsite/css/main.less'
+                'bundles/rtgsite/less/bootstrap.less'
+                'bundles/rtgsite/less/main.less'
                 filter='cssrewrite'
                 output='css/main.css'
             %}
@@ -60,8 +60,8 @@
 
         {% block javascript %}
             {% javascripts
-                '../vendor/jquery/jquery/jquery-1.9.1.min.js'
-                '../vendor/twitter/bootstrap/dist/js/bootstrap.min.js'
+                'bundles/rtgsite/js/jquery-1.9.1.min.js'
+                'bundles/rtgsite/dist/js/bootstrap.min.js'
                 'bundles/rtgsite/js/analyticstracking.min.js'
                 'bundles/rtgsite/js/main.js' %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
