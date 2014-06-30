@@ -137,7 +137,7 @@ ol {
 }
 
 .title {
-    padding: 50px;
+    padding: 30px;
     text-align: center;
 
     a {
@@ -145,7 +145,12 @@ ol {
         font-family: 'ethnocentricregular';
         font-weight: normal;
         text-shadow: 0 0 0.5em #457DBB;
-        font-size: 60px;
+        @media (min-width: 490px) {
+            font-size: 60px;
+        }
+        @media (max-width: 490px) {
+            font-size: 45px;
+        }
     }
     a:hover {
         text-decoration: none;
