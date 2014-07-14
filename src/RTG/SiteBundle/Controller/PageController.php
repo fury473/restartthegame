@@ -131,8 +131,6 @@ class PageController extends Controller
             $logger = $this->get('monolog.logger.ip_mails');
             $logger->warning($this->get('request')->getClientIp() . " have sent a mail from contact form.");
             
-            $message->getHeaders()->get('Content-Transfer-Encoding')->setValue("8bit");
-            
             $this->get('mailer')->send($message);
 
             return array('to' => $to);

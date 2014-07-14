@@ -56,8 +56,14 @@ class CompetitionArticleController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
+            
+//            if($form->get('newsletter')->getData()) {
+//                $subject = $form->get('title')->getData();
+//                $content = $form->get('message')->getData();
+//                $this->get('newsletter')->send($subject, $content);
+//            }
 
-            return $this->redirect($this->generateUrl('rtg_blog_competitionarticle_show', array('id' => $entity->getId(), 'slug' => $entity->getSlug())));
+            return $this->redirect($this->generateUrl('rtg_blog_competitionarticle_show', array('slug' => $entity->getSlug())));
         }
 
         return array(

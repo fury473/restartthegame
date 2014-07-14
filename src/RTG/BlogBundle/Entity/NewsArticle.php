@@ -14,13 +14,14 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class NewsArticle
 {
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
-    
+
     /**
      * @ORM\Column(type="boolean")
      */
@@ -30,12 +31,12 @@ class NewsArticle
      * @ORM\Column(type="string")
      */
     protected $title;
-    
+
     /**
      * @ORM\Column(type="string", name="catch_phrase")
      */
     protected $catchPhrase;
-    
+
     /**
      * @ORM\Column(type="string")
      */
@@ -46,7 +47,7 @@ class NewsArticle
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="SET NULL")
      */
     protected $author;
-    
+
     /**
      * @ORM\Column(type="text", nullable=true)
      */
@@ -57,7 +58,7 @@ class NewsArticle
      * @ORM\JoinColumn(name="image_id", referencedColumnName="id", onDelete="SET NULL")
      */
     protected $image;
-    
+
     /**
      * @ORM\OneToMany(targetEntity="RTG\BlogBundle\Entity\NewsComment", mappedBy="article", cascade={"remove"})
      */
@@ -72,29 +73,39 @@ class NewsArticle
      * @ORM\Column(type="datetime")
      */
     protected $updated;
-    
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
         $this->featured = true;
-        
+
         $this->setCreated(new \DateTime());
         $this->setUpdated(new \DateTime());
     }
-    
+
     public function __toString()
     {
         return $this->getTitle();
     }
-    
+
     /**
      * @ORM\PreUpdate
      */
     public function setUpdatedValue()
     {
-       $this->setUpdated(new \DateTime());
+        $this->setUpdated(new \DateTime());
     }
-    
+
+    private function stripAccents($string)
+    {
+        $unwanted_array = array('Š' => 'S', 'š' => 's', 'Ž' => 'Z', 'ž' => 'z', 'À' => 'A', 'Á' => 'A', 'Â' => 'A', 'Ã' => 'A', 'Ä' => 'A', 'Å' => 'A', 'Æ' => 'A', 'Ç' => 'C', 'È' => 'E', 'É' => 'E',
+            'Ê' => 'E', 'Ë' => 'E', 'Ì' => 'I', 'Í' => 'I', 'Î' => 'I', 'Ï' => 'I', 'Ñ' => 'N', 'Ò' => 'O', 'Ó' => 'O', 'Ô' => 'O', 'Õ' => 'O', 'Ö' => 'O', 'Ø' => 'O', 'Ù' => 'U',
+            'Ú' => 'U', 'Û' => 'U', 'Ü' => 'U', 'Ý' => 'Y', 'Þ' => 'B', 'ß' => 'Ss', 'à' => 'a', 'á' => 'a', 'â' => 'a', 'ã' => 'a', 'ä' => 'a', 'å' => 'a', 'æ' => 'a', 'ç' => 'c',
+            'è' => 'e', 'é' => 'e', 'ê' => 'e', 'ë' => 'e', 'ì' => 'i', 'í' => 'i', 'î' => 'i', 'ï' => 'i', 'ð' => 'o', 'ñ' => 'n', 'ò' => 'o', 'ó' => 'o', 'ô' => 'o', 'õ' => 'o',
+            'ö' => 'o', 'ø' => 'o', 'ù' => 'u', 'ú' => 'u', 'û' => 'u', 'ý' => 'y', 'ý' => 'y', 'þ' => 'b', 'ÿ' => 'y');
+        return strtr($string, $unwanted_array);
+    }
+
     public function slugify($text)
     {
         // replace non letter or digits by -
@@ -103,9 +114,11 @@ class NewsArticle
         // trim
         $text = trim($text, '-');
 
+        // remove accents
+        $text = $this->stripAccents($text);
+
         // transliterate
-        if (function_exists('iconv'))
-        {
+        if (function_exists('iconv')) {
             $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
         }
 
@@ -115,8 +128,7 @@ class NewsArticle
         // remove unwanted characters
         $text = preg_replace('#[^-\w]+#', '', $text);
 
-        if (empty($text))
-        {
+        if (empty($text)) {
             return 'n-a';
         }
 
@@ -132,7 +144,7 @@ class NewsArticle
     {
         return $this->id;
     }
-    
+
     /**
      * Set featured
      *
@@ -142,10 +154,10 @@ class NewsArticle
     public function setFeatured($featured)
     {
         $this->featured = $featured;
-        
+
         return $this;
     }
-    
+
     /**
      * Get featured
      *
@@ -165,9 +177,9 @@ class NewsArticle
     public function setTitle($title)
     {
         $this->title = $title;
-        
+
         $this->setSlug($this->title);
-    
+
         return $this;
     }
 
@@ -180,7 +192,7 @@ class NewsArticle
     {
         return $this->title;
     }
-    
+
     /**
      * Set catchPhrase
      *
@@ -190,10 +202,10 @@ class NewsArticle
     public function setCatchPhrase($catch_phrase)
     {
         $this->catchPhrase = $catch_phrase;
-        
+
         return $this;
     }
-    
+
     /**
      * Get catchPhrase
      *
@@ -203,7 +215,7 @@ class NewsArticle
     {
         return $this->catchPhrase;
     }
-    
+
     /**
      * Set slug
      *
@@ -213,7 +225,7 @@ class NewsArticle
     public function setSlug($slug)
     {
         $this->slug = $this->slugify($slug);
-    
+
         return $this;
     }
 
@@ -226,8 +238,8 @@ class NewsArticle
     {
         return $this->slug;
     }
-    
-     /**
+
+    /**
      * Set image
      *
      * @param \RTG\BlogBundle\Entity\ImageArticle $image
@@ -236,7 +248,7 @@ class NewsArticle
     public function setImage(\RTG\BlogBundle\Entity\ImageArticle $image = null)
     {
         $this->image = $image;
-    
+
         return $this;
     }
 
@@ -249,7 +261,7 @@ class NewsArticle
     {
         return $this->image;
     }
-    
+
     /**
      * Set author
      *
@@ -259,7 +271,7 @@ class NewsArticle
     public function setAuthor(\RTG\UserBundle\Entity\User $author = null)
     {
         $this->author = $author;
-    
+
         return $this;
     }
 
@@ -282,7 +294,7 @@ class NewsArticle
     public function setMessage($message)
     {
         $this->message = $message;
-    
+
         return $this;
     }
 
@@ -294,9 +306,9 @@ class NewsArticle
     public function getMessage($length = null)
     {
         if (false === is_null($length) && $length > 0)
-        return substr($this->message, 0, $length);
-    else
-        return $this->message;
+            return substr($this->message, 0, $length);
+        else
+            return $this->message;
     }
 
     /**
@@ -308,7 +320,7 @@ class NewsArticle
     public function setCreated($created)
     {
         $this->created = $created;
-    
+
         return $this;
     }
 
@@ -331,7 +343,7 @@ class NewsArticle
     public function setUpdated($updated)
     {
         $this->updated = $updated;
-    
+
         return $this;
     }
 
@@ -354,7 +366,7 @@ class NewsArticle
     public function addComment(NewsComment $comments)
     {
         $this->comments[] = $comments;
-    
+
         return $this;
     }
 
@@ -377,4 +389,5 @@ class NewsArticle
     {
         return $this->comments;
     }
+
 }
