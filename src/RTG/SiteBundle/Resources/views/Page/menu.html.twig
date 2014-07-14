@@ -1,4 +1,4 @@
-<ul class="nav navbar-nav">
+<ul class="nav navbar-nav" role="navigation">
     <li class="pull-left{% if 'rtg_site_page_index' in app.request.get('_route') %} active{% endif %}">
       <a href="{{ path('rtg_site_page_index') }}" title="Restart the Game">{{ 'home'|trans({}, 'menu') }}</a>
     </li>

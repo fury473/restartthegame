@@ -1,5 +1,7 @@
 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 {{ render(controller("RTGBlogBundle:NewsComment:new", { 'article_id': article.id })) }}
+{% else %}
+<a href="{{ path('fos_user_security_login') }}" class="btn btn-primary navbar-btn" title="{{ 'login_to_comment'|trans({}, 'menu') }}"><span class="glyphicon glyphicon-log-in"></span> {{ 'login_to_comment'|trans({}, 'menu') }}</a>
 {% endif %}
 {% for comment in comments %}
     <div class="media {{ cycle(['odd', 'even'], loop.index0) }}" id="comment-{{ comment.id }}">
@@ -24,4 +26,7 @@
     </div>
 {% else %}
     <p>{% trans %}There are no comments for this post. Be the first to comment...{% endtrans %}</p>
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+    <a href="{{ path('fos_user_security_login') }}" class="btn btn-primary navbar-btn" title="{{ 'login'|trans({}, 'menu') }}"><span class="glyphicon glyphicon-log-in"></span> {{ 'login'|trans({}, 'menu') }}</a>
+    {% endif %}
 {% endfor %}

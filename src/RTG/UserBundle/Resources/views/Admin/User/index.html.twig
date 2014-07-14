@@ -11,6 +11,8 @@
                 <th>#</th>
                 <th>{{ 'user.field.username'|trans({}, 'entity') }}</th>
                 <th>{{ 'user.field.email'|trans({}, 'entity') }}</th>
+                <th>{{ 'user.field.newsletter'|trans({}, 'entity') }}</th>
+                <th>{{ 'user.field.lastLogin'|trans({}, 'entity') }}</th>
                 <th>{{ 'user.field.roles'|trans({}, 'entity') }}</th>
                 <th>{{ 'user.field.locked'|trans({}, 'entity') }}</th>
                 <th>{{ 'user.field.actions'|trans({}, 'entity') }}</th>
@@ -22,7 +24,9 @@
                 <td>{{ loop.index }}</td>
                 <td><a href="{{ path('rtg_user_admin_user_show', { 'id': entity.id }) }}">{{ entity.username }}</a></td>
                 <td>{{ entity.email }}</td>
-                <td>{% for role in entity.roles %}{{ role }}<br/>{% endfor %}</td>
+                <td>{% if entity.newsletter %}Oui{% else %}Non{% endif %}</td>
+                <td>{{ entity.lastLogin|time_ago_in_words(true, true)|trans() }}</td>
+                <td>{% for role in entity.roles %}{{ role|trans({}, 'entity') }}<br/>{% endfor %}</td>
                 <td>{{ entity.locked }}</td>
                 <td>
                 <ul class="list-unstyled">

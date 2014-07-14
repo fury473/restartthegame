@@ -19,6 +19,7 @@ class UserType extends AbstractType
         $builder
             ->add('username', 'text', array('label' => 'user.field.username', 'attr' => array('class' => 'form-control')))
             ->add('email', 'email', array('label' => 'user.field.email', 'attr' => array('class' => 'form-control')))
+            ->add('newsletter', 'checkbox', array('label' => 'user.field.newsletter', 'required' => false))
             ->add('birthday', 'date', array(
                 'label' => 'user.field.birthday',
                 'widget' => 'single_text',
@@ -29,7 +30,17 @@ class UserType extends AbstractType
             ->add('city', 'text', array('label' => 'user.field.city', 'required' => false, 'attr' => array('class' => 'form-control')))
             ->add('enabled', 'checkbox', array('label' => 'user.field.enabled', 'required' => false))
             ->add('locked', 'checkbox', array('label' => 'user.field.locked', 'required' => false))
-            ->add('roles', null, array('label' => 'user.field.roles'))
+            /*->add('roles', 'choice', array(
+                'label' => 'user.field.roles',
+                'expanded' => true,
+                'multiple' => true,
+                'choices' => array(
+                    'ROLE_USER',
+                    'ROLE_STAFF',
+                    'ROLE_ADMIN',
+                    'ROLE_SUPER_ADMIN'
+                )
+            ))*/
         ;
         if($entity->getAvatar() == null) {
             $builder->add('avatar', new AvatarType(), array('label' => 'user.field.avatar'));

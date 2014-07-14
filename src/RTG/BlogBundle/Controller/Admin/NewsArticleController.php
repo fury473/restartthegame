@@ -54,12 +54,21 @@ class NewsArticleController extends Controller
 
         if ($form->isValid()) {
             $entity->setAuthor($this->get('security.context')->getToken()->getUser());
+            if($form->get('image')->getData() == null) {
+                $entity->setFeatured(false);
+            }
             
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
-
-            return $this->redirect($this->generateUrl('rtg_blog_newsarticle_show', array('id' => $entity->getId(), 'slug' => $entity->getSlug())));
+            
+//            if($form->get('newsletter')->getData()) {
+//                $subject = $form->get('title')->getData();
+//                $content = $form->get('message')->getData();
+//                $this->get('newsletter')->send($subject, $content);
+//            }
+            
+            return $this->redirect($this->generateUrl('rtg_blog_newsarticle_show', array('slug' => $entity->getSlug())));
         }
 
         return array(
@@ -187,6 +196,9 @@ class NewsArticleController extends Controller
         }
 
         if ($editForm->isValid()) {
+            if($editForm->has('image') && $editForm->get('image')->getData()->getFile() == null) {
+                $entity->setFeatured(false);
+            }
             $em->flush();
 
             return $this->redirect($this->generateUrl('rtg_blog_admin_newsarticle_edit', array('id' => $id)));
@@ -255,10 +267,13 @@ class NewsArticleController extends Controller
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $image = $em->getRepository('RTGBlogBundle:ImageArticle')->find($id);
+            $article = $em->getRepository('RTGBlogBundle:NewsArticle')->find($article_id);
 
             if (!$image) {
                 throw $this->createNotFoundException('Unable to find ImageArticle entity.');
             }
+            
+            $article->setFeatured(false);
 
             $em->remove($image);
             $em->flush();

@@ -9,6 +9,11 @@ use Doctrine\ORM\EntityRepository;
  */
 class NewsArticleRepository extends EntityRepository
 {
+    public function findAll()
+    {
+        return $this->findBy(array(), array('created' => 'DESC'));
+    }
+    
     public function getLatestArticles($limit = null)
     {
         $qb = $this->createQueryBuilder('a')

@@ -18,6 +18,7 @@ class ProfileFormType extends AbstractType
         $builder
             ->add('username', 'text', array('label' => 'user.field.username', 'attr' => array('class' => 'form-control')))
             ->add('email', 'email', array('label' => 'user.field.email', 'attr' => array('class' => 'form-control')))
+            ->add('newsletter', 'checkbox', array('label' => 'user.field.newsletter_suscribe', 'required' => false))
             ->add('birthday', 'date', array(
                 'label' => 'user.field.birthday',
                 'widget' => 'single_text',

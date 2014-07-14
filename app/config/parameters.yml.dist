@@ -14,6 +14,7 @@ parameters:
     dev_delivery_address: fury473@gmail.com
     noreply_address: noreply@restartthegame.com
     site_address: site@restartthegame.com
+    newsletter_address: newsletter@restartthegame.com
 
     locale:            fr
     secret:            'rtg,7hf'

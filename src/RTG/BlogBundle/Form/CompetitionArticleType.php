@@ -16,6 +16,9 @@ class CompetitionArticleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $entity = $options['data'];
+        if($entity->getId() == null) {
+            $builder->add('newsletter', 'checkbox', array('label' => 'article.newsletter', 'required' => false, 'mapped' => false));
+        }
         $builder
             ->add('title', 'text', array('label' => 'article.title', 'attr' => array('class' => 'form-control')))
             ->add('date', 'date', array('label' => 'article.date'))

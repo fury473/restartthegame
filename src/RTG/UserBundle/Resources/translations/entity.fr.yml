@@ -1,3 +1,7 @@
+ROLE_USER: Utilisateur
+ROLE_ADMIN: Administrateur
+ROLE_STAFF: Staff
+ROLE_SUPER_ADMIN: Super Administrateur
 user:
     title:
         index: 'Liste des utilisateurs'
@@ -16,12 +20,16 @@ user:
     field:
         username: 'Nom d''utilisateur'
         email: 'Adresse e-mail'
+        newsletter: 'Newsletter'
+        newsletter_suscribe: 'Recevoir par email des informations liées aux nouveautés de la RTG'
+        newsletter_suscribed: 'Abonné à la Newsletter'
         avatar: 'Image personnelle'
         age: 'Âge'
         birthday: 'Date de naissance'
         city: 'Ville'
         password: 'Mot de passe'
         actual_password: 'Mot de passe actuel'
+        lastLogin: 'Dernière connexion'
         roles: 'Rôles'
         enabled: 'Activé'
         locked: 'Banni'

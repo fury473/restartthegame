@@ -48,10 +48,17 @@ class User extends BaseUser
      * @ORM\OneToMany(targetEntity="RTG\BlogBundle\Entity\NewsComment", mappedBy="user")
      */
     protected $comments;
+    
+    /**
+     * @ORM\Column(type="boolean")
+     * @ORM\JoinColumn(name="newsletter")
+     */
+    protected $newsletter;
   
     public function __construct()
     {
         parent::__construct();
+        $this->newsletter = false;
     }
 
     /**
@@ -218,4 +225,27 @@ class User extends BaseUser
     {
         return $this->avatar;
     }
+    
+    /**
+     * Get newsletter
+     *
+     * @return boolean
+     */
+    public function getNewsletter()
+    {
+        return $this->newsletter;
+    }
+
+    /**
+     * Set newsletter
+     *
+     * @return \RTG\UserBundle\Entity\User
+     */
+    public function setNewsletter($newsletter)
+    {
+        $this->newsletter = $newsletter;
+        return $this;
+    }
+
+
 }
