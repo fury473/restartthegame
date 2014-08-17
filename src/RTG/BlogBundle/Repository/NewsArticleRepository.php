@@ -49,17 +49,18 @@ class NewsArticleRepository extends EntityRepository
     
     public function getFeaturedArticles($limit = null)
     {
-        $qb = $this->createQueryBuilder('a')
-                   ->select('a, c')
-                   ->leftJoin('a.comments', 'c')
-                   ->addOrderBy('a.created', 'DESC')
-                   ->where('a.featured = true');
+        $results = $this->createQueryBuilder('a')
+                        ->select('a, c')
+                        ->leftJoin('a.comments', 'c')
+                        ->addOrderBy('a.created', 'DESC')
+                        ->where('a.featured = true')
+                        ->getQuery()
+                        ->getResult();
         
-        if (false === is_null($limit)) {
-            $qb->setMaxResults($limit);
+        if ($limit != null) {
+            $results = array_slice($results, 0, $limit);
         }
-
-        return $qb->getQuery()
-                  ->getResult();
+        
+        return $results;
     }
 }
