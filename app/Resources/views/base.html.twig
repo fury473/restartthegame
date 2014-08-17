@@ -43,7 +43,7 @@
         </div>
         
         <div id="main-menu" class="container bloc">
-            {{ include('RTGSiteBundle:Page:menu.html.twig') }}
+            {{ render(controller('RTGSiteBundle:Page:menu')) }}
         </div>
             
         {% block body %}{% endblock %}

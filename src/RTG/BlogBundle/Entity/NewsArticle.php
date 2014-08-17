@@ -21,6 +21,12 @@ class NewsArticle
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="RTG\BlogBundle\Entity\Category", inversedBy="articles")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    protected $category;
 
     /**
      * @ORM\Column(type="boolean")
@@ -144,7 +150,29 @@ class NewsArticle
     {
         return $this->id;
     }
-
+    
+    /**
+     * Set category
+     *
+     * @param \RTG\BlogBundle\Entity\Cateogry $category
+     * @return Article
+     */
+    public function setCategory($category)
+    {
+        $this->category = $category;
+        return $this;
+    }
+    
+    /**
+     * Get category
+     *
+     * @return \RTG\BlogBundle\Entity\Category 
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+    
     /**
      * Set featured
      *

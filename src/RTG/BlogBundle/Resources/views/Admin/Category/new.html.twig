@@ -1,30 +1,14 @@
 {% extends 'RTGBlogBundle::layout.html.twig' %}
 
 {% block content -%}
-    <h1>{{ 'title.competition.new'|trans }}</h1>
+    <h1>{{ 'title.category.new'|trans }}</h1>
 
     {{ form_start(form, { 'attr': { 'class': 'form' } }) }}
     
     {{ form_errors(form) }}
 
-    <div class="checkbox">
-    {{ form_row(form.newsletter) }}
-    </div>
-
     <div class="form-group">
     {{ form_row(form.title, { 'attr': { 'placeholder': 'general.title'|trans } }) }}
-    </div>
-
-    <div class="form-group">
-    {{ form_row(form.date, { 'attr': { 'placeholder': 'general.date'|trans } }) }}
-    </div>
-    
-    <div class="form-group">
-    {{ form_row(form.message, { 'attr': { 'placeholder': 'general.message'|trans } }) }}
-    </div>
-    
-    <div class="form-group">
-    {{ form_row(form.image) }}
     </div>
     
     <div class="form-group pull-right">
@@ -33,7 +17,7 @@
     
     {{ form_end(form) }}
     
-    <a href="{{ path('rtg_blog_admin_competitionarticle_index') }}">
+    <a href="{{ path('rtg_blog_admin_category_index') }}">
         <button class="btn btn-primary">{{ 'back_to_the_list'|trans({}, 'form') }}</button>
     </a>
 {% endblock %}

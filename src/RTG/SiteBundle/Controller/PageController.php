@@ -25,8 +25,8 @@ class PageController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $news = $em->getRepository('RTGBlogBundle:NewsArticle')->getFeaturedArticles();
-        $competitions = $em->getRepository('RTGBlogBundle:CompetitionArticle')->getLatestArticles(5);
+        $news = $em->getRepository('RTGBlogBundle:NewsArticle')->getFeaturedArticles(5);
+        $competitions = $em->getRepository('RTGBlogBundle:CompetitionArticle')->getLatestArticles(null, 5);
         return array(
             'news' => $news,
             'competitions' => $competitions
@@ -38,7 +38,11 @@ class PageController extends Controller
      */
     public function menuAction()
     {
-        return array();
+        $em = $this->getDoctrine()->getManager();
+        $categories = $em->getRepository('RTGBlogBundle:Category')->findAll();
+        return array(
+            'categories' => $categories
+        );
     }
     
     /**

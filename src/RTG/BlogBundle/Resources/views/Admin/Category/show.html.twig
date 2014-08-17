@@ -1,0 +1,40 @@
+{% extends 'RTGBlogBundle::layout.html.twig' %}
+
+{% block title %}{{ 'title.category.show'|trans({'entity': category.title}) }}{% endblock %}
+
+{% block content -%}
+    <a class="pull-right" href="{{ path('rtg_blog_admin_category_addarticles', {'slug': category.slug}) }}">
+        <button class="btn btn-success">{{ 'category.add_articles'|trans({}, 'form') }}</button>
+    </a>
+    <h1>{{ 'title.category.show'|trans({'entity': category.title}) }}</h1>
+
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>{{ 'general.title'|trans({}, 'form') }}</th>
+                <th>{{ 'general.author'|trans({}, 'form') }}</th>
+                <th>{{ 'general.image'|trans({}, 'form') }}</th>
+                <th>{{ 'general.created'|trans({}, 'form') }}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in articles %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td><a href="{{ path('rtg_blog_admin_newsarticle_edit', { 'id': entity.id }) }}">{{ entity.title }}</a></td>
+                <td>{{ entity.author }}</td>
+                {% if entity.image is not null %}
+                <td><img src="{{ entity.image.webPath|apply_filter('tb-128x128') }}" /></td>
+                {% else %}
+                <td>Aucune</td>
+                {% endif %}
+                <td><time datetime="{{ entity.created|date('c') }}">{{ entity.created|localizeddate('short', 'none')|capitalize }}</time></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a class="pull-right" href="{{ path('rtg_blog_admin_category_addarticles', {'slug': category.slug}) }}">
+        <button class="btn btn-success">{{ 'category.add_articles'|trans({}, 'form') }}</button>
+    </a>
+{% endblock %}

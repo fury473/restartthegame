@@ -3,6 +3,12 @@ title:
         index: Liste des articles
         new: Création d'un article
         edit: Edition de l'article
+    category:
+        index: Liste des catégories
+        new: Création d'une catégorie
+        edit: Edition de la catégorie
+        show: entity - Liste des articles
+        addArticles: entity - Liste des articles sans catégorie
     competition:
         index: Liste des compétitions
         new: Création d'une compétition
@@ -10,6 +16,8 @@ title:
 
 News: Actualités
 list_of: Liste des %entity%
+Categories: Catégories
+Category: Catégorie
 Competition: Compétition
 Competitions: Compétitions
 'Continue reading...': Lire la suite...

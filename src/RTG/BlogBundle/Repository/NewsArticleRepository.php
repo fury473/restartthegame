@@ -3,6 +3,7 @@
 namespace RTG\BlogBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use RTG\BlogBundle\Entity\Category;
 
 /**
  * NewsArticleRepository
@@ -14,14 +15,31 @@ class NewsArticleRepository extends EntityRepository
         return $this->findBy(array(), array('created' => 'DESC'));
     }
     
-    public function getLatestArticles($limit = null)
+    public function findByCategoryOrNull(Category $category)
+    {
+        return $this->createQueryBuilder('a')
+                    ->select('a')
+                    ->where('a.category IS NULL')
+                    ->orWhere('a.category = :category')
+                    ->setParameter('category', $category)
+                    ->orderBy('a.title', 'ASC')
+                    ->getQuery()
+                    ->getResult();
+    }
+    
+    public function getLatestArticles(Category $category = null, $limit = null)
     {
         $qb = $this->createQueryBuilder('a')
                    ->select('a, c')
                    ->leftJoin('a.comments', 'c')
                    ->addOrderBy('a.created', 'DESC');
         
-        if (false === is_null($limit)) {
+        if ($category != null) {
+            $qb->where('a.category = :category')
+               ->setParameter('category', $category);
+        }
+        
+        if ($limit != null) {
             $qb->setMaxResults($limit);
         }
 

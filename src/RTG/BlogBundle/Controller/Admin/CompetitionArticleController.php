@@ -86,7 +86,7 @@ class CompetitionArticleController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => $this->get('translator')->trans('article.create', array(), 'form'), 'attr' => array('class' => 'btn btn-success')));
+        $form->add('submit', 'submit', array('label' => $this->get('translator')->trans('general.create', array(), 'form'), 'attr' => array('class' => 'btn btn-success')));
 
         return $form;
     }
@@ -160,7 +160,7 @@ class CompetitionArticleController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => $this->get('translator')->trans('article.update', array(), 'form'), 'attr' => array('class' => 'btn btn-primary')));
+        $form->add('submit', 'submit', array('label' => $this->get('translator')->trans('general.update', array(), 'form'), 'attr' => array('class' => 'btn btn-primary')));
 
         return $form;
     }
@@ -240,7 +240,7 @@ class CompetitionArticleController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('rtg_blog_admin_competitionarticle_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => $this->get('translator')->trans('article.delete', array(), 'form'), 'attr' => array('class' => 'btn btn-danger')))
+            ->add('submit', 'submit', array('label' => $this->get('translator')->trans('general.delete', array(), 'form'), 'attr' => array('class' => 'btn btn-danger')))
             ->getForm()
         ;
     }

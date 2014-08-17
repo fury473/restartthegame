@@ -12,15 +12,19 @@
     </div>
 
     <div class="form-group">
-    {{ form_row(form.title, { 'attr': { 'placeholder': 'article.title'|trans } }) }}
+    {{ form_row(form.title, { 'attr': { 'placeholder': 'general.title'|trans } }) }}
     </div>
     
     <div class="form-group">
-    {{ form_row(form.catchPhrase, { 'attr': { 'placeholder': 'article.catchPhrase'|trans } }) }}
+    {{ form_row(form.catchPhrase, { 'attr': { 'placeholder': 'general.catchPhrase'|trans } }) }}
     </div>
     
     <div class="form-group">
-    {{ form_row(form.message, { 'attr': { 'placeholder': 'article.message'|trans } }) }}
+    {{ form_row(form.category) }}
+    </div>
+    
+    <div class="form-group">
+    {{ form_row(form.message, { 'attr': { 'placeholder': 'general.message'|trans } }) }}
     </div>
     
     {% if delete_img_form is not defined %}
@@ -29,7 +33,7 @@
     </div>
     {% else %}
     <div class="form-group">
-        <label>{{ 'article.image'|trans({}, 'form') }}</label>
+        <label>{{ 'general.image'|trans({}, 'form') }}</label>
         <div>
             <img src="{{ asset(entity.image.webPath) }}" alt="{{ entity.title }}"/>
         </div>
@@ -51,6 +55,6 @@
     {% endif %}
     
     <a href="{{ path('rtg_blog_admin_newsarticle_index') }}">
-        <button class="btn btn-primary">{{ 'article.back_to_the_list'|trans({}, 'form') }}</button>
+        <button class="btn btn-primary">{{ 'back_to_the_list'|trans({}, 'form') }}</button>
     </a>
 {% endblock %}

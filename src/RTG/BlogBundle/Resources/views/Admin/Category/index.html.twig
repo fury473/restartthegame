@@ -1,0 +1,41 @@
+{% extends 'RTGBlogBundle::layout.html.twig' %}
+
+{% block title %}{% trans %}Category{% endtrans %}{% endblock %}
+
+{% block content -%}
+    <a class="pull-right" href="{{ path('rtg_blog_admin_category_new') }}">
+        <button class="btn btn-success">{{ 'category.create_a_new_entry'|trans({}, 'form') }}</button>
+    </a>
+    <h1>{{ 'title.category.index'|trans }}</h1>
+
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>{{ 'general.title'|trans({}, 'form') }}</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td><a href="{{ path('rtg_blog_admin_category_edit', { 'slug': entity.slug }) }}">{{ entity.title }}</a></td>
+                <td>
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="{{ path('rtg_blog_admin_category_edit', { 'slug': entity.slug }) }}"><button class="btn btn-primary btn-xs">{{ 'general.edit'|trans({}, 'form') }}</button></a>
+                    </li>
+                    <li>
+                        <a href="{{ path('rtg_blog_admin_category_show', { 'slug': entity.slug }) }}"><button class="btn btn-info btn-xs">{{ 'general.show'|trans({}, 'form') }}</button></a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a class="pull-right" href="{{ path('rtg_blog_admin_category_new') }}">
+        <button class="btn btn-success">{{ 'category.create_a_new_entry'|trans({}, 'form') }}</button>
+    </a>
+{% endblock %}

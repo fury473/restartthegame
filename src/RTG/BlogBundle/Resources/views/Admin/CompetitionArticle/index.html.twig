@@ -12,10 +12,10 @@
         <thead>
             <tr>
                 <th>#</th>
-                <th>{{ 'article.title'|trans({}, 'form') }}</th>
-                <th>{{ 'article.date'|trans({}, 'form') }}</th>
-                <th>{{ 'article.image'|trans({}, 'form') }}</th>
-                <th>{{ 'article.created'|trans({}, 'form') }}</th>
+                <th>{{ 'general.title'|trans({}, 'form') }}</th>
+                <th>{{ 'general.date'|trans({}, 'form') }}</th>
+                <th>{{ 'general.image'|trans({}, 'form') }}</th>
+                <th>{{ 'general.created'|trans({}, 'form') }}</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -34,10 +34,10 @@
                 <td>
                 <ul class="list-unstyled">
                     <li>
-                        <a href="{{ path('rtg_blog_admin_competitionarticle_edit', { 'id': entity.id }) }}"><button class="btn btn-primary btn-xs">{{ 'article.edit'|trans({}, 'form') }}</button></a>
+                        <a href="{{ path('rtg_blog_admin_competitionarticle_edit', { 'id': entity.id }) }}"><button class="btn btn-primary btn-xs">{{ 'general.edit'|trans({}, 'form') }}</button></a>
                     </li>
                     <li>
-                        <a href="{{ path('rtg_blog_competitionarticle_show', { 'slug': entity.slug }) }}"><button class="btn btn-info btn-xs">{{ 'article.show'|trans({}, 'form') }}</button></a>
+                        <a href="{{ path('rtg_blog_competitionarticle_show', { 'slug': entity.slug }) }}"><button class="btn btn-info btn-xs">{{ 'general.show'|trans({}, 'form') }}</button></a>
                     </li>
                 </ul>
                 </td>

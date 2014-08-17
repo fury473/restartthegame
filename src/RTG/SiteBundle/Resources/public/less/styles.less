@@ -119,9 +119,12 @@ ol {
         line-height: 32px;
         font-size: 14px;
     }
-    a:hover {
+    a:hover, a:focus {
         background: inherit;
         color: #ffffff;
+    }
+    li {
+        list-style-image: none;
     }
     li.active a {
         color: #ffffff;
@@ -136,6 +139,20 @@ ol {
             padding-right: 0;
         }
     }
+}
+
+.dropdown-menu {
+    background-color: rgba(0, 0, 0, 0.9);
+    border-top: none;
+    
+    .divider {
+        background-color: #454545;
+    }
+}
+
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+    background-color: inherit;
+    color: #ffffff;
 }
 
 .navbar a {

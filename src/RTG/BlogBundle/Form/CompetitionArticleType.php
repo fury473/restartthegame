@@ -17,14 +17,14 @@ class CompetitionArticleType extends AbstractType
     {
         $entity = $options['data'];
         if($entity->getId() == null) {
-            $builder->add('newsletter', 'checkbox', array('label' => 'article.newsletter', 'required' => false, 'mapped' => false));
+            $builder->add('newsletter', 'checkbox', array('label' => 'general.newsletter', 'required' => false, 'mapped' => false));
         }
         $builder
-            ->add('title', 'text', array('label' => 'article.title', 'attr' => array('class' => 'form-control')))
-            ->add('date', 'date', array('label' => 'article.date'))
-            ->add('message', 'ckeditor', array('label' => 'article.message', 'attr' => array('class' => 'form-control')));
+            ->add('title', 'text', array('label' => 'general.title', 'attr' => array('class' => 'form-control')))
+            ->add('date', 'date', array('label' => 'general.date'))
+            ->add('message', 'ckeditor', array('label' => 'general.message', 'attr' => array('class' => 'form-control')));
         if($entity->getImage() == null) {
-            $builder->add('image', new ImageArticleType(), array('label' => 'article.image'));
+            $builder->add('image', new ImageArticleType(), array('label' => 'general.image'));
         }
     }
     

@@ -1,23 +1,25 @@
-comment.header: Commentaires
-comment.pseudonym: Pseudonyme
-comment.message: Laissez un commentaire
-article.featured: A l'affiche
-article.newsletter: Newsletter
-article.title: Titre
-article.date: Date
-article.author: Auteur
-article.created: Crée le
-article.catchPhrase: Phrase d'accroche
-article.message: Message
-article.image: Image
-article.create: Créer
-article.update: Modifier
-article.delete: Supprimer
-article.edit: Éditer
-article.show: Voir
-article.create_a_new_entry: Créer un nouvel article
-article.back_to_the_list: Retourner à la liste
+back_to_the_list: Retourner à la liste
 
+comment.message: Laissez un commentaire
+general.featured: A l'affiche
+general.newsletter: Newsletter
+general.category: Catégorie
+general.title: Titre
+general.date: Date
+general.author: Auteur
+general.created: Crée le
+general.catchPhrase: Phrase d'accroche
+general.message: Message
+general.image: Image
+general.create: Créer
+general.update: Modifier
+general.delete: Supprimer
+general.edit: Éditer
+general.show: Voir
+
+article.create_a_new_entry: Créer un nouvel article
+category.add_articles: Ajouter des articles
+category.create_a_new_entry: Créer un nouvelle catégorie
 competition.create_a_new_entry: Créer une nouvelle compétition
 
 image.file: Fichier
@@ -30,4 +32,3 @@ image.show: Voir
 image.upload: Uploader une image
 image.list: Liste des images
 image.create_a_new_entry: Créer une nouvelle image
-image.back_to_the_list: Retourner à la liste

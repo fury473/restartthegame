@@ -1,0 +1,42 @@
+{% extends 'RTGBlogBundle::layout.html.twig' %}
+
+{% block title %}{{ 'title.category.addArticles'|trans({'entity': category.title}) }}{% endblock %}
+
+{% block content -%}
+    <h1>{{ 'title.category.addArticles'|trans({'entity': category.title}) }}</h1>
+
+    {% if articles is not empty %}
+    <form action="{{path('rtg_blog_admin_category_addarticlessubmit', {'slug': category.slug})}}" method="post">
+        <table class="table table-responsive">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>{{ 'general.title'|trans({}, 'form') }}</th>
+                    <th>{{ 'general.author'|trans({}, 'form') }}</th>
+                    <th>{{ 'general.image'|trans({}, 'form') }}</th>
+                    <th>{{ 'general.created'|trans({}, 'form') }}</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for entity in articles %}
+                <tr>
+                    <td><input type="checkbox" name="article_ids[]" value="{{entity.id}}" {% if entity.category is not null %}checked="checked"{% endif %}/></td>
+                    <td><a href="{{ path('rtg_blog_admin_newsarticle_edit', { 'id': entity.id }) }}">{{ entity.title }}</a></td>
+                    <td>{{ entity.author }}</td>
+                    {% if entity.image is not null %}
+                    <td><img src="{{ entity.image.webPath|apply_filter('tb-128x128') }}" /></td>
+                    {% else %}
+                    <td>Aucune</td>
+                    {% endif %}
+                    <td><time datetime="{{ entity.created|date('c') }}">{{ entity.created|localizeddate('short', 'none')|capitalize }}</time></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <input type="submit" class="btn btn-success pull-right"/>
+    </form>
+    <a class="pull-left" href="{{ path('rtg_blog_admin_category_show', {'slug': category.slug}) }}">
+        <button class="btn btn-primary">{{ 'back_to_the_list'|trans({}, 'form') }}</button>
+    </a>
+    {% endif %}
+{% endblock %}
