@@ -54,9 +54,6 @@ class NewsArticleController extends Controller
 
         if ($form->isValid()) {
             $entity->setAuthor($this->get('security.context')->getToken()->getUser());
-            if($form->get('image')->getData() == null) {
-                $entity->setFeatured(false);
-            }
             
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
@@ -196,9 +193,6 @@ class NewsArticleController extends Controller
         }
 
         if ($editForm->isValid()) {
-            if($editForm->has('image') && $editForm->get('image')->getData()->getFile() == null) {
-                $entity->setFeatured(false);
-            }
             $em->flush();
 
             return $this->redirect($this->generateUrl('rtg_blog_admin_newsarticle_edit', array('id' => $id)));
