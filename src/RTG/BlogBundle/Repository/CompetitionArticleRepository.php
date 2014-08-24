@@ -16,9 +16,9 @@ class CompetitionArticleRepository extends EntityRepository
     
     public function getLatestArticles($limit = null)
     {
-        $qb = $this->createQueryBuilder('a')
-                   ->select('a')
-                   ->addOrderBy('a.date', 'DESC');
+        $qb = $this->createQueryBuilder('c')
+                   ->select('c')
+                   ->addOrderBy('c.date', 'DESC');
         
         if (false === is_null($limit)) {
             $qb->setMaxResults($limit);

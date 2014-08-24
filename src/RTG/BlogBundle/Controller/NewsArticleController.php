@@ -32,7 +32,26 @@ class NewsArticleController extends Controller
         );
     }
         
-    
+    /**
+     * Lists all Category entities.
+     *
+     * @Route("/{slug}/index")
+     * @Method("GET")
+     * @Template()
+     */
+    public function indexByCategoryAction($slug)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $category = $em->getRepository('RTGBlogBundle:Category')->findOneBySlug($slug);
+        if($category == null) {
+            throw $this->createNotFoundException('RTGBlogBundle:Category object not found.');
+        }
+        $articles = $em->getRepository('RTGBlogBundle:NewsArticle')->getLatestArticles($category);
+        return array(
+            'category' => $category,
+            'articles' => $articles
+        );
+    }
 
     /**
      * Show an article

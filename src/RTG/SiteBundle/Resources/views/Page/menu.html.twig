@@ -20,7 +20,7 @@
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ 'news'|trans({}, 'menu') }} <span class="caret"></span></a>
         <ul class="dropdown-menu" role="menu">
             {% for category in categories %}
-            <li><a href="{{ path('rtg_blog_category_index', {'slug': category.slug}) }}" title="{{ category.title }}">{{ category.title }}</a></li>
+            <li><a href="{{ path('rtg_blog_newsarticle_indexbycategory', {'slug': category.slug}) }}" title="{{ category.title }}">{{ category.title }}</a></li>
             {% endfor %}
             <li class="divider"></li>
             <li><a href="{{ path('rtg_blog_newsarticle_index') }}" title="{{ 'all_f'|trans({}, 'menu') }}">{{ 'all_f'|trans({}, 'menu') }}</a></li>
