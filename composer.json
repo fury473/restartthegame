@@ -21,7 +21,7 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "salavert/time-ago-in-words": "1.*",
         "avalanche123/imagine-bundle": "2.1.*",
-        "egeloen/ckeditor-bundle": "~2.0",
+        "egeloen/ckeditor-bundle": "~2.4",
         "friendsofsymfony/user-bundle": "2.0.*@dev",
         "gregwar/captcha-bundle": "1.0.*",
         "oyejorge/less.php": "~1.5"

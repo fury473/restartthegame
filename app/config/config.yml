@@ -112,6 +112,19 @@ avalanche_imagine:
 gregwar_captcha: ~
 
 ivory_ck_editor:
+    plugins:
+        dialog:
+            path:     "/bundles/rtgsite/js/ckeditor/plugins/dialog/"
+            filename: "plugin.js"
+        lineutils:
+            path:     "/bundles/rtgsite/js/ckeditor/plugins/lineutils/"
+            filename: "plugin.js"
+        widget:
+            path:     "/bundles/rtgsite/js/ckeditor/plugins/widget/"
+            filename: "plugin.js"
+        oembed:
+            path:     "/bundles/rtgsite/js/ckeditor/plugins/oembed/"
+            filename: "plugin.js"
     default_config: config_1
     configs:
         config_1:
@@ -122,7 +135,7 @@ ivory_ck_editor:
                 - ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat']
                 - [NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl']
                 - ['Link', 'Unlink', 'Anchor']
-                - ['Image', 'FLash', 'Table', 'HorizontalRule', 'SpecialChar', 'Smiley']
+                - ['FLash', 'Table', 'HorizontalRule', 'SpecialChar', 'Smiley']
                 - '/'
                 - ['Styles', 'Format', 'Font', 'FontSize', 'TextColor', 'BGColor']
                 - ['Maximize', 'ShowBlocks']
@@ -130,6 +143,8 @@ ivory_ck_editor:
                 - ['Source', '-', 'NewPage', '-', 'Templates']
                 - ['PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']
                 - ['Find', 'Replace', '-', 'SelectAll', '-', 'Scayt']
+                - '/'
+                - ['oembed', 'Image']
             full: 
                 - ['Source', '-', 'NewPage', 'Preview', 'Print', '-', 'Templates']
                 - ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']
