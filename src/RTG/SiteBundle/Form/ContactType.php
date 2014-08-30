@@ -17,6 +17,7 @@ class ContactType extends AbstractType {
                 ->add('object', 'choice', array(
                     'choices' => array(
                         'Adhésion à la RTG' => 'Adhésion à la RTG',
+                        'Concours' => 'Concours',
                         'Problème(s) à propos de Teamspeak' => 'Problème(s) à propos de Teamspeak',
                         'Problème(s) à propos du Site' => 'Problème(s) à propos du Site',
                         'Autre' => 'Autre'
@@ -45,7 +46,7 @@ class ContactType extends AbstractType {
                     'invalid_message' => 'Captcha incorrect',
                     'distortion' => false,
                     'width' => 200,
-                    'length' => 10,
+                    'length' => 5,
                     'quality' => 100,
                     'as_url' => true,
                     'reload' => true,
