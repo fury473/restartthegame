@@ -162,6 +162,15 @@ class PageController extends Controller
         return array();
     }
     
+    /**
+     * @Route("/forum")
+     * @Method({"GET"})
+     */
+    public function forumAction()
+    {
+        return $this->redirect("http://forum.restartthegame.com");
+    }
+    
     
     
 //    /**
