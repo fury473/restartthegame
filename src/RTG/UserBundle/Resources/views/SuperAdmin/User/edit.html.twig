@@ -1,0 +1,121 @@
+{% extends 'RTGUserBundle::layout.html.twig' %}
+
+{% block title %}{{ 'user.title.edit'|trans({'username': entity.username}, 'entity') }}{% endblock %}
+
+{% block content -%}
+    <h1>{{ 'user.title.edit'|trans({'username': entity.username}, 'entity') }}</h1>
+
+    {{ form_start(form, { 'attr': { 'class': 'form' } }) }}
+    
+    {{ form_errors(form) }}
+
+    <div class="form-group">
+        <label>{{ 'user.field.username'|trans({}, 'entity') }}</label>
+        <div>{{ entity.username }}</div>
+    </div>
+
+    <div class="form-group">
+        <label>{{ 'user.field.email'|trans({}, 'entity') }}</label>
+        <div>{{ entity.email }}</div>
+    </div>
+
+    <div class="checkbox">
+    {{ form_row(form.newsletter, { 'attr': { 'placeholder': 'user.field.newsletter'|trans } }) }}
+    </div>
+
+    <div class="form-group">
+    {{ form_row(form.birthday) }}
+    </div>
+
+    <div class="form-group">
+    {{ form_row(form.city, { 'attr': { 'placeholder': 'user.field.city'|trans } }) }}
+    </div>
+    
+    <div class="form-group">
+    {{ form_row(form.enabled, { 'attr': { 'placeholder': 'user.field.enabled'|trans } }) }}
+    </div>
+    
+    <div class="form-group">
+    {{ form_row(form.locked, { 'attr': { 'placeholder': 'user.field.locked'|trans } }) }}
+    </div>
+    
+    <ul id="role-fields-list" data-prototype="{{ form_widget(form.roles.vars.prototype) | e }}">
+    {% for role in form.roles %}
+        <li>
+            {{ form_errors(role) }}
+            {{ form_widget(role) }}
+            <a href="#" class="remove-role">X</a>
+        </li>
+    {% endfor %}
+    </ul>
+    <a href="#" id="add-another-role">Ajouter un rôle</a>
+
+    {% if delete_img_form is not defined %}
+    <div class="form-group">
+    {{ form_row(form.avatar) }}
+    </div>
+    {% else %}
+    <div class="form-group">
+        <label>Image</label>
+        <div>
+            <img src="{{ entity.avatar.webPath|apply_filter('tb-128x128') }}" alt="{{ entity.username }}"/>
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="form-group pull-right">
+    {{ form_row(form.submit) }}
+    </div>
+
+    {{ form_end(form) }}
+    
+    <div class="form-group pull-right">
+    {{ form(delete_form) }}
+    </div>
+
+    {% if delete_img_form is defined %}
+        {{ form(delete_img_form) }}
+        <div class="clearfix"></div>
+    {% endif %}
+    
+    <a class="btn btn-primary" href="{{ path('rtg_user_superadmin_user_index') }}">{{ 'user.button.back_to_list'|trans({}, 'entity') }}</a>
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+    <script type="text/javascript">
+        // garde une trace du nombre de champs role qui ont été affichés
+        var roleCount = '{{ form.roles | length }}';
+
+        $(document).ready(function() {
+            $('#add-another-role').click(function(event) {
+                event.preventDefault();
+                var roleList = $('#role-fields-list');
+
+                // parcourt le template prototype
+                var newWidget = roleList.attr('data-prototype');
+                // remplace les "__name__" utilisés dans l'id et le nom du prototype
+                // par un nombre unique pour chaque role
+                // le nom de l'attribut final ressemblera à name="user[roles][2]"
+                newWidget = newWidget.replace(/__name__/g, roleCount);
+                roleCount++;
+
+                // créer une nouvelle liste d'éléments et l'ajoute à notre liste
+                var newLi = $('<li></li>').html(newWidget);
+                var newDeleteLink = $('<a href="#" class="remove-role"> X</a>');
+                newLi.appendTo($('#role-fields-list'));
+                newDeleteLink.appendTo(newLi);
+                newDeleteLink.click(function(event) {
+                    event.preventDefault();
+                    $(this).parent('li').remove();
+                });
+
+                return false;
+            });
+            $('.remove-role').click(function(event) {
+                event.preventDefault();
+                $(this).parent('li').remove();
+            });
+        });
+    </script>
+{% endblock %}

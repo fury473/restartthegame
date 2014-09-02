@@ -1,0 +1,20 @@
+{% extends 'RTGUserBundle::layout.html.twig' %}
+{% trans_default_domain 'entity' %}
+
+{% block title %}{{ 'user.title.profile_of'|trans({'username': entity.username}) }}{% endblock %}
+
+{% block content -%}
+    <h1>{{ 'user.title.profile_of'|trans({'username': entity.username}) }}</h1>
+
+    {% if entity.avatar is not null %}
+    <img class="thumbnail pull-right" src="{{ entity.avatar.webPath|apply_filter('tb-128x128') }}" alt="{{ entity.username }}"/>
+    {% endif %}
+    <p>{{ 'user.field.username'|trans }}: {{ entity.username }}</p>
+    <p>{{ 'user.field.email'|trans }}: {{ entity.email }}</p>
+    <p>{{ 'user.field.age'|trans }}: {{ entity.age }}</p>
+    <p>{{ 'user.field.city'|trans }}: {{ entity.city }}</p>
+    {% if entity.hasRole('ROLE_STAFF')%}<p>Staff RTG</p>{% endif %}
+    <div class="clearfix"></div>
+    <a href="{{ path('rtg_user_superadmin_user_edit', { 'id': entity.id }) }}" title="{{ 'user.title.edit'|trans }}" class="btn btn-primary pull-right">{{ 'user.button.edit'|trans }}</a>
+    <a class="btn btn-primary" href="{{ path('rtg_user_superadmin_user_index') }}">{{ 'user.button.back_to_list'|trans({}, 'entity') }}</a>
+{% endblock %}

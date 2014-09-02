@@ -1,6 +1,6 @@
 <?php
 
-namespace RTG\UserBundle\Form\Admin;
+namespace RTG\UserBundle\Form\SuperAdmin;
 
 use RTG\UserBundle\Form\AvatarType;
 use Symfony\Component\Form\AbstractType;
@@ -28,6 +28,12 @@ class UserType extends AbstractType
             ->add('city', 'text', array('label' => 'user.field.city', 'required' => false, 'attr' => array('class' => 'form-control')))
             ->add('enabled', 'checkbox', array('label' => 'user.field.enabled', 'required' => false))
             ->add('locked', 'checkbox', array('label' => 'user.field.locked', 'required' => false))
+            ->add('roles', 'collection', array(
+                'label' => 'user.field.roles',
+                'type' => 'text',
+                'allow_add' => true,
+                'allow_delete' => true
+            ))
         ;
         if($entity->getAvatar() == null) {
             $builder->add('avatar', new AvatarType(), array('label' => 'user.field.avatar'));
