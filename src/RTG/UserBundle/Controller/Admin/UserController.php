@@ -68,7 +68,7 @@ class UserController extends Controller
      */
     public function editAction($id)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $user = $em->getRepository('RTGUserBundle:User')->findOneBy(array('id' => $id));
 
