@@ -1,6 +1,6 @@
 <?php
 
-namespace RTG\UserBundle\Controller\Admin;
+namespace RTG\UserBundle\Controller\SuperAdmin;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -8,14 +8,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use RTG\UserBundle\Entity\User;
-use RTG\UserBundle\Form\UserType;
-use RTG\UserBundle\Form\Admin;
-use FOS\UserBundle\Doctrine\UserManager;
+use RTG\UserBundle\Form\SuperAdmin\UserType;
 
 /**
  * User controller.
  *
- * @Route("/admin/user")
+ * @Route("/super-admin/user")
  */
 class UserController extends Controller
 {
@@ -54,8 +52,11 @@ class UserController extends Controller
             throw $this->createNotFoundException('Unable to find User entity.');
         }
 
+        $deleteForm = $this->createDeleteForm($id);
+
         return array(
-            'entity'      => $entity
+            'entity'      => $entity,
+            'delete_form' => $deleteForm->createView(),
         );
     }
 
@@ -77,10 +78,12 @@ class UserController extends Controller
         }
 
         $editForm = $this->createEditForm($user);
+        $deleteForm = $this->createDeleteForm($id);
         
         $parameters = array(
             'entity'      => $user,
-            'form'   => $editForm->createView()
+            'form'   => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
         );
         
         if($user->getAvatar() != null) {
@@ -100,8 +103,8 @@ class UserController extends Controller
     */
     private function createEditForm(User $entity)
     {
-        $form = $this->createForm(new Admin\UserType(), $entity, array(
-            'action' => $this->generateUrl('rtg_user_admin_user_update', array('id' => $entity->getId())),
+        $form = $this->createForm(new UserType(), $entity, array(
+            'action' => $this->generateUrl('rtg_user_superadmin_user_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -138,7 +141,7 @@ class UserController extends Controller
         if ($editForm->isValid()) {
             $userManager->updateUser($entity);
 
-            return $this->redirect($this->generateUrl('rtg_user_admin_user_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('rtg_user_superadmin_user_edit', array('id' => $id)));
         }
 
         return array(
@@ -146,6 +149,47 @@ class UserController extends Controller
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
+    }
+    /**
+     * Deletes a User entity.
+     *
+     * @Route("/{id}")
+     * @Method("DELETE")
+     */
+    public function deleteAction(Request $request, $id)
+    {
+        $form = $this->createDeleteForm($id);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $userManager = $this->get('fos_user.user_manager');
+            $entity = $userManager->findUserBy(array('id' => $id));
+
+            if (!$entity) {
+                throw $this->createNotFoundException('Unable to find User entity.');
+            }
+
+            $userManager->deleteUser($entity);
+        }
+
+        return $this->redirect($this->generateUrl('rtg_user_superadmin_user'));
+    }
+
+    /**
+     * Creates a form to delete a User entity by id.
+     *
+     * @param mixed $id The entity id
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createDeleteForm($id)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('rtg_user_superadmin_user_delete', array('id' => $id)))
+            ->setMethod('DELETE')
+            ->add('submit', 'submit', array('label' => $this->get('translator')->trans('user.button.delete_this_account', array(), 'entity'), 'attr' => array('class' => 'btn btn-danger')))
+            ->getForm()
+        ;
     }
     
     /**
@@ -171,7 +215,7 @@ class UserController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('rtg_user_admin_user_edit', array('id' => $user_id)));
+        return $this->redirect($this->generateUrl('rtg_user_superadmin_user_edit', array('id' => $user_id)));
     }
     
     /**
@@ -184,7 +228,7 @@ class UserController extends Controller
     private function createDeleteImgForm($user_id, $id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('rtg_user_admin_user_deleteimg', array('user_id' => $user_id, 'id' => $id)))
+            ->setAction($this->generateUrl('rtg_user_superadmin_user_deleteimg', array('user_id' => $user_id, 'id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => $this->get('translator')->trans('image.delete', array(), 'form'), 'attr' => array('class' => 'btn btn-warning')))
             ->getForm()

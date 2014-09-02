@@ -208,6 +208,10 @@ ul.latest-posts {
             color: #b5b5b5;
             display: block;
             height: 46px;
+            overflow: hidden;
+            white-space: nowrap;
+            -o-text-overflow: ellipsis; /* pour Opera 9 */
+            text-overflow: ellipsis;
 
             span.post-title {
                 line-height: 46px;

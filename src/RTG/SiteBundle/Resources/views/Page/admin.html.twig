@@ -17,6 +17,11 @@
     {% if is_granted('ROLE_SUPER_ADMIN') %}
     <div>
         <h2>Utilisateurs</h2>
+        <a href="{{ path('rtg_user_superadmin_user_index') }}"><button class="btn btn-primary">{% trans from 'content' %}users{% endtrans %}</button></a>
+    </div>
+    {% else %}
+    <div>
+        <h2>Utilisateurs</h2>
         <a href="{{ path('rtg_user_admin_user_index') }}"><button class="btn btn-primary">{% trans from 'content' %}users{% endtrans %}</button></a>
     </div>
     {% endif %}

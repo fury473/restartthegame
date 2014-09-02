@@ -10,11 +10,13 @@
     {{ form_errors(form) }}
 
     <div class="form-group">
-    {{ form_row(form.username, { 'attr': { 'placeholder': 'user.field.username'|trans } }) }}
+        <label>{{ 'user.field.username'|trans({}, 'entity') }}</label>
+        <div>{{ entity.username }}</div>
     </div>
 
     <div class="form-group">
-    {{ form_row(form.email, { 'attr': { 'placeholder': 'user.field.email'|trans } }) }}
+        <label>{{ 'user.field.email'|trans({}, 'entity') }}</label>
+        <div>{{ entity.email }}</div>
     </div>
 
     <div class="checkbox">
@@ -36,7 +38,7 @@
     <div class="form-group">
     {{ form_row(form.locked, { 'attr': { 'placeholder': 'user.field.locked'|trans } }) }}
     </div>
-
+    
     {% if delete_img_form is not defined %}
     <div class="form-group">
     {{ form_row(form.avatar) }}
@@ -55,10 +57,6 @@
     </div>
 
     {{ form_end(form) }}
-    
-    <div class="form-group pull-right">
-    {{ form(delete_form) }}
-    </div>
 
     {% if delete_img_form is defined %}
         {{ form(delete_img_form) }}
