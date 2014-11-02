@@ -12,11 +12,33 @@
             <h3>Dernières compétitions</h3>
             <ul class="latest-posts">
                 {% for competition in competitions %}
-                    <li class="clearfix">
-                        <a href="{{ path('rtg_blog_competitionarticle_show', { 'slug': competition.slug }) }}" title="{{ competition.title }}"><span class="date">
-                                <em class="day">{{ competition.date|localizeddate('none', 'none', app.request.locale, null, 'd') }}</em>
-                                <em class="month">{{ competition.date|localizeddate('none', 'none', app.request.locale, null, 'MMM') }}</em>
-                            </span><span class="post-title">{{ competition.title }}</span></a>
+                    {% set date_itemprop = 'startDate' %}
+                    {% set date_status =  '' %}
+                    {% if competition.status == 'EventScheduled' %}
+                        {% set date_status =  '<link itemprop="eventStatus" href="http://schema.org/EventScheduled"/>' %}
+                    {% elseif competition.status == 'EventRescheduled' %}
+                        {% set date_status =  '<span itemprop="eventStatus" href="http://schema.org/EventRescheduled">(Replanifiée)</span>' %}
+                    {% elseif competition.status == 'EventPostponed' %}
+                        {% set date_status =  '<span itemprop="eventStatus" href="http://schema.org/EventPostponed">(Repoussée)</span>' %}
+                        {% set date_itemprop = 'previousStartDate' %}
+                    {% elseif competition.status == 'EventCancelled' %}
+                        {% set date_status =  '<span itemprop="eventStatus" href="http://schema.org/EventCancelled">(Annulée)</span>' %}
+                        {% set date_itemprop = 'previousStartDate' %}
+                    {% endif %}
+                    
+                    {% set incoming_class = '' %}
+                    {% if competition.date >= date() %}{% set incoming_class = ' class="incoming"' %}{% endif %}
+                    <li itemscope itemtype="http://schema.org/Event" class="clearfix">
+                        <a itemprop="url"{{ incoming_class|raw }} href="{{ path('rtg_blog_competitionarticle_show', { 'slug': competition.slug }) }}" title="{{ competition.title }}"><span class="date">
+                                <time itemprop="{{ date_itemprop }}" datetime="{{ competition.date|date('c') }}">
+                                    <em class="day">{{ competition.date|localizeddate('none', 'none', app.request.locale, null, 'd') }}</em>
+                                    <em class="month">{{ competition.date|localizeddate('none', 'none', app.request.locale, null, 'MMM') }}</em>
+                                </time>
+                            </span>
+                            <span itemprop="name" class="post-title">{{ competition.title }}</span>
+                            {{ date_status|raw }}
+                            
+                        </a>
                     </li>
                 {% endfor %}
             </ul>

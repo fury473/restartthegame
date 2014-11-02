@@ -5,6 +5,7 @@ namespace RTG\BlogBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use RTG\BlogBundle\Entity\CompetitionArticle;
 use RTG\BlogBundle\Form\ImageArticleType;
 
 class CompetitionArticleType extends AbstractType
@@ -21,6 +22,14 @@ class CompetitionArticleType extends AbstractType
         }
         $builder
             ->add('title', 'text', array('label' => 'general.title', 'attr' => array('class' => 'form-control')))
+            ->add('status', 'choice', array(
+                'choices' => array(
+                    CompetitionArticle::EventScheduled => 'Planifiée',
+                    CompetitionArticle::EventRescheduled => 'Replanifiée',
+                    CompetitionArticle::EventPostponed => 'Repoussée',
+                    CompetitionArticle::EventCancelled => 'Annulée',
+                )
+            ))
             ->add('date', 'date', array('label' => 'general.date'))
             ->add('message', 'ckeditor', array(
                 'label' => 'general.message',
