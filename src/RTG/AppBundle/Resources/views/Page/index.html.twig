@@ -14,15 +14,13 @@
                 {% for competition in competitions %}
                     {% set date_itemprop = 'startDate' %}
                     {% set date_status =  '' %}
-                    {% if competition.status == 'EventScheduled' %}
-                        {% set date_status =  '<link itemprop="eventStatus" href="http://schema.org/EventScheduled"/>' %}
-                    {% elseif competition.status == 'EventRescheduled' %}
-                        {% set date_status =  '<span itemprop="eventStatus" href="http://schema.org/EventRescheduled">(Replanifiée)</span>' %}
+                    {% if competition.status == 'EventRescheduled' %}
+                        {% set date_status =  '<span>(Replanifiée)</span>' %}
                     {% elseif competition.status == 'EventPostponed' %}
-                        {% set date_status =  '<span itemprop="eventStatus" href="http://schema.org/EventPostponed">(Repoussée)</span>' %}
+                        {% set date_status =  '<span>(Repoussée)</span>' %}
                         {% set date_itemprop = 'previousStartDate' %}
                     {% elseif competition.status == 'EventCancelled' %}
-                        {% set date_status =  '<span itemprop="eventStatus" href="http://schema.org/EventCancelled">(Annulée)</span>' %}
+                        {% set date_status =  '<span>(Annulée)</span>' %}
                         {% set date_itemprop = 'previousStartDate' %}
                     {% endif %}
                     
@@ -36,8 +34,7 @@
                                 </time>
                             </span>
                             <span itemprop="name" class="post-title">{{ competition.title }}</span>
-                            {{ date_status|raw }}
-                            
+                            <link itemprop="eventStatus" href="http://schema.org/{{ competition.status }}"/>{{ date_status|raw }}
                         </a>
                     </li>
                 {% endfor %}

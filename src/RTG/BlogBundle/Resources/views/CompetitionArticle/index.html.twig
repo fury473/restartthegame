@@ -5,14 +5,26 @@
 {% block content %}
     {% trans %}Competitions{% endtrans %}
     {% for article in articles %}
-        <article class="article">
+        <article itemscope itemtype="http://schema.org/Event" class="article">
             <header>
                 <div class="date pull-right">Posté le <time datetime="{{ article.created|date('c') }}">{{ article.created|localizeddate('full', 'short')|capitalize }}</time></div>
-                <h2><a href="{{ path('rtg_blog_competitionarticle_show', { 'slug': article.slug }) }}">{{ article.title }}</a></h2>
+                <h2><a itemprop="url" href="{{ path('rtg_blog_competitionarticle_show', { 'slug': article.slug }) }}"><span itemprop="name">{{ article.title }}</span></a></h2>
             </header>
             {% if article.date is null %}
                 Non plannifiée
             {% else %}
+                <link itemprop="eventStatus" href="http://schema.org/{{ article.status }}"/>
+                {% if article.status == 'EventScheduled' %}
+                    <strong>Compétition plannifiée le <time itemprop="startDate" datetime="{{ article.date|date('c') }}">{{ article.date|localizeddate('full', 'none')|capitalize }}</time>.</strong>
+                {% elseif article.status == 'EventRescheduled' %}
+                    <strong>Compétition replannifiée le <time itemprop="startDate" datetime="{{ article.date|date('c') }}">{{ article.date|localizeddate('full', 'none')|capitalize }}</time>.</strong>
+                {% elseif article.status == 'EventPostponed' %}
+                    <strong>Compétition repoussée.</strong><br/>
+                    <small>Initialement prévu le <time itemprop="previousStartDate" datetime="{{ article.date|date('c') }}">{{ article.date|localizeddate('full', 'none')|capitalize }}</time>.</small>
+                {% elseif article.status == 'EventCancelled' %}
+                    <strong>Compétition annulée.</strong><br/>
+                    <small>Initialement prévu le <time itemprop="previousStartDate" datetime="{{ article.date|date('c') }}">{{ article.date|localizeddate('full', 'none')|capitalize }}</time>.</small>
+                {% endif %}
                 Planifiée le <time datetime="{{ article.date|date('c') }}">{{ article.date|localizeddate('full', 'none')|capitalize }}</time>
             {% endif %}
         </article>
