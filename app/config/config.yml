@@ -4,7 +4,7 @@ imports:
 
 parameters:
     web_path: %kernel.root_dir%/../web
-    rtg.twig_extension.class: RTG\SiteBundle\Services\Extension\TwigExtension
+    rtg.twig_extension.class: RTG\AppBundle\Services\Extension\TwigExtension
 
 framework:
     #esi:             ~
@@ -31,7 +31,7 @@ twig:
     strict_variables: %kernel.debug%
     form:
         resources:
-            - 'RTGSiteBundle:Form:customFormTheme.html.twig'
+            - 'RTGAppBundle:Form:customFormTheme.html.twig'
     globals:
         web_path: %web_path%
 services:
@@ -53,7 +53,7 @@ services:
 assetic:
     debug:          %kernel.debug%
     use_controller: false
-    bundles:        [ RTGSiteBundle, RTGBlogBundle ]
+    bundles:        [ RTGAppBundle, RTGBlogBundle ]
     filters:
         cssrewrite: ~
         lessphp:
@@ -114,16 +114,16 @@ gregwar_captcha: ~
 ivory_ck_editor:
     plugins:
         dialog:
-            path:     "/bundles/rtgsite/js/ckeditor/plugins/dialog/"
+            path:     "/bundles/rtgapp/js/ckeditor/plugins/dialog/"
             filename: "plugin.js"
         lineutils:
-            path:     "/bundles/rtgsite/js/ckeditor/plugins/lineutils/"
+            path:     "/bundles/rtgapp/js/ckeditor/plugins/lineutils/"
             filename: "plugin.js"
         widget:
-            path:     "/bundles/rtgsite/js/ckeditor/plugins/widget/"
+            path:     "/bundles/rtgapp/js/ckeditor/plugins/widget/"
             filename: "plugin.js"
         oembed:
-            path:     "/bundles/rtgsite/js/ckeditor/plugins/oembed/"
+            path:     "/bundles/rtgapp/js/ckeditor/plugins/oembed/"
             filename: "plugin.js"
     default_config: config_1
     configs:

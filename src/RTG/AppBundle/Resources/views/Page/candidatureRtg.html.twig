@@ -1,0 +1,109 @@
+{% extends 'RTGUserBundle::layout.html.twig' %}
+
+{% block title %}{{ 'contact.rtg_apply'|trans({}, 'content') }} - RTG{% endblock %}
+
+{% block content %}
+<div class="bloc container">
+    <h1>{{ 'contact.rtg_apply'|trans({}, 'content') }}</h1>
+
+    {{ 'contact.text.p1'|trans({}, 'content')|raw }}
+
+    <h2>{{ 'contact.info_generales'|trans({}, 'content') }}</h2>
+    <form action="{{ path("fos_user_security_check") }}" method="post">
+
+        <h3>{{ 'contact.info_personnelles'|trans({}, 'content') }}</h3>
+
+        <label for="lastname">{{ 'lastname'|trans({}, 'user') }}</label><input type="text" id="lastname" name="lastname" value="{{ last_lastname|default('') }}" required />
+        <label for="firstname">{{ 'firstname'|trans({}, 'user') }}</label><input type="text" id="firstname" name="firstname" value="{{ last_firstname|default('') }}" required />
+        <label for="birthday">{{ 'birthday'|trans({}, 'user') }}</label><input type="date" id="birthday" name="birthday" value="{{ last_birthday|default('') }}" required />
+        <label for="adress">{{ 'address'|trans({}, 'user') }}</label><input type="text" id="adress" name="adress" value="{{ last_adress|default('') }}" required />
+        <label for="code">{{ 'zip_code'|trans({}, 'user') }}</label><input type="text" id="code" name="code" value="{{ last_code|default('') }}" required />
+        <label for="town">{{ 'town'|trans({}, 'user') }}</label><input type="text" id="town" name="town" value="{{ last_town|default('') }}" required />
+        <label for="email">{{ 'email'|trans({}, 'user') }}</label><input type="email" id="email" name="email" value="{{ last_firstname|default('') }}" required />
+        <label for="phone">{{ 'phone'|trans({}, 'user') }}</label><input type="tel" id="phone" name="phone" value="{{ last_firstname|default('') }}" required />
+
+        {{ 'contact.text.p2'|trans({}, 'content')|raw }}
+        <table class="table check_table">
+            <th>
+                <td>{{ 'days.monday'|trans({}, 'date') }}</td>
+                <td>{{ 'days.tuesday'|trans({}, 'date') }}</td>
+                <td>{{ 'days.wednesday'|trans({}, 'date') }}</td>
+                <td>{{ 'days.thursday'|trans({}, 'date') }}</td>
+                <td>{{ 'days.friday'|trans({}, 'date') }}</td>
+                <td>{{ 'days.saturday'|trans({}, 'date') }}</td>
+                <td>{{ 'days.sunday'|trans({}, 'date') }}</td>
+            </th>
+            {% for i in 0..2 %}
+            <tr>
+                {% if i == 0 %}
+                    <td>{{ 'day_times.morning'|trans({}, 'date') }}</td>
+                {% elseif i == 1 %}
+                    <td>{{ 'day_times.afternoon'|trans({}, 'date') }}</td>
+                {% elseif i == 2 %}
+                    <td>{{ 'day_times.evening'|trans({}, 'date') }}</td>
+                {% endif %}
+                {% for j in 0..6 %}
+                    <td><input type="checkbox" name="disponibility[{{j}}][{{i}}]" /></td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+
+        <h3>{{ 'contact.info_virtuelles'|trans({}, 'content') }}</h3>
+
+        <h3>{{ 'contact.parcours_professionnel'|trans({}, 'content') }}</h3>
+        <h4>{{ 'contact.parcours_pro.p1'|trans({}, 'content') }}</h4>
+        <textarea rows="5"></textarea>
+
+        <h4>{{ 'contact.parcours_pro.p2'|trans({}, 'content') }}</h4>
+        <textarea rows="5"></textarea>
+
+        <h4>{{ 'contact.parcours_pro.p3'|trans({}, 'content') }}</h4>
+        <textarea rows="5"></textarea>
+
+        <h2>{{ 'contact.info_post'|trans({}, 'content') }}</h2>
+
+        {{ 'contact.text.p3'|trans({}, 'content')|raw }}
+
+        <label class="radio"><input type="radio" name="post" required value="responsable_section" /> {{ 'contact.post.responsable_section'|trans({}, 'content') }}</label>
+        <label class="radio"><input type="radio" name="post" required value="moderateur_section" /> {{ 'contact.post.moderateur_section'|trans({}, 'content') }}</label>
+        <label class="radio"><input type="radio" name="post" required value="responsable_cup" /> {{ 'contact.post.responsable_cup'|trans({}, 'content') }}</label>
+        <label class="radio"><input type="radio" name="post" required value="streamer_commenter" /> {{ 'contact.post.streamer_commenter'|trans({}, 'content') }}</label>
+        <label class="radio"><input type="radio" name="post" required value="ts_officer" /> {{ 'contact.post.ts_officer'|trans({}, 'content') }}</label>
+
+        {{ 'contact.text.p4'|trans({}, 'content')|raw }}
+        <textarea rows="5"></textarea>
+
+        {{ 'contact.text.p5'|trans({}, 'content')|raw }}
+        <textarea rows="5"></textarea>
+
+        <div>
+            <button class="btn btn-inverse">Envoyer</button>
+        </div>
+
+        <div id="chi" class="visible-desktop hidden">
+            <img src="{{ asset('bundles/rtgapp/img/content/chi.png') }}" alt="euh...">
+        </div>
+
+    </form>
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script>
+    if ( window.addEventListener ) {
+        var kkeys = [], konami = "38,38,40,40,37,39,37,39,66,65";
+        window.addEventListener("keydown", function(e){
+            kkeys.push( e.keyCode );
+            if ( kkeys.toString().indexOf( konami ) >= 0 ) {
+                kkeys = [];
+                if($("#chi").hasClass("hidden")) {
+                    $("#chi").removeClass("hidden");
+                } else {
+                    $("#chi").addClass("hidden");
+                }
+            }
+        }, true);
+    }
+</script>
+{% endblock %}

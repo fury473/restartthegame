@@ -3,7 +3,7 @@
 namespace RTG\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use RTG\SiteBundle\Entity\Image;
+use RTG\AppBundle\Entity\Image;
 
 /**
  * @ORM\Entity

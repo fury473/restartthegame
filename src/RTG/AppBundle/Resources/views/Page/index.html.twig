@@ -1,0 +1,66 @@
+{% extends 'RTGAppBundle::layout.html.twig' %}
+
+{% block title %}Restart the Game{% endblock %}
+
+{% block content %}
+<div class="bloc container">
+    <div class="row-fluid clearfix">
+        <div class="col-md-9">
+            {{ include('RTGAppBundle:Page:carousel.html.twig', {'news': news}) }}
+        </div>
+        <div class="col-md-3">
+            <h3>Dernières compétitions</h3>
+            <ul class="latest-posts">
+                {% for competition in competitions %}
+                    <li class="clearfix">
+                        <a href="{{ path('rtg_blog_competitionarticle_show', { 'slug': competition.slug }) }}" title="{{ competition.title }}"><span class="date">
+                                <em class="day">{{ competition.date|localizeddate('none', 'none', app.request.locale, null, 'd') }}</em>
+                                <em class="month">{{ competition.date|localizeddate('none', 'none', app.request.locale, null, 'MMM') }}</em>
+                            </span><span class="post-title">{{ competition.title }}</span></a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    
+    <div class="row-fluid">
+        <div class="col-md-12">
+            <div class="intro">
+                La Restart The Game, RTG, est une association où se regroupent de nombreux joueurs...
+            </div>
+        </div>
+    </div>
+
+    <div class="row-fluid">
+        <div class="col-md-12">
+            <h1>Restart the Game</h1>
+            <p>L’association Restart The Game vous souhaite la bienvenue !</p>
+            <p>Depuis 2012 Restart The Game est d’abord une communauté de teams et de joueurs présents pour le simple plaisir de jouer et de faire connaissance. C’est à partir d’octobre 2013 que la RTG devient une association. Un nouvel objectif : promouvoir la communauté PC à travers la compétition virtuelle et physique, par le biais de Lans... ainsi que permettre aux joueurs de se retrouver et d’échanger des moments de complicité à travers les différents jeux sur PC.</p>
+            <p>Au quotidien, le Staff proposera à sa communauté des compétitions virtuelles, des streams, des concours... Au programme également, des soirées et d’autres événements dans la région lyonnaise.</p>
+            <p>Finalement, l’association Restart The Game et ses joueurs constituent une communauté solidaire, éthique, basée sur le respect de l’autre, et sur le professionnalisme du Staff qui encadre cette communauté.</p>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="col-md-3">
+            <img class="center-block" src="{{ asset('bundles/rtgapp/img/index/icon1.png') }}" alt="Teamspeak"/>
+            <h3 class="text-center">Teamspeak</h3>
+            <p class="text-center">Membre ou non de l’association, venez partager de bons moments sur notre Teamspeak !</p>
+        </div>
+        <div class="col-md-3">
+            <img class="center-block" src="{{ asset('bundles/rtgapp/img/index/icon2.png') }}" alt="Respect & Politesse"/>
+            <h3 class="text-center">Respect & Politesse</h3>
+            <p class="text-center">Les joueurs passent de bon moment. Et c'est encore mieux quand tout le monde respecte un minimum de politesse</p>
+        </div>
+        <div class="col-md-3">
+            <img class="center-block" src="{{ asset('bundles/rtgapp/img/index/icon3.png') }}" alt="Admins/Staff"/>
+            <h3 class="text-center">Admins/Staff</h3>
+            <p class="text-center">Les Admins, Modo ou le Staff sont là pour vous aider en cas de problème.</p>
+        </div>
+        <div class="col-md-3">
+            <img class="center-block" src="{{ asset('bundles/rtgapp/img/index/icon4.png') }}" alt="Votre channel"/>
+            <h3 class="text-center">Votre channel</h3>
+            <p class="text-center">Chaque équipe inscrite a le droit à son petit espace sur le Teamspeak.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

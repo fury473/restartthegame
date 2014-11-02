@@ -1,0 +1,29 @@
+{% extends 'RTGAppBundle::layout.html.twig' %}
+
+{% block title %}Teamspeak - RTG{% endblock %}
+
+{% block content %}
+<div class="bloc container">
+    <h1>Teamspeak</h1>
+    <p>
+        Le Teamspeak est l’outil de prédilection de la RtG. Il nous sert en effet dans différents aspects de la vie de l’association :
+        <ul>
+            <li>Nous l’utilisons lors de l’organisation de nos différentes Cups.</li>
+            <li>Le logiciel permet également de rester en contact avec le [Staff RtG],  régulièrement en ligne pour recevoir vos propositions et pourquoi pas tout simplement discuter</li>
+            <li>Il est également possible d’échanger avec les différentes équipes présentes.</li>
+        </ul>
+    </p> 
+    <p>
+        Il s’agit d’un logiciel gratuit, mais dont l’hébergement reste payant. Adhérer à l’association vous permet ainsi de bénéficier d’une place assurée sur les serveurs RtG, et de profiter au maximum des services du logiciel !
+    </p>
+    <div class="center-block" style="width: 128px;">
+        <a href="http://www.teamspeak.com/?page=downloads" target="_blank" title="Télécharger Teamspeak">
+            <img src="{{ asset('bundles/rtgapp/img/content/teamspeak/teamspeak.png') }}" alt="Teamspeak"/>
+        </a>
+    </div>
+    <br/>
+    <div class="center-block" style="width: 191px;">
+        <a href="ts3server://ts3.restartthegame.com" title="Se connecter au Teamspeak" class="btn btn-primary">Se connecter au teamspeak</a>
+    </div>
+</div>
+{% endblock %}

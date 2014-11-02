@@ -8,8 +8,8 @@ rtg_user:
     type:     annotation
     prefix:   /
 
-rtg_site:
-    resource: "@RTGSiteBundle/Controller/"
+rtg_app:
+    resource: "@RTGAppBundle/Controller/"
     type:     annotation
     prefix:   /
 

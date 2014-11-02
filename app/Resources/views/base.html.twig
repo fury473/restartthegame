@@ -11,31 +11,31 @@
 
         {% block stylesheet %}
             {% stylesheets
-                'bundles/rtgsite/less/bootstrap.less'
-                'bundles/rtgsite/less/main.less'
+                'bundles/rtgapp/less/bootstrap.less'
+                'bundles/rtgapp/less/main.less'
                 filter='cssrewrite'
                 output='css/main.css'
             %}
             <link rel="stylesheet" href="{{ asset_url }}" />{% endstylesheets %}
         {% endblock %}
     </head>
-    {% trans_default_domain 'RTGSiteBundle' %}
+    {% trans_default_domain 'RTGAppBundle' %}
     <body>
         <div class="scanlines"></div>
-        {{ include('RTGSiteBundle:Page:menuUser.html.twig') }}
+        {{ include('RTGAppBundle:Page:menuUser.html.twig') }}
         <div class="container">
             <div class="row">
                 <div class="col-md-3">
                     <div class="header-logo">
-                        <a href="{{ path('rtg_site_page_index') }}" title="Restart the Game">
-                            <img class="center-block img-responsive" src="{{ asset('bundles/rtgsite/img/logo.png') }}" alt="Restart the Game"/>
+                        <a href="{{ path('rtg_app_page_index') }}" title="Restart the Game">
+                            <img class="center-block img-responsive" src="{{ asset('bundles/rtgapp/img/logo.png') }}" alt="Restart the Game"/>
                         </a>
                     </div>
                 </div>
                 <div class="col-md-9">
                     <div class="title row">
                         <div class="center-block">
-                            <a href="{{ path('rtg_site_page_index') }}" title="Restart the Game">Restart the Game</a>
+                            <a href="{{ path('rtg_app_page_index') }}" title="Restart the Game">Restart the Game</a>
                         </div>
                     </div>
                 </div>
@@ -43,7 +43,7 @@
         </div>
         
         <div id="main-menu" class="container bloc">
-            {{ render(controller('RTGSiteBundle:Page:menu')) }}
+            {{ render(controller('RTGAppBundle:Page:menu')) }}
         </div>
             
         {% block body %}{% endblock %}
@@ -52,7 +52,7 @@
             <div class="container bloc">
                 <div id="copyright">
                     {% block footer %}
-                    © 2013 Restart the Game - <a href="{{ path('rtg_site_page_legalnotices') }}">{{ 'legal_notices'|trans({}, 'menu') }}</a>
+                    © 2013 Restart the Game - <a href="{{ path('rtg_app_page_legalnotices') }}">{{ 'legal_notices'|trans({}, 'menu') }}</a>
                     {% endblock %}
                 </div>
             </div>
@@ -60,9 +60,9 @@
 
         {% block javascript %}
             {% javascripts
-                'bundles/rtgsite/js/jquery-1.9.1.min.js'
-                'bundles/rtgsite/dist/js/bootstrap.min.js'
-                'bundles/rtgsite/js/main.js' %}
+                'bundles/rtgapp/js/jquery-1.9.1.min.js'
+                'bundles/rtgapp/dist/js/bootstrap.min.js'
+                'bundles/rtgapp/js/main.js' %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
         <script>
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

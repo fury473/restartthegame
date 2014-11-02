@@ -1,0 +1,12 @@
+parameters:
+    rtg_app.newsletter.class: RTG\AppBundle\Services\Newsletter
+services:
+    rtg_app.newsletter:
+        class: %rtg_app.newsletter.class%
+        arguments:
+            em: '@doctrine.orm.entity_manager'
+            mailer: '@mailer'
+            newsletter_address: %newsletter_address%
+            noreply_address: %noreply_address%
+    newsletter:
+        alias: rtg_app.newsletter

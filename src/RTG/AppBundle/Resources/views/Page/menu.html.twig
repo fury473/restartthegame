@@ -1,0 +1,48 @@
+<ul class="nav navbar-nav" role="navigation">
+    <li class="pull-left{% if 'rtg_app_page_index' in app.request.get('_route') %} active{% endif %}">
+      <a href="{{ path('rtg_app_page_index') }}" title="Restart the Game">{{ 'home'|trans({}, 'menu') }}</a>
+    </li>
+    {% if categories is empty %}
+    <li class="pull-left{% if 'rtg_blog_newsarticle' in app.request.get('_route') %} active{% endif %}">
+        <a href="{{ path('rtg_blog_newsarticle_index') }}" title="{{ 'news'|trans({}, 'menu') }}">{{ 'news'|trans({}, 'menu') }}</a>
+    </li>
+    {% else %}
+    <li class="dropdown pull-left{% if 'rtg_blog_newsarticle' in app.request.get('_route') %} active{% endif %}">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ 'news'|trans({}, 'menu') }} <span class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu">
+            {% for category in categories %}
+            <li><a href="{{ path('rtg_blog_newsarticle_indexbycategory', {'slug': category.slug}) }}" title="{{ category.title }}">{{ category.title }}</a></li>
+            {% endfor %}
+            <li class="divider"></li>
+            <li><a href="{{ path('rtg_blog_newsarticle_index') }}" title="{{ 'all_f'|trans({}, 'menu') }}">{{ 'all_f'|trans({}, 'menu') }}</a></li>
+          </ul>
+    </li>
+    {% endif %}
+    <li class="pull-left{% if 'rtg_blog_competitionarticle' in app.request.get('_route') %} active{% endif %}">
+        <a href="{{ path('rtg_blog_competitionarticle_index') }}" title="{{ 'competitions'|trans({}, 'menu') }}">{{ 'competitions'|trans({}, 'menu') }}</a>
+    </li>
+    <li class="pull-left{% if 'rtg_app_page_aboutus' in app.request.get('_route') %} active{% endif %}">
+        <a href="{{ path('rtg_app_page_aboutus') }}" title="{{ 'about_us'|trans({}, 'menu') }}">{{ 'about_us'|trans({}, 'menu') }}</a>
+    </li>
+    <li class="pull-left{% if 'rtg_app_page_teamspeak' in app.request.get('_route') %} active{% endif %}">
+        <a href="{{ path('rtg_app_page_teamspeak') }}" title="{{ 'teamspeak'|trans({}, 'menu') }}">{{ 'teamspeak'|trans({}, 'menu') }}</a>
+    </li>
+    <li class="pull-left{% if 'rtg_app_page_partners' in app.request.get('_route') %} active{% endif %}">
+        <a href="{{ path('rtg_app_page_partners') }}" title="{{ 'partners'|trans({}, 'menu') }}">{{ 'partners'|trans({}, 'menu') }}</a>
+    </li>
+    <li class="pull-left">
+        <a target="_blank" href="http://forum.restartthegame.com" title="Forum - Restart the Game">Forum</a>
+    </li>
+    <li class="pull-left{% if 'rtg_app_page_contact' in app.request.get('_route') %} active{% endif %}">
+        <a href="{{ path('rtg_app_page_contact') }}" title="{{ 'contact'|trans({}, 'menu') }}">{{ 'contact'|trans({}, 'menu') }}</a>
+    </li>
+    <li class="pull-right">
+        <a target="_blank" href="http://steamcommunity.com/groups/RestartTheGame" title="Steam - Restart the Game"><i class="icon-steam icon32"></i></a>
+    </li>
+    <li class="pull-right">
+        <a target="_blank" href="https://twitter.com/RestartTheGame" title="Twitter - Restart the Game"><i class="icon-twitter icon32"></i></a>
+    </li>
+    <li class="pull-right">
+        <a target="_blank" href="https://www.facebook.com/RestartTheGameCommunity" title="Facebook - Restart the Game"><i class="icon-facebook icon32"></i></a>
+    </li>
+</ul>
