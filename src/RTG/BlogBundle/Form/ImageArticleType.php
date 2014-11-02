@@ -3,7 +3,7 @@
 namespace RTG\BlogBundle\Form;
 
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use RTG\SiteBundle\Form\ImageType;
+use RTG\AppBundle\Form\ImageType;
 
 class ImageArticleType extends ImageType
 {

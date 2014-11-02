@@ -9,7 +9,7 @@
         {% if comment.user is not null and comment.user.avatar is not null %}
                 <img src="{{ comment.user.avatar.webPath|apply_filter('tb-48x48') }}" alt="{{ comment.user }}"/>
         {% else %}
-                <img src="{{ 'bundles/rtgsite/img/content/staff/anonyme.jpg'|apply_filter('tb-48x48') }}" alt="{{ comment.user|default('Compte supprimé') }}" />
+                <img src="{{ 'bundles/rtgapp/img/content/staff/anonyme.jpg'|apply_filter('tb-48x48') }}" alt="{{ comment.user|default('Compte supprimé') }}" />
         {% endif %}
         </div>
         <div class="media-body">

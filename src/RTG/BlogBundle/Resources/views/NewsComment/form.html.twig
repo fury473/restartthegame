@@ -5,7 +5,7 @@
     {% if user is not null and user.avatar is not null %}
         <img src="{{ user.avatar.webPath|apply_filter('tb-48x48') }}" alt="{{ user }}"/>
     {% else %}
-        <img src="{{ 'bundles/rtgsite/img/content/staff/anonyme.jpg'|apply_filter('tb-48x48') }}" alt="{{ user|default('Compte supprimé') }}" />
+        <img src="{{ 'bundles/rtgapp/img/content/staff/anonyme.jpg'|apply_filter('tb-48x48') }}" alt="{{ user|default('Compte supprimé') }}" />
     {% endif %}
     </div>
     
