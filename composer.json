@@ -22,7 +22,7 @@
         "salavert/time-ago-in-words": "1.*",
         "avalanche123/imagine-bundle": "2.1.*",
         "egeloen/ckeditor-bundle": "~2.4",
-        "friendsofsymfony/user-bundle": "2.0.*@dev",
+        "friendsofsymfony/user-bundle": "dev-master#094bea6f318fbb067db3ddf6d26a62af0bf13442",
         "gregwar/captcha-bundle": "1.0.*",
         "oyejorge/less.php": "~1.5"
     },
