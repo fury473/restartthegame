@@ -172,7 +172,7 @@ class UserController extends Controller
             $userManager->deleteUser($entity);
         }
 
-        return $this->redirect($this->generateUrl('rtg_user_superadmin_user'));
+        return $this->redirect($this->generateUrl('rtg_user_superadmin_user_index'));
     }
 
     /**
