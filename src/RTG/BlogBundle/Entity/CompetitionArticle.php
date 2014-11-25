@@ -3,6 +3,8 @@
 namespace RTG\BlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use RTG\UserBundle\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="RTG\BlogBundle\Repository\CompetitionArticleRepository")
@@ -61,6 +63,13 @@ class CompetitionArticle
      * @ORM\Column(type="datetime")
      */
     protected $updated;
+    
+    /**
+     * @var ArrayCollection
+     * @ORM\ManyToMany(targetEntity="RTG\UserBundle\Entity\User", inversedBy="competitions")
+     * @ORM\JoinTable(name="users_x_competitions")
+     **/
+    protected $users;
 
     const EventScheduled = 'EventScheduled';
     const EventRescheduled = 'EventRescheduled';
@@ -80,6 +89,7 @@ class CompetitionArticle
         $this->date = new \DateTime();
         $this->status = self::EventScheduled;
         $this->updated = new \DateTime();
+        $this->users = new ArrayCollection();
     }
 
     public function __toString()
@@ -334,6 +344,45 @@ class CompetitionArticle
     public function getUpdated()
     {
         return $this->updated;
+    }
+    
+    /**
+     * Get users
+     * @return ArrayCollection
+     */
+    public function getUsers()
+    {
+        return $this->users;
+    }
+    
+    public function hasUser(User $user)
+    {
+        return $this->users->contains($user);
+    }
+    
+    /**
+     * Add user
+     *
+     * @param RTG\UserBundle\Entity\User $user
+     * @return CompetitionArticle
+     */
+    public function addUser(User $user)
+    {
+        $user->addCompetition($this);
+        $this->users[] = $user;
+    
+        return $this;
+    }
+
+    /**
+     * Remove user
+     *
+     * @param RTG\UserBundle\Entity\User $user
+     */
+    public function removeUser(User $user)
+    {
+        $this->users->removeElement($user);
+        $user->removeCompetition($this);
     }
 
 }

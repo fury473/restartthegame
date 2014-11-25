@@ -25,7 +25,7 @@
                     <a href="{{ path('fos_user_security_logout') }}" title="{{ 'logout'|trans({}, 'menu') }}"><span class="glyphicon glyphicon-log-out"></span> {{ 'logout'|trans({}, 'menu') }}</a>
                 </li>                        
             {% else %}
-                <a href="{{ path('fos_user_registration_register') }}" class="navbar-link" title=""><span class="glyphicon glyphicon-ok"></span> {{ 'register'|trans({}, 'menu') }}</a>
+                <a href="{{ path('fos_user_registration_register') }}" class="navbar-link" title=""><span class="glyphicon glyphicon-ok"></span> {{ 'register'|trans({}, 'menu') }}</a>&nbsp;&nbsp;
                 <a href="{{ path('fos_user_security_login') }}" class="btn btn-primary navbar-btn" title="{{ 'login'|trans({}, 'menu') }}"><span class="glyphicon glyphicon-log-in"></span> {{ 'login'|trans({}, 'menu') }}</a>
             {% endif %}
             </ul>

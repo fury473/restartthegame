@@ -4,7 +4,7 @@
 
 {% block content %}
     <article itemscope itemtype="http://schema.org/Event">
-        <header>
+        <header class="row-fluid">
             <div class="pull-right">Annoncée le <time datetime="{{ article.created|date('c') }}">{{ article.created|localizeddate('full', 'none')|capitalize }}</time></div>
             <h1 itemprop="name">{{ article.title }}</h1>
             {% if article.image is not null %}
@@ -16,19 +16,75 @@
                 <link itemprop="eventStatus" href="http://schema.org/{{ article.status }}"/>
                 {% if article.status == 'EventScheduled' %}
                     <strong>Compétition plannifiée le <time itemprop="startDate" datetime="{{ article.date|date('c') }}">{{ article.date|localizeddate('full', 'none')|capitalize }}</time>.</strong>
-                {% elseif article.status == 'EventRescheduled' %}
+                        {% elseif article.status == 'EventRescheduled' %}
                     <strong>Compétition replannifiée le <time itemprop="startDate" datetime="{{ article.date|date('c') }}">{{ article.date|localizeddate('full', 'none')|capitalize }}</time>.</strong>
-                {% elseif article.status == 'EventPostponed' %}
+                        {% elseif article.status == 'EventPostponed' %}
                     <strong>Compétition repoussée.</strong><br/>
                     <small>Initialement prévu le <time itemprop="previousStartDate" datetime="{{ article.date|date('c') }}">{{ article.date|localizeddate('full', 'none')|capitalize }}</time>.</small>
-                {% elseif article.status == 'EventCancelled' %}
+                        {% elseif article.status == 'EventCancelled' %}
                     <strong>Compétition annulée.</strong><br/>
                     <small>Initialement prévu le <time itemprop="previousStartDate" datetime="{{ article.date|date('c') }}">{{ article.date|localizeddate('full', 'none')|capitalize }}</time>.</small>
-                {% endif %}
-            {% endif %}
+                        {% endif %}
+                    {% endif %}
         </header>
-        <div>
-            {{ article.message|raw }}
+        <div class="row-fluid">
+            <div class="col-md-10">
+                {{ article.message|raw }}
+            </div>
+
+            <div class="col-md-2">
+                <div class="row">
+                    {% if app.user %}
+                        <button id="suscribe_to_event" data-url="{{ path('rtg_blog_competitionarticle_ajaxtoggleregistration', {'id': article.id}) }}" data-username="{{app.user.username}}" class="btn btn-{% if app.user in article.users %}danger{% else %}success{% endif %} navbar-btn" title="Je m'inscris"><span class="glyphicon glyphicon-{% if app.user in article.users %}ban-circle{% else %}ok-circle{% endif %}"></span>&nbsp;<span class="btn-content">{% if app.user in article.users %}Je me désinscris{% else %}Je m'inscris{% endif %}</span></button>
+                    {% else %}
+                        <a href="{{ path('fos_user_security_login') }}" class="btn btn-primary navbar-btn" title="{{ 'login'|trans({}, 'menu') }}"><span class="glyphicon glyphicon-log-in"></span> {{ 'login'|trans({}, 'menu') }}</a>
+                    {% endif %}
+                </div>
+                <div class="row">
+                    <label {% if article.users is empty %}class="hidden"{% endif %}>Liste des participants: </label>
+                    <ul class="registred_users">
+                        {% for user in article.users %}
+                            <li id="user_{{user.username}}">{{user.username}}</li>
+                            {% endfor %}
+                    </ul>
+                </div>
+            </div>
         </div>
     </article>
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(function() {
+            $("#suscribe_to_event").click(function() {
+                var username = $(this).data('username');
+                var btn = $(this);
+                btn.attr('disabled', true);
+                $.ajax({
+                    url: $(this).data('url'),
+                    method: 'POST',
+                    dataType: 'json'
+                }).done(function(data) {
+                    if (data.registered) {
+                        $(".registred_users").append('<li id="user_' + username + '">' + username + '</li>');
+                        $(".registred_users").siblings('label').removeClass('hidden');
+                        btn.removeClass('btn-success').addClass('btn-danger');
+                        btn.find('.glyphicon').removeClass('glyphicon-ok-circle').addClass('glyphicon-ban-circle');
+                        btn.find('.btn-content').html('Je me désinscris');
+                    } else {
+                        $(".registred_users #user_" + username).remove();
+                        if($(".registred_users li").length <= 0) {
+                            $(".registred_users").siblings('label').addClass('hidden');
+                        }
+                        btn.removeClass('btn-danger').addClass('btn-success');
+                        btn.find('.glyphicon').removeClass('glyphicon-ban-circle').addClass('glyphicon-ok-circle');
+                        btn.find('.btn-content').html('Je m\'inscris');
+                    }
+                }).always(function() {
+                    btn.attr('disabled', false);
+                });
+            });
+        });
+    </script>
 {% endblock %}

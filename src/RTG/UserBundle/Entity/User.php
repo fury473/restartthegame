@@ -2,8 +2,11 @@
 
 namespace RTG\UserBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
+use RTG\BlogBundle\Entity\NewsArticle;
+use RTG\BlogBundle\Entity\CompetitionArticle;
 
 /**
  * User
@@ -50,6 +53,11 @@ class User extends BaseUser
     protected $comments;
     
     /**
+     * @ORM\ManyToMany(targetEntity="RTG\BlogBundle\Entity\CompetitionArticle", mappedBy="users")
+     **/
+    protected $competitions;
+    
+    /**
      * @ORM\Column(type="boolean")
      * @ORM\JoinColumn(name="newsletter")
      */
@@ -59,6 +67,8 @@ class User extends BaseUser
     {
         parent::__construct();
         $this->newsletter = false;
+        $this->comments = new ArrayCollection();
+        $this->competitions = new ArrayCollection();
     }
 
     /**
@@ -140,10 +150,10 @@ class User extends BaseUser
     /**
      * Add articles
      *
-     * @param \RTG\BlogBundle\Entity\NewsArticle $articles
+     * @param RTG\BlogBundle\Entity\NewsArticle $articles
      * @return User
      */
-    public function addArticle(\RTG\BlogBundle\Entity\NewsArticle $articles)
+    public function addArticle(NewsArticle $articles)
     {
         $this->articles[] = $articles;
     
@@ -153,11 +163,43 @@ class User extends BaseUser
     /**
      * Remove articles
      *
-     * @param \RTG\BlogBundle\Entity\NewsArticle $articles
+     * @param RTG\BlogBundle\Entity\NewsArticle $articles
      */
-    public function removeArticle(\RTG\BlogBundle\Entity\NewsArticle $articles)
+    public function removeArticle(NewsArticle $articles)
     {
         $this->articles->removeElement($articles);
+    }
+    
+    /**
+     * Get competitions
+     * @return ArrayCollection
+     */
+    public function getCompetitions()
+    {
+        return $this->competitions;
+    }
+    
+    /**
+     * Add competition
+     *
+     * @param RTG\BlogBundle\Entity\CompetitionArticle $competition
+     * @return User
+     */
+    public function addCompetition(CompetitionArticle $competition)
+    {
+        $this->competitions[] = $competition;
+    
+        return $this;
+    }
+
+    /**
+     * Remove competition
+     *
+     * @param RTG\BlogBundle\Entity\CompetitionArticle $competition
+     */
+    public function removeCompetition(CompetitionArticle $competition)
+    {
+        $this->competitions->removeElement($competition);
     }
 
     /**
