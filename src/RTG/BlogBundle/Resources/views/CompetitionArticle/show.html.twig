@@ -28,11 +28,11 @@
                     {% endif %}
         </header>
         <div class="row-fluid">
-            <div class="col-md-10">
+            <div class="col-md-12">
                 {{ article.message|raw }}
             </div>
 
-            <div class="col-md-2">
+            {#<div class="col-md-2">
                 <div class="row">
                     {% if app.user %}
                         <button id="suscribe_to_event" data-url="{{ path('rtg_blog_competitionarticle_ajaxtoggleregistration', {'id': article.id}) }}" data-username="{{app.user.username}}" class="btn btn-{% if app.user in article.users %}danger{% else %}success{% endif %} navbar-btn" title="Je m'inscris"><span class="glyphicon glyphicon-{% if app.user in article.users %}ban-circle{% else %}ok-circle{% endif %}"></span>&nbsp;<span class="btn-content">{% if app.user in article.users %}Je me désinscris{% else %}Je m'inscris{% endif %}</span></button>
@@ -48,14 +48,14 @@
                             {% endfor %}
                     </ul>
                 </div>
-            </div>
+            </div>#}
         </div>
     </article>
 {% endblock %}
 
 {% block javascript %}
     {{ parent() }}
-    <script type="text/javascript">
+    {#<script type="text/javascript">
         $(function() {
             $("#suscribe_to_event").click(function() {
                 var username = $(this).data('username');
@@ -86,5 +86,5 @@
                 });
             });
         });
-    </script>
+    </script>#}
 {% endblock %}
