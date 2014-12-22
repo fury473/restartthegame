@@ -8,7 +8,9 @@
     <div>
         <h2>Actualités</h2>
         <a href="{{ path('rtg_blog_admin_newsarticle_index') }}"><button class="btn btn-primary">{{ 'news'|trans({}, 'menu') }}</button></a>
+        {% if is_granted('ROLE_SUPER_ADMIN') %}
         <a href="{{ path('rtg_blog_admin_category_index') }}"><button class="btn btn-primary">{{ 'categories'|trans({}, 'menu') }}</button></a>
+        {% endif %}
     </div>
     <div>
         <h2>Compétitions</h2>

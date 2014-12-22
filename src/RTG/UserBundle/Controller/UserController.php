@@ -45,6 +45,7 @@ class UserController extends Controller {
      */
     public function myProfileAction() {
         $user = $this->get('security.context')->getToken()->getUser();
+        $twitch_username = null;
         return array('user' => $user);
     }
     

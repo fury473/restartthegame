@@ -1,0 +1,16 @@
+<div class="clearfix connect_item {{ service }}">
+    <div class="connect_item_info">
+        <div class="service_icon"></div>
+        <div class="connect-item-desc">
+            <div class="title">{{ title }}</div>
+            <p class="desc">{{ desc }}</p>
+        </div>
+        {% if user.twitchAccessToken is null %}
+            <a href="{{ path('rtg_user_oauth_connect'~service) }}" title="Se connecter" class="service_connect status disconnected"><span>Se connecter</span></a>
+        {% else %}
+            {% set currentPath = path(app.request.attributes.get('_route'),
+                           app.request.attributes.get('_route_params')) %}
+            <a href="{{ path('rtg_user_oauth_disconnect'~service, {'path': currentPath}) }}" title="Déconnecter" class="service_disconnect status connected"><span>Se déconnecter</span></a>
+        {% endif %}
+    </div>
+</div>

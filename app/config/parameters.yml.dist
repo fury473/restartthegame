@@ -19,4 +19,7 @@ parameters:
     locale:            fr
     secret:            'rtg,7hf'
 
+    twitch_client_id:     client_id
+    twitch_client_secret: client_secret
+
 #    assetic.cache.class: Assetic\Cache\ArrayCache

@@ -62,6 +62,21 @@ class User extends BaseUser
      * @ORM\JoinColumn(name="newsletter")
      */
     protected $newsletter;
+    
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $twitchAccessToken;
+    
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $twitchRefreshToken;
+    
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $twitchScopes;
   
     public function __construct()
     {
@@ -288,6 +303,51 @@ class User extends BaseUser
         $this->newsletter = $newsletter;
         return $this;
     }
+    
+    public function getTwitchAccessToken()
+    {
+        return $this->twitchAccessToken;
+    }
+
+    public function getTwitchRefreshToken()
+    {
+        return $this->twitchRefreshToken;
+    }
+
+    public function getTwitchScopes()
+    {
+        return unserialize($this->twitchScopes);
+    }
+    
+    public function resetTwitchAccess()
+    {
+        $this->setTwitchAccessToken(null);
+        $this->setTwitchRefreshToken(null);
+        $this->setTwitchScopes(null);
+    }
+
+    public function setTwitchAccessToken($twitchAccessToken)
+    {
+        $this->twitchAccessToken = $twitchAccessToken;
+        return $this;
+    }
+
+    public function setTwitchRefreshToken($twitchRefreshToken)
+    {
+        $this->twitchRefreshToken = $twitchRefreshToken;
+        return $this;
+    }
+
+    public function setTwitchScopes(array $twitchScopes = null)
+    {
+        if($twitchScopes != null) {
+            $this->twitchScopes = serialize($twitchScopes);
+        } else {
+            $this->twitchScopes = null;
+        }
+        return $this;
+    }
+
 
 
 }
