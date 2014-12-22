@@ -144,15 +144,6 @@ class PageController extends Controller
     }
     
     /**
-     * @Method({"GET"})
-     * @Template()
-     */
-    public function candidatureRtgAction()
-    {
-        return array();
-    }
-    
-    /**
      * @Route("/legal-notices")
      * @Method({"GET"})
      * @Template()
