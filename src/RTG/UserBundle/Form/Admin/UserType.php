@@ -2,47 +2,29 @@
 
 namespace RTG\UserBundle\Form\Admin;
 
+use RTG\UserBundle\Entity\Avatar;
 use RTG\UserBundle\Form\AvatarType;
+use RTG\UserBundle\Form\ProfileFormType as BaseUserType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class UserType extends AbstractType
+class UserType extends BaseUserType
 {
-        /**
+
+    /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $entity = $builder->getData();
+        parent::buildForm($builder, $options);
         $builder
-            ->add('newsletter', 'checkbox', array('label' => 'user.field.newsletter', 'required' => false))
-            ->add('birthday', 'date', array(
-                'label' => 'user.field.birthday',
-                'widget' => 'single_text',
-                'attr' => array('class' => 'datepicker'),
-                'required' => false,
-                'attr' => array('class' => 'form-control')
-            ))
-            ->add('city', 'text', array('label' => 'user.field.city', 'required' => false, 'attr' => array('class' => 'form-control')))
-            ->add('enabled', 'checkbox', array('label' => 'user.field.enabled', 'required' => false))
-            ->add('locked', 'checkbox', array('label' => 'user.field.locked', 'required' => false))
+                ->add('enabled', 'checkbox', array('label' => 'user.field.enabled', 'required' => false))
+                ->add('locked', 'checkbox', array('label' => 'user.field.locked', 'required' => false))
         ;
-        if($entity->getAvatar() == null) {
-            $builder->add('avatar', new AvatarType(), array('label' => 'user.field.avatar'));
-        }
-    }
-    
-    /**
-     * @param OptionsResolverInterface $resolver
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $resolver->setDefaults(array(
-            'data_class' => 'RTG\UserBundle\Entity\User',
-            'translation_domain' => 'entity'
-        ));
     }
 
     /**
@@ -50,6 +32,7 @@ class UserType extends AbstractType
      */
     public function getName()
     {
-        return 'rtg_userbundle_user';
+        return 'rtg_userbundle_admin_useredit';
     }
+
 }

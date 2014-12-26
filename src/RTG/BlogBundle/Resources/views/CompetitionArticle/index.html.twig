@@ -3,7 +3,7 @@
 {% block title %}{% trans %}Competitions{% endtrans %} - RTG{% endblock %}
 
 {% block content %}
-    {% trans %}Competitions{% endtrans %}
+    <h1>{% trans %}Competitions{% endtrans %}</h1>
     {% for article in articles %}
         <article itemscope itemtype="http://schema.org/Event" class="article">
             <header>
@@ -25,7 +25,6 @@
                     <strong>Compétition annulée.</strong><br/>
                     <small>Initialement prévu le <time itemprop="previousStartDate" datetime="{{ article.date|date('c') }}">{{ article.date|localizeddate('full', 'none')|capitalize }}</time>.</small>
                 {% endif %}
-                Planifiée le <time datetime="{{ article.date|date('c') }}">{{ article.date|localizeddate('full', 'none')|capitalize }}</time>
             {% endif %}
         </article>
         {% if not loop.last %}<hr/>{% endif %}

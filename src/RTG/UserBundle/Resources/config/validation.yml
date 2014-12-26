@@ -1,0 +1,21 @@
+RTG\UserBundle\Entity\User:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: username
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: email
+    properties:
+        username:
+            - NotBlank: ~
+            - Length:
+                min: 2
+                max: 20
+        email:
+            - NotBlank: ~
+            - Email: ~
+
+RTG\UserBundle\Entity\Avatar:
+    properties:
+        file:
+            - Image:
+                maxSize: 300k
+                minWidth: 128
+                minHeight: 128

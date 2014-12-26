@@ -8,9 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use RTG\UserBundle\Entity\User;
-use RTG\UserBundle\Form\UserType;
 use RTG\UserBundle\Form\Admin;
-use FOS\UserBundle\Doctrine\UserManager;
 
 /**
  * User controller.
@@ -36,69 +34,83 @@ class UserController extends Controller
             'entities' => $entities,
         );
     }
-    
-    /**
-     * Finds and displays a User entity.
-     *
-     * @Route("/{id}")
-     * @Method("GET")
-     * @Template()
-     */
-    public function showAction($id)
-    {
-        $userManager = $this->get('fos_user.user_manager');
-
-        $entity = $userManager->findUserBy(array('id' => $id));
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find User entity.');
-        }
-
-        return array(
-            'entity'      => $entity
-        );
-    }
 
     /**
      * Displays a form to edit an existing User entity.
      *
-     * @Route("/{id}/edit")
+     * @Route("/profile/{id}")
      * @Method("GET")
      * @Template()
      */
     public function editAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-
         $user = $em->getRepository('RTGUserBundle:User')->findOneBy(array('id' => $id));
-
         if (!$user) {
             throw $this->createNotFoundException('Unable to find User entity.');
         }
 
         $editForm = $this->createEditForm($user);
-        
-        $parameters = array(
-            'entity'      => $user,
-            'form'   => $editForm->createView()
-        );
-        
-        if($user->getAvatar() != null) {
-            $deleteImgForm = $this->createDeleteImgForm($user->getId(), $user->getAvatar()->getId());
-            $parameters['delete_img_form'] = $deleteImgForm->createView();
-        }
 
-        return $parameters;
+        return array(
+            'user' => $user,
+            'form' => $editForm->createView()
+        );
     }
 
     /**
-    * Creates a form to edit a User entity.
-    *
-    * @param User $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
-    private function createEditForm(User $entity)
+     * Edits an existing User entity.
+     *
+     * @Route("/profile/{id}")
+     * @Method("PUT")
+     * @Template("RTGUserBundle:Admin\User:edit.html.twig")
+     */
+    public function updateAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $user = $em->getRepository('RTGUserBundle:User')->find($id);
+        $original_user = clone $user;
+        if (!$user) {
+            throw $this->createNotFoundException('Unable to find User entity.');
+        }
+        $avatar = null;
+        if ($user->getAvatar()) {
+            $avatar = $em->getRepository('RTGUserBundle:Avatar')->find($user->getAvatar()->getId());
+        }
+
+        $editForm = $this->createEditForm($user);
+        $profile_handled = $request->get($editForm->getName());
+        $delete_avatar = false;
+        if (isset($profile_handled['delete_avatar'])) {
+            $delete_avatar = true;
+        }
+        $editForm->handleRequest($request);
+
+        if ($editForm->isValid()) {
+            if ($delete_avatar) {
+                $em->remove($avatar);
+            }
+            $em->persist($user);
+            $em->flush();
+            
+            return $this->redirectToEdit($id);
+        }
+
+        return array(
+            'user' => $original_user,
+            'form' => $editForm->createView()
+        );
+    }
+
+    /**
+     * Creates a form to edit a User entity.
+     *
+     * @param User $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    protected function createEditForm(User $entity)
     {
         $form = $this->createForm(new Admin\UserType(), $entity, array(
             'action' => $this->generateUrl('rtg_user_admin_user_update', array('id' => $entity->getId())),
@@ -109,83 +121,10 @@ class UserController extends Controller
 
         return $form;
     }
-    /**
-     * Edits an existing User entity.
-     *
-     * @Route("/{id}")
-     * @Method("PUT")
-     * @Template("RTGUserBundle:Admin\User:edit.html.twig")
-     */
-    public function updateAction(Request $request, $id)
-    {
-        $userManager = $this->get('fos_user.user_manager');
-
-        $entity = $userManager->findUserBy(array('id' => $id));
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find User entity.');
-        }
-
-        $editForm = $this->createEditForm($entity);
-        $editForm->handleRequest($request);
-        
-        $avatar = $entity->getAvatar();
-        if($avatar->getFile() == null) {
-            $entity->setAvatar(null);
-        }
-
-        if ($editForm->isValid()) {
-            $userManager->updateUser($entity);
-
-            return $this->redirect($this->generateUrl('rtg_user_admin_user_edit', array('id' => $id)));
-        }
-
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-        );
-    }
     
-    /**
-     * Deletes a ImageArticle entity.
-     *
-     * @Route("/{user_id}/image/{id}")
-     * @Method("DELETE")
-     */
-    public function deleteImgAction(Request $request, $user_id, $id)
+    protected function redirectToEdit($id)
     {
-        $form = $this->createDeleteImgForm($user_id, $id);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $image = $em->getRepository('RTGUserBundle:Avatar')->find($id);
-
-            if (!$image) {
-                throw $this->createNotFoundException('Unable to find Avatar entity.');
-            }
-
-            $em->remove($image);
-            $em->flush();
-        }
-
-        return $this->redirect($this->generateUrl('rtg_user_admin_user_edit', array('id' => $user_id)));
+        return $this->redirect($this->generateUrl('rtg_user_admin_user_edit', array('id' => $id)));
     }
-    
-    /**
-     * Creates a form to delete image by id.
-     *
-     * @param mixed $id The entity id
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteImgForm($user_id, $id)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('rtg_user_admin_user_deleteimg', array('user_id' => $user_id, 'id' => $id)))
-            ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => $this->get('translator')->trans('image.delete', array(), 'form'), 'attr' => array('class' => 'btn btn-warning')))
-            ->getForm()
-        ;
-    }
+
 }

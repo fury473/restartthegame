@@ -8,14 +8,14 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class ImageType extends AbstractType
 {
-        /**
+    /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('file', 'file', array('label' => false, 'attr' => array('class' => 'form-control'), 'required' => false))
+            ->add('file', 'file', array('label' => false, 'required' => false, 'data_class' => null))
         ;
     }
     

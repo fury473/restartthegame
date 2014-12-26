@@ -292,6 +292,17 @@ class User extends BaseUser
     {
         return $this->newsletter;
     }
+    
+    public function getRank()
+    {
+        if($this->hasRole('ROLE_SUPER_ADMIN')) {
+            return 'Super Admin';
+        } elseif($this->hasRole('ROLE_STAFF')) {
+            return 'Staff RTG';
+        } else {
+            return 'Membre';
+        }
+    }
 
     /**
      * Set newsletter

@@ -18,7 +18,7 @@ class CompetitionArticleType extends AbstractType
     {
         $entity = $options['data'];
         if($entity->getId() == null) {
-            $builder->add('newsletter', 'checkbox', array('label' => 'general.newsletter', 'required' => false, 'mapped' => false));
+            $builder->add('newsletter', 'checkbox', array('required' => false, 'mapped' => false));
         }
         $builder
             ->add('title', 'text', array('label' => 'general.title', 'attr' => array('class' => 'form-control')))

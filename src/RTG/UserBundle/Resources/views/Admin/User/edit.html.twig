@@ -1,67 +1,95 @@
 {% extends 'RTGUserBundle::layout.html.twig' %}
+{% trans_default_domain 'entity' %}
 
-{% block title %}{{ 'user.title.edit'|trans({'username': entity.username}, 'entity') }}{% endblock %}
+{% block title %}{{ 'user.title.edit'|trans({'username': user.username}) }}{% endblock %}
 
 {% block content -%}
-    <h1>{{ 'user.title.edit'|trans({'username': entity.username}, 'entity') }}</h1>
+    <h1>{{ 'user.title.edit'|trans({'username': user.username}) }}</h1>
 
     {{ form_start(form, { 'attr': { 'class': 'form' } }) }}
     
     {{ form_errors(form) }}
 
-    <div class="form-group">
-        <label>{{ 'user.field.username'|trans({}, 'entity') }}</label>
-        <div>{{ entity.username }}</div>
-    </div>
-
-    <div class="form-group">
-        <label>{{ 'user.field.email'|trans({}, 'entity') }}</label>
-        <div>{{ entity.email }}</div>
-    </div>
-
-    <div class="checkbox">
-    {{ form_row(form.newsletter, { 'attr': { 'placeholder': 'user.field.newsletter'|trans } }) }}
-    </div>
-
-    <div class="form-group">
-    {{ form_row(form.birthday) }}
-    </div>
-
-    <div class="form-group">
-    {{ form_row(form.city, { 'attr': { 'placeholder': 'user.field.city'|trans } }) }}
-    </div>
-    
-    <div class="form-group">
-    {{ form_row(form.enabled, { 'attr': { 'placeholder': 'user.field.enabled'|trans } }) }}
-    </div>
-    
-    <div class="form-group">
-    {{ form_row(form.locked, { 'attr': { 'placeholder': 'user.field.locked'|trans } }) }}
-    </div>
-    
-    {% if delete_img_form is not defined %}
-    <div class="form-group">
-    {{ form_row(form.avatar) }}
-    </div>
-    {% else %}
-    <div class="form-group">
-        <label>Image</label>
-        <div>
-            <img src="{{ entity.avatar.webPath|apply_filter('tb-128x128') }}" alt="{{ entity.username }}"/>
+    <fieldset class="row-fluid form-group">
+        <div class="col-md-2">{{ form_label(form.username) }}</div>
+        <div class="col-md-6">
+            {{ form_widget(form.username, { 'attr': { 'placeholder': 'user.field.username'|trans } }) }}
+            <small>Le nom d'utilisateur doit contenir entre 2 et 20 caractères.</small>
+            {{ form_errors(form.username) }}
         </div>
-    </div>
-    {% endif %}
+    </fieldset>
 
+    <fieldset class="row-fluid form-group">
+        <div class="col-md-2">{{ form_label(form.email) }}</div>
+        <div class="col-md-6">
+            {{ form_widget(form.email, { 'attr': { 'placeholder': 'user.field.email'|trans } }) }}
+            {{ form_errors(form.email) }}
+        </div>
+    </fieldset>
+
+    <fieldset class="row-fluid form-group">
+        <div class="col-md-2"><label>{{ 'user.field.newsletter'|trans }}</label></div>
+        <div class="col-md-6"><div class="checkbox"><label>{{ form_widget(form.newsletter) }} {{ 'user.field.newsletter_suscribe'|trans }}</label></div></div>
+    </fieldset>
+
+    <fieldset class="row-fluid form-group">
+        <div class="col-md-2">{{ form_label(form.birthday) }}</div>
+        <div class="col-md-6">
+            <div class="col-md-4">
+                {{ form_widget(form.birthday.children.day, { 'attr': { 'class': 'form-control' } }) }}
+            </div>
+            <div class="col-md-4">
+                {{ form_widget(form.birthday.children.month, { 'attr': { 'class': 'form-control' } }) }}
+            </div>
+            <div class="col-md-4">
+                {{ form_widget(form.birthday.children.year, { 'attr': { 'class': 'form-control' } }) }}
+            </div>
+            {{ form_errors(form.birthday) }}
+        </div>
+    </fieldset>
+
+    <fieldset class="row-fluid form-group">
+        <div class="col-md-2">{{ form_label(form.city) }}</div>
+        <div class="col-md-6">
+            {{ form_widget(form.city, { 'attr': { 'placeholder': 'user.field.city'|trans } }) }}
+            {{ form_errors(form.city) }}
+        </div>
+    </fieldset>
+
+    <fieldset class="row-fluid form-group">
+        <div class="col-md-2"><label>{{ 'user.field.avatar'|trans }}</label></div>
+        <div class="col-md-6 uploader">
+            {% if user.avatar is not null %}
+                <div class="picture">
+                    <img src="{{ user.avatar.webPath|apply_filter('tb-128x128') }}" alt="{{ user.username }}"/>
+                    <div class="checkbox-inline"><label>{{ form_widget(form.delete_avatar) }} {{ 'user.field.delete_avatar'|trans }}</label></div>
+                </div>
+            {% endif %}
+            {% if form.avatar is defined %}
+                <div class="file">
+                    {{ form_widget(form.avatar.file) }}
+                    <small>GIF, JPG ou PNG de 300 kB max.</small>
+                </div>
+                {{ form_errors(form.avatar.file) }}
+            {% endif %}
+        </div>
+    </fieldset>
+
+    <fieldset class="row-fluid form-group">
+        <div class="col-md-2"><label>{{ 'user.field.enabled'|trans }}</label></div>
+        <div class="col-md-6"><div class="checkbox"><label>{{ form_widget(form.enabled) }} A validé son adresse électronique</label></div></div>
+    </fieldset>
+    
+    <fieldset class="row-fluid form-group">
+        <div class="col-md-2"><label>{{ 'user.field.locked'|trans }}</label></div>
+        <div class="col-md-6"><div class="checkbox"><label>{{ form_widget(form.locked) }} {{ 'user.field.locked'|trans }}</label></div></div>
+    </fieldset>
+    
     <div class="form-group pull-right">
-    {{ form_row(form.submit) }}
+        {{ form_row(form.submit) }}
     </div>
 
     {{ form_end(form) }}
-
-    {% if delete_img_form is defined %}
-        {{ form(delete_img_form) }}
-        <div class="clearfix"></div>
-    {% endif %}
     
     <a class="btn btn-primary" href="{{ path('rtg_user_admin_user_index') }}">{{ 'user.button.back_to_list'|trans({}, 'entity') }}</a>
 {% endblock %}

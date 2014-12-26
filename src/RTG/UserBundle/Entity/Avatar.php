@@ -11,25 +11,12 @@ use RTG\AppBundle\Entity\Image;
  */
 class Avatar extends Image
 {
+
     public function __toString()
     {
         return (string) $this->id;
     }
-    
-    protected function getUploadDir()
-    {
-        return 'uploads/user/img/article';
-    }
-    
-    /**
-     * @var integer $id
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
-    
+
     /**
      * Get id
      *
@@ -39,4 +26,40 @@ class Avatar extends Image
     {
         return $this->id;
     }
+
+    public function storeFilenameForRemove()
+    {
+        $files = array();
+        $files[] = $this->getAbsolutePath();
+        $files[] = $this->getAbsoluteThumbPath(48, 48);
+        $files[] = $this->getAbsoluteThumbPath(128, 128);
+        $this->filenameForRemove = array();
+        foreach ($files as $file) {
+            if (file_exists($file)) {
+                $this->filenameForRemove[] = $file;
+            }
+        }
+    }
+
+    public function removeUpload()
+    {
+        foreach ($this->filenameForRemove as $file) {
+            unlink($file);
+        }
+    }
+
+    protected function getUploadDir()
+    {
+        return 'uploads/user/img/avatar';
+    }
+
+    /**
+     * @var integer $id
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
 }

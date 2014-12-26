@@ -16,8 +16,24 @@ body {
     margin: 20px auto;
 }
 
-.container img {
-    max-width: 100%;
+.container {
+    position: relative;
+    img {
+        max-width: 100%;
+    }
+
+    fieldset {
+        padding: 25px 0;
+    }
+
+    fieldset:not(.last) {
+        border-bottom: 1px solid #202020;
+    }
+}
+
+.absolute-pull-right {
+    position: absolute;
+    right: 15px;
 }
 
 .vcard {
@@ -74,14 +90,19 @@ h6 {
     line-height: 18px;
 }
 
+.alert-danger {
+    background: none;
+    border: none;
+}
+
 ul {
-    font-family: 'CharisSILItalic';
-    line-height: 20px;
-    font-size: 14px;
+    list-style: none;
+    padding: 0;
     
-    li {
-        list-style-image: url(../img/bullet.png);
-        padding-left: 15px;
+    li:before {
+        font-family: 'CharisSILItalic';
+        content: '\203A \020';
+        margin: 0 1em;
     }
 }
 
@@ -105,11 +126,43 @@ ol {
     }
 }
 
-.radio input[type="radio"], .radio-inline input[type="radio"],
-.checkbox input[type="checkbox"], .checkbox-inline input[type="checkbox"] {
-    left: 0;
-    margin-left: 0;
-    vertical-align: middle;
+.radio, .checkbox {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.radio label, .radio-inline label,
+.checkbox label, .checkbox-inline label {
+    font-weight: normal;
+    cursor: pointer;
+    margin-bottom: 0;
+}
+
+input[type="radio"], input[type="checkbox"] {
+    margin: 2px 0 0;
+}
+
+input, select, textarea {
+    margin-bottom: 10px;
+}
+
+select {
+    margin-right: 10px;
+}
+
+.uploader {
+    .picture {
+        margin-top: 10px;
+        margin-bottom: 20px;
+
+        img {
+            margin-right: 20px;
+        }
+    }
+
+    .file {
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
 }
 
 #main-menu.bloc {
@@ -127,8 +180,8 @@ ol {
         background: inherit;
         color: #ffffff;
     }
-    li {
-        list-style-image: none;
+    li:before {
+        content: none;
     }
     li.active a {
         color: #ffffff;
@@ -160,8 +213,11 @@ ol {
 }
 
 .navbar a {
-    list-style-type: none;
     font-family: Museo500;
+}
+
+.navbar li:before {
+    content: none;
 }
 
 .banner .title {
@@ -199,13 +255,12 @@ ul.latest-posts {
     padding-left: 2px;
         
     li {
-        list-style-image: none;
-        list-style-type: none;
         padding: 0;
         background: none;
         font-family: 'PTSansRegular';
         font-style: normal;
         font-size: 14px;
+        line-height: 20px;
         border-top: 1px dashed #454545;
 
         a {

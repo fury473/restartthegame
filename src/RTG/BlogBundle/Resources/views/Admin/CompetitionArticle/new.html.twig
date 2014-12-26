@@ -7,8 +7,10 @@
     
     {{ form_errors(form) }}
 
-    <div class="checkbox">
-    {{ form_row(form.newsletter) }}
+    <div class="form-group">
+        <div class="checkbox">
+            <label>{{ form_widget(form.newsletter) }} {{ 'general.newsletter'|trans({}, 'form') }}</label>
+        </div>
     </div>
 
     <div class="form-group">

@@ -28,7 +28,7 @@ abstract class File implements FileInterface
      */
     protected $file;
     
-    private $filenameForRemove;
+    protected $filenameForRemove;
 
     public function getAbsolutePath()
     {
@@ -74,7 +74,7 @@ abstract class File implements FileInterface
 
         $this->file->move($this->getUploadRootDir(), $this->path);
 
-        unset($this->file);
+        $this->file = null;
     }
     
     /**

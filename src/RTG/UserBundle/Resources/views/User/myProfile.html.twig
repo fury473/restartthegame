@@ -5,23 +5,108 @@
 
 {% block content %}
     <h2>{{ 'user.title.my_infos'|trans }}</h2>
-    <div class="clearfix user_infos">
-        {% if user.avatar is not null %}
-            <img class="thumbnail pull-right" src="{{ user.avatar.webPath|apply_filter('tb-128x128') }}" alt="{{ user.username }}"/>
-        {% endif %}
-        <p>{{ 'user.field.username'|trans }}: {{ user.username }}</p>
-        <p>{{ 'user.field.email'|trans }}: {{ user.email }}</p>
-        <p>{{ 'user.field.age'|trans }}: {{ user.age }}</p>
-        <p>{{ 'user.field.city'|trans }}: {{ user.city }}</p>
-        <p>{% if user.newsletter %}{{ 'user.field.newsletter_suscribed'|trans }}{% endif %}</p>
-        {% if user.hasRole('ROLE_STAFF')%}<p>Staff RTG</p>{% endif %}
+    {{ form_start(form, { 'attr': { 'class': 'form' } }) }}
+
+    {{ form_errors(form) }}
+    
+    <fieldset class="row-fluid form-group">
+        <div class="col-md-2">{{ form_label(form.username) }}</div>
+        <div class="col-md-6">
+            {{ form_widget(form.username, { 'attr': { 'placeholder': 'user.field.username'|trans } }) }}
+            <small>Le nom d'utilisateur doit contenir entre 2 et 20 caractères.</small>
+            {{ form_errors(form.username) }}
+        </div>
+    </fieldset>
+
+    <fieldset class="row-fluid form-group">
+        <div class="col-md-2">{{ form_label(form.email) }}</div>
+        <div class="col-md-6">
+            {{ form_widget(form.email, { 'attr': { 'placeholder': 'user.field.email'|trans } }) }}
+            {{ form_errors(form.email) }}
+        </div>
+    </fieldset>
+
+    <fieldset class="row-fluid form-group">
+        <div class="col-md-2"><label>{{ 'user.field.newsletter'|trans }}</label></div>
+        <div class="col-md-6"><div class="checkbox"><label>{{ form_widget(form.newsletter) }} {{ 'user.field.newsletter_suscribe'|trans }}</label></div></div>
+    </fieldset>
+
+    <fieldset class="row-fluid form-group">
+        <div class="col-md-2">{{ form_label(form.birthday) }}</div>
+        <div class="col-md-6">
+            <div class="col-md-4">
+                {{ form_widget(form.birthday.children.day, { 'attr': { 'class': 'form-control' } }) }}
+            </div>
+            <div class="col-md-4">
+                {{ form_widget(form.birthday.children.month, { 'attr': { 'class': 'form-control' } }) }}
+            </div>
+            <div class="col-md-4">
+                {{ form_widget(form.birthday.children.year, { 'attr': { 'class': 'form-control' } }) }}
+            </div>
+            {{ form_errors(form.birthday) }}
+        </div>
+    </fieldset>
+
+    <fieldset class="row-fluid form-group">
+        <div class="col-md-2">{{ form_label(form.city) }}</div>
+        <div class="col-md-6">
+            {{ form_widget(form.city, { 'attr': { 'placeholder': 'user.field.city'|trans } }) }}
+            {{ form_errors(form.city) }}
+        </div>
+    </fieldset>
+
+    <fieldset class="row-fluid form-group">
+        <div class="col-md-2"><label>{{ 'user.field.avatar'|trans }}</label></div>
+        <div class="col-md-6 uploader">
+            {% if user.avatar is not null %}
+                <div class="picture">
+                    <img src="{{ user.avatar.webPath|apply_filter('tb-128x128') }}" alt="{{ user.username }}"/>
+                    <div class="checkbox-inline"><label>{{ form_widget(form.delete_avatar) }} {{ 'user.field.delete_avatar'|trans }}</label></div>
+                </div>
+            {% endif %}
+            {% if form.avatar is defined %}
+                <div class="file">
+                    {{ form_widget(form.avatar.file) }}
+                    <small>GIF, JPG ou PNG de 300 kB max.</small>
+                </div>
+                {{ form_errors(form.avatar.file) }}
+            {% endif %}
+        </div>
+    </fieldset>
+            
+    {#<h2>{{ 'user.title.my_connections'|trans }}</h2>
+    
+    <fieldset class="row-fluid form-group">
+        <div class="connect_items">
+            {% include 'RTGAppBundle:Page:serviceItem.html.twig' with {'service': 'twitch', 'title': 'Twitter', 'desc': 'Associez votre compte Twitch en un clic à votre compte Restart the Game'} %}
+        </div>
+    </fieldset>#}
+
+    <h2>{{ 'user.title.delete'|trans }}</h2>
+
+    <fieldset class="row-fluid form-group">
+        <div class="col-md-2">{{ 'user.button.delete_account'|trans }}</div>
+        <div class="col-md-6">
+            Si vous le souhaitez, vous pouvez désactiver votre compte Restart the Game depuis la page
+            <a href="{{ path('rtg_user_user_delete') }}" id="disable_account">{{ 'user.button.delete_account'|trans }}</a>
+        </div>
+    </fieldset>
+
+    <div class="form-group">
+        {{ form_widget(form.submit) }}
     </div>
 
-    {#<h2>{{ 'user.title.my_connections'|trans }}</h2>
-    <div class="connect_items">
-        {% include 'RTGAppBundle:Page:serviceItem.html.twig' with {'service': 'twitch', 'title': 'Twitter', 'desc': 'Associez votre compte Twitch en un clic à votre compte Restart the Game'} %}
-    </div>#}
+    {{ form_end(form) }}
 
-    <a href="{{ path('rtg_user_user_edit') }}" title="Profil" class="btn btn-primary pull-right">{{ 'user.button.complete_profile'|trans }}</a>
-    <a href="{{ path('rtg_user_user_delete') }}" class="btn btn-danger pull-right">{{ 'user.button.delete_account'|trans }}</a>
 {% endblock content %}
+
+{% block javascript %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(document).ready(function() { 
+            $('.uploader .picture input[type="checkbox"]').change(function() {
+                $('.uploader .file').toggleClass('hidden');
+            });
+        });
+    </script>
+{% endblock %}

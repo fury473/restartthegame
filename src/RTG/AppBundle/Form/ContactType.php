@@ -38,6 +38,7 @@ class ContactType extends AbstractType {
                 ->add('message', 'textarea', array(
                     'attr' => array(
                         'class' => 'form-control',
+                        'cols' => 65,
                         'rows' => 9
                     ),
                     'label' => false

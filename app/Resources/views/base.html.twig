@@ -52,7 +52,7 @@
             <div class="container bloc">
                 <div id="copyright">
                     {% block footer %}
-                    © 2013 Restart the Game - <a href="{{ path('rtg_app_page_legalnotices') }}">{{ 'legal_notices'|trans({}, 'menu') }}</a>
+                    © 2013-{{ "now"|date("Y") }} Restart the Game - <a href="{{ path('rtg_app_page_legalnotices') }}">{{ 'legal_notices'|trans({}, 'menu') }}</a>
                     {% endblock %}
                 </div>
             </div>
