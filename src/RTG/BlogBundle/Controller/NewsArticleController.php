@@ -37,7 +37,7 @@ class NewsArticleController extends Controller
      *
      * @Route("/{slug}/index")
      * @Method("GET")
-     * @Template()
+     * @Template("RTGBlogBundle:NewsArticle:index.html.twig")
      */
     public function indexByCategoryAction($slug)
     {

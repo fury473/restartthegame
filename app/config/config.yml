@@ -102,6 +102,9 @@ fos_user:
 
 avalanche_imagine:
     filters:
+        article-tb:
+            type:    thumbnail
+            options: { size: [240, 90], mode: outbound, quality: 100, format: png }
         tb-128x128:
             type:    thumbnail
             options: { size: [128, 128], mode: inset, quality: 100, format: png }

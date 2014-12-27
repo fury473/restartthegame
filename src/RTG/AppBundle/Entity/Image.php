@@ -11,9 +11,9 @@ use RTG\AppBundle\Model\ImageInterface;
 abstract class Image extends File implements ImageInterface
 {
 
-    public function getAbsoluteThumbPath($width, $height)
+    public function getAbsoluteThumbPath($filter)
     {
-        return null === $this->path ? null : $this->getUploadThumbRootDir($width, $height) . '/' . $this->path;
+        return null === $this->path ? null : $this->getUploadThumbRootDir($filter) . '/' . $this->path;
     }
 
     protected function getUploadDir()
@@ -21,14 +21,14 @@ abstract class Image extends File implements ImageInterface
         return 'uploads/img';
     }
 
-    protected function getUploadThumbDir($width, $height)
+    protected function getUploadThumbDir($filter)
     {
-        return 'media/cache/tb-' . $width . 'x' . $height . '/' . $this->getUploadDir();
+        return 'media/cache/' . $filter . '/' . $this->getUploadDir();
     }
 
-    protected function getUploadThumbRootDir($width, $height)
+    protected function getUploadThumbRootDir($filter)
     {
-        return __DIR__ . '/../../../../web/' . $this->getUploadThumbDir($width, $height);
+        return __DIR__ . '/../../../../web/' . $this->getUploadThumbDir($filter);
     }
 
 }

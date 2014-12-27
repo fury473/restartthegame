@@ -30,3 +30,4 @@ day_times:
 format:
     js: "mm-dd-yyyy"
     hour: "h:iA"
+    twig: "m/d/Y"
