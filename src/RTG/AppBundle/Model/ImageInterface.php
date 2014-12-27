@@ -4,5 +4,5 @@ namespace RTG\AppBundle\Model;
 
 interface ImageInterface
 {
-    public function getAbsoluteThumbPath($width, $height);
+    public function getAbsoluteThumbPath($filter);
 }

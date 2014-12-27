@@ -29,4 +29,5 @@ day_times:
 
 format:
     js: "dd-mm-yyyy"
-    heure: "H:i"
+    hour: "H:i"
+    twig: "d/m/Y"

@@ -1,25 +1,34 @@
 {% extends 'RTGBlogBundle::layout.html.twig' %}
 
-{% block title %}{% trans %}News{% endtrans %} - RTG{% endblock %}
+{% block title %}{% trans %}News{% endtrans %}{% if category is defined %} - {{ category }}{% endif %} - RTG{% endblock %}
 
 {% block content %}
-    <h1>{% trans %}News{% endtrans %}</h1>
+    <h1>{% trans %}News{% endtrans %}{% if category is defined %} - {{ category }}{% endif %}</h1>
+    <div class="article-list">
     {% for article in articles %}
-        <article class="article">
-            <header>
-                <div class="pull-right">Posté par <span class="highlight">{{article.author}}</span> le <time datetime="{{ article.created|date('c') }}">{{ article.created|localizeddate('full', 'short') }}</time></div>
-                <h2><a href="{{ path('rtg_blog_newsarticle_show', { 'slug': article.slug }) }}">{{ article.title }}</a></h2>
-            </header>
-
-            {# <img src="{{ asset(article.image.webPath) }}" /> #}
-            <div class="snippet">
-                <p>{{ article.catchPhrase }}</p>
-                <div class="pull-right"><a href="{{ path('rtg_blog_newsarticle_show', { 'slug': article.slug }) }}#comments">{{ 'Voir les commentaires ('~article.comments|length~')' }}</a></div>
-                <p class="continue"><a href="{{ path('rtg_blog_newsarticle_show', { 'slug': article.slug }) }}">{% trans %}Continue reading...{% endtrans %}</a></p>
+        {% if loop.index0 % 2 == 0 %}
+        <div class="row-fluid clearfix">
+        {% endif %}
+            <div class="col-md-6">
+                <article class="article clearfix">
+                    <div class="col-xs-6 col-md-6">
+                        {% if article.image is not null %}
+                        <a href="{{ path('rtg_blog_newsarticle_show', { 'slug': article.slug }) }}"><img src="{{ article.image.webPath|apply_filter('article-tb') }}" /></a>
+                        {% endif %}
+                    </div>
+                    <div class="col-xs-6 col-md-6">
+                        <h2><a href="{{ path('rtg_blog_newsarticle_show', { 'slug': article.slug }) }}" class="bold">{{ article.category }} : <span>{{ article.title }}</span></a></h2>
+                        <div class="line-infos">
+                            <small><time datetime="{{ article.created|date('c') }}">{{ article.created|date('format.twig'|trans({}, 'date')) }}</time> - Par {{article.author}} - {{ article.comments|length }} <i class="glyphicon glyphicon-comment"></i></small>
+                        </div>
+                    </div>
+                </article>
             </div>
-        </article>
-        {% if not loop.last %}<hr/>{% endif %}
+        {% if loop.index0 % 2 == 1 or loop.last %}
+        </div>
+        {% endif %}
     {% else %}
         <p>{% trans %}There are no articles{% endtrans %}</p>
     {% endfor %}
+    </div>
 {% endblock %}

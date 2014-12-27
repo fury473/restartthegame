@@ -31,8 +31,8 @@ class Avatar extends Image
     {
         $files = array();
         $files[] = $this->getAbsolutePath();
-        $files[] = $this->getAbsoluteThumbPath(48, 48);
-        $files[] = $this->getAbsoluteThumbPath(128, 128);
+        $files[] = $this->getAbsoluteThumbPath('tb-48x48');
+        $files[] = $this->getAbsoluteThumbPath('tb-128x128');
         $this->filenameForRemove = array();
         foreach ($files as $file) {
             if (file_exists($file)) {

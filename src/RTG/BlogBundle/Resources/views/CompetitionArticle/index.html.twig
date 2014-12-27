@@ -4,31 +4,43 @@
 
 {% block content %}
     <h1>{% trans %}Competitions{% endtrans %}</h1>
+    <div class="article-list">
     {% for article in articles %}
-        <article itemscope itemtype="http://schema.org/Event" class="article">
-            <header>
-                <div class="date pull-right">Posté le <time datetime="{{ article.created|date('c') }}">{{ article.created|localizeddate('full', 'short')|capitalize }}</time></div>
-                <h2><a itemprop="url" href="{{ path('rtg_blog_competitionarticle_show', { 'slug': article.slug }) }}"><span itemprop="name">{{ article.title }}</span></a></h2>
-            </header>
-            {% if article.date is null %}
-                Non plannifiée
-            {% else %}
-                <link itemprop="eventStatus" href="http://schema.org/{{ article.status }}"/>
-                {% if article.status == 'EventScheduled' %}
-                    <strong>Compétition plannifiée le <time itemprop="startDate" datetime="{{ article.date|date('c') }}">{{ article.date|localizeddate('full', 'none')|capitalize }}</time>.</strong>
-                {% elseif article.status == 'EventRescheduled' %}
-                    <strong>Compétition replannifiée le <time itemprop="startDate" datetime="{{ article.date|date('c') }}">{{ article.date|localizeddate('full', 'none')|capitalize }}</time>.</strong>
-                {% elseif article.status == 'EventPostponed' %}
-                    <strong>Compétition repoussée.</strong><br/>
-                    <small>Initialement prévu le <time itemprop="previousStartDate" datetime="{{ article.date|date('c') }}">{{ article.date|localizeddate('full', 'none')|capitalize }}</time>.</small>
-                {% elseif article.status == 'EventCancelled' %}
-                    <strong>Compétition annulée.</strong><br/>
-                    <small>Initialement prévu le <time itemprop="previousStartDate" datetime="{{ article.date|date('c') }}">{{ article.date|localizeddate('full', 'none')|capitalize }}</time>.</small>
-                {% endif %}
-            {% endif %}
-        </article>
-        {% if not loop.last %}<hr/>{% endif %}
+        {% if loop.index0 % 2 == 0 %}
+        <div class="row-fluid clearfix">
+        {% endif %}
+            <div class="col-md-6">
+                <article class="article clearfix">
+                    <div class="col-xs-6 col-md-6">
+                        {% if article.image is not null %}
+                        <a href="{{ path('rtg_blog_newsarticle_show', { 'slug': article.slug }) }}"><img src="{{ article.image.webPath|apply_filter('article-tb') }}" /></a>
+                        {% endif %}
+                    </div>
+                    <div class="col-xs-6 col-md-6">
+                        <h2><a href="{{ path('rtg_blog_newsarticle_show', { 'slug': article.slug }) }}" class="bold">{{ article.title }}</a></h2>
+                        {% set articleDatetime = article.date|date('c') %}
+                        {% set articleDate = article.date|date('format.twig'|trans({}, 'date')) %}
+                        <div class="line-infos">
+                            <small>
+                                {% if article.status == 'EventScheduled' %}
+                                    <time itemprop="startDate" datetime="{{ articleDatetime }}">{{ articleDate }}</time> {% if article.date < date() %}<i class="glyphicon glyphicon-ok text-success" title="Terminée"></i>{% else %}<i class="glyphicon glyphicon-star text-warning" title="Plannifiée"></i>{% endif %}
+                                {% elseif article.status == 'EventRescheduled' %}
+                                    <time itemprop="startDate" datetime="{{ articleDatetime }}">{{ articleDate }}</time> {% if article.date < date() %}<i class="glyphicon glyphicon-ok text-success" title="Terminée"></i>{% else %}<i class="glyphicon glyphicon-time text-warning" title="Replannifiée"></i>{% endif %}
+                                {% elseif article.status == 'EventPostponed' %}
+                                    <time itemprop="previousStartDate" datetime="{{ articleDatetime }}"></time><i class="glyphicon glyphicon-time text-warning" title="Repoussée"></i>
+                                {% elseif article.status == 'EventCancelled' %}
+                                    <time itemprop="previousStartDate" datetime="{{ articleDatetime }}">{{ articleDate }}</time> <i class="glyphicon glyphicon-remove text-danger" title="Annulée"></i>
+                                {% endif %}
+                            </small>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        {% if loop.index0 % 2 == 1 or loop.last %}
+        </div>
+        {% endif %}
     {% else %}
         <p>{% trans %}There are no articles{% endtrans %}</p>
     {% endfor %}
+    </div>
 {% endblock %}
