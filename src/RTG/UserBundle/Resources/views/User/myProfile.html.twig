@@ -99,14 +99,3 @@
     {{ form_end(form) }}
 
 {% endblock content %}
-
-{% block javascript %}
-    {{ parent() }}
-    <script type="text/javascript">
-        $(document).ready(function() { 
-            $('.uploader .picture input[type="checkbox"]').change(function() {
-                $('.uploader .file').toggleClass('hidden');
-            });
-        });
-    </script>
-{% endblock %}
