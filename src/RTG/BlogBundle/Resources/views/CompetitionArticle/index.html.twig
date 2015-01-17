@@ -1,6 +1,6 @@
 {% extends 'RTGBlogBundle::layout.html.twig' %}
 
-{% block title %}{% trans %}Competitions{% endtrans %} - RTG{% endblock %}
+{% block title %}{% trans %}Competitions{% endtrans %}{% endblock %}
 
 {% block content %}
     <h1>{% trans %}Competitions{% endtrans %}</h1>
@@ -13,11 +13,11 @@
                 <article class="article clearfix">
                     <div class="col-xs-6 col-md-6">
                         {% if article.image is not null %}
-                        <a href="{{ path('rtg_blog_newsarticle_show', { 'slug': article.slug }) }}"><img src="{{ article.image.webPath|apply_filter('article-tb') }}" /></a>
+                        <a href="{{ path('rtg_blog_competitionarticle_show', { 'slug': article.slug }) }}"><img src="{{ article.image.webPath|apply_filter('article-tb') }}" /></a>
                         {% endif %}
                     </div>
                     <div class="col-xs-6 col-md-6">
-                        <h2><a href="{{ path('rtg_blog_newsarticle_show', { 'slug': article.slug }) }}" class="bold">{{ article.title }}</a></h2>
+                        <h2><a href="{{ path('rtg_blog_competitionarticle_show', { 'slug': article.slug }) }}" class="bold">{{ article.title }}</a></h2>
                         {% set articleDatetime = article.date|date('c') %}
                         {% set articleDate = article.date|date('format.twig'|trans({}, 'date')) %}
                         <div class="line-infos">

@@ -1,6 +1,6 @@
 {% extends 'RTGBlogBundle::layout.html.twig' %}
 
-{% block title %}{% trans %}News{% endtrans %}{% if category is defined %} - {{ category }}{% endif %} - RTG{% endblock %}
+{% block title %}{% trans %}News{% endtrans %}{% if category is defined %} - {{ category }}{% endif %}{% endblock %}
 
 {% block content %}
     <h1>{% trans %}News{% endtrans %}{% if category is defined %} - {{ category }}{% endif %}</h1>
