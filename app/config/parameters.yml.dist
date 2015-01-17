@@ -2,9 +2,9 @@ parameters:
     database_driver:   pdo_mysql
     database_host:     127.0.0.1
     database_port:     3306
-    database_name:     rtg
-    database_user:     rtg-dev
-    database_password: 'rtg,7hf'
+    database_name:     mysql
+    database_user:     root
+    database_password: ~
 
     mailer_transport:  smtp
     mailer_host:       restartthegame.com
@@ -17,9 +17,10 @@ parameters:
     newsletter_address: newsletter@restartthegame.com
 
     locale:            fr
-    secret:            'rtg,7hf'
+    secret:            secret
 
     twitch_client_id:     client_id
     twitch_client_secret: client_secret
+    facebook_app_id: app_id
 
 #    assetic.cache.class: Assetic\Cache\ArrayCache
