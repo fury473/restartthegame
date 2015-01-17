@@ -8,6 +8,7 @@ parameters:
 
     mailer_transport:  smtp
     mailer_host:       restartthegame.com
+    mailer_port:       ~
     mailer_user:       ~
     mailer_password:   ~
     contact_delivery_address: contact@restartthegame.com

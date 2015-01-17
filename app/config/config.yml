@@ -82,8 +82,13 @@ doctrine:
 # Swiftmailer Configuration
 swiftmailer:
     transport: %mailer_transport%
+    host:      %mailer_host%
     username:  %mailer_user%
+    port:      %mailer_port%
     password:  %mailer_password%
+    encryption: ssl
+    auth_mode:  login
+    logging:  "%kernel.debug%"
 
 fos_user:
     db_driver: orm
