@@ -26,7 +26,7 @@ class PageController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $news = $em->getRepository('RTGBlogBundle:NewsArticle')->getFeaturedArticles(5);
-        $competitions = $em->getRepository('RTGBlogBundle:CompetitionArticle')->getLatestArticles(null, 5);
+        $competitions = $em->getRepository('RTGBlogBundle:CompetitionArticle')->getLatestArticles(5);
         return array(
             'news' => $news,
             'competitions' => $competitions
