@@ -33,6 +33,7 @@ twig:
         resources:
             - 'RTGAppBundle:Form:customFormTheme.html.twig'
     globals:
+        fb_app_id: %facebook_app_id%
         web_path: %web_path%
 services:
     rtg.twig_extension:
@@ -81,8 +82,13 @@ doctrine:
 # Swiftmailer Configuration
 swiftmailer:
     transport: %mailer_transport%
+    host:      %mailer_host%
     username:  %mailer_user%
+    port:      %mailer_port%
     password:  %mailer_password%
+    encryption: ssl
+    auth_mode:  login
+    logging:  "%kernel.debug%"
 
 fos_user:
     db_driver: orm

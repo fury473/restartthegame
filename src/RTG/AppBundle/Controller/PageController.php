@@ -26,7 +26,7 @@ class PageController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $news = $em->getRepository('RTGBlogBundle:NewsArticle')->getFeaturedArticles(5);
-        $competitions = $em->getRepository('RTGBlogBundle:CompetitionArticle')->getLatestArticles(null, 5);
+        $competitions = $em->getRepository('RTGBlogBundle:CompetitionArticle')->getLatestArticles(5);
         return array(
             'news' => $news,
             'competitions' => $competitions
@@ -123,7 +123,12 @@ class PageController extends Controller
                 $subject = $other_object;
             }
             $from = $this->container->getParameter('site_address');
-            $to = $this->container->getParameter('contact_delivery_address');
+            $to = '';
+            if($subject == 'Problème(s) à propos du Site') {
+                $to = $this->container->getParameter('dev_delivery_address');
+            } else {
+                $to = $this->container->getParameter('contact_delivery_address');
+            }
             $content = $form->get('message')->getData();
 
             $message = \Swift_Message::newInstance()

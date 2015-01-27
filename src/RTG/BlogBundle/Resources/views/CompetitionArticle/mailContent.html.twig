@@ -1,0 +1,5 @@
+<p style="margin-bottom: 10px;">Une nouvelle competition est organisée le {{ article.date|localizeddate('full', 'none')|capitalize }}, n'hésitez pas à venir consulter l'article détaillant son déroulement sur notre site internet.</p>
+<h2 style="margin: 0;"><a href="{{ url('rtg_blog_competitionarticle_show', { 'slug': article.slug }) }}" style="color: #428bca;"><span>{{ article.title }}</span></a></h2>
+{% if article.image is not null %}
+<a href="{{ url('rtg_blog_competitionarticle_show', { 'slug': article.slug }) }}" style="display: block;"><img src="{{ app.request.scheme ~'://' ~ app.request.httpHost ~ asset(article.image.webPath) }}" style="max-width: 100%;" /></a>
+{% endif %}

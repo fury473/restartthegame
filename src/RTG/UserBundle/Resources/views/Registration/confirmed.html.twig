@@ -11,6 +11,6 @@
         {% set targetUrl = app.session.get('_security.' ~ app.security.token.providerKey ~ '.target_path') %}
         {% if targetUrl is not empty %}<p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>{% endif %}
         <p>Aidez nous en complétant votre profil !</p>
-        <a href="{{ path('fos_user_profile_edit') }}" title="Profil" class="btn btn-primary">Compléter mon profil</a>
+        <a href="{{ path('rtg_user_user_myprofile') }}" title="Profil" class="btn btn-primary">Compléter mon profil</a>
     {% endif %}
 {% endblock %}
