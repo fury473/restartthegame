@@ -5,14 +5,16 @@ namespace RTG\AppBundle\Services;
 use Doctrine\ORM\EntityManagerInterface;
 use Swift_Mailer;
 use Swift_Message;
+use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 
 class NewsLetter
 {
 
-    public function __construct(EntityManagerInterface $em, Swift_Mailer $mailer, $newsletter_address, $noreply_address)
+    public function __construct(EntityManagerInterface $em, Swift_Mailer $mailer, EngineInterface $templating, $newsletter_address, $noreply_address)
     {
         $this->em = $em;
         $this->mailer = $mailer;
+        $this->templating = $templating;
         self::$NEWSLETTER_EMAIL = $newsletter_address;
         self::$NOREPLY_EMAIL = $noreply_address;
     }
@@ -24,18 +26,14 @@ class NewsLetter
     public function send($subject, $content)
     {
         $users = $this->em->getRepository('RTGUserBundle:User')->getSuscribedToNewsletter();
-        $to = array();
         foreach($users as $user) {
-            $to[] = $user->getEmail();
-        }
-
-        if(count($to) > 0) {
+            $templated_content = $this->templating->render('RTGBlogBundle:Newsletter:mail.html.twig', array('user' => $user, 'content' => $content));
             $message = Swift_Message::newInstance()
             ->setSubject($subject)
-            ->setFrom(self::$NEWSLETTER_EMAIL)
+            ->setFrom(array(self::$NEWSLETTER_EMAIL => 'Restart The Game'))
             ->setReturnPath(self::$NOREPLY_EMAIL)
-            ->setBcc($to)
-            ->setBody($content, 'text/html');
+            ->setTo($user->getEmail())
+            ->setBody($templated_content, 'text/html');
             $this->mailer->send($message);
         }
     }
@@ -49,6 +47,11 @@ class NewsLetter
      * @var Swift_Mailer
      */
     protected $mailer;
+    
+    /**
+     * @var EngineInterface
+     */
+    protected $templating;
     
     /**
      * @var string

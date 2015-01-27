@@ -113,6 +113,24 @@ class UserController extends Controller
             return $this->redirect($this->generateUrl('fos_user_security_login'));
         }
     }
+    
+    /**
+     * @Route("/unsubscibe-newsletter/{newsletter_token}")
+     * @Method("GET")
+     * @Template()
+     */
+    public function unsubscribeNewsletterAction($newsletter_token)
+    {
+        $userManager = $this->get('fos_user.user_manager');
+        $user = $userManager->findUserBy(array('newsletterToken' => $newsletter_token));
+        if($user) {
+            $user->setNewsletter(false);
+            $userManager->updateUser($user);
+        } else {
+            throw $this->createNotFoundException();
+        }
+        return array('user' => $user);
+    }
 
     /**
      * Creates a form to delete a User entity by id.

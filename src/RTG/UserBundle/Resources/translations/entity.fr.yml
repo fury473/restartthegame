@@ -23,7 +23,7 @@ user:
         username: 'Nom d''utilisateur'
         email: 'Adresse électronique'
         newsletter: 'Newsletter'
-        newsletter_suscribe: 'Recevoir par email des informations liées aux nouveautés de la RTG'
+        newsletter_suscribe: 'Recevoir par email des informations liées aux actualités de la RTG'
         newsletter_suscribed: 'Abonné à la Newsletter'
         avatar: 'Avatar'
         delete_avatar: 'Supprimer mon avatar'

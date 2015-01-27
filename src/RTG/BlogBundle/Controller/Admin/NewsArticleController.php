@@ -59,11 +59,10 @@ class NewsArticleController extends Controller
             $em->persist($entity);
             $em->flush();
             
-//            if($form->get('newsletter')->getData()) {
-//                $subject = $form->get('title')->getData();
-//                $content = $form->get('message')->getData();
-//                $this->get('newsletter')->send($subject, $content);
-//            }
+            if($form->get('newsletter')->getData()) {
+                $content = $this->get('templating')->render('RTGBlogBundle:NewsArticle:mailContent.html.twig', array('article' => $entity));
+                $this->get('newsletter')->send($entity->getTitle(), $content);
+            }
             
             return $this->redirect($this->generateUrl('rtg_blog_newsarticle_show', array('slug' => $entity->getSlug())));
         }
