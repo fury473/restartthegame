@@ -21,6 +21,9 @@
     <li class="pull-left{% if 'rtg_blog_competitionarticle' in app.request.get('_route') %} active{% endif %}">
         <a href="{{ path('rtg_blog_competitionarticle_index') }}" title="{{ 'competitions'|trans({}, 'menu') }}">{{ 'competitions'|trans({}, 'menu') }}</a>
     </li>
+    <li class="pull-left{% if 'rtg_app_page_stream' in app.request.get('_route') %} active{% endif %}">
+        <a href="{{ path('rtg_app_page_stream') }}" title="{{ 'stream'|trans({}, 'menu') }}">{{ 'stream'|trans({}, 'menu') }}</a>
+    </li>
     <li class="pull-left{% if 'rtg_app_page_aboutus' in app.request.get('_route') %} active{% endif %}">
         <a href="{{ path('rtg_app_page_aboutus') }}" title="{{ 'about_us'|trans({}, 'menu') }}">{{ 'about_us'|trans({}, 'menu') }}</a>
     </li>

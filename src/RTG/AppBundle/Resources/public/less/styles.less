@@ -239,10 +239,10 @@ select {
         font-family: 'ethnocentricregular';
         font-weight: normal;
         text-shadow: 0 0 0.5em #457DBB;
-        @media (min-width: 490px) {
+        @media (min-width: @screen-xs) {
             font-size: 60px;
         }
-        @media (max-width: 490px) {
+        @media (max-width: @screen-xs) {
             font-size: 45px;
         }
     }
@@ -374,4 +374,31 @@ ul.latest-posts {
 
 .twitter-share-button {
     vertical-align: middle;
+}
+
+.twitch-iframe-chat, .twitch-iframe-video {
+    width: 100%;
+    height: 442px;
+    border: 0;
+    overflow: hidden;
+}
+
+@media (max-width: @screen-sm) {
+    .twitch-iframe-video {
+        height: 350px;
+    }
+}
+
+@media (max-width: @screen-md) {
+    .twitch-iframe-chat {
+        height: 300px;
+    }
+}
+
+.twitch-iframe-link {
+    padding: 2px 0px 4px;
+    display: block;
+    width: 345px;
+    font-weight: normal;
+    font-size: 10px;
 }

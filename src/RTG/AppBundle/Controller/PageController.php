@@ -84,6 +84,16 @@ class PageController extends Controller
     }
     
     /**
+     * @Route("/stream")
+     * @Method({"GET"})
+     * @Template()
+     */
+    public function streamAction()
+    {
+        return array();
+    }
+    
+    /**
      * @Route("/teamspeak")
      * @Method({"GET"})
      * @Template()
