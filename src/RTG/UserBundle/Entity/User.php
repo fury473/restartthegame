@@ -21,7 +21,7 @@ class User extends BaseUser
     {
         parent::__construct();
         $this->newsletter = false;
-        $this->resetNewsletterToken();
+        $this->generateNewsletterToken();
         $this->comments = new ArrayCollection();
         $this->competitions = new ArrayCollection();
     }
@@ -267,7 +267,6 @@ class User extends BaseUser
     public function setNewsletter($newsletter)
     {
         $this->newsletter = $newsletter;
-        $this->resetNewsletterToken();
         return $this;
     }
     
@@ -314,13 +313,13 @@ class User extends BaseUser
     }
     
     /**
-     * Reset newsletterToken
+     * Generate newsletterToken
      * 
      * @return \RTG\UserBundle\Entity\User
      */
-    public function resetNewsletterToken()
+    public function generateNewsletterToken()
     {
-        $this->newsletterToken = sha1(uniqid());
+        $this->newsletterToken = md5(uniqid());
         return $this;
     }
 
