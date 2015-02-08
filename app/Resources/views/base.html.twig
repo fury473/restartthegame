@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{% block title %}{{ brand_name }}{% endblock %}{% block title_suffix %} - restartthegame.com{% endblock %}</title>
         <meta name="application-name" content="{{ brand_name }}"/>
+        <meta name="msapplication-config" content="{{ url('rtg_app_browserconfig_browserconfig', {_format: 'xml'})}}"/>
         <meta name="author" content="{% block meta_author %}Olivier Haag{% endblock %}">
         {% block meta %}{% endblock %}
         <link rel="shortcut icon" type="image/ico" href="{{ asset('favicon.ico') }}" />
