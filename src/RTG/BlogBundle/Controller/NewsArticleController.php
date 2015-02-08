@@ -3,9 +3,10 @@
 namespace RTG\BlogBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 /**
@@ -51,6 +52,18 @@ class NewsArticleController extends Controller
             'category' => $category,
             'articles' => $articles
         );
+    }
+    
+    /**
+     * @Route("/rss.{_format}", Requirements={"_format" = "xml"})
+     * @Template("RTGBlogBundle:NewsArticle:rss.xml.twig")
+     * @Cache(expires="+1 hour")
+     */
+    public function rssAction() 
+    {
+        $em = $this->getDoctrine()->getManager();
+        $articles = $em->getRepository('RTGBlogBundle:NewsArticle')->getRecentArticles();
+        return array('articles' => $articles);
     }
 
     /**

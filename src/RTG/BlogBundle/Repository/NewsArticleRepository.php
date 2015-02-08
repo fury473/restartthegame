@@ -63,4 +63,25 @@ class NewsArticleRepository extends EntityRepository
         
         return $results;
     }
+    
+    public function getRecentArticles(Category $category = null, $limit = null)
+    {
+        $qb = $this->createQueryBuilder('a')
+                   ->select('a')
+                   ->where('a.created > :date')
+                   ->setParameter('date', new \DateTime('-1 month'))
+                   ->addOrderBy('a.created', 'DESC');
+        
+        if ($category != null) {
+            $qb->where('a.category = :category')
+               ->setParameter('category', $category);
+        }
+        
+        if ($limit != null) {
+            $qb->setMaxResults($limit);
+        }
+
+        return $qb->getQuery()
+                  ->getResult();
+    }
 }

@@ -3,15 +3,13 @@
 {% block title %}Qui sommes nous ?{% endblock %}
 
 {% block content %}
-<div class="bloc container">
-    <h1>{{ 'partners'|trans({}, 'menu') }}</h1>
-    <div class="row">
-        <div class="col-md-6 top">
-            {{ include('RTGAppBundle:Page:partner_vcard.html.twig', {'logo': 'engine-serv.png', 'href': 'http://www.engine-serv.com', 'title': 'Engine-Serv : Location de Serveur de jeux et vocaux'}) }}
-        </div>
-        <div class="col-md-6 top">
-            {{ include('RTGAppBundle:Page:partner_vcard.html.twig', {'logo': 'craftit-game.png', 'href': 'http://www.craftit-game.com', 'title': 'Craft IT Game'}) }}
-        </div>
+<h1>{{ 'partners'|trans({}, 'menu') }}</h1>
+<div class="row">
+    <div class="col-md-6 top">
+        {{ include('RTGAppBundle:Page:include/partner_vcard.html.twig', {'logo': 'engine-serv.png', 'href': 'http://www.engine-serv.com', 'title': 'Engine-Serv : Location de Serveur de jeux et vocaux'}) }}
+    </div>
+    <div class="col-md-6 top">
+        {{ include('RTGAppBundle:Page:include/partner_vcard.html.twig', {'logo': 'craftit-game.png', 'href': 'http://www.craftit-game.com', 'title': 'Craft IT Game'}) }}
     </div>
 </div>
 {% endblock %}

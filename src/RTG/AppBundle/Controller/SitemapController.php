@@ -9,12 +9,12 @@ class SitemapController extends Controller
 {
 
     /**
-     * @Route("/sitemap.{_format}", name="sample_sitemaps_sitemap", Requirements={"_format" = "xml"})
+     * @Route("/sitemap.{_format}", Requirements={"_format" = "xml"})
      * @Template("RTGAppBundle:Sitemap:sitemap.xml.twig")
      */
     public function sitemapAction() 
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         $urls = array();
         $hostname = $this->getRequest()->getHost();

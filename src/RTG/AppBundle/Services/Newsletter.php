@@ -10,13 +10,14 @@ use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 class NewsLetter
 {
 
-    public function __construct(EntityManagerInterface $em, Swift_Mailer $mailer, EngineInterface $templating, $newsletter_address, $noreply_address)
+    public function __construct(EntityManagerInterface $em, Swift_Mailer $mailer, EngineInterface $templating, $newsletter_address, $noreply_address, $brand_name)
     {
         $this->em = $em;
         $this->mailer = $mailer;
         $this->templating = $templating;
         self::$NEWSLETTER_EMAIL = $newsletter_address;
         self::$NOREPLY_EMAIL = $noreply_address;
+        self::$BRAND_NAME = $brand_name;
     }
     
     /**
@@ -30,7 +31,7 @@ class NewsLetter
             $templated_content = $this->templating->render('RTGBlogBundle:Newsletter:mail.html.twig', array('user' => $user, 'content' => $content));
             $message = Swift_Message::newInstance()
             ->setSubject($subject)
-            ->setFrom(array(self::$NEWSLETTER_EMAIL => 'Restart The Game'))
+            ->setFrom(array(self::$NEWSLETTER_EMAIL => self::$BRAND_NAME))
             ->setReturnPath(self::$NOREPLY_EMAIL)
             ->setTo($user->getEmail())
             ->setBody($templated_content, 'text/html');
@@ -52,6 +53,11 @@ class NewsLetter
      * @var EngineInterface
      */
     protected $templating;
+    
+    /**
+     * @var string
+     */
+    public static $BRAND_NAME;
     
     /**
      * @var string

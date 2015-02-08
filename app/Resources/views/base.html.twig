@@ -4,16 +4,17 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>{% block title %}Restart the Game{% endblock %}{% block title_suffix %} - restartthegame.com{% endblock %}</title>
+        <title>{% block title %}{{ brand_name }}{% endblock %}{% block title_suffix %} - restartthegame.com{% endblock %}</title>
+        <meta name="application-name" content="{{ brand_name }}"/>
+        <meta name="msapplication-config" content="{{ url('rtg_app_browserconfig_browserconfig', {_format: 'xml'})}}"/>
         <meta name="author" content="{% block meta_author %}Olivier Haag{% endblock %}">
         {% block meta %}{% endblock %}
-        <link rel="icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="shortcut icon" type="image/ico" href="{{ asset('favicon.ico') }}" />
 
 
         {% block stylesheet %}
             {% stylesheets
                 'bundles/rtgapp/less/bootstrap.less'
-                'bundles/rtgapp/less/main.less'
                 filter='cssrewrite'
                 output='css/main.css'
             %}
@@ -23,21 +24,17 @@
     {% trans_default_domain 'RTGAppBundle' %}
     <body>
         <div class="scanlines"></div>
-        {{ include('RTGAppBundle:Page:menuUser.html.twig') }}
-        <div class="container banner">
+        {{ include('RTGAppBundle:Page:include/menuUser.html.twig') }}
+        <div class="container">
             <div class="row">
                 <div class="col-md-3">
-                    <div class="header-logo">
-                        <a href="{{ path('rtg_app_page_index') }}" title="Restart the Game">
-                            <img class="center-block img-responsive" src="{{ asset('bundles/rtgapp/img/logo.png') }}" alt="Restart the Game"/>
-                        </a>
-                    </div>
+                    <a href="{{ path('rtg_app_page_index') }}" title="{{ brand_name }}">
+                        <img class="center-block img-responsive" src="{{ asset('bundles/rtgapp/img/logo.png') }}" alt="{{ brand_name }}"/>
+                    </a>
                 </div>
                 <div class="col-md-9">
-                    <div class="title row">
-                        <div class="center-block">
-                            <a href="{{ path('rtg_app_page_index') }}" title="Restart the Game">Restart the Game</a>
-                        </div>
+                    <div class="header-title">
+                        <a href="{{ path('rtg_app_page_index') }}" title="{{ brand_name }}">{{ brand_name }}</a>
                     </div>
                 </div>
             </div>
@@ -51,11 +48,9 @@
         
         <div id="footer">
             <div class="container bloc">
-                <div id="copyright">
                     {% block footer %}
-                    © 2013-{{ "now"|date("Y") }} Restart the Game - <a href="{{ path('rtg_app_page_legalnotices') }}">{{ 'legal_notices'|trans({}, 'menu') }}</a>
+                    © 2013-{{ "now"|date("Y") }} {{ brand_name }} - <a href="{{ path('rtg_app_page_legalnotices') }}">{{ 'legal_notices'|trans({}, 'menu') }}</a>
                     {% endblock %}
-                </div>
             </div>
         </div>
         <div class="scrollup"></div>

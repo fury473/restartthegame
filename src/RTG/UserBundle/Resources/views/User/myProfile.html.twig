@@ -78,7 +78,7 @@
     
     <fieldset class="row-fluid form-group">
         <div class="connect_items">
-            {% include 'RTGAppBundle:Page:serviceItem.html.twig' with {'service': 'twitch', 'title': 'Twitter', 'desc': 'Associez votre compte Twitch en un clic à votre compte Restart the Game'} %}
+            {% include 'RTGAppBundle:Page:include/serviceItem.html.twig' with {'service': 'twitch', 'title': 'Twitter', 'desc': 'Associez votre compte Twitch en un clic à votre compte {{ brand_name }}'} %}
         </div>
     </fieldset>#}
 
@@ -87,8 +87,8 @@
     <fieldset class="row-fluid form-group">
         <div class="col-md-2">{{ 'user.button.delete_account'|trans }}</div>
         <div class="col-md-6">
-            Si vous le souhaitez, vous pouvez désactiver votre compte Restart the Game depuis la page
-            <a href="{{ path('rtg_user_user_delete') }}" id="disable_account">{{ 'user.button.delete_account'|trans }}</a>
+            Si vous le souhaitez, vous pouvez désactiver votre compte {{ brand_name }} depuis la page
+            <a href="{{ path('rtg_user_user_delete') }}" class="text-danger">{{ 'user.button.delete_account'|trans }}</a>
         </div>
     </fieldset>
 

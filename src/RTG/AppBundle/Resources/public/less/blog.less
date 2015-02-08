@@ -8,16 +8,14 @@
     }
 
     a {
-        color: #428bca;
         span {
-            color: #b5b5b5;
+            color: @text-color;
         }
-    }
-
-    a:hover {
-        color: #428bca;
-        span {
-            color: #428bca;
+        &:hover {
+            color: @brand-primary;
+            span {
+                color: @brand-primary;
+            }
         }
     }
 }
@@ -27,7 +25,7 @@
         min-height: 101px;
         margin-bottom: 10px;
         padding-bottom: 10px;
-        border-bottom: 1px solid #202020;
+        border-bottom: 1px solid @gray-darker;
     }
 }
 

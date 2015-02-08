@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<browserconfig>
+    <msapplication>
+        <tile>
+            <square70x70logo src="{{ app.request.scheme ~'://' ~ app.request.httpHost ~ asset('bundles/rtgapp/img/msapplication/tiny.png') }}"/>
+            <square150x150logo src="{{ app.request.scheme ~'://' ~ app.request.httpHost ~ asset('bundles/rtgapp/img/msapplication/square.png') }}"/>
+            <wide310x150logo src="{{ app.request.scheme ~'://' ~ app.request.httpHost ~ asset('bundles/rtgapp/img/msapplication/wide.png') }}"/>
+            <square310x310logo src="{{ app.request.scheme ~'://' ~ app.request.httpHost ~ asset('bundles/rtgapp/img/msapplication/large.png') }}"/>
+            <TileImage src="{{ app.request.scheme ~'://' ~ app.request.httpHost ~ asset('bundles/rtgapp/img/msapplication/tileimage.png') }}"/>
+            <TileColor>#428bca</TileColor>
+        </tile>
+        <notification>
+            <polling-uri  src="{{ url('rtg_blog_newsarticle_rss', {_format: 'xml'}) }}"/>
+            <frequency>60</frequency>
+            <cycle>1</cycle>
+        </notification>
+    </msapplication>
+</browserconfig>

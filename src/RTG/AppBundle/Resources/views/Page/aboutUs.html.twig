@@ -3,48 +3,46 @@
 {% block title %}Qui sommes nous ?{% endblock %}
 
 {% block content %}
-<div class="bloc container">
-    <h1>Qui sommes nous ?</h1>
-    <h2>Naissance du projet RTG</h2>
-    <p>Partis du constat que la communauté PC française manquait d’évènements virtuels et physiques, les deux membres fondateurs, Shark et 7v3n, décident alors de créer la RTG. Issus de la communauté Modern Warfare 2, alors dépourvue d’activité, leur objectif a alors été de la relancer, et d’étendre le projet vers d’autres jeux. Dans ce but, l’équipe RTG s’agrandit : Lilith, Fury, Harck, Taokyl et Belette rejoignent alors le projet.</p>
-    
-    <h2>Un nouveau bureau pour la RTG</h2>
-    <p>Fin 2014, une nouvelle équipe rejoint la Restart The Game pour apporter une nouvelle dynamique. Belette, Lilith et 7v3n sont alors remplacés par La_Charogne, Insomnia et Van Drake. Leur objectif est clair : réaliser tous les projets prévus depuis les débuts de l’association et en mettre en place de nouveaux. 
-    Pour l’heure, un plus grand nombre de compétitions est établi, une implication plus importante auprès de la communauté, physiquement comme virtuellement, avec une plus grande proximité des membres. L’association continue et surtout progresse ! Nous comptons sur vous pour la réussite, ensemble, de cette belle aventure…</p>
-    
-    <h2>Le concept RTG</h2>
-    <p>Le concept de la RTG, épaulé de ses serveurs TeamSpeak® ainsi que de ses adhérents, est de proposer des événements compétitifs virtuels mais également « physiques » (appelés « Lan »).
-    L’adhésion des membres à l’association, des partenariats solides avec des enseignes du monde de l’informatique, du jeu vidéo et du web de manière plus générale seront des éléments qui permettront le bon fonctionnement de la RTG. Notre objectif aujourd’hui est de redynamiser la communauté PC, support roi pendant des années avant d’être délaissé par les joueurs de FPS en faveur des consoles.</p>
+<h1>Qui sommes nous ?</h1>
+<h2>Naissance du projet RTG</h2>
+<p>Partis du constat que la communauté PC française manquait d’évènements virtuels et physiques, les deux membres fondateurs, Shark et 7v3n, décident alors de créer la RTG. Issus de la communauté Modern Warfare 2, alors dépourvue d’activité, leur objectif a alors été de la relancer, et d’étendre le projet vers d’autres jeux. Dans ce but, l’équipe RTG s’agrandit : Lilith, Fury, Harck, Taokyl et Belette rejoignent alors le projet.</p>
 
-    <h2>RTG, association</h2>
-    <p>La Restart The Game est une association à but non lucratif implantée dans la région lyonnaise. Nous souhaitons relancer la communauté PC, en proposant à nos membres le meilleur de la compétition et des Lans. Nous sommes en effet conscients que la plus grande difficulté rencontrée par les joueurs issus du domaine E-sport, est de trouver des structures solides proposant des évènements réguliers.</p>
-    
-    <h2>Le [Staff RTG]</h2>
-    <div class="row">
-        <div class="col-md-6 top">
-            {{ include('RTGAppBundle:Page:vcard.html.twig', {'name': 'Romuald Senigallia', 'pseudo': 'La_Charogne', 'city': 'Rillieux-la-Pape', 'role': 'Président', 'image': 'la_charogne.jpg'}) }}
-        </div>
-        <div class="col-md-6 top">
-            {{ include('RTGAppBundle:Page:vcard.html.twig', {'name': 'Ivan Bésiat', 'pseudo': 'Van Drake', 'city': 'Lyon', 'role': 'Responsable Communauté', 'image': 'van_drake.jpg'}) }}
-        </div>
+<h2>Un nouveau bureau pour la RTG</h2>
+<p>Fin 2014, une nouvelle équipe rejoint la {{ brand_name }} pour apporter une nouvelle dynamique. Belette, Lilith et 7v3n sont alors remplacés par La_Charogne, Insomnia et Van Drake. Leur objectif est clair : réaliser tous les projets prévus depuis les débuts de l’association et en mettre en place de nouveaux. 
+Pour l’heure, un plus grand nombre de compétitions est établi, une implication plus importante auprès de la communauté, physiquement comme virtuellement, avec une plus grande proximité des membres. L’association continue et surtout progresse ! Nous comptons sur vous pour la réussite, ensemble, de cette belle aventure…</p>
+
+<h2>Le concept RTG</h2>
+<p>Le concept de la RTG, épaulé de ses serveurs TeamSpeak® ainsi que de ses adhérents, est de proposer des événements compétitifs virtuels mais également « physiques » (appelés « Lan »).
+L’adhésion des membres à l’association, des partenariats solides avec des enseignes du monde de l’informatique, du jeu vidéo et du web de manière plus générale seront des éléments qui permettront le bon fonctionnement de la RTG. Notre objectif aujourd’hui est de redynamiser la communauté PC, support roi pendant des années avant d’être délaissé par les joueurs de FPS en faveur des consoles.</p>
+
+<h2>RTG, association</h2>
+<p>La {{ brand_name }} est une association à but non lucratif implantée dans la région lyonnaise. Nous souhaitons relancer la communauté PC, en proposant à nos membres le meilleur de la compétition et des Lans. Nous sommes en effet conscients que la plus grande difficulté rencontrée par les joueurs issus du domaine E-sport, est de trouver des structures solides proposant des évènements réguliers.</p>
+
+<h2>Le [Staff RTG]</h2>
+<div class="row">
+    <div class="col-md-6">
+        {{ include('RTGAppBundle:Page:include/vcard.html.twig', {'name': 'Romuald Senigallia', 'pseudo': 'La_Charogne', 'city': 'Rillieux-la-Pape', 'role': 'Président', 'image': 'la_charogne.jpg'}) }}
     </div>
-    
-    <div class="row">
-        <div class="col-md-6">
-            {{ include('RTGAppBundle:Page:vcard.html.twig', {'name': 'Mélody Bailly', 'pseudo': 'Insomnia', 'city': 'Fleurieux sur l\'arbresle', 'role': 'Secrétaire', 'image': 'insomnia.jpg'}) }}
-        </div>
-        <div class="col-md-6">
-            {{ include('RTGAppBundle:Page:vcard.html.twig', {'name': 'Olivier Haag', 'pseudo': 'Fury', 'city': 'Pavezin', 'role': 'Développeur', 'image': 'fury.jpg'}) }}
-        </div>
+    <div class="col-md-6">
+        {{ include('RTGAppBundle:Page:include/vcard.html.twig', {'name': 'Ivan Bésiat', 'pseudo': 'Van Drake', 'city': 'Lyon', 'role': 'Responsable Communauté', 'image': 'van_drake.jpg'}) }}
     </div>
-    
-    <div class="row">
-        <div class="col-md-6">
-            {{ include('RTGAppBundle:Page:vcard.html.twig', {'name': 'Emmanuel Besset', 'pseudo': 'Taokyl', 'city': 'Oullins', 'role': 'Trésorier', 'image': 'taokyl.jpg'}) }}
-        </div>
-        <div class="col-md-6">
-            {{ include('RTGAppBundle:Page:vcard.html.twig', {'name': 'Mikael Ravinet', 'pseudo': 'Harck', 'city': 'Lyon', 'role': 'Hébergeur', 'image': 'harck.jpg'}) }}
-        </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        {{ include('RTGAppBundle:Page:include/vcard.html.twig', {'name': 'Mélody Bailly', 'pseudo': 'Insomnia', 'city': 'Fleurieux sur l\'arbresle', 'role': 'Secrétaire', 'image': 'insomnia.jpg'}) }}
+    </div>
+    <div class="col-md-6">
+        {{ include('RTGAppBundle:Page:include/vcard.html.twig', {'name': 'Olivier Haag', 'pseudo': 'Fury', 'city': 'Pavezin', 'role': 'Développeur', 'image': 'fury.jpg'}) }}
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        {{ include('RTGAppBundle:Page:include/vcard.html.twig', {'name': 'Emmanuel Besset', 'pseudo': 'Taokyl', 'city': 'Oullins', 'role': 'Trésorier', 'image': 'taokyl.jpg'}) }}
+    </div>
+    <div class="col-md-6">
+        {{ include('RTGAppBundle:Page:include/vcard.html.twig', {'name': 'Mikael Ravinet', 'pseudo': 'Harck', 'city': 'Lyon', 'role': 'Hébergeur', 'image': 'harck.jpg'}) }}
     </div>
 </div>
 {% endblock %}

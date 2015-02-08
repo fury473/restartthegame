@@ -1,11 +1,11 @@
 hr {
     margin: 18px 0;
     border: 0;
-    border-top: 1px solid #202020;
+    border-top: 1px solid @hr-border;
 }
 
 .table > thead > tr > th {
-    border-bottom: 2px solid #202020;
+    border-bottom: 2px solid @hr-border;
 }
 
 .table > thead > tr > th,
@@ -14,53 +14,25 @@ hr {
 .table > thead > tr > td,
 .table > tbody > tr > td,
 .table > tfoot > tr > td {
-    border-top: 1px solid #202020;
-}
-
-input, textarea, select,
-input.form-control, textarea.form-control, select.form-control {
-    background-color: #333;
-    border-color: #111;
-    color: #ccc;
-}
-
-input[type="file"] {
-    background-color: inherit;
-}
-
-input:disabled, textarea:disabled, select:disabled,
-input.form-control:disabled, textarea.form-control:disabled, select.form-control:disabled {
-    background-color: #888;
-}
-
-input:disabled, textarea:disabled, select:disabled,
-input:readonly, textarea:readonly, select:readonly,
-input.form-control:disabled, textarea.form-control:disabled, select.form-control:disabled,
-input.form-control:readonly, textarea.form-control:readonly, select.form-control:readonly {
-    border-color: #eee;
-    color: #555;
-}
-
-#disable_account {
-    color: #d44949;
+    border-top: 1px solid @hr-border;
 }
 
 .text-danger {
-    color: #d9534f;
+    color: @brand-danger;
 }
 
 .text-info {
-    color: #5bc0de;
+    color: @brand-info;
 }
 
 .text-primary {
-    color: #428bca;
+    color: @brand-primary;
 }
 
 .text-success {
-    color: #5cb85c;
+    color: @brand-success;
 }
 
 .text-warning {
-    color: #f0ad4e;
+    color: @brand-warning;
 }
