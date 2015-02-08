@@ -1,3 +1,17 @@
+@twitch-light-gray: #f1f1f1;
+@twitch-dark-gray: #262626;
+@twitch-light-purple: #b9a3e3;
+@twitch-purple: #6441a5;
+
+@facebook-bg: #3c5a96;
+@steam-bg: #3b3938;
+@twitch-bg: @twitch-purple;
+@twitter-bg: #59adeb;
+@youtube-bg: #ca1c26;
+
+@green-check: #51b321;
+@info-bg: #101010;
+
 .connect_items {
     padding: 20px;
     padding-bottom: 0;
@@ -10,7 +24,7 @@
     .connect_item_info {
         height: 80px;
         position: relative;
-        background: #101010;
+        background: @info-bg;
 
         .service_icon {
             background: url(../img/services/service-icons.png) no-repeat;
@@ -33,7 +47,7 @@
         .status {
             box-sizing: initial;
             border-radius: 24px;
-            background: #fff url(../img/services/service-status.png) no-repeat center -16px;
+            background: @white url(../img/services/service-status.png) no-repeat center -16px;
             width: 24px;
             height: 24px;
             position: absolute;
@@ -52,55 +66,55 @@
 
         .connected {
             background-position: center 7px;
-            border: 2px solid #51b321;
+            border: 2px solid @green-check;
         }
 
         .status:hover {
-            background: #fff;
+            background: @white;
             width: 90px;
             text-align: center;
             text-decoration: none;
 
             span {
                 display: inline-block;
-                color: #fff;
+                color: @white;
                 margin-top: 4px;
                 font-size: 11px;
             }
         }
 
         .status:hover.connected {
-            background: #c63236;
-            border-color: #c63236;
+            background: @brand-success;
+            border-color: @brand-success;
         }
 
         .status:hover.disconnected {
-            background: #51b321;
+            background: @brand-danger;
         }
     }
 
     .twitch .service_icon {
-        background-color: #6441a5;
+        background-color: @twitch-bg;
         background-position: 0px center;
     }
 
     .steam .service_icon {
-        background-color: #3b3938;
+        background-color: @steam-bg;
         background-position: -80px center;
     }
 
     .facebook .service_icon {
-        background-color: #3c5a96;
+        background-color: @facebook-bg;
         background-position: -160px center;
     }
 
     .twitter .service_icon {
-        background-color: #59adeb;
+        background-color: @twitter-bg;
         background-position: -240px center;
     }
 
     .youtube .service_icon {
-        background-color: #ca1c26;
+        background-color: @youtube-bg;
         background-position: -320px center;
     }
 }

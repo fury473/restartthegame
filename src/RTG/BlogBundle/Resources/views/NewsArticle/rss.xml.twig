@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<rss version="2.0">
+    <channel>
+        <title>restartthegame.com</title>
+        <link>{{ url('rtg_app_page_index') }}</link>
+        <description>Une association regroupant de nombreux joueurs PC et créant des évênement E-Sport.</description>
+        <language>fr-fr</language>
+        <copyright>
+            2013-{{ 'now'|date('Y') }} {{ brand_name }}
+        </copyright>
+        <lastBuildDate>{{ 'now'|date('r')}} </lastBuildDate>
+        <docs>http://blogs.law.harvard.edu/tech/rss</docs>
+        <category>Jeux Video</category>
+        <managingEditor>contact@restartthegame.com</managingEditor>
+        <webMaster>webmaster@restartthegame.com</webMaster>
+        <ttl>60</ttl>
+            {% for article in articles %}
+            <item>
+                <title>{{ article.title }}</title>
+                <link>{{ url('rtg_blog_newsarticle_show', {slug: article.slug}) }}</link>
+                <description>{{ article.catchPhrase }}</description>
+                <pubDate>{{ article.created|date('r') }}</pubDate>
+                <guid>{{ url('rtg_blog_newsarticle_show', {slug: article.slug}) }}</guid>
+                {% if article.category is not null %}<category>{{ article.category }}</category>{% endif %}
+            </item>
+        {% endfor %}
+    </channel>
+</rss>

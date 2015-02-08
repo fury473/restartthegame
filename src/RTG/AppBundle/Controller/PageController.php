@@ -34,7 +34,7 @@ class PageController extends Controller
     }
     
     /**
-     * @Template()
+     * @Template("RTGAppBundle:Page:include/menu.html.twig")
      */
     public function menuAction()
     {
@@ -46,7 +46,7 @@ class PageController extends Controller
     }
     
     /**
-     * @Template()
+     * @Template("RTGAppBundle:Page:include/menuUser.html.twig")
      */
     public function menuUserAction()
     {
@@ -90,7 +90,9 @@ class PageController extends Controller
      */
     public function streamAction()
     {
-        return array();
+        $em = $this->getDoctrine()->getManager();
+        $streamers = $em->getRepository('RTGUserBundle:User')->findStreamers();
+        return array('streamers' => $streamers);
     }
     
     /**

@@ -8,12 +8,8 @@ body {
     background-image: url(../img/bg.png);
     background-attachment: fixed;
     background-size: cover;
-    padding-top: 71px;
+    padding-top: 50px;
     margin-bottom: 110px;
-}
-
-.bloc {
-    margin: 20px auto;
 }
 
 .container {
@@ -27,7 +23,7 @@ body {
     }
 
     fieldset:not(.last) {
-        border-bottom: 1px solid #202020;
+        border-bottom: 1px solid @hr-border;
     }
 }
 
@@ -46,17 +42,9 @@ body {
     right: 15px;
 }
 
-.vcard {
-    margin-top: 20px;
-}
-
-.top .vcard {
-    margin-top: 0;
-}
-
-.bloc, .vcard {
+.bloc {
+    margin: 20px auto 0 auto;
     padding: 30px 15px;
-    color: #b5b5b5;
     background: rgba(0, 0, 0, 0.9);
     -webkit-box-shadow: 0px 1px 2px -1px rgba(0, 0, 0, 0.6);
     -moz-box-shadow: 0px 1px 2px -1px rgba(0, 0, 0, 0.6);
@@ -65,39 +53,7 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Museo500';
-    color: #4d92ab;
-    font-weight: normal;
-    padding-bottom: 12px;
-}
-
-h1 {
-    font-size: 22px;
-    line-height: 26px;
-}
-
-h2 {
-    font-size: 20px;
-    line-height: 24px;
-}
-
-h3 {
-    font-size: 18px;
-    line-height: 22px;
-}
-
-h4 {
-    font-size: 16px;
-    line-height: 20px;
-}
-
-h5 {
-    font-size: 14px;
-    line-height: 20px;
-}
-
-h6 {
-    font-size: 12px;
-    line-height: 18px;
+    color: @blue-title;
 }
 
 .alert-danger {
@@ -181,20 +137,20 @@ select {
 
 #main-menu {
     a {
-        color: #999999;
+        color: @text-color;
         font-family: 'Museo500';
         line-height: 32px;
         font-size: 14px;
     }
     a:hover, a:focus {
         background: inherit;
-        color: #ffffff;
+        color: @white;
     }
     li:before {
         content: none;
     }
     li.active a {
-        color: #ffffff;
+        color: @white;
     }
     ul {
         width: 100%;
@@ -213,13 +169,13 @@ select {
     border-top: none;
     
     .divider {
-        background-color: #454545;
+        background-color: @hr-border;
     }
 }
 
 .nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
     background-color: inherit;
-    color: #ffffff;
+    color: @white;
 }
 
 .navbar a {
@@ -230,7 +186,7 @@ select {
     content: none;
 }
 
-.banner .title {
+.header-title {
     padding: 30px;
     text-align: center;
 
@@ -238,7 +194,7 @@ select {
         color: white;
         font-family: 'ethnocentricregular';
         font-weight: normal;
-        text-shadow: 0 0 0.5em #457DBB;
+        text-shadow: 0 0 0.5em @brand-primary;
         @media (min-width: @screen-xs) {
             font-size: 60px;
         }
@@ -271,10 +227,10 @@ ul.latest-posts {
         font-style: normal;
         font-size: 14px;
         line-height: 20px;
-        border-top: 1px dashed #454545;
+        border-top: 1px dashed @hr-border;
 
         a {
-            color: #b5b5b5;
+            color: darken(@text-color, 5%);
             display: block;
             height: 46px;
             overflow: hidden;
@@ -308,14 +264,14 @@ ul.latest-posts {
                     font-style: normal;
                 }
             }
-        }
+            
+            &.incoming {
+                color: lighten(@text-color, 15%);
+            }
 
-        a.incoming {
-            color: #dcdcdc;
-        }
-
-        a:hover {
-            color: #e5ba5b;
+            &:hover {
+                color: @brand-warning;
+            }
         }
     }
 
@@ -326,7 +282,7 @@ ul.latest-posts {
 }
 
 #footer {
-    color: #eee;
+    color: @gray-lighter;
     text-align: center;
     position: absolute;
     bottom: 0;
@@ -334,22 +290,18 @@ ul.latest-posts {
     box-sizing: border-box;
     height: 110px;
 
-    .bloc {
-        padding: 5px;
-    }
-
     a {
         font-weight: bold;
-        color: #eee;
+        color: @gray-lighter;
     }
 
     a:hover {
-        color: #fff;
+        color: @white;
     }
-}
 
-#copyright {
-    margin: 20px auto;
+    & > div {
+        padding: 25px inherit;
+    }
 }
 
 .carousel-caption {

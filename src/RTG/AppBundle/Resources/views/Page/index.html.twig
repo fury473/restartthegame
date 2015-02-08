@@ -3,83 +3,81 @@
 {% block title_suffix %}{% endblock %}
 
 {% block content %}
-<div class="bloc container">
-    <div class="row-fluid clearfix">
-        <div class="col-md-9">
-            {{ include('RTGAppBundle:Page:carousel.html.twig', {'news': news}) }}
-        </div>
-        <div class="col-md-3">
-            <h3>Dernières compétitions</h3>
-            <ul class="latest-posts">
-                {% for competition in competitions %}
-                    {% set date_itemprop = 'startDate' %}
-                    {% set date_status =  '' %}
-                    {% if competition.status == 'EventRescheduled' %}
-                        {% set date_status =  '<span>(Replanifiée)</span>' %}
-                    {% elseif competition.status == 'EventPostponed' %}
-                        {% set date_status =  '<span>(Repoussée)</span>' %}
-                        {% set date_itemprop = 'previousStartDate' %}
-                    {% elseif competition.status == 'EventCancelled' %}
-                        {% set date_status =  '<span>(Annulée)</span>' %}
-                        {% set date_itemprop = 'previousStartDate' %}
-                    {% endif %}
-                    
-                    {% set incoming_class = '' %}
-                    {% if competition.date >= date() %}{% set incoming_class = ' class="incoming"' %}{% endif %}
-                    <li itemscope itemtype="http://schema.org/Event" class="clearfix">
-                        <a itemprop="url"{{ incoming_class|raw }} href="{{ path('rtg_blog_competitionarticle_show', { 'slug': competition.slug }) }}" title="{{ competition.title }}"><span class="date">
-                                <time itemprop="{{ date_itemprop }}" datetime="{{ competition.date|date('c') }}">
-                                    <em class="day">{{ competition.date|localizeddate('none', 'none', app.request.locale, null, 'd') }}</em>
-                                    <em class="month">{{ competition.date|localizeddate('none', 'none', app.request.locale, null, 'MMM') }}</em>
-                                </time>
-                            </span>
-                            <span itemprop="name" class="post-title">{{ competition.title }}</span>
-                            <link itemprop="eventStatus" href="http://schema.org/{{ competition.status }}"/>{{ date_status|raw }}
-                        </a>
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
+<div class="row-fluid clearfix">
+    <div class="col-md-9">
+        {{ include('RTGAppBundle:Page:include/carousel.html.twig', {'news': news}) }}
     </div>
-    
-    <div class="row-fluid">
-        <div class="col-md-12">
-            <div class="intro">
-                La Restart The Game, RTG, est une association où se regroupent de nombreux joueurs...
-            </div>
-        </div>
-    </div>
+    <div class="col-md-3">
+        <h3>Dernières compétitions</h3>
+        <ul class="latest-posts">
+            {% for competition in competitions %}
+                {% set date_itemprop = 'startDate' %}
+                {% set date_status =  '' %}
+                {% if competition.status == 'EventRescheduled' %}
+                    {% set date_status =  '<span>(Replanifiée)</span>' %}
+                {% elseif competition.status == 'EventPostponed' %}
+                    {% set date_status =  '<span>(Repoussée)</span>' %}
+                    {% set date_itemprop = 'previousStartDate' %}
+                {% elseif competition.status == 'EventCancelled' %}
+                    {% set date_status =  '<span>(Annulée)</span>' %}
+                    {% set date_itemprop = 'previousStartDate' %}
+                {% endif %}
 
-    <div class="row-fluid">
-        <div class="col-md-12">
-            <h1>Restart the Game</h1>
-            <p>L’association Restart The Game vous souhaite la bienvenue !</p>
-            <p>Depuis 2012 Restart The Game est d’abord une communauté de teams et de joueurs présents pour le simple plaisir de jouer et de faire connaissance. C’est à partir d’octobre 2013 que la RTG devient une association. Un nouvel objectif : promouvoir la communauté PC à travers la compétition virtuelle et physique, par le biais de Lans... ainsi que permettre aux joueurs de se retrouver et d’échanger des moments de complicité à travers les différents jeux sur PC.</p>
-            <p>Au quotidien, le Staff proposera à sa communauté des compétitions virtuelles, des streams, des concours... Au programme également, des soirées et d’autres événements dans la région lyonnaise.</p>
-            <p>Finalement, l’association Restart The Game et ses joueurs constituent une communauté solidaire, éthique, basée sur le respect de l’autre, et sur le professionnalisme du Staff qui encadre cette communauté.</p>
+                {% set incoming_class = '' %}
+                {% if competition.date >= date() %}{% set incoming_class = ' class="incoming"' %}{% endif %}
+                <li itemscope itemtype="http://schema.org/Event" class="clearfix">
+                    <a itemprop="url"{{ incoming_class|raw }} href="{{ path('rtg_blog_competitionarticle_show', { 'slug': competition.slug }) }}" title="{{ competition.title }}"><span class="date">
+                            <time itemprop="{{ date_itemprop }}" datetime="{{ competition.date|date('c') }}">
+                                <em class="day">{{ competition.date|localizeddate('none', 'none', app.request.locale, null, 'd') }}</em>
+                                <em class="month">{{ competition.date|localizeddate('none', 'none', app.request.locale, null, 'MMM') }}</em>
+                            </time>
+                        </span>
+                        <span itemprop="name" class="post-title">{{ competition.title }}</span>
+                        <link itemprop="eventStatus" href="http://schema.org/{{ competition.status }}"/>{{ date_status|raw }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<div class="row-fluid">
+    <div class="col-md-12">
+        <div class="intro">
+            La {{ brand_name }}, RTG, est une association où se regroupent de nombreux joueurs...
         </div>
     </div>
-    <div class="row-fluid">
-        <div class="col-md-3">
-            <img class="center-block" src="{{ asset('bundles/rtgapp/img/index/icon1.png') }}" alt="Teamspeak"/>
-            <h3 class="text-center">Teamspeak</h3>
-            <p class="text-center">Membre ou non de l’association, venez partager de bons moments sur notre Teamspeak !</p>
-        </div>
-        <div class="col-md-3">
-            <img class="center-block" src="{{ asset('bundles/rtgapp/img/index/icon2.png') }}" alt="Respect & Politesse"/>
-            <h3 class="text-center">Respect & Politesse</h3>
-            <p class="text-center">Les joueurs passent de bon moment. Et c'est encore mieux quand tout le monde respecte un minimum de politesse</p>
-        </div>
-        <div class="col-md-3">
-            <img class="center-block" src="{{ asset('bundles/rtgapp/img/index/icon3.png') }}" alt="Admins/Staff"/>
-            <h3 class="text-center">Admins/Staff</h3>
-            <p class="text-center">Les Admins, Modo ou le Staff sont là pour vous aider en cas de problème.</p>
-        </div>
-        <div class="col-md-3">
-            <img class="center-block" src="{{ asset('bundles/rtgapp/img/index/icon4.png') }}" alt="Votre channel"/>
-            <h3 class="text-center">Votre channel</h3>
-            <p class="text-center">Chaque équipe inscrite a le droit à son petit espace sur le Teamspeak.</p>
-        </div>
+</div>
+
+<div class="row-fluid">
+    <div class="col-md-12">
+        <h1>{{ brand_name }}</h1>
+        <p>L’association {{ brand_name }} vous souhaite la bienvenue !</p>
+        <p>Depuis 2012 {{ brand_name }} est d’abord une communauté de teams et de joueurs présents pour le simple plaisir de jouer et de faire connaissance. C’est à partir d’octobre 2013 que la RTG devient une association. Un nouvel objectif : promouvoir la communauté PC à travers la compétition virtuelle et physique, par le biais de Lans... ainsi que permettre aux joueurs de se retrouver et d’échanger des moments de complicité à travers les différents jeux sur PC.</p>
+        <p>Au quotidien, le Staff proposera à sa communauté des compétitions virtuelles, des streams, des concours... Au programme également, des soirées et d’autres événements dans la région lyonnaise.</p>
+        <p>Finalement, l’association {{ brand_name }} et ses joueurs constituent une communauté solidaire, éthique, basée sur le respect de l’autre, et sur le professionnalisme du Staff qui encadre cette communauté.</p>
+    </div>
+</div>
+<div class="row-fluid">
+    <div class="col-md-3">
+        <img class="center-block" src="{{ asset('bundles/rtgapp/img/index/icon1.png') }}" alt="Teamspeak"/>
+        <h3 class="text-center">Teamspeak</h3>
+        <p class="text-center">Membre ou non de l’association, venez partager de bons moments sur notre Teamspeak !</p>
+    </div>
+    <div class="col-md-3">
+        <img class="center-block" src="{{ asset('bundles/rtgapp/img/index/icon2.png') }}" alt="Respect & Politesse"/>
+        <h3 class="text-center">Respect & Politesse</h3>
+        <p class="text-center">Les joueurs passent de bon moment. Et c'est encore mieux quand tout le monde respecte un minimum de politesse</p>
+    </div>
+    <div class="col-md-3">
+        <img class="center-block" src="{{ asset('bundles/rtgapp/img/index/icon3.png') }}" alt="Admins/Staff"/>
+        <h3 class="text-center">Admins/Staff</h3>
+        <p class="text-center">Les Admins, Modo ou le Staff sont là pour vous aider en cas de problème.</p>
+    </div>
+    <div class="col-md-3">
+        <img class="center-block" src="{{ asset('bundles/rtgapp/img/index/icon4.png') }}" alt="Votre channel"/>
+        <h3 class="text-center">Votre channel</h3>
+        <p class="text-center">Chaque équipe inscrite a le droit à son petit espace sur le Teamspeak.</p>
     </div>
 </div>
 {% endblock %}

@@ -3,44 +3,42 @@
 {% block title %}Mentions légales{% endblock %}
 
 {% block content %}
-<div class="bloc container">
-    <h1>Mentions légales</h1>
-    <div class="row-fluid clearfix">
-        <div itemscope itemtype="http://schema.org/Organization" class="col-md-6">
-            <div class="pull-right"><img width="151" class="center-block img-responsive" src="{{ asset('bundles/rtgapp/img/logo.png') }}" alt="Restart the Game"></div>
-            <h2>Editeur du site internet</h2>
-            <p><strong>Restart the Game</strong></p>
-            <p><span itemprop="description">Association loi 1901</span></p>
-            <p>
-                Adresse:
-                <address itemscope itemtype="http://schema.org/PostalAddress">
-                    <span itemprop="streetAddress">8 rue Waldeck Rousseau</span><br/>
-                    <span itemprop="postalCode">69520</span> <span itemprop="addressLocality">GRIGNY</span><br/>
-                    <span itemprop="addressCountry">France</span>
-                    <br/>
-                </address>
-                <abbr title="Email">E</abbr>: <a itemprop="email" href="mailto:contact@restartthegame.com">contact@restartthegame.com</a><br/>
-                <abbr title="Site Web">W</abbr>: <a itemprop="url" href="http://www.restartthegame.com">www.restartthegame.com</a>
-            </p>
-        </div>
+<h1>Mentions légales</h1>
+<div class="row-fluid clearfix">
+    <div itemscope itemtype="http://schema.org/Organization" class="col-md-6">
+        <div class="pull-right"><img width="151" class="center-block img-responsive" src="{{ asset('bundles/rtgapp/img/logo.png') }}" alt="{{ brand_name }}"></div>
+        <h2>Editeur du site internet</h2>
+        <p><strong>{{ brand_name }}</strong></p>
+        <p><span itemprop="description">Association loi 1901</span></p>
+        <p>
+            Adresse:
+            <address itemscope itemtype="http://schema.org/PostalAddress">
+                <span itemprop="streetAddress">8 rue Waldeck Rousseau</span><br/>
+                <span itemprop="postalCode">69520</span> <span itemprop="addressLocality">GRIGNY</span><br/>
+                <span itemprop="addressCountry">France</span>
+                <br/>
+            </address>
+            <abbr title="Email">E</abbr>: <a itemprop="email" href="mailto:contact@restartthegame.com">contact@restartthegame.com</a><br/>
+            <abbr title="Site Web">W</abbr>: <a itemprop="url" href="http://www.restartthegame.com">www.restartthegame.com</a>
+        </p>
     </div>
-    
-    <div class="row-fluid">
-        <h2>Hébergement</h2>
-        <p>Ce site est hebergé par <a href="http://www.engine-serv.com/" target="_blank" title="Engine-Serv : Location de Serveur de jeux et vocaux">Engine-Serv</a>.</p>
-        <a href="http://www.engine-serv.com/" target="_blank" title="Engine-Serv : Location de Serveur de jeux et vocaux"><img src="{{ asset('bundles/rtgapp/img/content/partners/engine-serv.png') }}" alt="Engine-Serv : Location de Serveur de jeux et vocaux"/></a>
-    </div>
-    
-    <div class="row-fluid">
-        <h2>Propriété et reproduction</h2>
-        <p>La structure générale, ainsi que les logiciels, textes, images animées ou fixes, sons, savoir-faire, dessins, graphismes et tous autres éléments composant ce site web sont de l’utilisation exclusive de Restart the Game.</p>
-        <p>Toute reproduction totale ou partielle de ce site, par quelques procédés que ce soient, sans autorisation expresse de Restart the Game, est interdite et constituerait une contrefaçon sanctionnée par les articles L335-2 et suivants du Code de la propriété intellectuelle.</p>
-        <p>Les liens hypertextes mis en place dans le cadre du présent site web en direction d’autres ressources présentes sur le réseau internet, ne sauraient engager la responsabilité de Restart the Game.</p>
-    </div>
+</div>
 
-    <div class="row-fluid">
-        <h2>Loi applicable</h2>
-        <p>L’usage de ce site web est régi par la loi française à l’exception de toute autre législation.</p>
-    </div>
+<div class="row-fluid">
+    <h2>Hébergement</h2>
+    <p>Ce site est hebergé par <a href="http://www.engine-serv.com/" target="_blank" title="Engine-Serv : Location de Serveur de jeux et vocaux">Engine-Serv</a>.</p>
+    <a href="http://www.engine-serv.com/" target="_blank" title="Engine-Serv : Location de Serveur de jeux et vocaux"><img src="{{ asset('bundles/rtgapp/img/content/partners/engine-serv.png') }}" alt="Engine-Serv : Location de Serveur de jeux et vocaux"/></a>
+</div>
+
+<div class="row-fluid">
+    <h2>Propriété et reproduction</h2>
+    <p>La structure générale, ainsi que les logiciels, textes, images animées ou fixes, sons, savoir-faire, dessins, graphismes et tous autres éléments composant ce site web sont de l’utilisation exclusive de {{ brand_name }}.</p>
+    <p>Toute reproduction totale ou partielle de ce site, par quelques procédés que ce soient, sans autorisation expresse de {{ brand_name }}, est interdite et constituerait une contrefaçon sanctionnée par les articles L335-2 et suivants du Code de la propriété intellectuelle.</p>
+    <p>Les liens hypertextes mis en place dans le cadre du présent site web en direction d’autres ressources présentes sur le réseau internet, ne sauraient engager la responsabilité de {{ brand_name }}.</p>
+</div>
+
+<div class="row-fluid">
+    <h2>Loi applicable</h2>
+    <p>L’usage de ce site web est régi par la loi française à l’exception de toute autre législation.</p>
 </div>
 {% endblock %}

@@ -20,6 +20,8 @@ parameters:
     locale:            fr
     secret:            secret
 
+    brand_name: Restart The Game
+
     twitch_client_id:     client_id
     twitch_client_secret: client_secret
     facebook_app_id: app_id

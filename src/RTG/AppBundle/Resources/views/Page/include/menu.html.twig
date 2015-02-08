@@ -1,6 +1,6 @@
 <ul class="nav navbar-nav" role="navigation">
     <li class="pull-left{% if 'rtg_app_page_index' in app.request.get('_route') %} active{% endif %}">
-      <a href="{{ path('rtg_app_page_index') }}" title="Restart the Game">{{ 'home'|trans({}, 'menu') }}</a>
+      <a href="{{ path('rtg_app_page_index') }}" title="{{ brand_name }}">{{ 'home'|trans({}, 'menu') }}</a>
     </li>
     {% if categories is empty %}
     <li class="pull-left{% if 'rtg_blog_newsarticle' in app.request.get('_route') %} active{% endif %}">
@@ -34,18 +34,21 @@
         <a href="{{ path('rtg_app_page_partners') }}" title="{{ 'partners'|trans({}, 'menu') }}">{{ 'partners'|trans({}, 'menu') }}</a>
     </li>
     <li class="pull-left">
-        <a target="_blank" href="http://forum.restartthegame.com" title="Forum - Restart the Game">Forum</a>
+        <a target="_blank" href="http://forum.restartthegame.com" title="Forum - {{ brand_name }}">Forum</a>
     </li>
     <li class="pull-left{% if 'rtg_app_page_contact' in app.request.get('_route') %} active{% endif %}">
         <a href="{{ path('rtg_app_page_contact') }}" title="{{ 'contact'|trans({}, 'menu') }}">{{ 'contact'|trans({}, 'menu') }}</a>
     </li>
     <li class="pull-right">
-        <a target="_blank" href="http://steamcommunity.com/groups/RestartTheGame" title="Steam - Restart the Game"><i class="icon-steam icon32"></i></a>
+        <a target="_blank" href="{{ path('rtg_blog_newsarticle_rss', {_format: 'xml'}) }}" title="RSS - {{ brand_name }}"><i class="icon-rss icon32"></i></a>
     </li>
     <li class="pull-right">
-        <a target="_blank" href="https://twitter.com/RestartTheGame" title="Twitter - Restart the Game"><i class="icon-twitter icon32"></i></a>
+        <a target="_blank" href="http://steamcommunity.com/groups/RestartTheGame" title="Steam - {{ brand_name }}"><i class="icon-steam icon32"></i></a>
     </li>
     <li class="pull-right">
-        <a target="_blank" href="https://www.facebook.com/RestartTheGameCommunity" title="Facebook - Restart the Game"><i class="icon-facebook icon32"></i></a>
+        <a target="_blank" href="https://twitter.com/RestartTheGame" title="Twitter - {{ brand_name }}"><i class="icon-twitter icon32"></i></a>
+    </li>
+    <li class="pull-right">
+        <a target="_blank" href="https://www.facebook.com/RestartTheGameCommunity" title="Facebook - {{ brand_name }}"><i class="icon-facebook icon32"></i></a>
     </li>
 </ul>

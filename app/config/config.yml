@@ -18,7 +18,7 @@ framework:
     validation:      { enable_annotations: true }
     templating:
         engines: ['twig']
-        assets_version: v1.2.1
+        assets_version: v1.2.5
     default_locale:  "%locale%"
     trusted_proxies: ~
     session:         ~
@@ -35,6 +35,7 @@ twig:
     globals:
         fb_app_id: %facebook_app_id%
         web_path: %web_path%
+        brand_name: %brand_name%
 services:
     rtg.twig_extension:
         class: %rtg.twig_extension.class%

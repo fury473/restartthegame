@@ -7,5 +7,6 @@ services:
             templating: @templating
             newsletter_address: %newsletter_address%
             noreply_address: %noreply_address%
+            brand_name: %brand_name%
     newsletter:
         alias: rtg_app.newsletter
