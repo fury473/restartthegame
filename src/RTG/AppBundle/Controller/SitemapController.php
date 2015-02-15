@@ -50,13 +50,14 @@ class SitemapController extends Controller
     {
         $routes = array();
         $routes[] = 'rtg_app_page_index';
-        $routes[] = 'rtg_app_page_aboutus';
-        $routes[] = 'rtg_app_page_partners';
-        $routes[] = 'rtg_app_page_teamspeak';
-        $routes[] = 'rtg_app_page_contact';
-        $routes[] = 'rtg_app_page_legalnotices';
         $routes[] = 'rtg_blog_newsarticle_index';
         $routes[] = 'rtg_blog_competitionarticle_index';
+        $routes[] = 'rtg_app_page_stream';
+        $routes[] = 'rtg_app_page_aboutus';
+        $routes[] = 'rtg_app_page_teamspeak';
+        $routes[] = 'rtg_app_page_partners';
+        $routes[] = 'rtg_app_page_contact';
+        $routes[] = 'rtg_app_page_legalnotices';
         return $routes;
     }
 }
