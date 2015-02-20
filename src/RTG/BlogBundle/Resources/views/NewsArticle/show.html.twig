@@ -24,16 +24,18 @@
 {% endblock %}
 
 {% block content %}
-    <article>
+    <article itemscope itemtype="http://schema.org/Article">
         <header>
             {# |date('l, F j, Y') #}
+            <meta itemprop="author" content="{{ article.author.username }}">
+            <meta itemprop="datePublished" content="{{ article.created|date('c') }}">
             <time datetime="{{ article.created|date('c') }}" class="pull-right">{{ article.created|localizeddate('full', 'none')|capitalize }}</time>
-            <h1>{{ article.title }}</h1>
+            <h1 itemprop="headline">{{ article.title }}</h1>
             {% if article.image is not null %}
-                <img src="{{ asset(article.image.webPath) }}" alt="{{ article.title }}" class="img-responsive" />
+                <img itemprop="image" src="{{ asset(article.image.webPath) }}" alt="{{ article.title }}" class="img-responsive" />
             {% endif %}
         </header>
-        <div>
+        <div itemprop="articleBody">
             {{ article.message|raw }}
         </div>
         <div class="row-fluid">
