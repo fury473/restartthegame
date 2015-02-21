@@ -1,36 +1,51 @@
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu-user">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="{{ path('rtg_app_page_index') }}" title="{{ brand_name }}">{{ brand_name }}</a>
-        </div>
-        <div class="collapse navbar-collapse" id="menu-user">
-            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                <ul class="nav navbar-nav navbar-right navbar-collapse">
-                    {# {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} #}
-                    <li{% if 'profile' in app.request.get('_route') or 'rtg_user_user_edit' in app.request.get('_route') %} class="active"{% endif %}>
-                        <a href="{{ path('rtg_user_user_myprofile') }}" title="{{ 'profile'|trans({}, 'menu') }}"><span class="glyphicon glyphicon-user"></span> {{ 'profile'|trans({}, 'menu') }}</a>
-                    </li>
-                    {% if is_granted("ROLE_ADMIN") %}
-                        <li{% if 'admin' in app.request.get('_route') %} class="active"{% endif %}>
-                            <a href="{{ path('rtg_app_page_admin') }}" title="{{ 'admin'|trans({}, 'menu') }}"><span class="glyphicon glyphicon-wrench"></span> {{ 'admin'|trans({}, 'menu') }}</a>
-                        </li>
-                    {% endif %}
-                    <li>
-                        <a href="{{ path('fos_user_security_logout') }}" title="{{ 'logout'|trans({}, 'menu') }}"><span class="glyphicon glyphicon-log-out"></span> {{ 'logout'|trans({}, 'menu') }}</a>
-                    </li>                        
-                </ul>
-            {% else %}
-                <div class="nav navbar-nav navbar-right navbar-collapse">
-                    <a href="{{ path('fos_user_registration_register') }}" class="navbar-link" title=""><span class="glyphicon glyphicon-ok"></span> {{ 'register'|trans({}, 'menu') }}</a>&nbsp;&nbsp;
-                    <a href="{{ path('fos_user_security_login') }}" class="btn btn-primary navbar-btn" title="{{ 'login'|trans({}, 'menu') }}"><span class="glyphicon glyphicon-log-in"></span> {{ 'login'|trans({}, 'menu') }}</a>
+        <div class="row-fluid">
+            <div class="col-md-6">
+                <div class="navbar-header" itemscope itemtype="http://schema.org/WebSite">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu-user">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="{{ path('rtg_app_page_index') }}" title="{{ brand_name }}"><meta itemprop="url" content="{{ url('rtg_app_page_index') }}"/>{{ brand_name }}</a>
+                    <form action="{{ path('rtg_app_page_search') }}" method="GET" itemprop="potentialAction" itemscope itemtype="http://schema.org/SearchAction">
+                        <div id="searchBar" class="input-group">
+                            <meta itemprop="target" content="{{ url('rtg_app_page_search') }}?query={query}"/>
+                            <input itemprop="query-input" type="text" name="query" class="form-control" placeholder="Rechercher une actu, une compétition">
+                            <span class="input-group-btn">
+                                <button class="btn btn-info" type="submit"><i class="glyphicon glyphicon-search" aria-hidden="true"></i></button>
+                            </span>
+                        </div>
+                    </form>
                 </div>
-            {% endif %}
+            </div>
+            <div class="col-md-6">
+                <div class="collapse navbar-collapse" id="menu-user">
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                        <ul class="nav navbar-nav navbar-right navbar-collapse">
+                            {# {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} #}
+                            <li{% if 'profile' in app.request.get('_route') or 'rtg_user_user_edit' in app.request.get('_route') %} class="active"{% endif %}>
+                                <a href="{{ path('rtg_user_user_myprofile') }}" title="{{ 'profile'|trans({}, 'menu') }}"><span class="glyphicon glyphicon-user"></span> {{ 'profile'|trans({}, 'menu') }}</a>
+                            </li>
+                            {% if is_granted("ROLE_ADMIN") %}
+                                <li{% if 'admin' in app.request.get('_route') %} class="active"{% endif %}>
+                                    <a href="{{ path('rtg_app_page_admin') }}" title="{{ 'admin'|trans({}, 'menu') }}"><span class="glyphicon glyphicon-wrench"></span> {{ 'admin'|trans({}, 'menu') }}</a>
+                                </li>
+                            {% endif %}
+                            <li>
+                                <a href="{{ path('fos_user_security_logout') }}" title="{{ 'logout'|trans({}, 'menu') }}"><span class="glyphicon glyphicon-log-out"></span> {{ 'logout'|trans({}, 'menu') }}</a>
+                            </li>                        
+                        </ul>
+                    {% else %}
+                        <div class="nav navbar-nav navbar-right navbar-collapse">
+                            <a href="{{ path('fos_user_registration_register') }}" class="navbar-link" title=""><span class="glyphicon glyphicon-ok"></span> {{ 'register'|trans({}, 'menu') }}</a>&nbsp;&nbsp;
+                            <a href="{{ path('fos_user_security_login') }}" class="btn btn-primary navbar-btn" title="{{ 'login'|trans({}, 'menu') }}"><span class="glyphicon glyphicon-log-in"></span> {{ 'login'|trans({}, 'menu') }}</a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
         </div>
     </div>
 </div>

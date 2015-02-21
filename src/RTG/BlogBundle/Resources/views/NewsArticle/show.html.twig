@@ -24,11 +24,12 @@
 {% endblock %}
 
 {% block content %}
-    <article itemscope itemtype="http://schema.org/Article">
+    <article itemscope itemtype="http://schema.org/NewsArticle">
         <header>
             {# |date('l, F j, Y') #}
             <meta itemprop="author" content="{{ article.author.username }}">
             <meta itemprop="datePublished" content="{{ article.created|date('c') }}">
+            <meta itemprop="dateModified" content="{{ article.updated|date('c') }}">
             <time datetime="{{ article.created|date('c') }}" class="pull-right">{{ article.created|localizeddate('full', 'none')|capitalize }}</time>
             <h1 itemprop="headline">{{ article.title }}</h1>
             {% if article.image is not null %}

@@ -84,6 +84,52 @@ class PageController extends Controller
     }
     
     /**
+     * @Route("/search")
+     * @Method({"GET"})
+     * @Template()
+     */
+    public function searchAction(Request $request)
+    {
+        $query = $request->query->get('query');
+        $em = $this->getDoctrine()->getManager();
+        if($query) {
+            $news = $em->getRepository('RTGBlogBundle:NewsArticle')->search($query, 6);
+            $news_count = $em->getRepository('RTGBlogBundle:NewsArticle')->searchCount($query);
+            $competitions = $em->getRepository('RTGBlogBundle:CompetitionArticle')->search($query, 6);
+            $competitions_count = $em->getRepository('RTGBlogBundle:CompetitionArticle')->searchCount($query);
+        } else {
+            return array('query' => $query);
+        }
+        return array('query' => $query, 'news' => $news, 'news_count' => $news_count, 'competitions' => $competitions, 'competitions_count' => $competitions_count);
+    }
+    
+    /**
+     * @Route("/search/competition")
+     * @Method({"GET"})
+     * @Template("RTGAppBundle:Page:search.html.twig")
+     */
+    public function searchCompetitionAction(Request $request)
+    {
+        $query = $request->query->get('query');
+        $em = $this->getDoctrine()->getManager();
+        $competitions = $em->getRepository('RTGBlogBundle:CompetitionArticle')->search($query);
+        return array('query' => $query, 'competitions' => $competitions, 'competitions_count' => count($competitions));
+    }
+    
+    /**
+     * @Route("/search/news")
+     * @Method({"GET"})
+     * @Template("RTGAppBundle:Page:search.html.twig")
+     */
+    public function searchNewsAction(Request $request)
+    {
+        $query = $request->query->get('query');
+        $em = $this->getDoctrine()->getManager();
+        $news = $em->getRepository('RTGBlogBundle:NewsArticle')->search($query);
+        return array('query' => $query, 'news' => $news, 'news_count' => count($news));
+    }
+    
+    /**
      * @Route("/stream")
      * @Method({"GET"})
      * @Template()

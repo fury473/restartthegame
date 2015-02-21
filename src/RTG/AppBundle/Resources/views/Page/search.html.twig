@@ -1,0 +1,27 @@
+{% extends 'RTGAppBundle::layout.html.twig' %}
+
+{% block title %}Résultats pour "{{ query }}"{% endblock %}
+
+{% block content %}
+    <h1>Résultats pour "{{ query }}"</h1>
+    {% if (news is not defined or news is empty) and (competitions is not defined or competitions is empty) %}
+        <p>Aucun résultat ne correspond à vos critères de recherche.</p>
+    {% else %}
+        {% if news is defined and news is not empty %}
+            {% if news_count > news|length %}
+                <a class="btn btn-info pull-right" href="{{ path('rtg_app_page_searchnews', {query: app.request.get('query')}) }}" title="Voir toutes les actualités">Voir toutes les actualités</a>
+            {% endif %}
+            <h2>Actualités : <span>{{ news_count }} résultat{% if news_count > 1 %}s{% endif %}</span></h2>
+            <br/>
+            {{ include('RTGBlogBundle:NewsArticle:list.html.twig', {'articles': news}) }}
+        {% endif %}
+        {% if competitions is defined and competitions is not empty %}
+            {% if competitions_count > competitions|length %}
+                <a class="btn btn-info pull-right" href="{{ path('rtg_app_page_searchcompetition', {query: app.request.get('query')}) }}" title="Voir toutes les compétitions">Voir toutes les compétitions</a>
+            {% endif %}
+            <h2>Compétitions : <span>{{ competitions_count }} résultat{% if competitions_count > 1 %}s{% endif %}</span></h2>
+            <br/>
+            {{ include('RTGBlogBundle:CompetitionArticle:list.html.twig', {'articles': competitions}) }}
+        {% endif %}
+    {% endif %}
+{% endblock %}

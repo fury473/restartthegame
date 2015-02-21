@@ -4,7 +4,7 @@
 <a href="{{ path('fos_user_security_login') }}" class="btn btn-primary navbar-btn" title="{{ 'login_to_comment'|trans({}, 'menu') }}"><span class="glyphicon glyphicon-log-in"></span> {{ 'login_to_comment'|trans({}, 'menu') }}</a>
 {% endif %}
 {% for comment in comments %}
-    <div class="media {{ cycle(['odd', 'even'], loop.index0) }}" id="comment-{{ comment.id }}">
+    <div class="media {{ cycle(['odd', 'even'], loop.index0) }}" id="comment-{{ comment.id }}" itemprop="comment" itemscope itemtype="http://schema.org/UserComments">
         <div class="pull-left">
         {% if comment.user is not null and comment.user.avatar is not null %}
                 <img src="{{ comment.user.avatar.webPath|apply_filter('tb-48x48') }}" alt="{{ comment.user }}"/>
@@ -15,13 +15,14 @@
         <div class="media-body">
             <div class="media-heading">
                 {% if comment.user is not null %}
-                <a href="{{ path('rtg_user_user_profile', {'id': comment.user.id}) }}" title="Voir le profil">{{ comment.user }}</a></span>
+                    <a href="{{ path('rtg_user_user_profile', {'id': comment.user.id}) }}" title="Voir le profil"><span itemprop="creator">{{ comment.user }}</span></a></span>
                 {% else %}
                 <span class="highlight">Compte supprimé</span>
                 {% endif %}
+                <meta itemprop="commentTime" content="{{ comment.created|date('c') }}">
                 <time datetime="{{ comment.created|date('c') }}" class="comment-date">{{ comment.created|time_ago_in_words(true, true)|trans() }}</time>
             </div>
-            {{ comment.comment }}
+            <div itemprop="commentText">{{ comment.comment }}</div>
         </div>
     </div>
 {% else %}
