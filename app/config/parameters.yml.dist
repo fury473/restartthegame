@@ -22,6 +22,9 @@ parameters:
 
     brand_name: Restart The Game
 
+    chatdepot_api_url: 'https://chatdepot.twitch.tv'
+    twitch_api_url: 'https://api.twitch.tv'
+    twitch_channel: 'restart_the_game'
     twitch_client_id:     client_id
     twitch_client_secret: client_secret
     facebook_app_id: app_id

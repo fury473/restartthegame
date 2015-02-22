@@ -54,29 +54,28 @@ body {
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Museo500';
     color: @blue-title;
+    span {
+        color: @text-color;
+    }
 }
 
-.alert-danger {
-    background: none;
-    border: none;
+#glob-errors {
+    position: fixed;
+    width: 25%;
+    left: 37.5%;
+    top: 10%;
+    z-index: 1000;
 }
 
 ul {
     list-style: none;
     padding: 0;
-    
-    li:before {
-        font-family: 'CharisSILItalic';
-        content: '\203A \020';
-        margin: 0 1em;
-    }
 }
 
-ul.list-unstyled {
-    li {
-        padding: 0;
-        list-style-image: none;
-    }
+ul:not(.list-unstyled) li:before {
+    font-family: 'CharisSILItalic';
+    content: '\203A \020';
+    margin: 0 1em;
 }
 
 ol {
@@ -161,6 +160,13 @@ select {
             padding-left: 5px;
             padding-right: 0;
         }
+    }
+}
+
+#searchBar {
+    margin-top: 8px;
+    button {
+        height: 34px;
     }
 }
 
@@ -322,6 +328,21 @@ ul.latest-posts {
 
 .fb-like {
     margin-left: 5px;
+}
+
+.stream-header {
+    margin-bottom: 10px;
+
+    img {
+        margin-right: 5px;
+        width: 60px;
+        height: 60px;
+    }
+
+    h2 {
+        margin-top: 10px;
+        margin-bottom: 0px;
+    }
 }
 
 .twitter-share-button {

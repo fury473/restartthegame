@@ -1,0 +1,27 @@
+<div class="article-list">
+    {% for article in articles %}
+        {% if loop.index0 % 2 == 0 %}
+            <div class="row-fluid clearfix">
+            {% endif %}
+            <div class="col-md-6">
+                <article class="article clearfix">
+                    <div class="col-xs-6 col-md-6">
+                        {% if article.image is not null %}
+                            <a href="{{ path('rtg_blog_newsarticle_show', { 'slug': article.slug }) }}"><img src="{{ article.image.webPath|apply_filter('article-tb') }}" /></a>
+                            {% endif %}
+                    </div>
+                    <div class="col-xs-6 col-md-6">
+                        <h2><a href="{{ path('rtg_blog_newsarticle_show', { 'slug': article.slug }) }}" class="bold">{{ article.category }} : <span>{{ article.title }}</span></a></h2>
+                        <div class="line-infos">
+                            <small><time datetime="{{ article.created|date('c') }}">{{ article.created|date('format.twig'|trans({}, 'date')) }}</time> - Par {{article.author}} - {{ article.comments|length }} <i class="glyphicon glyphicon-comment"></i></small>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            {% if loop.index0 % 2 == 1 or loop.last %}
+            </div>
+        {% endif %}
+    {% else %}
+        <p>{% trans %}There are no articles{% endtrans %}</p>
+    {% endfor %}
+</div>

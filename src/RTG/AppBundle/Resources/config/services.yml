@@ -8,5 +8,26 @@ services:
             newsletter_address: %newsletter_address%
             noreply_address: %noreply_address%
             brand_name: %brand_name%
+    rtg_app.twitchapiwrapper:
+        class: RTG\AppBundle\Services\TwitchApiWrapper
+        arguments:
+            client: @rtg_app.twitchapiclient
+            host_target_client: @rtg_app.chatdepotclient
+    rtg_app.twitchapiclient:
+        class: GuzzleHttp\Client
+        arguments:
+            config:
+                base_url: %twitch_api_url%
+                defaults:
+                    query:
+                        client_id: %twitch_client_id%
+                    verify: false
+    rtg_app.chatdepotclient:
+        class: GuzzleHttp\Client
+        arguments:
+            config:
+                base_url: %chatdepot_api_url%
+                defaults:
+                    verify: false
     newsletter:
         alias: rtg_app.newsletter

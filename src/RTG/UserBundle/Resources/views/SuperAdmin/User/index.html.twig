@@ -25,7 +25,7 @@
                 <td><a href="{{ path('rtg_user_superadmin_user_edit', { 'id': entity.id }) }}">{{ entity.username }}</a></td>
                 <td>{{ entity.email }}</td>
                 <td>{% if entity.newsletter %}Oui{% else %}Non{% endif %}</td>
-                <td>{{ entity.lastLogin|time_ago_in_words(true, true)|trans() }}</td>
+                <td>{{ entity.lastLogin|ago(true, true)|trans() }}</td>
                 <td>{% for role in entity.roles %}{{ role|trans({}, 'entity') }}<br/>{% endfor %}</td>
                 <td>{{ entity.locked }}</td>
                 <td>
