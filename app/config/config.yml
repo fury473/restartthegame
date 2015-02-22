@@ -18,7 +18,7 @@ framework:
     validation:      { enable_annotations: true }
     templating:
         engines: ['twig']
-        assets_version: v1.2.5
+        assets_version: v1.2.7
     default_locale:  "%locale%"
     trusted_proxies: ~
     session:         ~
@@ -45,11 +45,6 @@ services:
         class: Twig_Extensions_Extension_Intl
         tags:
             - { name: twig.extension }
-    salavert.twig.time_ago:
-        class: Salavert\Twig\Extension\TimeAgoExtension
-        arguments: ["@translator"]
-        tags:
-        - { name: twig.extension }
 
 # Assetic Configuration
 assetic:

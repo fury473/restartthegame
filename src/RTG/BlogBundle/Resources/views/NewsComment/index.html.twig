@@ -20,7 +20,7 @@
                 <span class="highlight">Compte supprimé</span>
                 {% endif %}
                 <meta itemprop="commentTime" content="{{ comment.created|date('c') }}">
-                <time datetime="{{ comment.created|date('c') }}" class="comment-date">{{ comment.created|time_ago_in_words(true, true)|trans() }}</time>
+                <time datetime="{{ comment.created|date('c') }}" class="comment-date">{{ comment.created|ago }}</time>
             </div>
             <div itemprop="commentText">{{ comment.comment }}</div>
         </div>

@@ -16,12 +16,12 @@ class AppKernel extends Kernel
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-            new Sensio\Bundle\BuzzBundle\SensioBuzzBundle(),
             new RTG\AppBundle\RTGAppBundle(),
             new RTG\UserBundle\RTGUserBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new RTG\BlogBundle\RTGBlogBundle(),
             new Avalanche\Bundle\ImagineBundle\AvalancheImagineBundle(),
+            new Knp\Bundle\TimeBundle\KnpTimeBundle(),
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
             new Gregwar\CaptchaBundle\GregwarCaptchaBundle(),
         );

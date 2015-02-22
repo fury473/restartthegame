@@ -24,7 +24,7 @@
             <div class="col-md-6">
                 <div class="collapse navbar-collapse" id="menu-user">
                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                        <ul class="nav navbar-nav navbar-right navbar-collapse">
+                        <ul class="nav navbar-nav navbar-right navbar-collapse list-unstyled">
                             {# {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} #}
                             <li{% if 'profile' in app.request.get('_route') or 'rtg_user_user_edit' in app.request.get('_route') %} class="active"{% endif %}>
                                 <a href="{{ path('rtg_user_user_myprofile') }}" title="{{ 'profile'|trans({}, 'menu') }}"><span class="glyphicon glyphicon-user"></span> {{ 'profile'|trans({}, 'menu') }}</a>

@@ -2,13 +2,13 @@
 
 namespace RTG\AppBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use GuzzleHttp\Exception\RequestException;
+use RTG\AppBundle\Form\ContactType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use RTG\AppBundle\Form\ContactType;
 
 /**
  * Page controller.
@@ -17,6 +17,7 @@ use RTG\AppBundle\Form\ContactType;
  */
 class PageController extends Controller
 {
+
     /**
      * @Route("/")
      * @Method({"GET"})
@@ -32,7 +33,7 @@ class PageController extends Controller
             'competitions' => $competitions
         );
     }
-    
+
     /**
      * @Template("RTGAppBundle:Page:include/menu.html.twig")
      */
@@ -44,7 +45,7 @@ class PageController extends Controller
             'categories' => $categories
         );
     }
-    
+
     /**
      * @Template("RTGAppBundle:Page:include/menuUser.html.twig")
      */
@@ -52,7 +53,7 @@ class PageController extends Controller
     {
         return array();
     }
-    
+
     /**
      * @Route("/admin")
      * @Method({"GET"})
@@ -62,7 +63,7 @@ class PageController extends Controller
     {
         return array();
     }
-    
+
     /**
      * @Route("/about-us")
      * @Method({"GET"})
@@ -72,7 +73,7 @@ class PageController extends Controller
     {
         return array();
     }
-    
+
     /**
      * @Route("/partners")
      * @Method({"GET"})
@@ -82,7 +83,7 @@ class PageController extends Controller
     {
         return array();
     }
-    
+
     /**
      * @Route("/search")
      * @Method({"GET"})
@@ -92,7 +93,7 @@ class PageController extends Controller
     {
         $query = $request->query->get('query');
         $em = $this->getDoctrine()->getManager();
-        if($query) {
+        if ($query) {
             $news = $em->getRepository('RTGBlogBundle:NewsArticle')->search($query, 6);
             $news_count = $em->getRepository('RTGBlogBundle:NewsArticle')->searchCount($query);
             $competitions = $em->getRepository('RTGBlogBundle:CompetitionArticle')->search($query, 6);
@@ -102,7 +103,7 @@ class PageController extends Controller
         }
         return array('query' => $query, 'news' => $news, 'news_count' => $news_count, 'competitions' => $competitions, 'competitions_count' => $competitions_count);
     }
-    
+
     /**
      * @Route("/search/competition")
      * @Method({"GET"})
@@ -115,7 +116,7 @@ class PageController extends Controller
         $competitions = $em->getRepository('RTGBlogBundle:CompetitionArticle')->search($query);
         return array('query' => $query, 'competitions' => $competitions, 'competitions_count' => count($competitions));
     }
-    
+
     /**
      * @Route("/search/news")
      * @Method({"GET"})
@@ -128,7 +129,7 @@ class PageController extends Controller
         $news = $em->getRepository('RTGBlogBundle:NewsArticle')->search($query);
         return array('query' => $query, 'news' => $news, 'news_count' => count($news));
     }
-    
+
     /**
      * @Route("/stream")
      * @Method({"GET"})
@@ -138,9 +139,22 @@ class PageController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $streamers = $em->getRepository('RTGUserBundle:User')->findStreamers();
-        return array('streamers' => $streamers);
+
+        $channel_name = $host_target = $this->container->getParameter('twitch_channel');
+        $client = $this->get('rtg_app.twitchapiwrapper');
+        $channel = $client->getChannel($channel_name);
+        
+        $hosted_channel = null;
+        if ($channel['host_target']) {
+            $stream = $client->getStream($channel['host_target']);
+            $hosted_channel = $client->getChannel($channel['host_target']);
+        } else {
+            $stream = $client->getStream($channel_name);
+        }
+
+        return array('channel' => $channel, 'hosted_channel' => $hosted_channel, 'stream' => $stream, 'streamers' => $streamers);
     }
-    
+
     /**
      * @Route("/teamspeak")
      * @Method({"GET"})
@@ -150,7 +164,7 @@ class PageController extends Controller
     {
         return array();
     }
-    
+
     /**
      * @Route("/contact")
      * @Method({"GET"})
@@ -162,7 +176,7 @@ class PageController extends Controller
         $form = $this->createForm(new ContactType(), null, array('action' => $route));
         return array('form' => $form->createView());
     }
-    
+
     /**
      * @Route("/contact-submit")
      * @Method({"POST"})
@@ -172,17 +186,17 @@ class PageController extends Controller
     {
         $form = $this->createForm(new ContactType());
         $form->handleRequest($request);
-        
-        if(($errorList = $form->isValid()) == true) {
+
+        if (($errorList = $form->isValid()) == true) {
             $other_object = $form->get('other_object')->getData();
-            if($other_object == null || $form->get('object')->getData() != 'Autre') {
+            if ($other_object == null || $form->get('object')->getData() != 'Autre') {
                 $subject = $form->get('object')->getData();
             } else {
                 $subject = $other_object;
             }
             $from = $this->container->getParameter('site_address');
             $to = '';
-            if($subject == 'Problème(s) à propos du Site') {
+            if ($subject == 'Problème(s) à propos du Site') {
                 $to = $this->container->getParameter('dev_delivery_address');
             } else {
                 $to = $this->container->getParameter('contact_delivery_address');
@@ -190,14 +204,14 @@ class PageController extends Controller
             $content = $form->get('message')->getData();
 
             $message = \Swift_Message::newInstance()
-            ->setSubject($subject)
-            ->setFrom($from)
-            ->setTo($to)
-            ->setBody($content);
-            
+                    ->setSubject($subject)
+                    ->setFrom($from)
+                    ->setTo($to)
+                    ->setBody($content);
+
             $logger = $this->get('monolog.logger.ip_mails');
             $logger->warning($this->get('request')->getClientIp() . " have sent a mail from contact form.");
-            
+
             $this->get('mailer')->send($message);
 
             return array('to' => $to);
@@ -205,7 +219,7 @@ class PageController extends Controller
             return $this->render('RTGAppBundle:Page:contact.html.twig', array('form' => $form->createView(), 'errorList' => $errorList));
         }
     }
-    
+
     /**
      * @Route("/legal-notices")
      * @Method({"GET"})
@@ -215,7 +229,7 @@ class PageController extends Controller
     {
         return array();
     }
-    
+
     /**
      * @Route("/forum")
      * @Method({"GET"})
@@ -224,9 +238,7 @@ class PageController extends Controller
     {
         return $this->redirect("http://forum.restartthegame.com");
     }
-    
-    
-    
+
 //    /**
 //     * @Route("/coming-soon")
 //     * @Method({"GET"})

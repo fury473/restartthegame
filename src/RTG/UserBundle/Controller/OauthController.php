@@ -2,6 +2,7 @@
 
 namespace RTG\UserBundle\Controller;
 
+use GuzzleHttp\Exception\RequestException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -21,12 +22,18 @@ class OAuthController extends Controller
     public function connectTwitchAction()
     {
         $scope = array('channel_read');
-        $url = 'https://api.twitch.tv/kraken/oauth2/authorize' .
-                '?response_type=code' .
-                '&client_id=' . $this->container->getParameter('twitch_client_id') .
-                '&redirect_uri=' . $this->generateUrl('rtg_user_oauth_checktwitch', array(), true) .
-                '&scope=' . implode('+', $scope);
-        return $this->redirect($url);
+        $client = $this->get('rtg_app.twitchapiclient');
+        try {
+            $response = $client->get('/oauth2/authorize', ['query' => [
+                'redirect_uri' => $this->generateUrl('rtg_user_oauth_checktwitch', array(), true),
+                'response_type' => 'code',
+                'scope' => implode('+', $scope)
+            ]]);
+        } catch (RequestException $e) {
+            $this->get('session')->getFlashBag()->add('error', 'Une erreur est survenu lors de l\'association au compte Twitch.');
+            return $this->redirect($this->generateUrl('rtg_user_user_myprofile'));
+        }
+        return $this->redirect($response->getEffectiveUrl());
     }
 
     /**
@@ -35,16 +42,19 @@ class OAuthController extends Controller
      */
     public function checkTwitchAction(Request $request)
     {
-        $url = 'https://api.twitch.tv/kraken/oauth2/token';
-        $content = 'client_id=' . $this->container->getParameter('twitch_client_id') .
-                '&client_secret=' . $this->container->getParameter('twitch_client_secret') .
-                '&grant_type=authorization_code' .
-                '&redirect_uri=' . $this->generateUrl('rtg_user_oauth_checktwitch', array(), true) .
-                '&code=' . $request->query->get('code');
-        $buzz = $this->container->get('buzz');
-        $buzz->getClient()->setVerifyPeer(false);
-        $response = $buzz->post($url, array(), $content);
-        $data = json_decode($response->getContent(), true);
+        $client = $this->get('rtg_app.twitchapiclient');
+        try {
+            $response = $client->post('/oauth2/token', ['query' => [
+                'client_secret' => $this->container->getParameter('twitch_client_secret'),
+                'code' => $request->query->get('code'),
+                'grant_type' => 'authorization_code',
+                'redirect_uri' => $this->generateUrl('rtg_user_oauth_checktwitch', array(), true)
+            ]]);
+        } catch (RequestException $e) {
+            $this->get('session')->getFlashBag()->add('error', 'Une erreur est survenu lors de l\'association au compte Twitch.');
+            return $this->redirect($this->generateUrl('rtg_user_user_myprofile'));
+        }
+        $data = json_decode((string) $response->getBody(), true);
         
         $user = $this->getUser();
         $user->setTwitchAccessToken($data['access_token']);
