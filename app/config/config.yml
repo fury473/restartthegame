@@ -116,6 +116,11 @@ avalanche_imagine:
 
 gregwar_captcha: ~
 
+ornicar_gravatar:
+    rating: g
+    size: 128
+    default: mm
+
 ivory_ck_editor:
     plugins:
         dialog:

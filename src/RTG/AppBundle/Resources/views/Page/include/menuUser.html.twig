@@ -22,7 +22,7 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="collapse navbar-collapse" id="menu-user">
+                <nav class="collapse navbar-collapse" id="menu-user" role="navigation" aria-label="Secondaire">
                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                         <ul class="nav navbar-nav navbar-right navbar-collapse list-unstyled">
                             {# {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} #}
@@ -44,7 +44,7 @@
                             <a href="{{ path('fos_user_security_login') }}" class="btn btn-primary navbar-btn" title="{{ 'login'|trans({}, 'menu') }}"><span class="glyphicon glyphicon-log-in"></span> {{ 'login'|trans({}, 'menu') }}</a>
                         </div>
                     {% endif %}
-                </div>
+                </nav>
             </div>
         </div>
     </div>

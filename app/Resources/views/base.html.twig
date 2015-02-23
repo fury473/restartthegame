@@ -50,9 +50,9 @@
             </div>
         </div>
         
-        <div id="main-menu" class="container bloc">
+        <nav id="main-menu" class="container bloc" role="navigation" aria-label="Principal">
             {{ render(controller('RTGAppBundle:Page:menu')) }}
-        </div>
+        </nav>
         
         {% if app.session.flashbag.has('error') %}
         <div id="glob-errors" class="alert alert-danger alert-dismissible" role="alert">

@@ -2,10 +2,10 @@
     {{ form_errors(form) }}
     
     <div class="pull-left">
-    {% if user is not null and user.avatar is not null %}
+    {% if user.avatar is not null %}
         <img src="{{ user.avatar.webPath|apply_filter('tb-48x48') }}" alt="{{ user }}"/>
     {% else %}
-        <img src="{{ 'bundles/rtgapp/img/content/staff/anonyme.jpg'|apply_filter('tb-48x48') }}" alt="{{ user|default('Compte supprimé') }}" />
+        <img src="{{ gravatar(user.email, 48) }}" alt="{{ user }}"/>
     {% endif %}
     </div>
     
