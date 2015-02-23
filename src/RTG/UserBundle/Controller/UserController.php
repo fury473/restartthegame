@@ -35,14 +35,14 @@ class UserController extends Controller
     }
 
     /**
-     * @Route("/profile/{id}")
+     * @Route("/profile/{username}")
      * @Method("GET")
      * @Template()
      */
-    public function profileAction($id)
+    public function profileAction($username)
     {
         $userManager = $this->get('fos_user.user_manager');
-        $user = $userManager->findUserBy(array('id' => $id));
+        $user = $userManager->findUserBy(array('username' => $username));
         return array('user' => $user);
     }
 

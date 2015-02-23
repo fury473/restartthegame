@@ -6,11 +6,13 @@
 {% block content %}
     <h1>{{ user.username }}</h1>
     
-    {% if user.avatar is not null %}
         <div class="absolute-pull-right">
-            <img class="thumbnail" src="{{ user.avatar.webPath|apply_filter('tb-128x128') }}" alt="{{ user.username }}"/>
+        {% if user.avatar is not null %}
+            <img src="{{ user.avatar.webPath|apply_filter('tb-128x128') }}" alt="{{ user.username }}"/>
+        {% else %}
+            <img src="{{ gravatar(user.email) }}" alt="{{ user.username }}"/>
+        {% endif %}
         </div>
-    {% endif %}
     
     <fieldset class="row-fluid form-group">
         <div class="col-md-2"><label>{{ 'user.field.rank'|trans }}</label></div>

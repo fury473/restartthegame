@@ -6,16 +6,20 @@
 {% for comment in comments %}
     <div class="media {{ cycle(['odd', 'even'], loop.index0) }}" id="comment-{{ comment.id }}" itemprop="comment" itemscope itemtype="http://schema.org/UserComments">
         <div class="pull-left">
-        {% if comment.user is not null and comment.user.avatar is not null %}
+        {% if comment.user is not null %}
+            {% if comment.user.avatar is not null %}
                 <img src="{{ comment.user.avatar.webPath|apply_filter('tb-48x48') }}" alt="{{ comment.user }}"/>
+            {% else %}
+                <img src="{{ gravatar(comment.user.email, 48) }}" alt="{{ comment.user }}"/>
+            {% endif %}
         {% else %}
-                <img src="{{ 'bundles/rtgapp/img/content/staff/anonyme.jpg'|apply_filter('tb-48x48') }}" alt="{{ comment.user|default('Compte supprimé') }}" />
+                <img src="{{ gravatar('anonyme', 48) }}&f=y" alt="{{ comment.user|default('Compte supprimé') }}" />
         {% endif %}
         </div>
         <div class="media-body">
             <div class="media-heading">
                 {% if comment.user is not null %}
-                    <a href="{{ path('rtg_user_user_profile', {'id': comment.user.id}) }}" title="Voir le profil"><span itemprop="creator">{{ comment.user }}</span></a></span>
+                    <a href="{{ path('rtg_user_user_profile', {'username': comment.user.usernameCanonical}) }}" title="Voir le profil"><span itemprop="creator">{{ comment.user }}</span></a></span>
                 {% else %}
                 <span class="highlight">Compte supprimé</span>
                 {% endif %}
