@@ -36,6 +36,7 @@ twig:
         fb_app_id: %facebook_app_id%
         web_path: %web_path%
         brand_name: %brand_name%
+        recaptchaKey: %recaptcha_key%
 services:
     rtg.twig_extension:
         class: %rtg.twig_extension.class%
@@ -113,8 +114,6 @@ avalanche_imagine:
         tb-48x48:
             type:    thumbnail
             options: { size: [48, 48], mode: inset, quality: 100, format: png }
-
-gregwar_captcha: ~
 
 ornicar_gravatar:
     rating: g

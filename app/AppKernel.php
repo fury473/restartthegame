@@ -23,7 +23,6 @@ class AppKernel extends Kernel
             new Avalanche\Bundle\ImagineBundle\AvalancheImagineBundle(),
             new Knp\Bundle\TimeBundle\KnpTimeBundle(),
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
-            new Gregwar\CaptchaBundle\GregwarCaptchaBundle(),
             new Ornicar\GravatarBundle\OrnicarGravatarBundle(),
         );
 

@@ -2,13 +2,13 @@
 
 namespace RTG\AppBundle\Controller;
 
-use GuzzleHttp\Exception\RequestException;
 use RTG\AppBundle\Form\ContactType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use ReCaptcha\ReCaptcha;
 
 /**
  * Page controller.
@@ -188,6 +188,13 @@ class PageController extends Controller
         $form->handleRequest($request);
 
         if (($errorList = $form->isValid()) == true) {
+            $secret = $this->container->getParameter('recaptcha_secret');
+            $recaptcha = new ReCaptcha($secret);
+            $resp = $recaptcha->verify($request->get('g-recaptcha-response'), $request->getClientIp());
+            if (!$resp->isSuccess()) {
+                $this->get('session')->getFlashBag()->add('error', 'Echec de la validation reCAPTCHA');
+                return $this->redirect($this->generateUrl('rtg_app_page_contact'));
+            }
             $other_object = $form->get('other_object')->getData();
             if ($other_object == null || $form->get('object')->getData() != 'Autre') {
                 $subject = $form->get('object')->getData();
@@ -238,7 +245,7 @@ class PageController extends Controller
     {
         return $this->redirect("http://forum.restartthegame.com");
     }
-
+    
 //    /**
 //     * @Route("/coming-soon")
 //     * @Method({"GET"})
