@@ -43,18 +43,6 @@ class ContactType extends AbstractType {
                     ),
                     'label' => false
                 ))
-                ->add('captcha', 'captcha', array(
-                    'invalid_message' => 'Captcha incorrect',
-                    'distortion' => false,
-                    'width' => 200,
-                    'length' => 5,
-                    'quality' => 100,
-                    'as_url' => true,
-                    'reload' => true,
-                    'attr' => array(
-                        'class' => 'form-control'
-                    )
-                ))
                 ->add('send', 'submit', array('label' => 'Envoyer'))
         ;
     }

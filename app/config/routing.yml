@@ -19,6 +19,3 @@ rtg_user:
 _imagine:
     resource: .
     type:     imagine
-
-gregwar_captcha_routing:
-    resource: "@GregwarCaptchaBundle/Resources/config/routing/routing.yml"
