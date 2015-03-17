@@ -35,13 +35,20 @@ class ContactType extends AbstractType {
                         'class' => 'form-control'
                     )
                 ))
+                ->add('email', 'email', array(
+                    'label' => 'Email',
+                    'required' => true,
+                    'attr' => array(
+                        'class' => 'form-control'
+                    )
+                ))
                 ->add('message', 'textarea', array(
                     'attr' => array(
                         'class' => 'form-control',
                         'cols' => 65,
                         'rows' => 9
                     ),
-                    'label' => false
+                    'label' => 'Message'
                 ))
                 ->add('send', 'submit', array('label' => 'Envoyer'))
         ;
