@@ -18,7 +18,7 @@ framework:
     validation:      { enable_annotations: true }
     templating:
         engines: ['twig']
-        assets_version: v1.2.7
+        assets_version: v1.2.10
     default_locale:  "%locale%"
     trusted_proxies: ~
     session:         ~
@@ -150,13 +150,10 @@ ivory_ck_editor:
                 - ['Link', 'Unlink', 'Anchor']
                 - ['FLash', 'Table', 'HorizontalRule', 'SpecialChar', 'Smiley']
                 - '/'
-                - ['Styles', 'Format', 'Font', 'FontSize', 'TextColor', 'BGColor']
-                - ['Maximize', 'ShowBlocks']
-                - '/'
                 - ['Source', '-', 'NewPage', '-', 'Templates']
                 - ['PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']
                 - ['Find', 'Replace', '-', 'SelectAll', '-', 'Scayt']
-                - '/'
+                - ['Maximize', 'ShowBlocks']
                 - ['oembed', 'Image']
             full: 
                 - ['Source', '-', 'NewPage', 'Preview', 'Print', '-', 'Templates']
