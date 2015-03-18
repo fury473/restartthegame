@@ -33,10 +33,7 @@ class NewsArticleType extends AbstractType
             ))
             ->add('message', 'ckeditor', array(
                 'label' => 'general.message',
-                'attr' => array('class' => 'form-control'),
-                'config' => array(
-                    'extraPlugins' => 'oembed'
-                )
+                'attr' => array('class' => 'form-control')
             ));
         if($entity->getImage() == null) {
             $builder->add('image', new ImageArticleType(), array('label' => 'general.image'));

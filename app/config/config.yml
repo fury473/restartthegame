@@ -125,6 +125,9 @@ ivory_ck_editor:
         dialog:
             path:     "/bundles/rtgapp/js/ckeditor/plugins/dialog/"
             filename: "plugin.js"
+        image2:
+            path:     "/bundles/rtgapp/js/ckeditor/plugins/image2/"
+            filename: "plugin.js"
         lineutils:
             path:     "/bundles/rtgapp/js/ckeditor/plugins/lineutils/"
             filename: "plugin.js"
@@ -138,6 +141,7 @@ ivory_ck_editor:
     configs:
         config_1:
             toolbar: custom
+            extraPlugins: oembed,image2
     toolbars:
         configs:
             custom: 
