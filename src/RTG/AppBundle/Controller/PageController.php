@@ -212,7 +212,8 @@ class PageController extends Controller
 
             $message = \Swift_Message::newInstance()
                     ->setSubject($subject)
-                    ->setFrom($from)
+                    ->setFrom($from, 'Formulaire de contact RTG')
+                    ->setReplyTo($form->get('email')->getData())
                     ->setTo($to)
                     ->setBody($content);
 

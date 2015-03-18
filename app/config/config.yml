@@ -18,7 +18,7 @@ framework:
     validation:      { enable_annotations: true }
     templating:
         engines: ['twig']
-        assets_version: v1.2.7
+        assets_version: v1.2.10
     default_locale:  "%locale%"
     trusted_proxies: ~
     session:         ~
@@ -125,6 +125,9 @@ ivory_ck_editor:
         dialog:
             path:     "/bundles/rtgapp/js/ckeditor/plugins/dialog/"
             filename: "plugin.js"
+        image2:
+            path:     "/bundles/rtgapp/js/ckeditor/plugins/image2/"
+            filename: "plugin.js"
         lineutils:
             path:     "/bundles/rtgapp/js/ckeditor/plugins/lineutils/"
             filename: "plugin.js"
@@ -138,6 +141,7 @@ ivory_ck_editor:
     configs:
         config_1:
             toolbar: custom
+            extraPlugins: oembed,image2
     toolbars:
         configs:
             custom: 
@@ -146,13 +150,10 @@ ivory_ck_editor:
                 - ['Link', 'Unlink', 'Anchor']
                 - ['FLash', 'Table', 'HorizontalRule', 'SpecialChar', 'Smiley']
                 - '/'
-                - ['Styles', 'Format', 'Font', 'FontSize', 'TextColor', 'BGColor']
-                - ['Maximize', 'ShowBlocks']
-                - '/'
                 - ['Source', '-', 'NewPage', '-', 'Templates']
                 - ['PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']
                 - ['Find', 'Replace', '-', 'SelectAll', '-', 'Scayt']
-                - '/'
+                - ['Maximize', 'ShowBlocks']
                 - ['oembed', 'Image']
             full: 
                 - ['Source', '-', 'NewPage', 'Preview', 'Print', '-', 'Templates']
