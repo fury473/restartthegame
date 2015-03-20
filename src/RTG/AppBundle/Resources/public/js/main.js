@@ -7,6 +7,7 @@ function setScrollBtnOffset() {
 
 $(function() {
     $('#carousel-example-generic').carousel();
+    $("[data-toggle='switch']").bootstrapSwitch();
     
     setScrollBtnOffset();
     

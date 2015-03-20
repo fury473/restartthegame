@@ -3,9 +3,12 @@
 namespace RTG\UserBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
+use RTG\AppBundle\Entity\Stream;
 use RTG\BlogBundle\Entity\NewsArticle;
+use RTG\BlogBundle\Entity\NewsComment;
 use RTG\BlogBundle\Entity\CompetitionArticle;
 
 /**
@@ -25,64 +28,61 @@ class User extends BaseUser
         $this->comments = new ArrayCollection();
         $this->competitions = new ArrayCollection();
     }
-
+    
     /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Get birthday
-     *
-     * @return \DateTime 
-     */
-    public function getBirthday()
-    {
-        return $this->birthday;
-    }
-
-    /**
-     * Set birthday
-     *
-     * @var \Date
+     * @param NewsArticle $articles
      * @return User
      */
-    public function setBirthday($birthday)
+    public function addArticle(NewsArticle $articles)
     {
-        $this->birthday = $birthday;
+        $this->articles[] = $articles;
+
         return $this;
     }
-
+    
     /**
-     * Get city
-     *
-     * @return string 
+     * @param NewsComment $comments
+     * @return User
      */
-    public function getCity()
+    public function addComment(\RTG\BlogBundle\Entity\NewsComment $comments)
     {
-        return $this->city;
-    }
+        $this->comments[] = $comments;
 
-    /**
-     * Set city
-     *
-     * @var string
-     * @return User 
-     */
-    public function setCity($city)
-    {
-        $this->city = $city;
         return $this;
     }
-
+    
     /**
-     * Compute age
-     *
+     * @param CompetitionArticle $competition
+     * @return User
+     */
+    public function addCompetition(CompetitionArticle $competition)
+    {
+        $this->competitions[] = $competition;
+
+        return $this;
+    }
+    
+    /**
+     * @param Stream $stream
+     * @return User
+     */
+    public function addStream(Stream $stream)
+    {
+        $this->streams[] = $stream;
+
+        return $this;
+    }
+    
+    /**
+     * @return User
+     */
+    public function generateNewsletterToken()
+    {
+        $this->newsletterToken = md5(uniqid());
+        return $this;
+    }
+    
+    /**
      * @return string
      */
     public function getAge()
@@ -101,33 +101,49 @@ class User extends BaseUser
             }
         }
     }
-
+    
     /**
-     * Add articles
-     *
-     * @param RTG\BlogBundle\Entity\NewsArticle $articles
-     * @return User
+     * @return Collection 
      */
-    public function addArticle(NewsArticle $articles)
+    public function getArticles()
     {
-        $this->articles[] = $articles;
-
-        return $this;
+        return $this->articles;
     }
-
+    
     /**
-     * Remove articles
-     *
-     * @param RTG\BlogBundle\Entity\NewsArticle $articles
+     * @return Avatar 
      */
-    public function removeArticle(NewsArticle $articles)
+    public function getAvatar()
     {
-        $this->articles->removeElement($articles);
+        return $this->avatar;
     }
-
+    
     /**
-     * Get competitions
-     * @return ArrayCollection
+     * @return DateTime 
+     */
+    public function getBirthday()
+    {
+        return $this->birthday;
+    }
+    
+    /**
+     * @return string 
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+    
+    /**
+     * @return Collection 
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+    
+    /**
+     * @return Collection
      */
     public function getCompetitions()
     {
@@ -135,97 +151,14 @@ class User extends BaseUser
     }
 
     /**
-     * Add competition
-     *
-     * @param RTG\BlogBundle\Entity\CompetitionArticle $competition
-     * @return User
+     * @return integer 
      */
-    public function addCompetition(CompetitionArticle $competition)
+    public function getId()
     {
-        $this->competitions[] = $competition;
-
-        return $this;
+        return $this->id;
     }
-
+    
     /**
-     * Remove competition
-     *
-     * @param RTG\BlogBundle\Entity\CompetitionArticle $competition
-     */
-    public function removeCompetition(CompetitionArticle $competition)
-    {
-        $this->competitions->removeElement($competition);
-    }
-
-    /**
-     * Get articles
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getArticles()
-    {
-        return $this->articles;
-    }
-
-    /**
-     * Add comments
-     *
-     * @param \RTG\BlogBundle\Entity\NewsComment $comments
-     * @return User
-     */
-    public function addComment(\RTG\BlogBundle\Entity\NewsComment $comments)
-    {
-        $this->comments[] = $comments;
-
-        return $this;
-    }
-
-    /**
-     * Remove comment
-     *
-     * @param \RTG\BlogBundle\Entity\NewsComment $comment
-     */
-    public function removeComment(\RTG\BlogBundle\Entity\NewsComment $comment)
-    {
-        $this->articles->removeElement($comment);
-    }
-
-    /**
-     * Get comments
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getComments()
-    {
-        return $this->comments;
-    }
-
-    /**
-     * Set avatar
-     *
-     * @param \RTG\UserBundle\Entity\Avatar $avatar
-     * @return User
-     */
-    public function setAvatar(\RTG\UserBundle\Entity\Avatar $avatar = null)
-    {
-        $this->avatar = $avatar;
-
-        return $this;
-    }
-
-    /**
-     * Get avatar
-     *
-     * @return \RTG\UserBundle\Entity\Avatar 
-     */
-    public function getAvatar()
-    {
-        return $this->avatar;
-    }
-
-    /**
-     * Get newsletter
-     *
      * @return boolean
      */
     public function getNewsletter()
@@ -234,8 +167,6 @@ class User extends BaseUser
     }
     
     /**
-     * Get newsletterToken
-     *
      * @return boolean
      */
     public function getNewsletterToken()
@@ -244,8 +175,6 @@ class User extends BaseUser
     }
 
     /**
-     * Get rank
-     * 
      * @return string
      */
     public function getRank()
@@ -258,33 +187,16 @@ class User extends BaseUser
             return 'Membre';
         }
     }
-
-    /**
-     * Set newsletter
-     *
-     * @return \RTG\UserBundle\Entity\User
-     */
-    public function setNewsletter($newsletter)
-    {
-        $this->newsletter = $newsletter;
-        return $this;
-    }
     
     /**
-     * Set newsletterToken
-     *
-     * @param string $newsletter_token
-     * @return \RTG\UserBundle\Entity\User
+     * @return Collection 
      */
-    public function setNewsletterToken($newsletter_token)
+    public function getStreams()
     {
-        $this->newsletterToken = $newsletter_token;
-        return $this;
+        return $this->streams;
     }
 
     /**
-     * Get twitchAccessToken
-     * 
      * @return string
      */
     public function getTwitchAccessToken()
@@ -293,8 +205,6 @@ class User extends BaseUser
     }
 
     /**
-     * Get twitchRefreshToken
-     * 
      * @return string
      */
     public function getTwitchRefreshToken()
@@ -303,8 +213,6 @@ class User extends BaseUser
     }
 
     /**
-     * Get twitchScopes
-     * 
      * @return array
      */
     public function getTwitchScopes()
@@ -313,20 +221,99 @@ class User extends BaseUser
     }
     
     /**
-     * Generate newsletterToken
-     * 
-     * @return \RTG\UserBundle\Entity\User
+     * @param Avatar $avatar
+     * @return User
      */
-    public function generateNewsletterToken()
+    public function setAvatar(Avatar $avatar = null)
     {
-        $this->newsletterToken = md5(uniqid());
+        $this->avatar = $avatar;
+
         return $this;
     }
 
     /**
+     * @param Date $birthday
+     * @return User
+     */
+    public function setBirthday($birthday)
+    {
+        $this->birthday = $birthday;
+        return $this;
+    }
+
+    /**
+     * @param string $city
+     * @return User 
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
+        return $this;
+    }
+
+    /**
+     * @param boolean $newsletter
+     * @return User
+     */
+    public function setNewsletter($newsletter)
+    {
+        $this->newsletter = $newsletter;
+        return $this;
+    }
+    
+    /**
+     * @param string $newsletter_token
+     * @return User
+     */
+    public function setNewsletterToken($newsletter_token)
+    {
+        $this->newsletterToken = $newsletter_token;
+        return $this;
+    }
+    
+    /**
+     * @param NewsArticle $article
+     * @return User
+     */
+    public function removeArticle(NewsArticle $article)
+    {
+        $this->articles->removeElement($article);
+        return $this;
+    }
+    
+    /**
+     * @param NewsComment $comment
+     * @return User
+     */
+    public function removeComment(NewsComment $comment)
+    {
+        $this->articles->removeElement($comment);
+        return $this;
+    }
+    
+    /**
+     * @param CompetitionArticle $competition
+     * @return User
+     */
+    public function removeCompetition(CompetitionArticle $competition)
+    {
+        $this->competitions->removeElement($competition);
+        return $this;
+    }
+    
+    /**
+     * @param Stream $stream
+     * @return User
+     */
+    public function removeStream(Stream $stream)
+    {
+        $this->streams->removeElement($stream);
+        return $this;
+    }
+    
+    /**
      * Reset twitch columns
-     * 
-     * @return \RTG\UserBundle\Entity\User
+     * @return User
      */
     public function resetTwitchAccess()
     {
@@ -336,18 +323,30 @@ class User extends BaseUser
         return $this;
     }
 
+    /**
+     * @param string $twitchAccessToken
+     * @return User
+     */
     public function setTwitchAccessToken($twitchAccessToken)
     {
         $this->twitchAccessToken = $twitchAccessToken;
         return $this;
     }
 
+    /**
+     * @param string $twitchRefreshToken
+     * @return User
+     */
     public function setTwitchRefreshToken($twitchRefreshToken)
     {
         $this->twitchRefreshToken = $twitchRefreshToken;
         return $this;
     }
 
+    /**
+     * @param array $twitchScopes
+     * @return User
+     */
     public function setTwitchScopes(array $twitchScopes = null)
     {
         if ($twitchScopes != null) {
@@ -364,6 +363,17 @@ class User extends BaseUser
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="RTG\BlogBundle\Entity\NewsArticle", mappedBy="author")
+     */
+    protected $articles;
+
+    /**
+     * @ORM\OneToOne(targetEntity="RTG\UserBundle\Entity\Avatar", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="avatar_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    protected $avatar;
 
     /**
      * @ORM\Column(type="date", name="birthday", nullable=true)
@@ -374,17 +384,6 @@ class User extends BaseUser
      * @ORM\Column(type="string", name="city", nullable=true)
      */
     protected $city;
-
-    /**
-     * @ORM\OneToOne(targetEntity="RTG\UserBundle\Entity\Avatar", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(name="avatar_id", referencedColumnName="id", onDelete="SET NULL")
-     */
-    protected $avatar;
-
-    /**
-     * @ORM\OneToMany(targetEntity="RTG\BlogBundle\Entity\NewsArticle", mappedBy="author")
-     */
-    protected $articles;
 
     /**
      * @ORM\OneToMany(targetEntity="RTG\BlogBundle\Entity\NewsComment", mappedBy="user")
@@ -405,6 +404,11 @@ class User extends BaseUser
      * @ORM\Column(type="string", name="newsletter_token", nullable=true)
      */
     protected $newsletterToken;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="RTG\AppBundle\Entity\Stream", mappedBy="user")
+     */
+    protected $streams;
 
     /**
      * @ORM\Column(type="string", name="twitch_access_token", nullable=true)

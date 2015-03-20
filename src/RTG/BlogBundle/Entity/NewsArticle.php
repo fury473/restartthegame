@@ -2,8 +2,10 @@
 
 namespace RTG\BlogBundle\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use RTG\AppBundle\Util\String;
 
 /**
  * @ORM\Entity(repositoryClass="RTG\BlogBundle\Repository\NewsArticleRepository")
@@ -85,8 +87,8 @@ class NewsArticle
         $this->comments = new ArrayCollection();
         $this->featured = true;
 
-        $this->setCreated(new \DateTime());
-        $this->setUpdated(new \DateTime());
+        $this->setCreated(new DateTime());
+        $this->setUpdated(new DateTime());
     }
 
     public function __toString()
@@ -99,46 +101,7 @@ class NewsArticle
      */
     public function setUpdatedValue()
     {
-        $this->setUpdated(new \DateTime());
-    }
-
-    private function stripAccents($string)
-    {
-        $unwanted_array = array('Š' => 'S', 'š' => 's', 'Ž' => 'Z', 'ž' => 'z', 'À' => 'A', 'Á' => 'A', 'Â' => 'A', 'Ã' => 'A', 'Ä' => 'A', 'Å' => 'A', 'Æ' => 'A', 'Ç' => 'C', 'È' => 'E', 'É' => 'E',
-            'Ê' => 'E', 'Ë' => 'E', 'Ì' => 'I', 'Í' => 'I', 'Î' => 'I', 'Ï' => 'I', 'Ñ' => 'N', 'Ò' => 'O', 'Ó' => 'O', 'Ô' => 'O', 'Õ' => 'O', 'Ö' => 'O', 'Ø' => 'O', 'Ù' => 'U',
-            'Ú' => 'U', 'Û' => 'U', 'Ü' => 'U', 'Ý' => 'Y', 'Þ' => 'B', 'ß' => 'Ss', 'à' => 'a', 'á' => 'a', 'â' => 'a', 'ã' => 'a', 'ä' => 'a', 'å' => 'a', 'æ' => 'a', 'ç' => 'c',
-            'è' => 'e', 'é' => 'e', 'ê' => 'e', 'ë' => 'e', 'ì' => 'i', 'í' => 'i', 'î' => 'i', 'ï' => 'i', 'ð' => 'o', 'ñ' => 'n', 'ò' => 'o', 'ó' => 'o', 'ô' => 'o', 'õ' => 'o',
-            'ö' => 'o', 'ø' => 'o', 'ù' => 'u', 'ú' => 'u', 'û' => 'u', 'ý' => 'y', 'ý' => 'y', 'þ' => 'b', 'ÿ' => 'y');
-        return strtr($string, $unwanted_array);
-    }
-
-    public function slugify($text)
-    {
-        // replace non letter or digits by -
-        $text = preg_replace('#[^\\pL\d]+#u', '-', $text);
-
-        // trim
-        $text = trim($text, '-');
-
-        // remove accents
-        $text = $this->stripAccents($text);
-
-        // transliterate
-        if (function_exists('iconv')) {
-            $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
-        }
-
-        // lowercase
-        $text = strtolower($text);
-
-        // remove unwanted characters
-        $text = preg_replace('#[^-\w]+#', '', $text);
-
-        if (empty($text)) {
-            return 'n-a';
-        }
-
-        return $text;
+        $this->setUpdated(new DateTime());
     }
 
     /**
@@ -252,7 +215,7 @@ class NewsArticle
      */
     public function setSlug($slug)
     {
-        $this->slug = $this->slugify($slug);
+        $this->slug = String::slugify($slug);
 
         return $this;
     }
@@ -342,7 +305,7 @@ class NewsArticle
     /**
      * Set created
      *
-     * @param \DateTime $created
+     * @param DateTime $created
      * @return Article
      */
     public function setCreated($created)
@@ -355,7 +318,7 @@ class NewsArticle
     /**
      * Get created
      *
-     * @return \DateTime 
+     * @return DateTime 
      */
     public function getCreated()
     {
@@ -365,7 +328,7 @@ class NewsArticle
     /**
      * Set updated
      *
-     * @param \DateTime $updated
+     * @param DateTime $updated
      * @return Article
      */
     public function setUpdated($updated)
@@ -378,7 +341,7 @@ class NewsArticle
     /**
      * Get updated
      *
-     * @return \DateTime 
+     * @return DateTime 
      */
     public function getUpdated()
     {

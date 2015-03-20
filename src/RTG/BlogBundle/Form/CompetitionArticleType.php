@@ -28,9 +28,15 @@ class CompetitionArticleType extends AbstractType
                     CompetitionArticle::EventRescheduled => 'Replanifiée',
                     CompetitionArticle::EventPostponed => 'Repoussée',
                     CompetitionArticle::EventCancelled => 'Annulée',
-                )
+                ),
+                'attr' => array('class' => 'form-control')
             ))
-            ->add('date', 'date', array('label' => 'general.date'))
+            ->add('date', 'date', array(
+                'widget' => 'single_text',
+                'format' => 'dd/MM/yyyy',
+                'label' => 'general.date',
+                'attr' => array('class' => 'form-control')
+            ))
             ->add('message', 'ckeditor', array(
                 'label' => 'general.message',
                 'attr' => array('class' => 'form-control')

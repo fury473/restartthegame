@@ -20,7 +20,8 @@ class UserType extends BaseUserType
                     'label' => 'user.field.roles',
                     'type' => 'text',
                     'allow_add' => true,
-                    'allow_delete' => true
+                    'allow_delete' => true,
+                    'options' => array('attr' => array('class' => 'form-control'))
         ));
     }
 

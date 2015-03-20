@@ -34,15 +34,7 @@
     <fieldset class="row-fluid form-group">
         <div class="col-md-2">{{ form_label(form.birthday) }}</div>
         <div class="col-md-6">
-            <div class="col-md-4">
-                {{ form_widget(form.birthday.children.day, { 'attr': { 'class': 'form-control' } }) }}
-            </div>
-            <div class="col-md-4">
-                {{ form_widget(form.birthday.children.month, { 'attr': { 'class': 'form-control' } }) }}
-            </div>
-            <div class="col-md-4">
-                {{ form_widget(form.birthday.children.year, { 'attr': { 'class': 'form-control' } }) }}
-            </div>
+            {{ form_widget(form.birthday) }}
             {{ form_errors(form.birthday) }}
         </div>
     </fieldset>
@@ -101,3 +93,14 @@
     {{ form_end(form) }}
 
 {% endblock content %}
+
+{% block javascript %}
+    {{ parent() }}
+    <script>
+        $(function() {
+            $('#rtg_userbundle_user_profile_birthday').datetimepicker({
+                format: 'DD/MM/YYYY'
+            });
+        });
+    </script>
+{% endblock %}
