@@ -1,0 +1,36 @@
+{% extends 'RTGAppBundle::layout.html.twig' %}
+
+{% block title %}RTG TV{% endblock %}
+
+{% block content %}
+    <h1>{{ 'my_channels'|trans({}, 'menu') }}</h1>
+    <ul class="nav nav-pills list-unstyled" role="tablist">
+        {% if dailymotion is defined %}
+            <li role="presentation"><a href="#dailymotion" aria-controls="dailymotion" role="tab" data-toggle="tab">Dailymotion</a></li>
+            {% endif %}
+            {% if twitch is defined %}
+            <li role="presentation"><a href="#twitch" aria-controls="twitch" role="tab" data-toggle="tab">Twitch</a></li>
+            {% endif %}
+    </ul>
+    <div class="tab-content">
+        {% if dailymotion is defined %}
+            <div role="tabpanel" class="tab-pane fade" id="dailymotion">
+                {{ render(controller("RTGAppBundle:Channel:dailymotion", { 'username': user.usernameCanonical })) }}
+            </div>
+        {% endif %}
+        {% if twitch is defined %}
+            <div role="tabpanel" class="tab-pane fade" id="twitch">
+                {{ render(controller("RTGAppBundle:Channel:twitch", { 'username': user.usernameCanonical })) }}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(function () {
+            $('[data-toggle="tab"]:last').tab('show');
+        })
+    </script>
+{% endblock %}

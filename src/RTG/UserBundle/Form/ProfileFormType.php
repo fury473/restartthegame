@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
 class ProfileFormType extends AbstractType
 {
@@ -27,9 +28,11 @@ class ProfileFormType extends AbstractType
                 ->add('email', 'email', array('label' => 'user.field.email', 'attr' => array('class' => 'form-control')))
                 ->add('newsletter', 'checkbox', array('required' => false))
                 ->add('birthday', 'date', array(
-                    'years' => $this->getYears(),
+                    'widget' => 'single_text',
+                    'format' => 'dd/MM/yyyy',
                     'label' => 'user.field.birthday',
-                    'required' => false
+                    'required' => false,
+                    'attr' => array('class' => 'form-control')
                 ))
                 ->add('city', 'text', array('label' => 'user.field.city', 'required' => false, 'attr' => array('class' => 'form-control')))
                 ->addEventListener(FormEvents::PRE_SUBMIT, array($this, 'onPreSubmit'))
@@ -84,17 +87,6 @@ class ProfileFormType extends AbstractType
                 $event->getForm()->getData()->setAvatar(null);
             }
         }
-    }
-
-    private function getYears()
-    {
-        $today = new \DateTime();
-        $year = $today->format('Y');
-        $years = array();
-        for ($i = 0; $i <= 112; $i++) {
-            $years[] = $year - $i;
-        }
-        return $years;
     }
 
     private $originalAvatar;

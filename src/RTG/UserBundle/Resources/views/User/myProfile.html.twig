@@ -34,15 +34,7 @@
     <fieldset class="row-fluid form-group">
         <div class="col-md-2">{{ form_label(form.birthday) }}</div>
         <div class="col-md-6">
-            <div class="col-md-4">
-                {{ form_widget(form.birthday.children.day, { 'attr': { 'class': 'form-control' } }) }}
-            </div>
-            <div class="col-md-4">
-                {{ form_widget(form.birthday.children.month, { 'attr': { 'class': 'form-control' } }) }}
-            </div>
-            <div class="col-md-4">
-                {{ form_widget(form.birthday.children.year, { 'attr': { 'class': 'form-control' } }) }}
-            </div>
+            {{ form_widget(form.birthday) }}
             {{ form_errors(form.birthday) }}
         </div>
     </fieldset>
@@ -75,14 +67,16 @@
             {% endif %}
         </div>
     </fieldset>
-            
-    {#<h2>{{ 'user.title.my_connections'|trans }}</h2>
+    
+    {% if is_granted("ROLE_STREAMER") %}
+    <h2 id="my-connections">{{ 'user.title.my_connections'|trans }}</h2>
     
     <fieldset class="row-fluid form-group">
         <div class="connect_items">
             {% include 'RTGAppBundle:Page:include/serviceItem.html.twig' with {'service': 'twitch', 'title': 'Twitter', 'desc': 'Associez votre compte Twitch en un clic à votre compte ' ~ brand_name} %}
         </div>
-    </fieldset>#}
+    </fieldset>
+    {% endif %}
 
     <h2>{{ 'user.title.delete'|trans }}</h2>
 
@@ -101,3 +95,14 @@
     {{ form_end(form) }}
 
 {% endblock content %}
+
+{% block javascript %}
+    {{ parent() }}
+    <script>
+        $(function() {
+            $('#rtg_userbundle_user_profile_birthday').datetimepicker({
+                format: 'DD/MM/YYYY'
+            });
+        });
+    </script>
+{% endblock %}

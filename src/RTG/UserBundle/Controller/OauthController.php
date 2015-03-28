@@ -24,7 +24,7 @@ class OAuthController extends Controller
         $scope = array('channel_read');
         $client = $this->get('rtg_app.twitchapiclient');
         try {
-            $response = $client->get('/oauth2/authorize', ['query' => [
+            $request = $client->createRequest('get', '/kraken/oauth2/authorize', ['query' => [
                 'redirect_uri' => $this->generateUrl('rtg_user_oauth_checktwitch', array(), true),
                 'response_type' => 'code',
                 'scope' => implode('+', $scope)
@@ -33,7 +33,7 @@ class OAuthController extends Controller
             $this->get('session')->getFlashBag()->add('error', 'Une erreur est survenu lors de l\'association au compte Twitch.');
             return $this->redirect($this->generateUrl('rtg_user_user_myprofile'));
         }
-        return $this->redirect($response->getEffectiveUrl());
+        return $this->redirect($request->getUrl());
     }
 
     /**
@@ -44,7 +44,7 @@ class OAuthController extends Controller
     {
         $client = $this->get('rtg_app.twitchapiclient');
         try {
-            $response = $client->post('/oauth2/token', ['query' => [
+            $response = $client->post('/kraken/oauth2/token', ['query' => [
                 'client_secret' => $this->container->getParameter('twitch_client_secret'),
                 'code' => $request->query->get('code'),
                 'grant_type' => 'authorization_code',

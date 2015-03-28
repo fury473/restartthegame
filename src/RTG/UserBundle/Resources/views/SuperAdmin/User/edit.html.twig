@@ -35,15 +35,7 @@
     <fieldset class="row-fluid form-group">
         <div class="col-md-2">{{ form_label(form.birthday) }}</div>
         <div class="col-md-6">
-            <div class="col-md-4">
-                {{ form_widget(form.birthday.children.day, { 'attr': { 'class': 'form-control' } }) }}
-            </div>
-            <div class="col-md-4">
-                {{ form_widget(form.birthday.children.month, { 'attr': { 'class': 'form-control' } }) }}
-            </div>
-            <div class="col-md-4">
-                {{ form_widget(form.birthday.children.year, { 'attr': { 'class': 'form-control' } }) }}
-            </div>
+            {{ form_widget(form.birthday) }}
             {{ form_errors(form.birthday) }}
         </div>
     </fieldset>
@@ -90,12 +82,12 @@
     <fieldset class="row-fluid form-group">
         <div class="col-md-2"><label>{{ 'user.field.roles'|trans }}</label></div>
         <div class="col-md-6">
-            <ul id="role-fields-list" data-prototype="{{ form_widget(form.roles.vars.prototype) | e }}">
+            <ul id="role-fields-list" class="list-unstyled" data-prototype="{{ form_widget(form.roles.vars.prototype) | e }}">
             {% for role in form.roles %}
-                <li>
+                <li class="input-group">
                     {{ form_errors(role) }}
                     {{ form_widget(role) }}
-                    <a href="#" class="remove-role">X</a>
+                    <span class="input-group-btn remove-role"><button class="btn btn-danger"><i class="glyphicon glyphicon-remove" aria-hidden="true"></i></button></span>
                 </li>
             {% endfor %}
             </ul>
@@ -123,6 +115,10 @@
         var roleCount = '{{ form.roles | length }}';
 
         $(document).ready(function() {
+            $('#rtg_userbundle_superadmin_useredit_birthday').datetimepicker({
+                format: 'DD/MM/YYYY'
+            });
+            
             $('#add-another-role').click(function(event) {
                 event.preventDefault();
                 var roleList = $('#role-fields-list');
@@ -136,8 +132,8 @@
                 roleCount++;
 
                 // créer une nouvelle liste d'éléments et l'ajoute à notre liste
-                var newLi = $('<li></li>').html(newWidget);
-                var newDeleteLink = $('<a href="#" class="remove-role"> X</a>');
+                var newLi = $('<li class="input-group"></li>').html(newWidget);
+                var newDeleteLink = $('<span class="input-group-btn remove-role"><button class="btn btn-danger"><i class="glyphicon glyphicon-remove" aria-hidden="true"></i></button></span>');
                 newLi.appendTo($('#role-fields-list'));
                 newDeleteLink.appendTo(newLi);
                 newDeleteLink.click(function(event) {

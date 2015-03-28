@@ -55,3 +55,14 @@
         <button class="btn btn-primary">{{ 'back_to_the_list'|trans({}, 'form') }}</button>
     </a>
 {% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+    <script>
+        $(function() {
+            $('#rtg_blogbundle_admin_competition_article_date').datetimepicker({
+                format: 'DD/MM/YYYY'
+            });
+        });
+    </script>
+{% endblock %}

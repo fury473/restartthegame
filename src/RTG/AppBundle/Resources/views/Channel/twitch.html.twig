@@ -1,0 +1,31 @@
+{% if channel != broadcastedChannel %}
+    <p>{{ channel.displayName }} diffuse actuellement la chaîne de <a href="http://www.twitch.tv/{{ broadcastedChannel.name }}?tt_medium=live_embed&tt_content=text_link">{{ broadcastedChannel.displayName }}</a></p>
+{% endif %}
+<div class="row-fluid clearfix">
+    <div class="col-md-12 stream-header clearfix">
+        {% if broadcastedChannel.logoUrl is not null %}
+        <img class="pull-left" src="{{ broadcastedChannel.logoUrl }}" alt="{{ broadcastedChannel.displayName }}"/>
+        {% endif %}
+        <h2>{{ broadcastedChannel.status }}</h2>
+        <small>
+        {% if stream is not null %}
+            Stream commencé {{ stream.createdAt|ago }}
+            {% if broadcastedChannel.game is not null%} sur {{ broadcastedChannel.game }}{% endif %}
+        {% else %}
+            Hors ligne
+        {% endif %}
+        </small>
+    </div>
+</div>
+<div class="row-fluid clearfix">
+    <div class="col-md-8">
+        <iframe src="{{ broadcastedChannel.url }}/embed" class="twitch-iframe-video"></iframe>
+        <a href="{{ broadcastedChannel.url }}?tt_medium=live_embed&tt_content=text_link" class="twitch-iframe-link">Regardez en direct la chaîne de {{ broadcastedChannel.displayName }} sur www.twitch.tv</a>
+        {% if channel != broadcastedChannel %}
+            <a href="{{ channel.url }}?tt_medium=live_embed&tt_content=text_link" class="twitch-iframe-link">Regardez en direct la chaîne de {{ channel.displayName }} sur www.twitch.tv</a>
+        {% endif %}
+    </div>
+    <div class="col-md-4">
+        <iframe src="{{ channel.url }}/chat?popout=" class="twitch-iframe-chat"></iframe>
+    </div>
+</div>

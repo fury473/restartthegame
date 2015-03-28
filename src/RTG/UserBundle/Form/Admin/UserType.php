@@ -2,14 +2,8 @@
 
 namespace RTG\UserBundle\Form\Admin;
 
-use RTG\UserBundle\Entity\Avatar;
-use RTG\UserBundle\Form\AvatarType;
 use RTG\UserBundle\Form\ProfileFormType as BaseUserType;
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class UserType extends BaseUserType
 {

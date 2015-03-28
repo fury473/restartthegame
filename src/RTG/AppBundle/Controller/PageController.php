@@ -142,17 +142,11 @@ class PageController extends Controller
 
         $channel_name = $host_target = $this->container->getParameter('twitch_channel');
         $client = $this->get('rtg_app.twitchapiwrapper');
-        $channel = $client->getChannel($channel_name);
+        $channel = $client->getChannelByName($channel_name);
         
-        $hosted_channel = null;
-        if ($channel['host_target']) {
-            $stream = $client->getStream($channel['host_target']);
-            $hosted_channel = $client->getChannel($channel['host_target']);
-        } else {
-            $stream = $client->getStream($channel_name);
-        }
-
-        return array('channel' => $channel, 'hosted_channel' => $hosted_channel, 'stream' => $stream, 'streamers' => $streamers);
+        $broadcasted_channel = $channel->getBroadcastedChannel();
+        $stream = $client->getStream($broadcasted_channel->getName());
+        return array('channel' => $channel, 'broadcastedChannel' => $broadcasted_channel, 'stream' => $stream, 'streamers' => $streamers);
     }
 
     /**

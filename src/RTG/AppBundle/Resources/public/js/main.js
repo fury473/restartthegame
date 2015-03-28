@@ -2,18 +2,23 @@ function setScrollBtnOffset() {
     var container = $('body > .container');
     var container_width = container.width() + 30;
     var offset = container.offset().left + container_width + 15;
-    return $('.scrollup').css('left', offset+'px');
+    return $('.scrollup').css('left', offset + 'px');
 }
 
-$(function() {
+$(function () {
     $('#carousel-example-generic').carousel();
-    
+    $("[data-toggle='switch']").bootstrapSwitch();
+    $("[data-toggle='tab']").click(function (e) {
+        e.preventDefault();
+        $(this).tab('show');
+    })
+
     setScrollBtnOffset();
-    
-    $(window).resize(function() {
+
+    $(window).resize(function () {
         setScrollBtnOffset();
     });
-    
+
     $(window).scroll(function () {
         if ($(this).scrollTop() > 300) {
             $('.scrollup').fadeIn();
