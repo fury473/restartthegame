@@ -4,30 +4,5 @@
 
 {% block content %}
 <h1>RTG TV</h1>
-{% if hosted_channel is not null %}
-    <p>{{ channel.display_name }} diffuse actuellement la chaîne de <a href="http://www.twitch.tv/{{ hosted_channel.name }}?tt_medium=live_embed&tt_content=text_link">{{ hosted_channel.display_name }}</a></p>
-{% endif %}
-<div class="stream-header clearfix">
-    {% if hosted_channel|default(channel).logo is not null %}
-    <img class="pull-left" src="{{ hosted_channel|default(channel).logo }}" alt="{{ hosted_channel|default(channel).display_name }}"/>
-    {% endif %}
-    <h2>{{ hosted_channel|default(channel).status }}</h2>
-    <small>
-    {% if stream.stream is not null %}
-        Stream commencé {{ stream.stream.created_at|ago }}
-        {% if hosted_channel|default(channel).game is not null%} sur {{ hosted_channel|default(channel).game }}{% endif %}
-    {% else %}
-        Hors ligne
-    {% endif %}
-    </small>
-</div>
-<div class="row-fluid clearfix">
-    <div class="col-md-8">
-        <iframe src="{{ hosted_channel|default(channel).url }}/embed" class="twitch-iframe-video"></iframe>
-        <a href="{{ hosted_channel|default(channel).url }}?tt_medium=live_embed&tt_content=text_link" class="twitch-iframe-link">Regardez en direct la chaîne de {{ hosted_channel|default(channel).display_name }} sur www.twitch.tv</a>
-    </div>
-    <div class="col-md-4">
-        <iframe src="{{ channel.url }}/chat?popout=" class="twitch-iframe-chat"></iframe>
-    </div>
-</div>
+{% include 'RTGAppBundle:Channel:twitch.html.twig' %}
 {% endblock %}

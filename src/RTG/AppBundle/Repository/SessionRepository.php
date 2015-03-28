@@ -5,9 +5,9 @@ namespace RTG\AppBundle\Repository;
 use Doctrine\ORM\EntityRepository;
 
 /**
- * StreamRepository
+ * SessionRepository
  */
-class StreamRepository extends EntityRepository
+class SessionRepository extends EntityRepository
 {
     public function findAll()
     {

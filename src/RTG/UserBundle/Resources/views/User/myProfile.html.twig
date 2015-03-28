@@ -67,14 +67,16 @@
             {% endif %}
         </div>
     </fieldset>
-            
-    {#<h2>{{ 'user.title.my_connections'|trans }}</h2>
+    
+    {% if is_granted("ROLE_STREAMER") %}
+    <h2 id="my-connections">{{ 'user.title.my_connections'|trans }}</h2>
     
     <fieldset class="row-fluid form-group">
         <div class="connect_items">
             {% include 'RTGAppBundle:Page:include/serviceItem.html.twig' with {'service': 'twitch', 'title': 'Twitter', 'desc': 'Associez votre compte Twitch en un clic à votre compte ' ~ brand_name} %}
         </div>
-    </fieldset>#}
+    </fieldset>
+    {% endif %}
 
     <h2>{{ 'user.title.delete'|trans }}</h2>
 

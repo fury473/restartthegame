@@ -5,22 +5,15 @@ namespace RTG\AppBundle\Entity;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use RTG\UserBundle\Entity\User;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="RTG\AppBundle\Repository\StreamRepository")
- * @ORM\Table(name="stream", uniqueConstraints={
- * @ORM\UniqueConstraint(name="search_idx", columns={"slug"})
- * })
- * @ORM\HasLifecycleCallbacks()
+ * @ORM\Entity(repositoryClass="RTG\AppBundle\Repository\SessionRepository")
+ * @ORM\Table(name="session")
  */
-class Stream
+class Session
 {
-
-    public function __construct()
-    {
-        $this->createdAt = new DateTime();
-    }
     
     /**
      * @return DateTime
@@ -47,14 +40,6 @@ class Stream
     }
 
     /**
-     * @return string
-     */
-    function getSlug()
-    {
-        return $this->slug;
-    }
-
-    /**
      * @return DateTime
      */
     function getStartAt()
@@ -77,19 +62,10 @@ class Stream
     {
         return $this->user;
     }
-    
-    /**
-     * @ORM\PrePersist
-     * @ORM\PreUpdate
-     */
-    public function refreshSlug()
-    {
-        $this->setSlug($this->title);
-    }
 
     /**
      * @param DateTime $createdAt
-     * @return Stream
+     * @return Session
      */
     public function setCreatedAt(DateTime $createdAt)
     {
@@ -99,7 +75,7 @@ class Stream
 
     /**
      * @param DateTime $endAt
-     * @return Stream
+     * @return Session
      */
     public function setEndAt(DateTime $endAt)
     {
@@ -109,7 +85,7 @@ class Stream
 
     /**
      * @param integer $id
-     * @return Stream
+     * @return Session
      */
     public function setId($id)
     {
@@ -118,18 +94,8 @@ class Stream
     }
 
     /**
-     * @param string $slug
-     * @return Stream
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-        return $this;
-    }
-
-    /**
      * @param DateTime $startAt
-     * @return Stream
+     * @return Session
      */
     public function setStartAt(DateTime $startAt)
     {
@@ -139,7 +105,7 @@ class Stream
 
     /**
      * @param string $title
-     * @return Stream
+     * @return Session
      */
     public function setTitle($title)
     {
@@ -149,7 +115,7 @@ class Stream
 
     /**
      * @param User $user
-     * @return Stream
+     * @return Session
      */
     public function setUser(User $user)
     {
@@ -158,11 +124,18 @@ class Stream
     }
 
     /**
-     * @Assert\DateTime()
+     * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="created_at", type="datetime")
      * @var DateTime
      */
     protected $createdAt;
+    
+    /**
+     * @Gedmo\Timestampable(on="change", field={"startAt", "endAt"})
+     * @ORM\Column(name="$date_changed", type="datetime")
+     * @var DateTime
+     */
+    protected $dateChanged;
 
     /**
      * @Assert\DateTime()
@@ -180,12 +153,6 @@ class Stream
     protected $id;
 
     /**
-     * @ORM\Column(name="slug", type="string")
-     * @var string
-     */
-    protected $slug;
-
-    /**
      * @Assert\DateTime()
      * @Assert\NotNull()
      * @ORM\Column(name="start_at", type="datetime")
@@ -200,10 +167,17 @@ class Stream
      * @var string
      */
     protected $title;
+    
+    /**
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(name="updated_at", type="datetime")
+     * @var DateTime
+     */
+    protected $updatedAt;
 
     /**
      * @Assert\NotNull()
-     * @ORM\ManyToOne(targetEntity="RTG\UserBundle\Entity\User", inversedBy="streams")
+     * @ORM\ManyToOne(targetEntity="RTG\UserBundle\Entity\User", inversedBy="sessions")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="SET NULL")
      * @var User
      */

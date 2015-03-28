@@ -6,7 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
-use RTG\AppBundle\Entity\Stream;
+use RTG\AppBundle\Entity\Session;
 use RTG\BlogBundle\Entity\NewsArticle;
 use RTG\BlogBundle\Entity\NewsComment;
 use RTG\BlogBundle\Entity\CompetitionArticle;
@@ -63,12 +63,12 @@ class User extends BaseUser
     }
     
     /**
-     * @param Stream $stream
+     * @param Session $session
      * @return User
      */
-    public function addStream(Stream $stream)
+    public function addSession(Session $session)
     {
-        $this->streams[] = $stream;
+        $this->sessions[] = $session;
 
         return $this;
     }
@@ -191,9 +191,9 @@ class User extends BaseUser
     /**
      * @return Collection 
      */
-    public function getStreams()
+    public function getSessions()
     {
-        return $this->streams;
+        return $this->sessions;
     }
 
     /**
@@ -302,12 +302,12 @@ class User extends BaseUser
     }
     
     /**
-     * @param Stream $stream
+     * @param Session $session
      * @return User
      */
-    public function removeStream(Stream $stream)
+    public function removeSession(Session $session)
     {
-        $this->streams->removeElement($stream);
+        $this->sessions->removeElement($session);
         return $this;
     }
     
@@ -406,9 +406,9 @@ class User extends BaseUser
     protected $newsletterToken;
     
     /**
-     * @ORM\OneToMany(targetEntity="RTG\AppBundle\Entity\Stream", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="RTG\AppBundle\Entity\Session", mappedBy="user")
      */
-    protected $streams;
+    protected $sessions;
 
     /**
      * @ORM\Column(type="string", name="twitch_access_token", nullable=true)
