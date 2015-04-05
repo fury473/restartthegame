@@ -11,10 +11,12 @@
         {% for article in news %}
         <div class="item{% if loop.index0 == 0 %}  active{% endif %}">
             {% if article.image == null %}{% set image_path = 'bundles/rtgapp/img/content/slide/blank.png' %}{% else %}{% set image_path = article.image.webPath %}{% endif %}
-            <a href="{{ path('rtg_blog_newsarticle_show', { 'slug': article.slug }) }}" title="{{ article.title }}"><img class="center-block" src="{{ asset(image_path) }}" alt="{{ article.title }}"/></a>
-            <div class="carousel-caption">
-                {{ article.catchPhrase }}
-            </div>
+            <a href="{{ path('rtg_blog_newsarticle_show', { 'slug': article.slug }) }}" title="{{ article.title }}">
+                <img class="center-block" src="{{ asset(image_path) }}" alt="{{ article.title }}"/>
+                <div class="carousel-caption">
+                    {{ article.catchPhrase }}
+                </div>
+            </a>
         </div>
         {% endfor %}
     </div>
