@@ -3,6 +3,7 @@
 namespace RTG\AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use InvalidArgumentException;
 use RTG\UserBundle\Entity\User;
 
 /**
@@ -23,13 +24,14 @@ class SessionRepository extends EntityRepository
      */
     public function getSessionEvents($start, $end, User $user = null)
     {
-        $qb = $this->createQueryBuilder('s')->select('s');
-        if ($start !== null) {
-            $qb->andWhere('s.startAt >= :start')->setParameter('start', $start);
+        if ($start == null or $end == null or $start >= $end) {
+            throw new InvalidArgumentException();
         }
-        if ($end !== null) {
-            $qb->andWhere('s.endAt <= :end')->setParameter('end', $end);
-        }
+        $qb = $this->createQueryBuilder('s')
+                ->select('s')
+                ->where(':start <= s.endAt AND s.startAt <= :end')
+                ->setParameter('start', $start)
+                ->setParameter('end', $end);
         if ($user !== null) {
             $qb->andWhere('s.user = :user')->setParameter('user', $user);
         }
