@@ -7,6 +7,7 @@
 //
 //## Gray and brand colors for use across Bootstrap.
 
+@gray-darkest:           lighten(#000, 7%); // #111
 @gray-darker:            lighten(#000, 13.5%); // #222
 @gray-dark:              lighten(#000, 20%);   // #333
 @gray:                   lighten(#000, 33.5%); // #555
@@ -144,9 +145,9 @@
 
 @btn-font-weight:                normal;
 
-@btn-default-color:              #333;
-@btn-default-bg:                 #fff;
-@btn-default-border:             #ccc;
+@btn-default-color:              @text-color;
+@btn-default-bg:                 @gray-darker;
+@btn-default-border:             @input-border;
 
 @btn-primary-color:              #fff;
 @btn-primary-bg:                 @brand-primary;
@@ -203,7 +204,7 @@
 @legend-border-color:            #e5e5e5;
 
 //** Background color for textual input addons
-@input-group-addon-bg:           @gray-lighter;
+@input-group-addon-bg:           @gray-darker;
 //** Border color for textual input addons
 @input-group-addon-border-color: @input-border;
 

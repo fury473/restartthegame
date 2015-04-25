@@ -16,6 +16,7 @@ class ContactType extends AbstractType {
         $builder
                 ->add('object', 'choice', array(
                     'choices' => array(
+                        '' => 'Définissez l\'object de votre demande',
                         'Adhésion à la RTG' => 'Adhésion à la RTG',
                         'Concours' => 'Concours',
                         'Problème(s) à propos de Teamspeak' => 'Problème(s) à propos de Teamspeak',

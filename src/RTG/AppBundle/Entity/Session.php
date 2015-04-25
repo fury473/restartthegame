@@ -15,10 +15,18 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Session
 {
     
+    public function __construct()
+    {
+        $this->createdAt = new DateTime();
+        $this->dateChanged = new DateTime();
+        $this->updatedAt = new DateTime();
+    }
+
+    
     /**
      * @return DateTime
      */
-    function getCreatedAt()
+    public function getCreatedAt()
     {
         return $this->createdAt;
     }
@@ -26,7 +34,7 @@ class Session
     /**
      * @return DateTime
      */
-    function getEndAt()
+    public function getEndAt()
     {
         return $this->endAt;
     }
@@ -34,7 +42,7 @@ class Session
     /** 
      * @return integer
      */
-    function getId()
+    public function getId()
     {
         return $this->id;
     }
@@ -42,7 +50,7 @@ class Session
     /**
      * @return DateTime
      */
-    function getStartAt()
+    public function getStartAt()
     {
         return $this->startAt;
     }
@@ -50,7 +58,7 @@ class Session
     /**
      * @return string
      */
-    function getTitle()
+    public function getTitle()
     {
         return $this->title;
     }
@@ -58,7 +66,7 @@ class Session
     /**
      * @return User
      */
-    function getUser()
+    public function getUser()
     {
         return $this->user;
     }
@@ -122,9 +130,32 @@ class Session
         $this->user = $user;
         return $this;
     }
+    
+    public function toArray()
+    {
+        return array(
+            'created_at' => $this->createdAt,
+            'date_changed' => $this->dateChanged,
+            'end_at' => $this->endAt,
+            'id' => $this->id,
+            'start_at' => $this->startAt,
+            'title' => $this->title,
+            'updated_at' => $this->updatedAt,
+            'user_id' => $this->user->getId(),
+        );
+    }
+    
+    public function toEvent()
+    {
+        return array(
+            'end' => ($this->endAt != null) ? $this->endAt->format('c') : null,
+            'id' => $this->id,
+            'start' => $this->startAt->format('c'),
+            'title' => $this->title,
+        );
+    }
 
     /**
-     * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="created_at", type="datetime")
      * @var DateTime
      */
@@ -132,7 +163,7 @@ class Session
     
     /**
      * @Gedmo\Timestampable(on="change", field={"startAt", "endAt"})
-     * @ORM\Column(name="$date_changed", type="datetime")
+     * @ORM\Column(name="date_changed", type="datetime")
      * @var DateTime
      */
     protected $dateChanged;

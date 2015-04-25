@@ -24,13 +24,141 @@
             </div>
         {% endif %}
     </div>
+    <div class="col-md-7">
+        <h2>Planning</h2>
+        <div id="loader" data-target="calendar">loading...</div>
+        <div id="calendar" data-events-url="{{ url('rtg_app_rest_session_userlist', {'id': app.user.id}) }}"></div>
+    </div>
+    <div class='col-sm-5'>
+        <h2>Plannifier un stream</h2>
+        <form id="session-form" class="form" action="{{ path('rtg_app_rest_session_create') }}" method="POST">
+            <div class="row">
+                <div class='col-sm-12'>
+                    <div class="form-group">
+                        <label class="label" for="session-title">Titre</label>
+                        <input id="session-title" type="text" name="session[title]" placeholder="Titre" class="form-control" required/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class='col-sm-6'>
+                    <div class="form-group">
+                        <label class="label">Début du stream</label>
+                        <div class='input-group date' id='session-startAt-picker'>
+                            <input type='text' class="form-control" placeholder="{{ 'now'|date('d/m/Y H:i') }}" name="session[startAt]" required />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class='col-sm-6'>
+                    <div class="form-group">
+                        <label class="label">Fin du stream</label>
+                        <div class='input-group date' id='session-endAt-picker'>
+                            <input type='text' class="form-control" placeholder="{{ '+2 hours +30minutes'|date('d/m/Y H:i') }}" name="session[endAt]" required />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class='col-sm-12'>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-primary form-control" data-loading-text="Chargement..." value="Valider"/>
+                    </div>
+                </div>
+            </div>
+            <input id="session-user" type="hidden" name="session[user_id]" value="{{ app.user.id }}" required/>
+        </form>
+    </div>
 {% endblock %}
 
 {% block javascript %}
     {{ parent() }}
     <script type="text/javascript">
+        function updateSession(url, data, revertFunc) {
+            $.ajax({
+                url: url,
+                data: data,
+                type: 'PUT',
+                error: function() {
+                    alert('Une erreur est survenue, annulation de la modification.')
+                    revertFunc();
+                }
+            });
+        }
         $(function () {
             $('[data-toggle="tab"]:last').tab('show');
-        })
+            var monthNames = ["Janvier", "February", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
+
+            var dayNames = ["L", "M", "M", "J", "V", "S", "D"];
+            $('#calendar').fullCalendar({
+                lang: 'fr',
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay'
+                },
+                editable: true,
+                events: {
+                    url: $('#calendar').data('events-url'),
+                    error: function () {
+                    }
+                },
+                eventAfterRender: function(event, element) {
+                    element.prepend( '<span class="closeon" aria-hidden="true">×</span>' );
+                    element.find(".closeon").click(function() {
+                        var url = "{{ path('rtg_app_rest_session_list') }}/"+event._id;
+                        $.ajax({
+                            url: url,
+                            type: 'DELETE',
+                            success: function(result) {
+                                $('#calendar').fullCalendar('removeEvents',event._id);
+                            }
+                        });
+                    });
+                },
+                eventDrop: function( event, delta, revertFunc, jsEvent, ui, view ) {
+                    var url = "{{ path('rtg_app_rest_session_list') }}/"+event._id;
+                    updateSession(url, {'move_delta': delta._data}, revertFunc);
+                },
+                eventResize: function( event, delta, revertFunc, jsEvent, ui, view ) {
+                    var url = "{{ path('rtg_app_rest_session_list') }}/"+event._id;
+                    updateSession(url, {'resize_delta': delta._data}, revertFunc);
+                },
+                loading: function (bool) {
+                    var loader = $('#loader');
+                    loader.toggle(bool);
+                }
+            });
+            $('#session-startAt-picker, #session-endAt-picker').datetimepicker({
+                format: 'DD/MM/YYYY HH:mm'
+            });
+            $("#session-startAt-picker").on("dp.change", function (e) {
+                $('#session-endAt-picker').data("DateTimePicker").minDate(e.date.add(1, 'm'));
+            });
+            $("#session-endAt-picker").on("dp.change", function (e) {
+                $('#session-startAt-picker').data("DateTimePicker").maxDate(e.date.subtract(1, 'm'));
+            });
+            $('#session-form').submit(function (e) {
+                e.preventDefault();
+                var form = $(this);
+                var post_data = form.serialize();
+                var action = form.attr('action');
+                var submit = form.find('[type="submit"]');
+                submit.button('loading');
+                $.post(action, post_data, function (data) {
+                    $('#calendar').fullCalendar('renderEvent', data);
+                    $('#session-form').find("input[type=text]").val("");
+                    submit.button('reset');
+                }, "json")
+                .fail(function() {
+                    submit.button('reset');
+                });
+            });
+        });
     </script>
 {% endblock %}

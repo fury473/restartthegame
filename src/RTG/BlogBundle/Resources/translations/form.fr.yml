@@ -17,6 +17,7 @@ general.update: Modifier
 general.delete: Supprimer
 general.edit: Éditer
 general.show: Voir
+general.validate: Valider
 
 article.create_a_new_entry: Créer un nouvel article
 category.add_articles: Ajouter des articles
