@@ -3,6 +3,7 @@
 namespace RTG\AppBundle\Services;
 
 use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Exception\ClientException;
 use RTG\AppBundle\Model\Twitch\Channel;
 use RTG\AppBundle\Model\Twitch\Stream;
 use RTG\UserBundle\Entity\User;
@@ -67,8 +68,8 @@ class TwitchApiWrapper
         $host_target = null;
         try {
             $response = $this->hostTargetClient->get("/rooms/$channel_name/host_target");
-        } catch (RequestException $e) {
-            
+        } catch (ClientException $e) {
+            return null;
         }
         $data = json_decode((string) $response->getBody(), true);
         if (isset($data['host_target'])) {

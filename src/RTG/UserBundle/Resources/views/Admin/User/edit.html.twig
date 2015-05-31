@@ -10,7 +10,7 @@
     
     {{ form_errors(form) }}
 
-    <fieldset class="row-fluid form-group">
+    <fieldset class="row form-group">
         <div class="col-md-2">{{ form_label(form.username) }}</div>
         <div class="col-md-6">
             {{ form_widget(form.username, { 'attr': { 'placeholder': 'user.field.username'|trans } }) }}
@@ -19,7 +19,7 @@
         </div>
     </fieldset>
 
-    <fieldset class="row-fluid form-group">
+    <fieldset class="row form-group">
         <div class="col-md-2">{{ form_label(form.email) }}</div>
         <div class="col-md-6">
             {{ form_widget(form.email, { 'attr': { 'placeholder': 'user.field.email'|trans } }) }}
@@ -27,12 +27,12 @@
         </div>
     </fieldset>
 
-    <fieldset class="row-fluid form-group">
+    <fieldset class="row form-group">
         <div class="col-md-2"><label>{{ 'user.field.newsletter'|trans }}</label></div>
         <div class="col-md-6"><div class="checkbox"><label>{{ form_widget(form.newsletter) }} {{ 'user.field.newsletter_suscribe'|trans }}</label></div></div>
     </fieldset>
 
-    <fieldset class="row-fluid form-group">
+    <fieldset class="row form-group">
         <div class="col-md-2">{{ form_label(form.birthday) }}</div>
         <div class="col-md-6">
             {{ form_widget(form.birthday) }}
@@ -40,7 +40,7 @@
         </div>
     </fieldset>
 
-    <fieldset class="row-fluid form-group">
+    <fieldset class="row form-group">
         <div class="col-md-2">{{ form_label(form.city) }}</div>
         <div class="col-md-6">
             {{ form_widget(form.city, { 'attr': { 'placeholder': 'user.field.city'|trans } }) }}
@@ -48,7 +48,7 @@
         </div>
     </fieldset>
 
-    <fieldset class="row-fluid form-group">
+    <fieldset class="row form-group">
         <div class="col-md-2"><label>{{ 'user.field.avatar'|trans }}</label></div>
         <div class="col-md-6 uploader">
             <div class="picture">
@@ -69,12 +69,12 @@
         </div>
     </fieldset>
 
-    <fieldset class="row-fluid form-group">
+    <fieldset class="row form-group">
         <div class="col-md-2"><label>{{ 'user.field.enabled'|trans }}</label></div>
         <div class="col-md-6"><div class="checkbox"><label>{{ form_widget(form.enabled) }} A validé son adresse électronique</label></div></div>
     </fieldset>
     
-    <fieldset class="row-fluid form-group">
+    <fieldset class="row form-group">
         <div class="col-md-2"><label>{{ 'user.field.locked'|trans }}</label></div>
         <div class="col-md-6"><div class="checkbox"><label>{{ form_widget(form.locked) }} {{ 'user.field.locked'|trans }}</label></div></div>
     </fieldset>

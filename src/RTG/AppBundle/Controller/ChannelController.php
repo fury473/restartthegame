@@ -4,6 +4,8 @@ namespace RTG\AppBundle\Controller;
 
 use GuzzleHttp\Exception\ClientException;
 use RTG\UserBundle\Entity\User;
+use RTG\AppBundle\Entity\Session;
+use RTG\AppBundle\Form\SessionType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -11,7 +13,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
- * Page controller.
+ * Channel controller.
  *
  * @Route("/")
  */
@@ -26,6 +28,9 @@ class ChannelController extends Controller
      */
     public function channelsAction(User $user)
     {
+        if ($user->hasRole('ROLE_STREAMER') == false) {
+            throw $this->createNotFoundException();
+        }
         $parameters = array();
         if ($user->getTwitchAccessToken() != null) {
             $parameters['twitch'] = true;

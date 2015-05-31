@@ -9,7 +9,7 @@
 
     {{ form_errors(form) }}
     
-    <fieldset class="row-fluid form-group">
+    <fieldset class="row form-group">
         <div class="col-md-2">{{ form_label(form.username) }}</div>
         <div class="col-md-6">
             {{ form_widget(form.username, { 'attr': { 'placeholder': 'user.field.username'|trans } }) }}
@@ -18,7 +18,7 @@
         </div>
     </fieldset>
 
-    <fieldset class="row-fluid form-group">
+    <fieldset class="row form-group">
         <div class="col-md-2">{{ form_label(form.email) }}</div>
         <div class="col-md-6">
             {{ form_widget(form.email, { 'attr': { 'placeholder': 'user.field.email'|trans } }) }}
@@ -26,12 +26,12 @@
         </div>
     </fieldset>
 
-    <fieldset class="row-fluid form-group">
+    <fieldset class="row form-group">
         <div class="col-md-2"><label>{{ 'user.field.newsletter'|trans }}</label></div>
         <div class="col-md-6"><div class="checkbox"><label>{{ form_widget(form.newsletter) }} {{ 'user.field.newsletter_suscribe'|trans }}</label></div></div>
     </fieldset>
 
-    <fieldset class="row-fluid form-group">
+    <fieldset class="row form-group">
         <div class="col-md-2">{{ form_label(form.birthday) }}</div>
         <div class="col-md-6">
             {{ form_widget(form.birthday) }}
@@ -39,7 +39,7 @@
         </div>
     </fieldset>
 
-    <fieldset class="row-fluid form-group">
+    <fieldset class="row form-group">
         <div class="col-md-2">{{ form_label(form.city) }}</div>
         <div class="col-md-6">
             {{ form_widget(form.city, { 'attr': { 'placeholder': 'user.field.city'|trans } }) }}
@@ -47,7 +47,7 @@
         </div>
     </fieldset>
 
-    <fieldset class="row-fluid form-group">
+    <fieldset class="row form-group">
         <div class="col-md-2"><label>{{ 'user.field.avatar'|trans }}</label></div>
         <div class="col-md-6 uploader">
             <div class="picture">
@@ -71,7 +71,7 @@
     {% if is_granted("ROLE_STREAMER") %}
     <h2 id="my-connections">{{ 'user.title.my_connections'|trans }}</h2>
     
-    <fieldset class="row-fluid form-group">
+    <fieldset class="row form-group">
         <div class="connect_items">
             {% include 'RTGAppBundle:Page:include/serviceItem.html.twig' with {'service': 'twitch', 'title': 'Twitter', 'desc': 'Associez votre compte Twitch en un clic à votre compte ' ~ brand_name} %}
         </div>
@@ -80,7 +80,7 @@
 
     <h2>{{ 'user.title.delete'|trans }}</h2>
 
-    <fieldset class="row-fluid form-group">
+    <fieldset class="row form-group">
         <div class="col-md-2">{{ 'user.button.delete_account'|trans }}</div>
         <div class="col-md-6">
             Si vous le souhaitez, vous pouvez désactiver votre compte {{ brand_name }} depuis la page
