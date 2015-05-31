@@ -16,7 +16,7 @@ abstract class Image extends File implements ImageInterface
         return null === $this->path ? null : $this->getUploadThumbRootDir($filter) . '/' . $this->path;
     }
 
-    protected function getUploadDir()
+    public static function getUploadDir()
     {
         return 'uploads/img';
     }

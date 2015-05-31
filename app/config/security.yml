@@ -3,7 +3,7 @@ security:
         RTG\UserBundle\Entity\User: sha512
 
     role_hierarchy:
-        ROLE_ADMIN:       ROLE_USER
+        ROLE_ADMIN:       [ROLE_USER, ROLE_CHAT_ADMIN]
         ROLE_STAFF:       [ROLE_USER, ROLE_ADMIN]
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_STAFF, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
@@ -19,6 +19,7 @@ security:
             pattern:   ^/
             anonymous: true
             provider:  main
+            switch_user: true
             form_login:
                 login_path: fos_user_security_login
                 check_path: fos_user_security_check

@@ -15,14 +15,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 /**
  * Channel controller.
  *
- * @Route("/")
+ * @Route("/stream")
  */
 class ChannelController extends Controller
 {
 
     /**
      * @ParamConverter("user", class="RTGUserBundle:User", options={"id" = "username", "repository_method" = "findOneByUsernameCanonical"})
-     * @Route("/stream/{username}")
+     * @Route("/{username}")
      * @Method({"GET"})
      * @Template()
      */
@@ -49,7 +49,7 @@ class ChannelController extends Controller
     
     /**
      * @ParamConverter("user", class="RTGUserBundle:User", options={"id" = "username", "repository_method" = "findOneByUsernameCanonical"})
-     * @Route("/stream/{username}/twitch")
+     * @Route("/{username}/twitch")
      * @Method({"GET"})
      * @Template()
      */

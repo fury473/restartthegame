@@ -1,0 +1,17 @@
+{% extends 'RTGAppBundle::layout.html.twig' %}
+
+{% block title %}Chat{% endblock %}
+
+{% block content %}
+<h1>Chat (BÊTA)</h1>
+{{ include('RTGAppBundle:Chat:widget.html.twig') }}
+{% endblock %}
+
+{% block javascript %}
+{{ parent() }}
+{% if is_granted('ROLE_USER') %}
+{% javascripts 'bundles/rtgapp/js/chat.js' output='js/chat.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+{% endif %}
+{% endblock %}

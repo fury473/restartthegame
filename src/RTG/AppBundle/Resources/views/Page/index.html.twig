@@ -48,7 +48,7 @@
         </div>
     </div>
 </div>
-
+     
 <div class="row">
     <div class="col-md-12">
         <h1>{{ brand_name }}</h1>
@@ -80,4 +80,18 @@
         <p class="text-center">Chaque équipe inscrite a le droit à son petit espace sur le Teamspeak.</p>
     </div>
 </div>
+        
+{% if is_granted('ROLE_USER') %}
+<h2>Chat (BÊTA)</h2>
+{{ include('RTGAppBundle:Chat:widget.html.twig') }}
+{% endif %}
+{% endblock %}
+
+{% block javascript %}
+{{ parent() }}
+{% if is_granted('ROLE_USER') %}
+{% javascripts 'bundles/rtgapp/js/chat.js' output='js/chat.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+{% endif %}
 {% endblock %}

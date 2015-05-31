@@ -12,14 +12,12 @@ use ReCaptcha\ReCaptcha;
 
 /**
  * Page controller.
- *
- * @Route("/")
  */
 class PageController extends Controller
 {
 
     /**
-     * @Route("/")
+     * @Route("")
      * @Method({"GET"})
      * @Template()
      */
@@ -28,9 +26,13 @@ class PageController extends Controller
         $em = $this->getDoctrine()->getManager();
         $news = $em->getRepository('RTGBlogBundle:NewsArticle')->getFeaturedArticles(5);
         $competitions = $em->getRepository('RTGBlogBundle:CompetitionArticle')->getLatestArticles(5);
+        $port = $this->container->getParameter('chat_port');
+        $domain = $this->getRequest()->getHost();
+        $websocket_url = 'ws://'.$domain.':'.$port;
         return array(
             'news' => $news,
-            'competitions' => $competitions
+            'competitions' => $competitions,
+            'websocketUrl' => $websocket_url
         );
     }
 

@@ -1,4 +1,9 @@
 services:
+    rtg_app.chat:
+        class: RTG\AppBundle\Services\Chat
+        arguments:
+            em: @doctrine.orm.entity_manager
+            templating: @templating
     rtg_app.newsletter:
         class: RTG\AppBundle\Services\Newsletter
         arguments:

@@ -31,6 +31,7 @@ class Avatar extends Image
     {
         $files = array();
         $files[] = $this->getAbsolutePath();
+        $files[] = $this->getAbsoluteThumbPath('tb-36x36');
         $files[] = $this->getAbsoluteThumbPath('tb-48x48');
         $files[] = $this->getAbsoluteThumbPath('tb-128x128');
         $this->filenameForRemove = array();
@@ -48,7 +49,7 @@ class Avatar extends Image
         }
     }
 
-    protected function getUploadDir()
+    public static function getUploadDir()
     {
         return 'uploads/user/img/avatar';
     }

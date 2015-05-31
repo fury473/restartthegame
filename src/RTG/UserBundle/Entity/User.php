@@ -127,6 +127,14 @@ class User extends BaseUser
     }
     
     /**
+     * @return boolean 
+     */
+    public function getChatBanned()
+    {
+        return $this->chatBanned;
+    }
+    
+    /**
      * @return string 
      */
     public function getCity()
@@ -238,6 +246,16 @@ class User extends BaseUser
     public function setBirthday($birthday)
     {
         $this->birthday = $birthday;
+        return $this;
+    }
+    
+    /**
+     * @param boolean $chat_banned
+     * @return User 
+     */
+    public function setChatBanned($chat_banned)
+    {
+        $this->chatBanned = $chat_banned;
         return $this;
     }
 
@@ -379,6 +397,11 @@ class User extends BaseUser
      * @ORM\Column(type="date", name="birthday", nullable=true)
      */
     protected $birthday;
+    
+    /**
+     * @ORM\Column(type="boolean", name="chat_banned")
+     */
+    protected $chatBanned;
 
     /**
      * @ORM\Column(type="string", name="city", nullable=true)

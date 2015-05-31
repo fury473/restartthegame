@@ -22,6 +22,8 @@ parameters:
 
     brand_name: Restart The Game
 
+    chat_port: 9009
+
     chatdepot_api_url: 'https://chatdepot.twitch.tv'
     twitch_api_url: 'https://api.twitch.tv'
     twitch_channel: 'restart_the_game'
@@ -32,5 +34,3 @@ parameters:
     recaptcha_api_url: https://www.google.com/recaptcha/api
     recaptcha_key: 6Le2dPkSAAAAACRpch-UdW9nN5RbYoH-VGX5c7-D
     recaptcha_secret: 6Le2dPkSAAAAAOPUQg5dFrVwMRRKX2ovUO-PAB99
-
-#    assetic.cache.class: Assetic\Cache\ArrayCache

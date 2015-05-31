@@ -1,0 +1,19 @@
+<div class="chat-message{% if msg.user is null %} server{% elseif msg.user.id == app_user_id %} me{% endif %} clearfix">
+    <div class="message-header">
+        {% if msg.user is null %}
+            <p>Serveur</p>
+        {% else %}
+        {% if msg.user.avatar is not null %}
+            {% set avatar = msg.user.avatar.webPath|apply_filter('tb-36x36') %}
+        {% else %}
+            {% set avatar = gravatar(msg.user.email, 36) %}
+        {% endif %}
+        <img src="{{ avatar }}" class="pull-left" alt="{{ msg.user.username }}"/>
+        <p>{{ msg.user.username }}</p>
+        {% endif %}
+        <p><time datetime="{{ msg.time|date('c') }}" title="{{ msg.time|localizeddate() }}">{{ msg.time|date('H:i') }}</time></p>
+    </div>
+    <div class="message-content">
+        <p>{{ msg.text|auto_link_text }}</p>
+    </div>
+</div>

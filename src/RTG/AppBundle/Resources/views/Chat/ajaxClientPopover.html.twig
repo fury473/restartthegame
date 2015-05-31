@@ -1,0 +1,5 @@
+<p>Connecté <time datetime="{{ client.connectedAt|date('c') }}" title="{{ client.connectedAt|localizeddate() }}">{{ client.connectedAt|ago }}</time></p>
+{% if is_granted('ROLE_CHAT_ADMIN') %}
+<a href="#" class="chat-client-kick" data-client-id="{{ client.id }}">Exclure</a>
+<a href="#" class="chat-client-ban" data-client-id="{{ client.id }}">Bannir</a>
+{% endif %}

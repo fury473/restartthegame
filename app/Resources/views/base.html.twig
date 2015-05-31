@@ -79,19 +79,19 @@
         <div id="fb-root"></div>
         {% block javascript %}
             {% javascripts
+                'bundles/rtgapp/js/jquery-1.9.1.min.js'
                 'bundles/rtgapp/js/facebook-sdk.js'
                 'bundles/rtgapp/js/twitter.js'
                 'bundles/rtgapp/js/google-apis.js'
-                'bundles/rtgapp/js/jquery-1.9.1.min.js'
                 'bundles/rtgapp/js/moment/moment.min.js'
                 'bundles/rtgapp/js/moment/locale/fr.js'
                 'bundles/rtgapp/dist/js/bootstrap.min.js'
                 'bundles/rtgapp/js/bootstrap-datetimepicker.js'
-                'bundles/rtgapp/js/bootstrap-switch.min.js'
+                'bundles/rtgapp/js/bootstrap-toggle.min.js'
                 'bundles/rtgapp/js/tab.js'
                 'bundles/rtgapp/js/fullcalendar.min.js'
                 'bundles/rtgapp/js/lang-all.js'
-                'bundles/rtgapp/js/main.js' %}
+                'bundles/rtgapp/js/main.js' output='js/main.js' %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
             {% endjavascripts %}
         {% endblock %}

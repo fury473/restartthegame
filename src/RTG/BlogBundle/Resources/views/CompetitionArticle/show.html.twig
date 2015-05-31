@@ -22,7 +22,7 @@
 
 {% block content %}
     <article itemscope itemtype="http://schema.org/Event">
-        <header class="row">
+        <header>
             <div class="pull-right">Annoncée le <time datetime="{{ article.created|date('c') }}">{{ article.created|localizeddate('full', 'none')|capitalize }}</time></div>
             <h1 itemprop="name">{{ article.title }}</h1>
             {% if article.image is not null %}

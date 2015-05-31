@@ -45,7 +45,7 @@ abstract class File implements FileInterface
         return __DIR__.'/../../../../web/'.$this->getUploadDir();
     }
 
-    protected function getUploadDir()
+    public static function getUploadDir()
     {
         return 'uploads/file';
     }

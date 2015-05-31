@@ -5,6 +5,7 @@ imports:
 parameters:
     web_path: %kernel.root_dir%/../web
     rtg.twig_extension.class: RTG\AppBundle\Services\Extension\TwigExtension
+    rtg.auto_link_twig_extension.class: RTG\AppBundle\Services\Extension\AutoLinkTwigExtension
 
 framework:
     #esi:             ~
@@ -18,7 +19,7 @@ framework:
     validation:      { enable_annotations: true }
     templating:
         engines: ['twig']
-        assets_version: v1.4.0
+        assets_version: v1.5.0
     default_locale:  "%locale%"
     trusted_proxies: ~
     session:         ~
@@ -40,6 +41,10 @@ twig:
 services:
     rtg.twig_extension:
         class: %rtg.twig_extension.class%
+        tags:
+            - { name: twig.extension }
+    rtg.auto_link_twig_extension:
+        class: %rtg.auto_link_twig_extension.class%
         tags:
             - { name: twig.extension }
     twig.extension.intl:
@@ -114,6 +119,9 @@ avalanche_imagine:
         tb-48x48:
             type:    thumbnail
             options: { size: [48, 48], mode: inset, quality: 100, format: png }
+        tb-36x36:
+            type:    thumbnail
+            options: { size: [36, 36], mode: inset, quality: 100, format: png }
 
 ornicar_gravatar:
     rating: g

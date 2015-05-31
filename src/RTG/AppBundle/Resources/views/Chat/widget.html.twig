@@ -1,0 +1,18 @@
+<input id="chat-connect-button" type="checkbox" data-toggle="toggle" data-on="ON" data-off="OFF" data-onstyle="success" data-offstyle="danger" autocomplete="off">
+<section id="chat" data-user-id="{{ app.user.id }}" data-websocket-url="{{ websocketUrl }}">
+    <div class="col-xs-3 col-md-3 left-column">
+        <div id="chat-header">Membres connectés</div>
+        <ul id="chat-clients" class="list-unstyled"></ul>
+    </div>
+    <div class="col-xs-9 col-md-9 right-column">
+        <div id="chat-messages" data-info-prototype="{{ '<div class="chat-message server clearfix"><div class="message-header">Info</div><div class="message-content">__name__</div></div>'|e }}"></div>
+        <form id="chat-message-edit" method="post">
+            <div class="input-group">
+                <textarea class="form-control" maxlength="255" required disabled></textarea>
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" disabled>Envoyer</button>
+                </span>
+            </div>
+        </form>
+    </div>
+</section>
