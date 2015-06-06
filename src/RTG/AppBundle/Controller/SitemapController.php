@@ -52,7 +52,7 @@ class SitemapController extends Controller
         $routes[] = 'rtg_app_page_index';
         $routes[] = 'rtg_blog_newsarticle_index';
         $routes[] = 'rtg_blog_competitionarticle_index';
-        $routes[] = 'rtg_app_page_stream';
+        $routes[] = 'rtg_app_page_tv';
         $routes[] = 'rtg_app_page_aboutus';
         $routes[] = 'rtg_app_page_teamspeak';
         $routes[] = 'rtg_app_page_partners';

@@ -152,6 +152,7 @@ class Session
             'id' => $this->id,
             'start' => $this->startAt->format('c'),
             'title' => $this->title,
+            'organizer' => $this->user->getUsernameCanonical()
         );
     }
 

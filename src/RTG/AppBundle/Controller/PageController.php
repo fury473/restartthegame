@@ -17,56 +17,6 @@ class PageController extends Controller
 {
 
     /**
-     * @Route("")
-     * @Method({"GET"})
-     * @Template()
-     */
-    public function indexAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-        $news = $em->getRepository('RTGBlogBundle:NewsArticle')->getFeaturedArticles(5);
-        $competitions = $em->getRepository('RTGBlogBundle:CompetitionArticle')->getLatestArticles(5);
-        $port = $this->container->getParameter('chat_port');
-        $domain = $this->getRequest()->getHost();
-        $websocket_url = 'ws://'.$domain.':'.$port;
-        return array(
-            'news' => $news,
-            'competitions' => $competitions,
-            'websocketUrl' => $websocket_url
-        );
-    }
-
-    /**
-     * @Template("RTGAppBundle:Page:include/menu.html.twig")
-     */
-    public function menuAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-        $categories = $em->getRepository('RTGBlogBundle:Category')->findAll();
-        return array(
-            'categories' => $categories
-        );
-    }
-
-    /**
-     * @Template("RTGAppBundle:Page:include/menuUser.html.twig")
-     */
-    public function menuUserAction()
-    {
-        return array();
-    }
-
-    /**
-     * @Route("/admin")
-     * @Method({"GET"})
-     * @Template()
-     */
-    public function adminAction()
-    {
-        return array();
-    }
-
-    /**
      * @Route("/about-us")
      * @Method({"GET"})
      * @Template()
@@ -77,86 +27,11 @@ class PageController extends Controller
     }
 
     /**
-     * @Route("/partners")
+     * @Route("/admin")
      * @Method({"GET"})
      * @Template()
      */
-    public function partnersAction()
-    {
-        return array();
-    }
-
-    /**
-     * @Route("/search")
-     * @Method({"GET"})
-     * @Template()
-     */
-    public function searchAction(Request $request)
-    {
-        $query = $request->query->get('query');
-        $em = $this->getDoctrine()->getManager();
-        if ($query) {
-            $news = $em->getRepository('RTGBlogBundle:NewsArticle')->search($query, 6);
-            $news_count = $em->getRepository('RTGBlogBundle:NewsArticle')->searchCount($query);
-            $competitions = $em->getRepository('RTGBlogBundle:CompetitionArticle')->search($query, 6);
-            $competitions_count = $em->getRepository('RTGBlogBundle:CompetitionArticle')->searchCount($query);
-        } else {
-            return array('query' => $query);
-        }
-        return array('query' => $query, 'news' => $news, 'news_count' => $news_count, 'competitions' => $competitions, 'competitions_count' => $competitions_count);
-    }
-
-    /**
-     * @Route("/search/competition")
-     * @Method({"GET"})
-     * @Template("RTGAppBundle:Page:search.html.twig")
-     */
-    public function searchCompetitionAction(Request $request)
-    {
-        $query = $request->query->get('query');
-        $em = $this->getDoctrine()->getManager();
-        $competitions = $em->getRepository('RTGBlogBundle:CompetitionArticle')->search($query);
-        return array('query' => $query, 'competitions' => $competitions, 'competitions_count' => count($competitions));
-    }
-
-    /**
-     * @Route("/search/news")
-     * @Method({"GET"})
-     * @Template("RTGAppBundle:Page:search.html.twig")
-     */
-    public function searchNewsAction(Request $request)
-    {
-        $query = $request->query->get('query');
-        $em = $this->getDoctrine()->getManager();
-        $news = $em->getRepository('RTGBlogBundle:NewsArticle')->search($query);
-        return array('query' => $query, 'news' => $news, 'news_count' => count($news));
-    }
-
-    /**
-     * @Route("/stream")
-     * @Method({"GET"})
-     * @Template()
-     */
-    public function streamAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-        $streamers = $em->getRepository('RTGUserBundle:User')->findStreamers();
-
-        $channel_name = $host_target = $this->container->getParameter('twitch_channel');
-        $client = $this->get('rtg_app.twitchapiwrapper');
-        $channel = $client->getChannelByName($channel_name);
-        
-        $broadcasted_channel = $channel->getBroadcastedChannel();
-        $stream = $client->getStream($broadcasted_channel->getName());
-        return array('channel' => $channel, 'broadcastedChannel' => $broadcasted_channel, 'stream' => $stream, 'streamers' => $streamers);
-    }
-
-    /**
-     * @Route("/teamspeak")
-     * @Method({"GET"})
-     * @Template()
-     */
-    public function teamspeakAction()
+    public function adminAction()
     {
         return array();
     }
@@ -225,6 +100,35 @@ class PageController extends Controller
     }
 
     /**
+     * @Route("/forum")
+     * @Method({"GET"})
+     */
+    public function forumAction()
+    {
+        return $this->redirect("http://forum.restartthegame.com");
+    }
+
+    /**
+     * @Route("")
+     * @Method({"GET"})
+     * @Template()
+     */
+    public function indexAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $news = $em->getRepository('RTGBlogBundle:NewsArticle')->getFeaturedArticles(5);
+        $competitions = $em->getRepository('RTGBlogBundle:CompetitionArticle')->getLatestArticles(5);
+        $port = $this->container->getParameter('chat_port');
+        $domain = $this->getRequest()->getHost();
+        $websocket_url = 'ws://' . $domain . ':' . $port;
+        return array(
+            'news' => $news,
+            'competitions' => $competitions,
+            'websocketUrl' => $websocket_url
+        );
+    }
+
+    /**
      * @Route("/legal-notices")
      * @Method({"GET"})
      * @Template()
@@ -235,21 +139,82 @@ class PageController extends Controller
     }
 
     /**
-     * @Route("/forum")
-     * @Method({"GET"})
+     * @Template("RTGAppBundle:Page:include/menu.html.twig")
      */
-    public function forumAction()
+    public function menuAction($originalRequest)
     {
-        return $this->redirect("http://forum.restartthegame.com");
+        $em = $this->getDoctrine()->getManager();
+        $categories = $em->getRepository('RTGBlogBundle:Category')->findAll();
+        return array(
+            'categories' => $categories,
+            'request' => $originalRequest
+        );
     }
     
-//    /**
-//     * @Route("/coming-soon")
-//     * @Method({"GET"})
-//     * @Template()
-//     */
-//    public function comingSoonAction()
-//    {
-//        return array();
-//    }
+    /**
+     * @Route("/partners")
+     * @Method({"GET"})
+     * @Template()
+     */
+    public function partnersAction()
+    {
+        return array();
+    }
+
+    /**
+     * @Route("/search")
+     * @Method({"GET"})
+     * @Template()
+     */
+    public function searchAction(Request $request)
+    {
+        $query = $request->query->get('query');
+        $em = $this->getDoctrine()->getManager();
+        if ($query) {
+            $news = $em->getRepository('RTGBlogBundle:NewsArticle')->search($query, 6);
+            $news_count = $em->getRepository('RTGBlogBundle:NewsArticle')->searchCount($query);
+            $competitions = $em->getRepository('RTGBlogBundle:CompetitionArticle')->search($query, 6);
+            $competitions_count = $em->getRepository('RTGBlogBundle:CompetitionArticle')->searchCount($query);
+        } else {
+            return array('query' => $query);
+        }
+        return array('query' => $query, 'news' => $news, 'news_count' => $news_count, 'competitions' => $competitions, 'competitions_count' => $competitions_count);
+    }
+
+    /**
+     * @Route("/search/competition")
+     * @Method({"GET"})
+     * @Template("RTGAppBundle:Page:search.html.twig")
+     */
+    public function searchCompetitionAction(Request $request)
+    {
+        $query = $request->query->get('query');
+        $em = $this->getDoctrine()->getManager();
+        $competitions = $em->getRepository('RTGBlogBundle:CompetitionArticle')->search($query);
+        return array('query' => $query, 'competitions' => $competitions, 'competitions_count' => count($competitions));
+    }
+
+    /**
+     * @Route("/search/news")
+     * @Method({"GET"})
+     * @Template("RTGAppBundle:Page:search.html.twig")
+     */
+    public function searchNewsAction(Request $request)
+    {
+        $query = $request->query->get('query');
+        $em = $this->getDoctrine()->getManager();
+        $news = $em->getRepository('RTGBlogBundle:NewsArticle')->search($query);
+        return array('query' => $query, 'news' => $news, 'news_count' => count($news));
+    }
+    
+    /**
+     * @Route("/teamspeak")
+     * @Method({"GET"})
+     * @Template()
+     */
+    public function teamspeakAction()
+    {
+        return array();
+    }
+
 }

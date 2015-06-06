@@ -14,9 +14,11 @@ class UserRepository extends EntityRepository
     public function findStreamers()
     {
         return $this->createQueryBuilder('u')
-                        ->select('u.id', 'u.username')
+                        ->select('u')
                         ->where('u.roles LIKE :role')
+                        ->andWhere('u.twitchAccessToken is not null')
                         ->setParameter('role', '%ROLE_STREAMER%')
+                        ->orderBy('u.username')
                         ->getQuery()
                         ->getResult();
     }

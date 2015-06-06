@@ -1,42 +1,46 @@
 <ul class="nav navbar-nav">
-    <li class="pull-left{% if 'rtg_app_page_index' in app.request.get('_route') %} active{% endif %}">
+    <li class="pull-left{% if 'rtg_app_page_index' in request.get('_route') %} active{% endif %}">
       <a href="{{ path('rtg_app_page_index') }}" title="{{ brand_name }}">{{ 'home'|trans({}, 'menu') }}</a>
     </li>
     {% if categories is empty %}
-    <li class="pull-left{% if 'rtg_blog_newsarticle' in app.request.get('_route') %} active{% endif %}">
+    <li class="pull-left{% if 'rtg_blog_newsarticle' in request.get('_route') %} active{% endif %}">
         <a href="{{ path('rtg_blog_newsarticle_index') }}" title="{{ 'news'|trans({}, 'menu') }}">{{ 'news'|trans({}, 'menu') }}</a>
     </li>
     {% else %}
-    <li class="dropdown pull-left{% if 'rtg_blog_newsarticle' in app.request.get('_route') %} active{% endif %}">
+    <li class="dropdown pull-left{% if 'rtg_blog_newsarticle' in request.get('_route') %} active{% endif %}">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ 'news'|trans({}, 'menu') }} <span class="caret"></span></a>
         <ul class="dropdown-menu" role="menu">
             {% for category in categories %}
-            <li><a href="{{ path('rtg_blog_newsarticle_indexbycategory', {'slug': category.slug}) }}" title="{{ category.title }}">{{ category.title }}</a></li>
+            <li{% if 'rtg_blog_newsarticle_indexbycategory' == request.get('_route') and request.get('slug') == category.slug %} class="active"{% endif %}><a href="{{ path('rtg_blog_newsarticle_indexbycategory', {'slug': category.slug}) }}" title="{{ category.title }}">{{ category.title }}</a></li>
             {% endfor %}
             <li class="divider"></li>
-            <li><a href="{{ path('rtg_blog_newsarticle_index') }}" title="{{ 'all_f'|trans({}, 'menu') }}">{{ 'all_f'|trans({}, 'menu') }}</a></li>
+            <li{% if 'rtg_blog_newsarticle_index' == request.get('_route') %} class="active"{% endif %}><a href="{{ path('rtg_blog_newsarticle_index') }}" title="{{ 'all_f'|trans({}, 'menu') }}">{{ 'all_f'|trans({}, 'menu') }}</a></li>
           </ul>
     </li>
     {% endif %}
-    <li class="pull-left{% if 'rtg_blog_competitionarticle' in app.request.get('_route') %} active{% endif %}">
+    <li class="pull-left{% if 'rtg_blog_competitionarticle' in request.get('_route') %} active{% endif %}">
         <a href="{{ path('rtg_blog_competitionarticle_index') }}" title="{{ 'competitions'|trans({}, 'menu') }}">{{ 'competitions'|trans({}, 'menu') }}</a>
     </li>
-    <li class="pull-left{% if 'rtg_app_page_stream' in app.request.get('_route') %} active{% endif %}">
-        <a href="{{ path('rtg_app_page_stream') }}" title="{{ 'stream'|trans({}, 'menu') }}">{{ 'stream'|trans({}, 'menu') }}</a>
+    <li class="dropdown pull-left{% if 'rtg_app_stream' in request.get('_route') %} active{% endif %}">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ 'stream'|trans({}, 'menu') }} <span class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu">
+            <li{% if 'rtg_app_stream_rtgtv' == request.get('_route') %} class="active"{% endif %}><a href="{{ path('rtg_app_stream_rtgtv') }}" title="{{ 'rtg_tv'|trans({}, 'menu') }}">{{ 'rtg_tv'|trans({}, 'menu') }}</a></li>
+            <li{% if 'rtg_app_stream_streamers' == request.get('_route') %} class="active"{% endif %}><a href="{{ path('rtg_app_stream_streamers') }}" title="{{ 'our_streamers'|trans({}, 'menu') }}">{{ 'our_streamers'|trans({}, 'menu') }}</a></li>
+        </ul>
     </li>
-    <li class="pull-left{% if 'rtg_app_page_aboutus' in app.request.get('_route') %} active{% endif %}">
+    <li class="pull-left{% if 'rtg_app_page_aboutus' in request.get('_route') %} active{% endif %}">
         <a href="{{ path('rtg_app_page_aboutus') }}" title="{{ 'about_us'|trans({}, 'menu') }}">{{ 'about_us'|trans({}, 'menu') }}</a>
     </li>
-    <li class="pull-left{% if 'rtg_app_page_teamspeak' in app.request.get('_route') %} active{% endif %}">
+    <li class="pull-left{% if 'rtg_app_page_teamspeak' in request.get('_route') %} active{% endif %}">
         <a href="{{ path('rtg_app_page_teamspeak') }}" title="{{ 'teamspeak'|trans({}, 'menu') }}">{{ 'teamspeak'|trans({}, 'menu') }}</a>
     </li>
-    <li class="pull-left{% if 'rtg_app_page_partners' in app.request.get('_route') %} active{% endif %}">
+    <li class="pull-left{% if 'rtg_app_page_partners' in request.get('_route') %} active{% endif %}">
         <a href="{{ path('rtg_app_page_partners') }}" title="{{ 'partners'|trans({}, 'menu') }}">{{ 'partners'|trans({}, 'menu') }}</a>
     </li>
     <li class="pull-left">
         <a target="_blank" href="http://forum.restartthegame.com" title="Forum - {{ brand_name }}">Forum</a>
     </li>
-    <li class="pull-left{% if 'rtg_app_page_contact' in app.request.get('_route') %} active{% endif %}">
+    <li class="pull-left{% if 'rtg_app_page_contact' in request.get('_route') %} active{% endif %}">
         <a href="{{ path('rtg_app_page_contact') }}" title="{{ 'contact'|trans({}, 'menu') }}">{{ 'contact'|trans({}, 'menu') }}</a>
     </li>
     <li class="pull-right">
