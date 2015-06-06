@@ -3,7 +3,7 @@
 {% block title %}{{ 'my_stream'|trans({}, 'menu') }}{% endblock %}
 
 {% block content %}
-    <h1>{% if app.user.id == user.id %}{{ 'my_stream'|trans({}, 'menu') }}{% else %}Stream - {{ user.username }}{% endif %}</h1>
+    <h1>{% if app.user != null and app.user.id == user.id %}{{ 'my_stream'|trans({}, 'menu') }}{% else %}Stream - {{ user.username }}{% endif %}</h1>
     <ul class="nav nav-pills list-unstyled hidden" role="tablist">
         {% if dailymotion is defined %}
             <li role="presentation"><a href="#dailymotion" aria-controls="dailymotion" role="tab" data-toggle="tab">Dailymotion</a></li>
@@ -24,12 +24,12 @@
             </div>
         {% endif %}
     </div>
-    <div class="col-md-{% if app.user.id == user.id %}7{% else %}12{% endif %}">
+    <div class="col-md-{% if app.user != null and app.user.id == user.id %}7{% else %}12{% endif %}">
         <h2>Planning</h2>
         <div id="loader" class="loader"></div>
-        <div id="calendar" data-event-url="{{ path('rtg_app_rest_session_list') }}" data-user-events-url="{{ path('rtg_app_rest_user_sessions', {'id': user.id}) }}" data-editable="{% if (app.user.id == user.id) %}true{% else %}false{% endif %}"></div>
+        <div id="calendar" data-event-url="{{ path('rtg_app_rest_session_list') }}" data-user-events-url="{{ path('rtg_app_rest_user_sessions', {'id': user.id}) }}" data-editable="{% if app.user != null and app.user.id == user.id %}true{% else %}false{% endif %}"></div>
     </div>
-    {% if app.user.id == user.id %}
+    {% if app.user != null and app.user.id == user.id %}
     <div class='col-sm-5'>
         <h2>Plannifier un stream</h2>
         <form id="session-form" class="form" action="{{ path('rtg_app_rest_session_create') }}" method="POST">
