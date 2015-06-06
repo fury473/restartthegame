@@ -1,10 +1,10 @@
 {% extends 'RTGAppBundle::layout.html.twig' %}
 
-{% block title %}RTG TV{% endblock %}
+{% block title %}{{ 'my_stream'|trans({}, 'menu') }}{% endblock %}
 
 {% block content %}
-    <h1>{{ 'my_channels'|trans({}, 'menu') }}</h1>
-    <ul class="nav nav-pills list-unstyled" role="tablist">
+    <h1>{% if app.user.id == user.id %}{{ 'my_stream'|trans({}, 'menu') }}{% else %}Stream - {{ user.username }}{% endif %}</h1>
+    <ul class="nav nav-pills list-unstyled hidden" role="tablist">
         {% if dailymotion is defined %}
             <li role="presentation"><a href="#dailymotion" aria-controls="dailymotion" role="tab" data-toggle="tab">Dailymotion</a></li>
             {% endif %}
@@ -15,19 +15,19 @@
     <div class="tab-content">
         {% if dailymotion is defined %}
             <div role="tabpanel" class="tab-pane fade" id="dailymotion">
-                {{ render(controller("RTGAppBundle:Channel:dailymotion", { 'username': user.usernameCanonical })) }}
+                {{ render(controller("RTGAppBundle:Stream:dailymotion", { 'username': user.usernameCanonical })) }}
             </div>
         {% endif %}
         {% if twitch is defined %}
             <div role="tabpanel" class="tab-pane fade" id="twitch">
-                {{ render(controller("RTGAppBundle:Channel:twitch", { 'username': user.usernameCanonical })) }}
+{#                {{ render(controller("RTGAppBundle:Stream:twitch", { 'username': user.usernameCanonical })) }}#}
             </div>
         {% endif %}
     </div>
-    <div class="col-md-7">
+    <div class="col-md-{% if app.user.id == user.id %}7{% else %}12{% endif %}">
         <h2>Planning</h2>
-        <div id="loader" data-target="calendar">loading...</div>
-        <div id="calendar" data-events-url="{{ url('rtg_app_rest_session_userlist', {'id': user.id}) }}"></div>
+        <div id="loader" class="loader"></div>
+        <div id="calendar" data-event-url="{{ path('rtg_app_rest_session_list') }}" data-user-events-url="{{ path('rtg_app_rest_user_sessions', {'id': user.id}) }}" data-editable="{% if (app.user.id == user.id) %}true{% else %}false{% endif %}"></div>
     </div>
     {% if app.user.id == user.id %}
     <div class='col-sm-5'>
@@ -93,49 +93,52 @@
             });
         }
         $(function () {
-            $('[data-toggle="tab"]:last').tab('show');
-            var monthNames = ["Janvier", "February", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
-
-            var dayNames = ["L", "M", "M", "J", "V", "S", "D"];
             $('#calendar').fullCalendar({
-                lang: '{{ app.request.locale }}',
+                lang: $('html').attr('lang'),
                 header: {
                     left: 'prev,next today',
                     center: 'title',
                     right: 'month,agendaWeek,agendaDay'
                 },
-                editable: true,
+                editable: $('#calendar').data('editable'),
                 events: {
-                    url: $('#calendar').data('events-url'),
+                    url: $('#calendar').data('user-events-url'),
                     error: function () {
                     }
                 },
-                eventAfterRender: function(event, element) {
-                    element.prepend( '<span class="closeon" aria-hidden="true">×</span>' );
-                    element.find(".closeon").click(function() {
-                        var url = "{{ path('rtg_app_rest_session_list') }}/"+event._id;
-                        $.ajax({
-                            url: url,
-                            type: 'DELETE',
-                            success: function(result) {
-                                $('#calendar').fullCalendar('removeEvents',event._id);
-                            }
+                eventAfterRender: function(event, element, view) {
+                    if (view.options.editable) {
+                        element.prepend( '<span class="closeon" aria-hidden="true">×</span>' );
+                        element.find(".closeon").click(function() {
+                            var url = $('#calendar').data('event-url') + '/' + event._id;
+                            $.ajax({
+                                url: url,
+                                type: 'DELETE',
+                                success: function(result) {
+                                    $('#calendar').fullCalendar('removeEvents',event._id);
+                                }
+                            });
                         });
-                    });
+                    }
                 },
                 eventDrop: function( event, delta, revertFunc, jsEvent, ui, view ) {
-                    var url = "{{ path('rtg_app_rest_session_list') }}/"+event._id;
-                    updateSession(url, {'move_delta': delta._data}, revertFunc);
+                    if (view.options.editable) {
+                        var url = $('#calendar').data('event-url')+'/'+event._id;
+                        updateSession(url, {'move_delta': delta._data}, revertFunc);
+                    }
                 },
                 eventResize: function( event, delta, revertFunc, jsEvent, ui, view ) {
-                    var url = "{{ path('rtg_app_rest_session_list') }}/"+event._id;
-                    updateSession(url, {'resize_delta': delta._data}, revertFunc);
+                    if (view.options.editable) {
+                        var url = $('#calendar').data('event-url')+'/'+event._id;
+                        updateSession(url, {'resize_delta': delta._data}, revertFunc);
+                    }
                 },
                 loading: function (bool) {
                     var loader = $('#loader');
                     loader.toggle(bool);
                 }
             });
+            $('[data-toggle="tab"]:first').tab('show');
             $('#session-startAt-picker, #session-endAt-picker').datetimepicker({
                 format: 'DD/MM/YYYY HH:mm'
             });

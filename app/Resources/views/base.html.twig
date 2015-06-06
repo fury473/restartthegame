@@ -52,7 +52,7 @@
         </div>
         
         <nav id="main-menu" class="container bloc" role="navigation" aria-label="Principal">
-            {{ render(controller('RTGAppBundle:Page:menu')) }}
+            {{ render(controller('RTGAppBundle:Page:menu', { originalRequest: app.request })) }}
         </nav>
         
         {% if app.session.flashbag.has('error') %}
@@ -60,6 +60,16 @@
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <ul class="list-unstyled">
             {% for flashMessage in app.session.flashbag.get('error') %}
+                <li>{{ flashMessage|raw }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+        {% if app.session.flashbag.has('success') %}
+        <div id="glob-errors" class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <ul class="list-unstyled">
+            {% for flashMessage in app.session.flashbag.get('success') %}
                 <li>{{ flashMessage|raw }}</li>
             {% endfor %}
             </ul>

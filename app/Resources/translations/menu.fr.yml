@@ -1,19 +1,21 @@
-home: Accueil
-news: Actualités
-all_m: Tous
+about_us: Qui-sommes-nous ?
+admin: Administration
 all_f: Toutes
+all_m: Tous
 categories: Catégories
 competitions: Compétitions
-about_us: Qui-sommes-nous ?
-teamspeak: TeamSpeak
-partners: Partenaires
 contact: Nous contacter
-my_channels: Mon Stream
-stream: Stream
-register: S'inscrire
-profile: Profil
-admin: Administration
+home: Accueil
 legal_notices: Mentions légales
 login: Connexion
 login_to_comment: Se connecter pour commenter
 logout: Se déconnecter
+my_stream: Mon Stream
+news: Actualités
+our_streamers: Nos streamers
+partners: Partenaires
+profile: Profil
+register: S'inscrire
+rtg_tv: RTG TV
+stream: Stream
+teamspeak: TeamSpeak

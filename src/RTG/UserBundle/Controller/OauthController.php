@@ -33,6 +33,7 @@ class OAuthController extends Controller
             $this->get('session')->getFlashBag()->add('error', 'Une erreur est survenu lors de l\'association au compte Twitch.');
             return $this->redirect($this->generateUrl('rtg_user_user_myprofile'));
         }
+        $this->get('session')->getFlashBag()->add('success', 'La connexion à votre compte Twitch s\'est déroulée avec succès.');
         return $this->redirect($request->getUrl());
     }
 
@@ -77,6 +78,7 @@ class OAuthController extends Controller
         $user->resetTwitchAccess();
         $em->persist($user);
         $em->flush();
+        $this->get('session')->getFlashBag()->add('success', 'La déconnexion à votre compte Twitch s\'est déroulée avec succès.');
         return $this->redirect($request->get('path'));
     }
 

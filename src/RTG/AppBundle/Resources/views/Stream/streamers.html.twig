@@ -1,0 +1,61 @@
+{% extends 'RTGAppBundle::layout.html.twig' %}
+
+{% block title %}{{ 'our_streamers'|trans({}, 'menu') }}{% endblock %}
+
+{% block content %}
+<h1>{{ 'our_streamers'|trans({}, 'menu') }}</h1>
+{% for streamer in streamers %}
+{% if loop.index0 % 4 == 0 %}
+<div class="row" style="margin-bottom: 10px;">
+{% endif %}
+    <div class="col-md-3">
+        <article class="article clearfix">
+            <div class="col-xs-6 col-md-6">
+                <a href="{{ path('rtg_app_stream_streamer' , {'username': streamer.usernameCanonical}) }}" title="{{ streamer.username }}">
+                {% if streamer.avatar is not null %}
+                    <img src="{{ streamer.avatar.webPath|apply_filter('tb-128x128') }}" alt="{{ streamer.username }}"/>
+                {% else %}
+                    <img src="{{ gravatar(streamer.email) }}" alt="{{ streamer.username }}"/>
+                {% endif %}
+                </a>
+            </div>
+            <div class="col-xs-6 col-md-6">
+                <h2><a href="{{ path('rtg_app_stream_streamer' , {'username': streamer.usernameCanonical}) }}" title="{{ streamer.username }}">{{ streamer.username }}</a></h2>
+            </div>
+        </article>
+    </div>
+{% if loop.index0 % 2 == 1 or loop.last %}
+</div>
+{% endif %}
+{% else %}
+<p>{% trans %}Il n'y a aucun streamer pour le moment{% endtrans %}</p>
+{% endfor %}
+<h2>Liste des streams</h1>
+<div id="loader" class="loader"></div>
+<div id="calendar" data-events-url="{{ path('rtg_app_rest_session_list') }}"></div>
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(function () {
+           $('#calendar').fullCalendar({
+                lang: $('html').attr('lang'),
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay'
+                },
+                events: {
+                    url: $('#calendar').data('events-url'),
+                    error: function () {
+                    }
+                },
+                loading: function (bool) {
+                    var loader = $('#loader');
+                    loader.toggle(bool);
+                }
+            }); 
+        });
+    </script>
+{% endblock %}

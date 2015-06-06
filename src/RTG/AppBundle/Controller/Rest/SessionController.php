@@ -72,6 +72,9 @@ class SessionController extends Controller
         $sessions = $em->getRepository("RTGAppBundle:Session")->getSessionEvents(
                 $request->query->get('start'), $request->query->get('end')
         );
+        foreach ($sessions as &$session) {
+            $session['url'] = $this->generateUrl('rtg_app_stream_streamer', array('username' => $session['organizer']));
+        }
         return new JsonResponse($sessions);
     }
     
@@ -103,19 +106,6 @@ class SessionController extends Controller
         }
         $em->flush();
         return new JsonResponse($session->toEvent());
-    }
-
-    /**
-     * @Route("/{id}")
-     * @Method({"GET"})
-     */
-    public function userListAction(Request $request, User $user)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $sessions = $em->getRepository("RTGAppBundle:Session")->getSessionEvents(
-                $request->query->get('start'), $request->query->get('end'), $user
-        );
-        return new JsonResponse($sessions);
     }
 
     /**

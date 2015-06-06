@@ -25,13 +25,12 @@
                 <nav class="collapse navbar-collapse" id="menu-user" role="navigation" aria-label="Secondaire">
                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                         <ul class="nav navbar-nav navbar-right navbar-collapse list-unstyled">
-                            {# {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} #}
                             <li{% if 'profile' in app.request.get('_route') or 'rtg_user_user_edit' in app.request.get('_route') %} class="active"{% endif %}>
                                 <a href="{{ path('rtg_user_user_myprofile') }}" title="{{ 'profile'|trans({}, 'menu') }}"><span class="glyphicon glyphicon-user"></span> {{ 'profile'|trans({}, 'menu') }}</a>
                             </li>
                             {% if is_granted("ROLE_STREAMER") %}
-                                <li{% if 'rtg_app_page_mystream' in app.request.get('_route') %} class="active"{% endif %}>
-                                    <a href="{{ path('rtg_app_channel_channels', {'username': app.user.usernameCanonical}) }}" title="{{ 'my_channels'|trans({}, 'menu') }}"><span class="glyphicon glyphicon-play"></span> {{ 'my_channels'|trans({}, 'menu') }}</a>
+                                <li{% if 'rtg_app_stream_streamer' == app.request.get('_route') and app.request.get('username') == app.user.usernameCanonical %} class="active"{% endif %}>
+                                    <a href="{{ path('rtg_app_stream_streamer', {'username': app.user.usernameCanonical}) }}" title="{{ 'my_stream'|trans({}, 'menu') }}"><span class="glyphicon glyphicon-play"></span> {{ 'my_stream'|trans({}, 'menu') }}</a>
                                 </li>
                             {% endif %}
                             {% if is_granted("ROLE_ADMIN") %}
