@@ -32,15 +32,21 @@ class SitemapController extends Controller
         }
         
         // Add urls for all news
-        foreach ($em->getRepository('RTGBlogBundle:NewsArticle')->findAll() as $article) {
+        foreach ($em->getRepository('RTGBlogBundle:NewsArticle')->findAll() as $streamer) {
             $urls[] = array('loc' => $router->generate('rtg_blog_newsarticle_show', 
-                    array('slug' => $article->getSlug())));
+                    array('slug' => $streamer->getSlug())));
         }
         
         // Add urls for all competitions
         foreach ($em->getRepository('RTGBlogBundle:CompetitionArticle')->findAll() as $competition) {
             $urls[] = array('loc' => $router->generate('rtg_blog_competitionarticle_show', 
                     array('slug' => $competition->getSlug())));
+        }
+        
+        // Add urls for all streamers
+        foreach ($em->getRepository('RTGUserBundle:User')->findStreamers() as $streamer) {
+            $urls[] = array('loc' => $router->generate('rtg_app_stream_streamer', 
+                    array('username' => $streamer->getUsernameCanonical())));
         }
 
         return array('urls' => $urls, 'hostname' => $hostname);
@@ -52,12 +58,13 @@ class SitemapController extends Controller
         $routes[] = 'rtg_app_page_index';
         $routes[] = 'rtg_blog_newsarticle_index';
         $routes[] = 'rtg_blog_competitionarticle_index';
-        $routes[] = 'rtg_app_page_tv';
         $routes[] = 'rtg_app_page_aboutus';
         $routes[] = 'rtg_app_page_teamspeak';
         $routes[] = 'rtg_app_page_partners';
         $routes[] = 'rtg_app_page_contact';
         $routes[] = 'rtg_app_page_legalnotices';
+        $routes[] = 'rtg_app_stream_rtgtv';
+        $routes[] = 'rtg_app_stream_streamers';
         return $routes;
     }
 }
