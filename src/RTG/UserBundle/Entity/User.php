@@ -24,6 +24,7 @@ class User extends BaseUser
     {
         parent::__construct();
         $this->newsletter = false;
+        $this->chatBanned = false;
         $this->generateNewsletterToken();
         $this->comments = new ArrayCollection();
         $this->competitions = new ArrayCollection();
