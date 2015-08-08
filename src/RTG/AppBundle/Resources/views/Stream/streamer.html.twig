@@ -20,7 +20,7 @@
         {% endif %}
         {% if twitch is defined %}
             <div role="tabpanel" class="tab-pane fade" id="twitch">
-{#                {{ render(controller("RTGAppBundle:Stream:twitch", { 'username': user.usernameCanonical })) }}#}
+                {{ render(controller("RTGAppBundle:Stream:twitch", { 'username': user.usernameCanonical })) }}
             </div>
         {% endif %}
     </div>
