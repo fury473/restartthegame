@@ -15,3 +15,6 @@
 ^web\/media\/
 ^web\/uploads\/
 ^web\/documents\/
+^\.settings$
+^\.buildpath$
+^\.project$
