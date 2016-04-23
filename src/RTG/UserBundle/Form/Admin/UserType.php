@@ -16,6 +16,7 @@ class UserType extends BaseUserType
     {
         parent::buildForm($builder, $options);
         $builder
+                ->add('function', 'text', array('label' => 'user.field.function', 'required' => false, 'attr' => array('class' => 'form-control')))
                 ->add('enabled', 'checkbox', array('label' => 'user.field.enabled', 'required' => false))
                 ->add('locked', 'checkbox', array('label' => 'user.field.locked', 'required' => false))
         ;

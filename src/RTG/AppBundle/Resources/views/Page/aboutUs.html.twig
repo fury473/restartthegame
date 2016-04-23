@@ -19,30 +19,15 @@ L’adhésion des membres à l’association, des partenariats solides avec des 
 <p>La {{ brand_name }} est une association à but non lucratif implantée dans la région lyonnaise. Nous souhaitons relancer la communauté PC, en proposant à nos membres le meilleur de la compétition et des Lans. Nous sommes en effet conscients que la plus grande difficulté rencontrée par les joueurs issus du domaine E-sport, est de trouver des structures solides proposant des évènements réguliers.</p>
 
 <h2>Le [Staff RTG]</h2>
-<div class="row">
+{% for user in staffMembers %}
+{% if loop.index0 % 2 == 0 %}
+<div class="row" style="margin-bottom: 10px;">
+{% endif %}
     <div class="col-md-6">
-        {{ include('RTGAppBundle:Page:include/vcard.html.twig', {'name': 'Romuald Senigallia', 'pseudo': 'La_Charogne', 'city': 'Rillieux-la-Pape', 'role': 'Président', 'image': 'la_charogne.jpg'}) }}
+        {{ include('RTGAppBundle:Page:include/vcard.html.twig', {'user': user}) }}
     </div>
-    <div class="col-md-6">
-        {{ include('RTGAppBundle:Page:include/vcard.html.twig', {'name': 'Ivan Bésiat', 'pseudo': 'Van Drake', 'city': 'Lyon', 'role': 'Responsable Communauté', 'image': 'van_drake.jpg'}) }}
-    </div>
+{% if loop.index0 % 2 == 1 or loop.last %}
 </div>
-
-<div class="row">
-    <div class="col-md-6">
-        {{ include('RTGAppBundle:Page:include/vcard.html.twig', {'name': 'Mélody Bailly', 'pseudo': 'Insomnia', 'city': 'Fleurieux sur l\'arbresle', 'role': 'Secrétaire', 'image': 'insomnia.jpg'}) }}
-    </div>
-    <div class="col-md-6">
-        {{ include('RTGAppBundle:Page:include/vcard.html.twig', {'name': 'Olivier Haag', 'pseudo': 'Fury', 'city': 'Pavezin', 'role': 'Développeur', 'image': 'fury.jpg'}) }}
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-md-6">
-        {{ include('RTGAppBundle:Page:include/vcard.html.twig', {'name': 'Emmanuel Besset', 'pseudo': 'Taokyl', 'city': 'Oullins', 'role': 'Trésorier', 'image': 'taokyl.jpg'}) }}
-    </div>
-    <div class="col-md-6">
-        {{ include('RTGAppBundle:Page:include/vcard.html.twig', {'name': 'Mikael Ravinet', 'pseudo': 'Harck', 'city': 'Lyon', 'role': 'Hébergeur', 'image': 'harck.jpg'}) }}
-    </div>
-</div>
+{% endif %}
+{% endfor %}
 {% endblock %}

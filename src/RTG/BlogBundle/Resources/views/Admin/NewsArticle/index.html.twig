@@ -29,7 +29,7 @@
                 {% if entity.image is not null %}
                 <td><img src="{{ entity.image.webPath|apply_filter('tb-128x128') }}" /></td>
                 {% else %}
-                <td>Aucune</td>
+                <td>Pas d'image</td>
                 {% endif %}
                 <td>{{ entity.category|default('-') }}</td>
                 <td><time datetime="{{ entity.created|date('c') }}">{{ entity.created|localizeddate('short', 'none')|capitalize }}</time></td>

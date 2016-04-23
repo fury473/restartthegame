@@ -38,6 +38,22 @@
             {{ form_errors(form.birthday) }}
         </div>
     </fieldset>
+    
+    <fieldset class="row form-group">
+        <div class="col-md-2">{{ form_label(form.firstName) }}</div>
+        <div class="col-md-6">
+            {{ form_widget(form.firstName, { 'attr': { 'placeholder': 'user.field.first_name'|trans } }) }}
+            {{ form_errors(form.firstName) }}
+        </div>
+    </fieldset>
+    
+    <fieldset class="row form-group">
+        <div class="col-md-2">{{ form_label(form.lastName) }}</div>
+        <div class="col-md-6">
+            {{ form_widget(form.lastName, { 'attr': { 'placeholder': 'user.field.last_name'|trans } }) }}
+            {{ form_errors(form.lastName) }}
+        </div>
+    </fieldset>
 
     <fieldset class="row form-group">
         <div class="col-md-2">{{ form_label(form.city) }}</div>

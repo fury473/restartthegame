@@ -158,6 +158,22 @@ class User extends BaseUser
     {
         return $this->competitions;
     }
+    
+    /**
+     * @return string 
+     */
+    public function getFirstName()
+    {
+        return $this->firstName;
+    }
+    
+    /**
+     * @return string 
+     */
+    public function getFunction()
+    {
+        return $this->function;
+    }
 
     /**
      * @return integer 
@@ -165,6 +181,14 @@ class User extends BaseUser
     public function getId()
     {
         return $this->id;
+    }
+    
+    /**
+     * @return string 
+     */
+    public function getLastName()
+    {
+        return $this->lastName;
     }
     
     /**
@@ -267,6 +291,36 @@ class User extends BaseUser
     public function setCity($city)
     {
         $this->city = $city;
+        return $this;
+    }
+    
+    /**
+     * @param string $first_name
+     * @return User 
+     */
+    public function setFirstName($first_name)
+    {
+        $this->firstName = $first_name;
+        return $this;
+    }
+    
+    /**
+     * @param string $function
+     * @return User 
+     */
+    public function setFunction($function)
+    {
+        $this->function = $function;
+        return $this;
+    }
+    
+    /**
+     * @param string $last_name
+     * @return User 
+     */
+    public function setLastName($last_name)
+    {
+        $this->lastName = $last_name;
         return $this;
     }
 
@@ -418,6 +472,21 @@ class User extends BaseUser
      * @ORM\ManyToMany(targetEntity="RTG\BlogBundle\Entity\CompetitionArticle", mappedBy="users")
      * */
     protected $competitions;
+    
+    /**
+     * @ORM\Column(type="string", name="first_name", nullable=true)
+     */
+    protected $firstName;
+    
+    /**
+     * @ORM\Column(type="string", name="function", nullable=true)
+     */
+    protected $function;
+    
+    /**
+     * @ORM\Column(type="string", name="last_name", nullable=true)
+     */
+    protected $lastName;
 
     /**
      * @ORM\Column(type="boolean", name="newsletter")
