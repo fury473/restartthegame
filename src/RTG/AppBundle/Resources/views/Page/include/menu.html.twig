@@ -37,9 +37,6 @@
     <li class="pull-left{% if 'rtg_app_page_partners' in request.get('_route') %} active{% endif %}">
         <a href="{{ path('rtg_app_page_partners') }}" title="{{ 'partners'|trans({}, 'menu') }}">{{ 'partners'|trans({}, 'menu') }}</a>
     </li>
-    <li class="pull-left">
-        <a target="_blank" href="http://forum.restartthegame.com" title="Forum - {{ brand_name }}">Forum</a>
-    </li>
     <li class="pull-left{% if 'rtg_app_page_contact' in request.get('_route') %} active{% endif %}">
         <a href="{{ path('rtg_app_page_contact') }}" title="{{ 'contact'|trans({}, 'menu') }}">{{ 'contact'|trans({}, 'menu') }}</a>
     </li>
