@@ -22,6 +22,17 @@ class UserRepository extends EntityRepository
                         ->getQuery()
                         ->getResult();
     }
+    
+    public function findStaffMembers()
+    {
+        return $this->createQueryBuilder('u')
+                        ->select('u')
+                        ->where('u.roles LIKE :role')
+                        ->setParameter('role', '%ROLE_STAFF%')
+                        ->orderBy('u.username')
+                        ->getQuery()
+                        ->getResult();
+    }
 
     public function getSuscribedToNewsletter()
     {

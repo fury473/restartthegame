@@ -23,7 +23,8 @@ class PageController extends Controller
      */
     public function aboutUsAction()
     {
-        return array();
+        $em = $this->getDoctrine()->getManager();
+        return array('staffMembers' => $em->getRepository("RTGUserBundle:User")->findStaffMembers());
     }
 
     /**
@@ -135,7 +136,11 @@ class PageController extends Controller
      */
     public function legalNoticesAction()
     {
-        return array();
+        $brand_name = $this->container->getParameter('brand_name');
+        $em =$this->getDoctrine()->getManager();
+        $association = $em->getRepository('RTGAppBundle:Association')->findOneByName($brand_name);
+        
+        return array('association' => $association);
     }
 
     /**
@@ -150,7 +155,7 @@ class PageController extends Controller
             'request' => $originalRequest
         );
     }
-    
+
     /**
      * @Route("/partners")
      * @Method({"GET"})
@@ -206,7 +211,7 @@ class PageController extends Controller
         $news = $em->getRepository('RTGBlogBundle:NewsArticle')->search($query);
         return array('query' => $query, 'news' => $news, 'news_count' => count($news));
     }
-    
+
     /**
      * @Route("/teamspeak")
      * @Method({"GET"})

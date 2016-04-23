@@ -4,8 +4,8 @@ security:
 
     role_hierarchy:
         ROLE_ADMIN:       [ROLE_USER, ROLE_CHAT_ADMIN]
-        ROLE_STAFF:       [ROLE_USER, ROLE_ADMIN]
-        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_STAFF, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+        ROLE_STAFF:       [ROLE_USER]
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     providers:
          main:

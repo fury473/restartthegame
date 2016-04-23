@@ -26,7 +26,6 @@ class ProfileFormType extends AbstractType
         $builder
                 ->add('username', 'text', array('label' => 'user.field.username', 'attr' => array('class' => 'form-control')))
                 ->add('email', 'email', array('label' => 'user.field.email', 'attr' => array('class' => 'form-control')))
-                ->add('newsletter', 'checkbox', array('required' => false))
                 ->add('birthday', 'date', array(
                     'widget' => 'single_text',
                     'format' => 'dd/MM/yyyy',
@@ -34,7 +33,10 @@ class ProfileFormType extends AbstractType
                     'required' => false,
                     'attr' => array('class' => 'form-control')
                 ))
+                ->add('firstName', 'text', array('label' => 'user.field.first_name', 'required' => false, 'attr' => array('class' => 'form-control')))
+                ->add('lastName', 'text', array('label' => 'user.field.last_name', 'required' => false, 'attr' => array('class' => 'form-control')))
                 ->add('city', 'text', array('label' => 'user.field.city', 'required' => false, 'attr' => array('class' => 'form-control')))
+                ->add('newsletter', 'checkbox', array('required' => false))
                 ->addEventListener(FormEvents::PRE_SUBMIT, array($this, 'onPreSubmit'))
                 ->addEventListener(FormEvents::SUBMIT, array($this, 'onSubmit'))
         ;

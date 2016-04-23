@@ -1,15 +1,17 @@
-<div class="well col-md-10 col-md-offset-1">
+<div class="well col-md-10 col-md-offset-1" style="min-height: 188px;">
     <div class="col-md-6">
-        {% if file_exists(web_path~'/bundles/rtgapp/img/content/staff/'~image) %}
-        <img class="picture img-circle img-responsive" src="{{ asset('bundles/rtgapp/img/content/staff/'~image) }}" />
+        {% if user.avatar is not null %}
+            <img class="picture img-circle img-responsive" src="{{ user.avatar.webPath|apply_filter('tb-150x150') }}" alt="{{ user.username }}"/>
         {% else %}
-        <img class="picture img-circle img-responsive" src="{{ asset('bundles/rtgapp/img/content/staff/anonyme.jpg') }}" />
+            <img class="picture img-circle img-responsive" src="{{ gravatar(user.email, 150) }}" alt="{{ user.username }}"/>
         {% endif %}
     </div>
     <div class="col-md-6">
-        <p>{{ name }} (<strong>{{ pseudo }}</strong>)</p>
-        <p>{{ city }}</p>
+        <p>{{ user.firstName|default('') ~ ' ' ~ user.lastName|default('') }} (<strong>{{ user.username }}</strong>)</p>
+        {% if user.city is not null %}<p>{{ user.city }}</p>{% endif %}
+        {% if user.function is not null %}
         <br/>
-        <p><strong>{{ role }}</strong></p>
+        <p><strong>{{ user.function }}</strong></p>
+        {% endif %}
     </div>
 </div>

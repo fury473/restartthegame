@@ -22,6 +22,9 @@ user:
     field:
         username: 'Nom d''utilisateur'
         email: 'Adresse électronique'
+        first_name: 'Prénom'
+        function: 'Fonction'
+        last_name: 'Nom'
         newsletter: 'Newsletter'
         newsletter_suscribe: 'Recevoir par email des informations liées aux actualités de la RTG'
         newsletter_suscribed: 'Abonné à la Newsletter'

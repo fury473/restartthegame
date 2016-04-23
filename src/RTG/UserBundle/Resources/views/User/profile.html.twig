@@ -20,9 +20,18 @@
     </fieldset>
     
     <fieldset class="row form-group">
+        <div class="col-md-2"><label>{{ 'user.field.first_name'|trans }}</label></div>
+        <div class="col-md-6">{{ user.firstName }}</div>
+    </fieldset>
+    
+    <fieldset class="row form-group">
+        <div class="col-md-2"><label>{{ 'user.field.last_name'|trans }}</label></div>
+        <div class="col-md-6">{{ user.lastName }}</div>
+    </fieldset>
+    
+    <fieldset class="row form-group">
         <div class="col-md-2"><label>{{ 'user.field.age'|trans }}</label></div>
         <div class="col-md-6">{{ user.age }}</div>
-        <div class="clearfix"></div>
     </fieldset>
 
     <fieldset class="row form-group">

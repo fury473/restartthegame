@@ -80,6 +80,7 @@ doctrine:
     orm:
         auto_generate_proxy_classes: %kernel.debug%
         auto_mapping: true
+        naming_strategy: doctrine.orm.naming_strategy.underscore
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -113,6 +114,9 @@ avalanche_imagine:
         article-tb:
             type:    thumbnail
             options: { size: [240, 90], mode: outbound, quality: 100, format: png }
+        tb-150x150:
+            type:    thumbnail
+            options: { size: [150, 150], mode: inset, quality: 100, format: png }
         tb-128x128:
             type:    thumbnail
             options: { size: [128, 128], mode: inset, quality: 100, format: png }
