@@ -24,6 +24,8 @@ parameters:
 
     chat_port: 9009
 
+    assets_version : v1.6.1
+
     chatdepot_api_url: 'https://chatdepot.twitch.tv'
     twitch_api_url: 'https://api.twitch.tv'
     twitch_channel: 'restart_the_game'
