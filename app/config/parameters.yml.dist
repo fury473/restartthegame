@@ -34,5 +34,5 @@ parameters:
     facebook_app_id: app_id
 
     recaptcha_api_url: https://www.google.com/recaptcha/api
-    recaptcha_key: 6Le2dPkSAAAAACRpch-UdW9nN5RbYoH-VGX5c7-D
-    recaptcha_secret: 6Le2dPkSAAAAAOPUQg5dFrVwMRRKX2ovUO-PAB99
+    recaptcha_key: recaptcha_key
+    recaptcha_secret: recaptcha_secret
