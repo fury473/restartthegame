@@ -12,7 +12,7 @@ parameters:
     mailer_user:       ~
     mailer_password:   ~
     contact_delivery_address: contact@restartthegame.com
-    dev_delivery_address: fury473@gmail.com
+    dev_delivery_address: test@yopmail.com
     noreply_address: noreply@restartthegame.com
     site_address: site@restartthegame.com
     newsletter_address: newsletter@restartthegame.com
